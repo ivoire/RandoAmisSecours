@@ -9,6 +9,12 @@
     <meta name="author" content="">
 
     <link href="{% get_static_prefix %}RandoAmisSecours/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style>
+      body {
+        padding-top: 60px
+        padding-bottom: 40px;
+      }
+    </style>
     <link href="{% get_static_prefix %}RandoAmisSecours/css/bootstrap-responsive.min.css" rel="stylesheet">
 </head>
 
@@ -21,8 +27,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="{% url 'index' %}">RandoAmisSecours</a>
+      <a class="brand" href="{% url 'index' %}">R.A.S.</a>
       <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li><a href="{% url 'index' %}"><i class="icon-home"></i> Home</a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -41,3 +50,4 @@
 <script src="{% get_static_prefix %}RandoAmisSecours/js/jquery.min.js"></script>
 <script src="{% get_static_prefix %}RandoAmisSecours/js/bootstrap.min.js"></script>
 </body>
+</html>
