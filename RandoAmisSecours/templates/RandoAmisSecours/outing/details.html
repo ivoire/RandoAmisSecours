@@ -1,0 +1,10 @@
+{% extends 'RandoAmisSecours/base.html' %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'outings.index' %}">Outings</a> <span class="divider">/</span></li>
+  <li class="active">{{ outing.name }}</li>
+{% endblock %}
+
+{% block body %}
+{% endblock %}
