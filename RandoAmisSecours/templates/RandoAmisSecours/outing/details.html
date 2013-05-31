@@ -1,9 +1,10 @@
 {% extends 'RandoAmisSecours/base.html' %}
+{% load static %}
 
 {% block title %}R.A.S - Outing «{{ outing.name }}»{% endblock %}
 
 {% block head %}
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+  <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.css" />
 {% endblock %}
 
 {% block style %}
@@ -44,7 +45,7 @@
 {% endblock %}
 
 {% block script %}
-<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet.js"></script>
 <script>
   $(function(){
     var map = L.map('map').setView([{{ outing.latitude }}, {{ outing.longitude }}], 12);
