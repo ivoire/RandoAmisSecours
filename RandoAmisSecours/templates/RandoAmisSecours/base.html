@@ -16,6 +16,7 @@
     {% block style %}{% endblock %}
   </style>
   <link href="{% get_static_prefix %}RandoAmisSecours/css/bootstrap-responsive.min.css" rel="stylesheet">
+  {% block head %}{% endblock %}
 </head>
 
 <body>
@@ -54,5 +55,7 @@
 
 <script src="{% get_static_prefix %}RandoAmisSecours/js/jquery.min.js"></script>
 <script src="{% get_static_prefix %}RandoAmisSecours/js/bootstrap.min.js"></script>
+{% block script %}
+{% endblock %}
 </body>
 </html>
