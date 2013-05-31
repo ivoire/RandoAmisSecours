@@ -1,5 +1,15 @@
 {% extends 'RandoAmisSecours/base.html' %}
 
+{% block title %}R.A.S - Outing «{{ outing.name }}»{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+{% endblock %}
+
+{% block style %}
+    #map { height: 300px; }
+{% endblock %}
+
 {% block breadcrumb %}
   <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
   <li><a href="{% url 'outings.index' %}">Outings</a> <span class="divider">/</span></li>
@@ -7,4 +17,42 @@
 {% endblock %}
 
 {% block body %}
+<h2>{{ outing.name }}</h2>
+
+<div class="row">
+  <div class="span6">
+    <dl class="dl-horizontal">
+      <dt>Begin</dt>
+      <dd>{{ outing.begining }}</dd>
+      <dt>End</dt>
+      <dd>{{ outing.ending }}</dd>
+      <dt>Alert at</dt>
+      <dd>{{ outing.alert }}</dd>
+    </dl>
+  </div>
+  <div class="span6">
+    <dl class="dl-horizontal">
+      <dt>Description</dt>
+      <dd>{{ outing.description }}</dd>
+    </dl>
+  </div>
+  <div class="span6 offset3">
+    <div id="map">
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+<script>
+  $(function(){
+    var map = L.map('map').setView([{{ outing.latitude }}, {{ outing.longitude }}], 12);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: 'attribution: &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18}).addTo(map);
+    var marker = L.marker([{{ outing.latitude }}, {{ outing.longitude }}]).addTo(map)
+                    .bindPopup('Ending');
+  })
+</script>
 {% endblock %}
