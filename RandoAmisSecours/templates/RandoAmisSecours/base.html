@@ -32,6 +32,21 @@
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li><a href="{% url 'index' %}"><i class="icon-home"></i> Home</a></li>
+          <li><a href="{% url 'outings.index' %}"><i class="icon-tasks"></i> Outings</a></li>
+        </ul>
+        <ul class="nav pull-right">
+        {% if user.is_authenticated %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> {{ user.get_full_name }}<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Profile</a></li>
+              <li class="divider"></li>
+              <li><a href="{% url 'accounts.logout' %}">Logout</a></li>
+            </ul>
+          </li>
+        {% else %}
+          <li><a href="{% url 'accounts.login' %}"><i class="icon-user"></i> Log in</a></li>
+        {% endif %}
         </ul>
       </div>
     </div>
