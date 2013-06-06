@@ -1,17 +1,28 @@
 # -*- coding: utf-8 -*-
 # vim: set ts=4
 
-from django.http import HttpResponse
+from django.db.models import Q
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
-from RandoAmisSecours.models import Outing
+from RandoAmisSecours.models import Outing, DRAFT, CONFIRMED, LATE, FINISHED, CANCELED
 
 
-def index(request):
-    from datetime import datetime
-    new_outings = Outing.objects.filter(alert__gte=datetime.now())
-    return render_to_response('RandoAmisSecours/outing/index.html', {'new_outings': new_outings}, context_instance=RequestContext(request))
+def index(request, status='confirmed'):
+    if status == 'confirmed':
+        outings = Outing.objects.filter(Q(status=CONFIRMED) | Q(status=LATE))
+    elif status == 'draft':
+        outings = Outing.objects.filter(status=DRAFT)
+    elif status == 'finished':
+        outings = Outing.objects.filter(status=FINISHED)
+    elif status == 'late':
+        outings = Outing.objects.filter(status=LATE)
+    elif status == 'canceled':
+        outings = Outing.objects.filter(status=CANCELED)
+    else:
+        raise Http404
+    return render_to_response('RandoAmisSecours/outing/index.html', {'outings': outings, 'status': status}, context_instance=RequestContext(request))
 
 
 def details(request, outing_id):

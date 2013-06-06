@@ -18,20 +18,20 @@
 
 {% block body %}
 <div class="page-header">
-  <h2>Running outings</h2>
+  <h2>{{ status|capfirst }} outings</h2>
 </div>
 
 <div class="row">
   <div class="span12">
     <ul class="thumbnails">
-    {% for outing in new_outings %}
+    {% for outing in outings %}
       <li class="span4">
         <div class="thumbnail">
           <div id="map{{ outing.pk }}" class="outing-map" data-lat="{{ outing.latitude }}" data-lng="{{ outing.longitude }}">
           </div>
           <div class="caption">
             <h3><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></h3>
-            <p>{{ outing.description }}</p<
+            <p>{{ outing.description }}</p>
           </div>
         </div>
       </li>
