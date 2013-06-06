@@ -33,8 +33,9 @@
 <form class="form-signin" method="post" action="{% url 'accounts.login' %}">
     {% csrf_token %}
     <h2 class="form-signin-heading">Please sign in</h2>
-    <input type="text" class="input-block-level" placeholder="Email address">
-    <input type="password" class="input-block-level" placeholder="Password">
+    <input name="username" type="text" class="input-block-level" placeholder="Login" autofocus="autofocus">
+    <input name="password" type="password" class="input-block-level" placeholder="Password">
+    <input type="hidden" name="next" value="{% url 'outings.index' %}" />
     <button class="btn btn-large btn-primary" type="submit">Sign in</button>
 </form>
 {% endblock %}
