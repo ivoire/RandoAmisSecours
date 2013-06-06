@@ -5,6 +5,21 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
+# Outing status
+DRAFT = 0
+CONFIRMED = 1
+LATE = 3
+FINISHED = 3
+CANCELED = 4
+OUTING_STATUS = (
+    (DRAFT, 'draft'),
+    (CONFIRMED, 'confirmed'),
+    (LATE, 'late'),
+    (FINISHED, 'finished'),
+    (CANCELED, 'canceled')
+)
+
+
 def random_hash():
     """ Create a random string of size 15 """
     return binascii.b2a_hex(os.urandom(15))
@@ -28,6 +43,7 @@ class Outing(models.Model):
     # Visible information
     name = models.CharField(max_length=200)
     description = models.TextField()
+    status = models.IntegerField(choices=OUTING_STATUS, default=DRAFT)
 
     # Time frame: (begin, end, alert)
     begining = models.DateTimeField()
