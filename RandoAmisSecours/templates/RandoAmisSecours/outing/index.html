@@ -1,0 +1,57 @@
+{% extends 'RandoAmisSecours/base.html' %}
+{% load static %}
+
+{% block title %} R.A.S - Outings{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
+  <li class="active">Outings</li>
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.css" />
+{% endblock %}
+
+{% block style %}
+    .outing-map { height: 300px; }
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+  <h2>Running outings</h2>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <ul class="thumbnails">
+    {% for outing in new_outings %}
+      <li class="span4">
+        <div class="thumbnail">
+          <div id="map{{ outing.pk }}" class="outing-map" data-lat="{{ outing.latitude }}" data-lng="{{ outing.longitude }}">
+          </div>
+          <div class="caption">
+            <h3><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></h3>
+            <p>{{ outing.description }}</p<
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet.js"></script>
+<script>
+  $(function(){
+    $('.outing-map').each(function() {
+      var map = L.map(this.id).setView([$(this).data('lat'), $(this).data('lng')], 12);
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: 'attribution: &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18}).addTo(map);
+      var marker = L.marker([$(this).data('lat'), $(this).data('lng')]).addTo(map);
+    })
+  })
+</script>
+{% endblock %}

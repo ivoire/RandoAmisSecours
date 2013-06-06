@@ -9,7 +9,9 @@ from RandoAmisSecours.models import Outing
 
 
 def index(request):
-    return HttpResponse(status=200)
+    from datetime import datetime
+    new_outings = Outing.objects.filter(alert__gte=datetime.now())
+    return render_to_response('RandoAmisSecours/outing/index.html', {'new_outings': new_outings}, context_instance=RequestContext(request))
 
 
 def details(request, outing_id):
