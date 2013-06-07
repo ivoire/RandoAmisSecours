@@ -29,13 +29,19 @@
   }
 {% endblock %}
 
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
+  <li><a href="#">Account</a> <span class="divider">/</span></li>
+  <li class="activate">login</li>
+{% endblock %}
+
 {% block body %}
 <form class="form-signin" method="post" action="{% url 'accounts.login' %}">
     {% csrf_token %}
-    <h2 class="form-signin-heading">Please sign in</h2>
+    <h2 class="form-signin-heading">Please Log in</h2>
     <input name="username" type="text" class="input-block-level" placeholder="Login" autofocus="autofocus">
     <input name="password" type="password" class="input-block-level" placeholder="Password">
     <input type="hidden" name="next" value="{% url 'outings.index' %}" />
-    <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+    <button class="btn btn-large btn-primary" type="submit">Log in</button>
 </form>
 {% endblock %}
