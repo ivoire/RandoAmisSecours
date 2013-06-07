@@ -36,11 +36,21 @@
 {% endblock %}
 
 {% block body %}
-<form class="form-signin" method="post" action="{% url 'accounts.login' %}">
+<div class="container">
+  {% if form.errors %}
+    <div class="alert alert-error">
+      <button class="close" data-dismiss="alert" type="button"><i class="icon-remove"></i></button>
+      <strong>Wrong username of password</strong>: Note that both fields may be case-sensitive
+    </div>
+  {% endif %}
+
+  <form class="form-signin" method="post" action="{% url 'accounts.login' %}">
     {% csrf_token %}
-    <h2 class="form-signin-heading">Please Log in</h2>
-    <input name="username" type="text" class="input-block-level" placeholder="Login" autofocus="autofocus">
-    <input name="password" type="password" class="input-block-level" placeholder="Password">
-    <button class="btn btn-large btn-primary" type="submit">Log in</button>
-</form>
+    <h2 class="form-signin-heading">Please sign in</h2>
+      {{ form.username }}
+      {{ form.password }}
+    <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+</div>
 {% endblock %}

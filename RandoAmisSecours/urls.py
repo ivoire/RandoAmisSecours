@@ -3,6 +3,8 @@
 
 from django.conf.urls import patterns, url
 
+from RandoAmisSecours.views.account import RASAuthenticationForm
+
 # Main page
 urlpatterns = patterns('RandoAmisSecours.views.main',
     url(r'^$', 'index', name='index'),
@@ -10,11 +12,11 @@ urlpatterns = patterns('RandoAmisSecours.views.main',
 
 # Authentication
 urlpatterns += patterns('django.contrib.auth.views',
-    url(r'^accounts/login/$', 'login', {'template_name': 'RandoAmisSecours/account/login.html'}, name='accounts.login'),
+    url(r'^accounts/login/$', 'login', {'template_name': 'RandoAmisSecours/account/login.html', 'authentication_form': RASAuthenticationForm}, name='accounts.login'),
     url(r'^accounts/logout/$', 'logout', {'template_name': 'RandoAmisSecours/account/logged_out.html'}, name='accounts.logout'),
 )
 
-urlpatterns += patterns('RandoAmisSecours.views.profile',
+urlpatterns += patterns('RandoAmisSecours.views.account',
     url(r'^accounts/profile/$', 'profile', name='accounts.profile'),
 )
 
