@@ -10,8 +10,8 @@ urlpatterns = patterns('RandoAmisSecours.views.main',
 
 # Authentication
 urlpatterns += patterns('django.contrib.auth.views',
-    url(r'^accounts/login$', 'login', {'template_name': 'RandoAmisSecours/registration/login.html'}, name='accounts.login'),
-    url(r'^accounts/logout$', 'logout', {'template_name': 'RandoAmisSecours/registration/logout.html'}, name='accounts.logout'),
+    url(r'^accounts/login$', 'login', {'template_name': 'RandoAmisSecours/account/login.html'}, name='accounts.login'),
+    url(r'^accounts/logout$', 'logout', {'template_name': 'RandoAmisSecours/account/logged_out.html'}, name='accounts.logout'),
 )
 
 # Outing
