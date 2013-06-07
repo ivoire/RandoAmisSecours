@@ -14,6 +14,10 @@ urlpatterns += patterns('django.contrib.auth.views',
     url(r'^accounts/logout$', 'logout', {'template_name': 'RandoAmisSecours/account/logged_out.html'}, name='accounts.logout'),
 )
 
+urlpatterns += patterns('RandoAmisSecours.views.profile',
+    url(r'^accounts/profile$', 'profile', name='accounts.profile'),
+)
+
 # Outing
 urlpatterns += patterns('RandoAmisSecours.views.outing',
     url(r'^outings$', 'index', name='outings.index'),
