@@ -31,7 +31,7 @@
 
 {% block breadcrumb %}
   <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
-  <li><a href="#">Account</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'accounts.profile' %}">Account</a> <span class="divider">/</span></li>
   <li class="activate">login</li>
 {% endblock %}
 
