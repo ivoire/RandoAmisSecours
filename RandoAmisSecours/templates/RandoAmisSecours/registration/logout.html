@@ -1,2 +1,39 @@
 {% extends 'RandoAmisSecours/base.html' %}
 
+{% block title %} R.A.S - logged out{% endblock %}
+
+{% block style %}
+    .div-signout {
+      max-width: 300px;
+      padding: 19px 29px 29px;
+      margin: 0 auto 20px;
+      background-color: #fff;
+      border: 1px solid #e5e5e5;
+      -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+             border-radius: 5px;
+      -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+         -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+              box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .div-signout .div-signout-heading,
+        margin-bottom: 10px;
+      }
+{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
+  <li><a href="#">Account</a> <span class="divider">/</span></li>
+  <li class="activate">logout</li>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="div-signout">
+    <h2 class="div-signout-heading">Logged out</h2>
+    <p>Thanks for using RandoAmisSecours.</p>
+    <a href="{% url 'accounts.login' %}" class="btn btn-primary">Log in again</a>
+  </div>
+</div>
+{% endblock %}
+
