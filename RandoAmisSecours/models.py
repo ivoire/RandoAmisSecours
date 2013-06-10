@@ -33,8 +33,11 @@ class Profile(models.Model):
         app_label = 'RandoAmisSecours'
 
     user = models.ForeignKey(User)
-    phone_number = models.CharField(max_length=30)
+    phone_number = models.CharField(max_length=30, blank=True, null=True)
     hash_id = models.CharField(unique=True, max_length=30, default=random_hash)
+
+    def __unicode__(self):
+        return unicode(self.user)
 
 
 class Outing(models.Model):
