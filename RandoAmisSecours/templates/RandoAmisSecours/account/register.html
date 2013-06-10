@@ -1,0 +1,82 @@
+{% extends 'RandoAmisSecours/base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'accounts.profile' %}">Account</a> <span class="divider">/</span></li>
+  <li class="activate">Register</li>
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+  <h1>Create an account</h1>
+</div>
+<div class="row">
+  <div class="span12">
+    {{ user_form.errors }}
+    <form class="form-horizontal" method="post" action="{% url 'accounts.register' %}">
+      {% csrf_token %}
+      <div class="control-group{% if user_form.username.errors %} error{% endif %}">
+        <label class="control-label" for="id_username">Username</label>
+        <div class="controls">
+          {{ user_form.username }}
+          {% for error in user_form.username.errors %}
+          <span class="help-inline">{{ error }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="control-group{% if user_form.password1.errors %} error{% endif %}">
+        <label class="control-label" for="id_password1">Password</label>
+        <div class="controls">
+          {{ user_form.password1 }}
+          {% for error in user_form.password1.errors %}
+          <span class="help-inline">{{ error }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="control-group{% if user_form.password2.errors %} error{% endif %}">
+        <label class="control-label" for="id_password2">Password</label>
+        <div class="controls">
+          {{ user_form.password2 }}
+          {% for error in user_form.password2.errors %}
+          <span class="help-inline">{{ error }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="control-group{% if user_form.first_name.errors %} error{% endif %}">
+        <label class="control-label" for="id_phone_number">First name</label>
+        <div class="controls">
+          {{ user_form.first_name }}
+          {% for error in user_form.first_name.errors %}
+          <span class="help-inline">{{ error }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="control-group{% if user_form.last_name.errors %} error{% endif %}">
+        <label class="control-label" for="id_phone_number">Last name</label>
+        <div class="controls">
+          {{ user_form.last_name }}
+          {% for error in user_form.last_name.errors %}
+          <span class="help-inline">{{ error }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="control-group{% if user_form.email.errors %} error{% endif %}">
+        <label class="control-label" for="id_phone_number">Email</label>
+        <div class="controls">
+          {{ user_form.email }}
+          {% for error in user_form.email.errors %}
+          <span class="help-inline">{{ error }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
