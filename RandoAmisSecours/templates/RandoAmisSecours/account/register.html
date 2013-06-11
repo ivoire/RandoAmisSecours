@@ -13,70 +13,76 @@
   <h1>Create an account</h1>
 </div>
 <div class="row">
-  <div class="span12">
-    {{ user_form.errors }}
-    <form class="form-horizontal" method="post" action="{% url 'accounts.register' %}">
-      {% csrf_token %}
-      <div class="control-group{% if user_form.username.errors %} error{% endif %}">
-        <label class="control-label" for="id_username">Username</label>
-        <div class="controls">
-          {{ user_form.username }}
-          {% for error in user_form.username.errors %}
-          <span class="help-inline">{{ error }}</span>
-          {% endfor %}
-        </div>
+  <form class="form-horizontal" method="post" action="{% url 'accounts.register' %}">
+  {% csrf_token %}
+  <div class="span6">
+    <h4 class="modal-header">Account information</h4>
+    <div class="control-group{% if user_form.username.errors %} error{% endif %}">
+      <label class="control-label" for="id_username">Username</label>
+      <div class="controls">
+        {{ user_form.username }}
+        {% for error in user_form.username.errors %}
+        <span class="help-inline">{{ error }}</span>
+        {% endfor %}
       </div>
-      <div class="control-group{% if user_form.password1.errors %} error{% endif %}">
-        <label class="control-label" for="id_password1">Password</label>
-        <div class="controls">
-          {{ user_form.password1 }}
-          {% for error in user_form.password1.errors %}
-          <span class="help-inline">{{ error }}</span>
-          {% endfor %}
-        </div>
+    </div>
+    <div class="control-group{% if user_form.password1.errors %} error{% endif %}">
+      <label class="control-label" for="id_password1">Password</label>
+      <div class="controls">
+        {{ user_form.password1 }}
+        {% for error in user_form.password1.errors %}
+        <span class="help-inline">{{ error }}</span>
+        {% endfor %}
       </div>
-      <div class="control-group{% if user_form.password2.errors %} error{% endif %}">
-        <label class="control-label" for="id_password2">Password</label>
-        <div class="controls">
-          {{ user_form.password2 }}
-          {% for error in user_form.password2.errors %}
-          <span class="help-inline">{{ error }}</span>
-          {% endfor %}
-        </div>
+    </div>
+    <div class="control-group{% if user_form.password2.errors %} error{% endif %}">
+      <label class="control-label" for="id_password2">Password</label>
+      <div class="controls">
+        {{ user_form.password2 }}
+        {% for error in user_form.password2.errors %}
+        <span class="help-inline">{{ error }}</span>
+        {% endfor %}
       </div>
-
-      <div class="control-group{% if user_form.first_name.errors %} error{% endif %}">
-        <label class="control-label" for="id_phone_number">First name</label>
-        <div class="controls">
-          {{ user_form.first_name }}
-          {% for error in user_form.first_name.errors %}
-          <span class="help-inline">{{ error }}</span>
-          {% endfor %}
-        </div>
-      </div>
-      <div class="control-group{% if user_form.last_name.errors %} error{% endif %}">
-        <label class="control-label" for="id_phone_number">Last name</label>
-        <div class="controls">
-          {{ user_form.last_name }}
-          {% for error in user_form.last_name.errors %}
-          <span class="help-inline">{{ error }}</span>
-          {% endfor %}
-        </div>
-      </div>
-      <div class="control-group{% if user_form.email.errors %} error{% endif %}">
-        <label class="control-label" for="id_phone_number">Email</label>
-        <div class="controls">
-          {{ user_form.email }}
-          {% for error in user_form.email.errors %}
-          <span class="help-inline">{{ error }}</span>
-          {% endfor %}
-        </div>
-      </div>
-
-      <div class="form-actions">
-        <button class="btn btn-primary" type="submit">Register</button>
-      </div>
-    </form>
+    </div>
   </div>
+  <div class="span6">
+    <h4 class="modal-header">Personnal information</h4>
+    <div class="control-group{% if user_form.first_name.errors %} error{% endif %}">
+      <label class="control-label" for="id_first_name">First name</label>
+      <div class="controls">
+        {{ user_form.first_name }}
+        {% for error in user_form.first_name.errors %}
+        <span class="help-inline">{{ error }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="control-group{% if user_form.last_name.errors %} error{% endif %}">
+      <label class="control-label" for="id_last_name">Last name</label>
+      <div class="controls">
+        {{ user_form.last_name }}
+        {% for error in user_form.last_name.errors %}
+        <span class="help-inline">{{ error }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="control-group{% if user_form.email.errors %} error{% endif %}">
+      <label class="control-label" for="id_email">Email</label>
+      <div class="controls">
+        <div class="input-append">
+          {{ user_form.email }}
+          <span class="add-on">@</span>
+        </div>
+        {% for error in user_form.email.errors %}
+        <span class="help-inline">{{ error }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="span12">
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Register</button>
+    </div>
+  </div>
+  </form>
 </div>
 {% endblock %}
