@@ -25,8 +25,14 @@
   <div class="span12">
     <ul class="thumbnails">
     {% for outing in outings %}
+      {% with outing.getPercents as percents %}
       <li class="span4">
         <div class="thumbnail">
+          <div class="progress">
+            <div class="bar bar-success" style="width: {{ percents.0 }}%"></div>
+            <div class="bar bar-warning" style="width: {{ percents.1 }}%"></div>
+            <div class="bar bar-danger" style="width: {{ percents.2 }}%"></div>
+          </div>
           <div id="map{{ outing.pk }}" class="outing-map" data-lat="{{ outing.latitude }}" data-lng="{{ outing.longitude }}">
           </div>
           <div class="caption">
@@ -35,6 +41,7 @@
           </div>
         </div>
       </li>
+      {% endwith %}
     {% endfor %}
     </ul>
   </div>

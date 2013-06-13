@@ -3,6 +3,7 @@
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.timezone import datetime, utc
 
 import binascii
 import os
@@ -62,3 +63,21 @@ class Outing(models.Model):
 
     def __unicode__(self):
         return u"%s: %s" % (self.user.get_full_name(), self.name)
+
+    def getPercents(self):
+        current_time = datetime.utcnow().replace(tzinfo=utc)
+        # now < begin < end < alert
+        if current_time < self.begining:
+            return (0, 0, 0)
+        # begin < end < alert < now
+        elif self.alert < current_time:
+            return (0, 0, 100)
+        # begin < now < end < alert
+        elif current_time < self.ending:
+            return (((current_time - self.begining).total_seconds()) / float((self.alert - self.begining).total_seconds()) * 100, 0, 0)
+        # begin < end < now < alert
+        else:
+            assert(current_time < self.alert)
+            return (((self.ending - self.begining).total_seconds()) / float((self.alert - self.begining).total_seconds()) * 100,
+                    ((current_time - self.ending).total_seconds()) / float((self.alert - self.begining).total_seconds()) * 100,
+                    0)
