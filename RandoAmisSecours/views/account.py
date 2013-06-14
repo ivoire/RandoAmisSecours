@@ -31,8 +31,8 @@ class RASUserCreationForm(UserCreationForm):
     Override the default UserCreationForm in order to add HTML5 attributes.
     """
     class Meta:
-      model = User
-      fields = ('username', 'email', 'password1', 'password2', 'first_name', 'last_name')
+        model = User
+        fields = ('username', 'email', 'password1', 'password2', 'first_name', 'last_name')
 
     def __init__(self, *args, **kwargs):
         super(RASUserCreationForm, self).__init__(*args, **kwargs)
