@@ -1,0 +1,174 @@
+{% extends 'RandoAmisSecours/base.html' %}
+{% load static %}
+
+{% block title %}New outing{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.css" />
+  <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/bootstrap-datetimepicker.min.css" />
+{% endblock %}
+
+{% block style %}
+    #map { height: 300px; }
+{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'outings.index' %}">Outings</a> <span class="divider">/</span></li>
+  <li class="active">Create</li>
+{% endblock %}
+
+{% block body %}
+<h2>New outing</h2>
+
+<div class="row">
+  <div class="span12">
+  <form action="#" method="post" class="form-horizontal">
+    {% csrf_token %}
+    <div class="row">
+      <div class="span6">
+        <h4 class="modal-header">Global information</h4>
+        <div class="control-group{% if form.name.errors %} error{% endif %}">
+          <label class="control-label" for="id_name">Name</label>
+          <div class="controls">
+            {{ form.name }}
+            {% for error in form.name.errors %}
+            <span class="help-inline">{{ error }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="control-group{% if form.description.errors %} error{% endif %}">
+          <label class="control-label" for="id_description">Description</label>
+          <div class="controls">
+            {{ form.description }}
+            {% for error in form.description.errors %}
+            <span class="help-inline">{{ error }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="control-group{% if form.latitude.errors %} error{% endif %}">
+          <label class="control-label" for="id_latitude">Latitude</label>
+          <div class="controls">
+            {{ form.latitude }}
+            {% for error in form.latitude.errors %}
+            <span class="help-inline">{{ error }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="control-group{% if form.longitude.errors %} error{% endif %}">
+          <label class="control-label" for="id_longitude">Longitude</label>
+          <div class="controls">
+            {{ form.longitude }}
+            {% for error in form.longitude.errors %}
+            <span class="help-inline">{{ error }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <h4 class="modal-header">Timing</h4>
+        <div class="control-group{% if form.begining.errors %} error{% endif %}">
+          <label class="control-label" for="id_begining">begin</label>
+          <div class="controls">
+            <div id="beginning_picker" class="input-append date">
+              {{ form.begining }}
+              <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+            </div>
+            {% for error in form.begining.errors %}
+            <span class="help-inline">{{ error }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="control-group{% if form.ending.errors %} error{% endif %}">
+          <label class="control-label" for="id_ending">end</label>
+          <div class="controls">
+            <div id="ending_picker" class="input-append date">
+              {{ form.ending }}
+              <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+            </div>
+            {% for error in form.ending.errors %}
+            <span class="help-inline">{{ error }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="control-group{% if form.alert.errors %} error{% endif %}">
+          <label class="control-label" for="id_alert">alert</label>
+          <div class="controls">
+            <div id="alert_picker" class="input-append date">
+              {{ form.alert }}
+              <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+            </div>
+            {% for error in form.alert.errors %}
+            <span class="help-inline">{{ error }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="span6 offset3">
+        <div id="map">
+        </div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+  </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+  $(function(){
+    var marker = null;
+    var map = L.map('map').setView([0, 0], 1);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: 'attribution: &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18}).addTo(map);
+
+    // Add a marker to the map
+    function addMarker(latlng) {
+      marker = L.marker(latlng,  {'draggable': true}).addTo(map);
+      // Update the postion while dragging
+      marker.on('dragend', function(e) {
+        var latlng = marker.getLatLng();
+        $('#id_latitude').val(latlng.lat);
+        $('#id_longitude').val(latlng.lng);
+      });
+      marker.on('drag', function(e) {
+        var latlng = marker.getLatLng();
+        $('#id_latitude').val(latlng.lat);
+        $('#id_longitude').val(latlng.lng);
+      });
+    };
+
+    // Add the marker at the right place if latitude and longitude are defined
+    if($('#id_latitude').val() && $('#id_longitude').val()) {
+      addMarker([$('#id_latitude').val(), $('#id_longitude').val()]);
+    }
+
+    // Map events
+    map.on('click', function(e){
+      // Update the position when clicking
+      $('#id_latitude').val(e.latlng.lat);
+      $('#id_longitude').val(e.latlng.lng);
+
+      // Create the marker if needed
+      if(!marker) {
+        addMarker(e.latlng);
+      } else {
+        marker.setLatLng(e.latlng);
+      }
+    })
+
+    // datetime pickers
+    $('#beginning_picker, #ending_picker, #alert_picker').datetimepicker({
+      format: 'yyyy-MM-dd hh:mm',
+      pickSeconds: false,
+      language: 'en',
+    });
+  })
+</script>
+{% endblock %}

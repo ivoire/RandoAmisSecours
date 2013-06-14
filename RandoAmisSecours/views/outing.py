@@ -1,12 +1,29 @@
 # -*- coding: utf-8 -*-
 # vim: set ts=4
 
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.http import Http404, HttpResponse
+from django.forms import ModelForm
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
 from RandoAmisSecours.models import Outing, DRAFT, CONFIRMED, LATE, FINISHED, CANCELED
+
+
+class OutingForm(ModelForm):
+    class Meta:
+        model = Outing
+        fields = ('name', 'description', 'begining', 'ending', 'alert', 'latitude', 'longitude')
+
+    def __init__(self, *args, **kwargs):
+        super(OutingForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs['placeholder'] = 'Outing name'
+        self.fields['name'].widget.attrs['autofocus'] = 'autofocus'
+        self.fields['description'].widget.attrs['placeholder'] = 'description'
+        self.fields['latitude'].widget.attrs['placeholder'] = 'latitude'
+        self.fields['longitude'].widget.attrs['placeholder'] = 'longitude'
 
 
 def index(request, status='confirmed'):
@@ -29,3 +46,18 @@ def details(request, outing_id):
     outing = get_object_or_404(Outing, pk=outing_id)
 
     return render_to_response('RandoAmisSecours/outing/details.html', {'outing': outing}, context_instance=RequestContext(request))
+
+
+@login_required
+def create(request):
+    if request.method == 'POST':
+        form = OutingForm(request.POST)
+        if form.is_valid():
+            outing = form.save(commit=False)
+            outing.user = request.user
+            outing.save()
+            return HttpResponseRedirect(reverse('outings.details', args=[outing.pk]))
+    else:
+        form = OutingForm()
+
+    return render_to_response('RandoAmisSecours/outing/create.html', {'form': form}, context_instance=RequestContext(request))
