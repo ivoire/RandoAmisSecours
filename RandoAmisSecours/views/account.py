@@ -70,4 +70,5 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render_to_response('RandoAmisSecours/account/profile.html', context_instance=RequestContext(request))
+    outings = request.user.outing_set.all()
+    return render_to_response('RandoAmisSecours/account/profile.html', {'outings': outings}, context_instance=RequestContext(request))
