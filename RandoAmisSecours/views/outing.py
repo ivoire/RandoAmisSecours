@@ -61,3 +61,18 @@ def create(request):
         form = OutingForm()
 
     return render_to_response('RandoAmisSecours/outing/create.html', {'form': form}, context_instance=RequestContext(request))
+
+
+@login_required
+def update(request, outing_id):
+    outing = get_object_or_404(Outing, pk=outing_id)
+
+    if request.method == 'POST':
+        form = OutingForm(request.POST, instance=outing)
+        if form.is_valid():
+            outing = form.save()
+            return HttpResponseRedirect(reverse('outings.details', args=[outing.pk]))
+    else:
+        form = OutingForm(instance=outing)
+
+    return render_to_response('RandoAmisSecours/outing/create.html', {'form': form, 'update': True, 'outing': outing}, context_instance=RequestContext(request))

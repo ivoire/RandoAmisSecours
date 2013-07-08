@@ -29,5 +29,6 @@ urlpatterns += patterns('RandoAmisSecours.views.outing',
     url(r'^outings/late/$', 'index', {'status': 'late'}, name='outings.index.late'),
     url(r'^outings/canceled/$', 'index', {'status': 'canceled'}, name='outings.index.canceled'),
     url(r'^outings/(?P<outing_id>\d+)/$', 'details', name='outings.details'),
+    url(r'^outings/(?P<outing_id>\d+)/update/$', 'update', name='outings.update'),
     url(r'^outings/create/$', 'create', name='outings.create'),
 )

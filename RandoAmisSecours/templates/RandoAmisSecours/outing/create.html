@@ -1,7 +1,7 @@
 {% extends 'RandoAmisSecours/base.html' %}
 {% load static %}
 
-{% block title %}New outing{% endblock %}
+{% block title %}{{ update|yesno:"Update,New outing" }}{% endblock %}
 
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.css" />
@@ -15,11 +15,11 @@
 {% block breadcrumb %}
   <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
   <li><a href="{% url 'outings.index' %}">Outings</a> <span class="divider">/</span></li>
-  <li class="active">Create</li>
+  <li class="active">{{ update|yesno:"Update,Create" }}</li>
 {% endblock %}
 
 {% block body %}
-<h2>New outing</h2>
+<h2>{% if update %}Update «{{ outing.name }}»{% else %}New outing{% endif %}</h2>
 
 <div class="row">
   <div class="span12">
@@ -110,7 +110,7 @@
       </div>
     </div>
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Create</button>
+      <button type="submit" class="btn btn-primary">{{ update|yesno:"Update,Create" }}</button>
     </div>
   </form>
   </div>
