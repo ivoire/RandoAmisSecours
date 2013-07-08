@@ -37,7 +37,7 @@
           </div>
           <div class="caption">
             <h3><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></h3>
-            <p>{{ outing.description }}</p>
+            <p>{{ outing.description|truncatewords:8 }}</p>
           </div>
         </div>
       </li>
