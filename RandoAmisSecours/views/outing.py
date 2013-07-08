@@ -2,6 +2,7 @@
 # vim: set ts=4
 
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms import ModelForm
@@ -66,6 +67,10 @@ def create(request):
 @login_required
 def update(request, outing_id):
     outing = get_object_or_404(Outing, pk=outing_id)
+
+    if outing.user != request.user:
+        messages.error(request, 'Only the outing owner can update it')
+        return HttpResponseRedirect(reverse('outings.details', args=[outing_id]))
 
     if request.method == 'POST':
         form = OutingForm(request.POST, instance=outing)

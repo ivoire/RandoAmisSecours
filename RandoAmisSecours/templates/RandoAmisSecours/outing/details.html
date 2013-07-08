@@ -21,6 +21,16 @@
 <h2>{{ outing.name }}</h2>
 
 <div class="row">
+  {% if messages %}
+  <div class="span12">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags|default:'error' }}">
+      <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+      <strong>{{ message.tags|default:'error'|capfirst }}:</strong> {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
   <div class="span12">
     <div class="progress">
       {% with outing.getPercents as percents %}
