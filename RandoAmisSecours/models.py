@@ -44,6 +44,7 @@ class Profile(models.Model):
 class Outing(models.Model):
     class Meta:
         app_label = 'RandoAmisSecours'
+        ordering = ['begining', 'ending', 'alert', 'name']
 
     user = models.ForeignKey(User)
 
