@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from RandoAmisSecours.models import Profile
+from RandoAmisSecours.models import Profile, CONFIRMED, DRAFT
 
 
 class RASAuthenticationForm(AuthenticationForm):
@@ -70,5 +70,6 @@ def register(request):
 
 @login_required
 def profile(request):
-    outings = request.user.outing_set.all()
+    outings = request.user.outing_set.filter(status=CONFIRMED)
+    draft_outings = request.user.outing_set.filter(status=DRAFT)
     return render_to_response('RandoAmisSecours/account/profile.html', {'outings': outings}, context_instance=RequestContext(request))
