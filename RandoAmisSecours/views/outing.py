@@ -81,3 +81,12 @@ def update(request, outing_id):
         form = OutingForm(instance=outing)
 
     return render_to_response('RandoAmisSecours/outing/create.html', {'form': form, 'update': True, 'outing': outing}, context_instance=RequestContext(request))
+
+
+@login_required
+def delete(request, outing_id):
+    outing = get_object_or_404(Outing, pk=outing_id)
+    if outing.user != request.user:
+        messages.error(request, 'Only the outing owner can delete it')
+        return HttpResponseRedirect(reverse('outings.index'))
+    outing.delete()
