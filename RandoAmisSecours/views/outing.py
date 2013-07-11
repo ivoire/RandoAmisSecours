@@ -90,3 +90,5 @@ def delete(request, outing_id):
         messages.error(request, 'Only the outing owner can delete it')
         return HttpResponseRedirect(reverse('outings.index'))
     outing.delete()
+
+    return HttpResponseRedirect(reverse('accounts.profile'))
