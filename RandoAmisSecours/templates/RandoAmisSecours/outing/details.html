@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block body %}
-<h2>{{ outing.name }}</h2>
+<h2>{{ outing.name }} <small><a href="{% url 'outings.update' outing.pk %}">(update)</a></small></h2>
 
 <div class="row">
   {% if messages %}
