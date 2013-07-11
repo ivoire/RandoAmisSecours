@@ -72,4 +72,4 @@ def register(request):
 def profile(request):
     outings = request.user.outing_set.filter(status=CONFIRMED)
     draft_outings = request.user.outing_set.filter(status=DRAFT)
-    return render_to_response('RandoAmisSecours/account/profile.html', {'outings': outings}, context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/account/profile.html', {'outings': outings, 'draft_outings': draft_outings}, context_instance=RequestContext(request))
