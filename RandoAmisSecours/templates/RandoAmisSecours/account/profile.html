@@ -54,7 +54,7 @@
               </div>
             </div>
           </td>
-          <td><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
+          <td><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
             <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
@@ -88,7 +88,7 @@
         <tr>
           <td>{{ outing.name }}</td>
           <td>{{ outing.begining }}</td>
-          <td><a href="{% url 'outings.confirm' outing.pk %}" class="btn btn-mini btn-success"><i class="icon-ok"></i></a><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
+          <td><a href="{% url 'outings.confirm' outing.pk %}" class="btn btn-mini btn-success"><i class="icon-ok"></i></a><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
             <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
