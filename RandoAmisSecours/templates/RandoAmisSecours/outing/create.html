@@ -5,6 +5,7 @@
 
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.css" />
+  <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/l.geosearch.css" />
   <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/bootstrap-datetimepicker.min.css" />
 {% endblock %}
 
@@ -119,14 +120,25 @@
 
 {% block script %}
 <script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/l.control.geosearch.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/l.geosearch.provider.openstreetmap.js"></script>
 <script src="{% get_static_prefix %}RandoAmisSecours/js/bootstrap-datetimepicker.min.js"></script>
 <script>
   $(function(){
+    var osmURL = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+    var basemap = new L.TileLayer(osmURL,
+                        {attribution: 'attribution: &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                         maxZoom: 18});
     var marker = null;
-    var map = L.map('map').setView([0, 0], 1);
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: 'attribution: &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 18}).addTo(map);
+    var map = new L.Map('map', {
+      layers: [basemap],
+      center: new L.LatLng(0, 0),
+      zoom: 1
+    });
+
+    new L.Control.GeoSearch({
+      provider: new L.GeoSearch.Provider.OpenStreetMap()
+    }).addTo(map);
 
     // Add a marker to the map
     function addMarker(latlng) {
