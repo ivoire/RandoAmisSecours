@@ -105,3 +105,16 @@ def confirm(request, outing_id):
     outing.save()
     messages.info(request, u"«%s» is now confirmed" % (outing.name))
     return HttpResponseRedirect(reverse('accounts.profile'))
+
+
+@login_required
+def finish(request, outing_id):
+    outing = get_object_or_404(Outing, pk=outing_id)
+    if outing.user != request.user:
+        messages.error(request, 'Only the outing owner can finish it')
+        return HttpResponseRedirect(reverse('outings.index'))
+
+    outing.status = FINISHED
+    outing.save()
+    messages.info(request, u"«%s» is now finished" % (outing.name))
+    return HttpResponseRedirect(reverse('accounts.profile'))

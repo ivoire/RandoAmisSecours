@@ -32,6 +32,6 @@ urlpatterns += patterns('RandoAmisSecours.views.outing',
     url(r'^outings/(?P<outing_id>\d+)/$', 'details', name='outings.details'),
     url(r'^outings/(?P<outing_id>\d+)/update/$', 'update', name='outings.update'),
     url(r'^outings/(?P<outing_id>\d+)/delete/$', 'delete', name='outings.delete'),
-    url(r'^outings/(?P<outing_id>\d+)/delete/$', 'delete', name='outings.delete'),
     url(r'^outings/(?P<outing_id>\d+)/confirm/$', 'confirm', name='outings.confirm'),
+    url(r'^outings/(?P<outing_id>\d+)/finish/$', 'finish', name='outings.finish'),
 )
