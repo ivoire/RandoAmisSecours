@@ -30,7 +30,8 @@
         <tr>
           <th>Name</th>
           <th>Begin</th>
-          <th></th>
+          <th width="10%"></th>
+          <th width="10%"></th>
         </tr>
       </thead>
       <tbody>
@@ -38,6 +39,21 @@
         <tr>
           <td>{{ outing.name }}</td>
           <td>{{ outing.begining }}</td>
+          <td><a href="#okModal{{ outing.pk }}" role="button" class="btn btn-mini btn-success" data-toggle="modal"><i class="icon-ok-sign"></i></a><a href="#" class="btn btn-mini btn-warning"><i class="icon-time"></i></a>
+            <div id="okModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="okModal{{ outing.pk }}Label" aria-hidden="true">
+              <div class="modal-header">
+                <button type="button" class="close" data-div="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+                <h3 id="okModal{{ outing.pk }}Label">Finishing outing</h3>
+              </div>
+              <div class="modal-body">
+                <p>Confirm that you are back home safe from «{{ outing.name }}» ?</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <a href="{% url 'outings.finish' outing.pk %}" class="btn btn-success">Finish</a>
+              </div>
+            </div>
+          </td>
           <td><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
             <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
               <div class="modal-header">
@@ -64,7 +80,7 @@
         <tr>
           <th>Name</th>
           <th>Begin</th>
-          <th></th>
+          <th width="10%"></th>
         </tr>
       </thead>
       <tbody>
