@@ -13,8 +13,8 @@ import os
 DRAFT = 0
 CONFIRMED = 1
 LATE = 3
-FINISHED = 3
-CANCELED = 4
+FINISHED = 4
+CANCELED = 5
 OUTING_STATUS = (
     (DRAFT, 'draft'),
     (CONFIRMED, 'confirmed'),
