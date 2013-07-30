@@ -24,93 +24,113 @@
   </div>
   {% endif %}
   <div class="span12">
-    <h4 class="modal-header">Current outings <small><a href="{% url 'outings.create' %}">Create</a></small></h4>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Begin</th>
-          <th width="10%"></th>
-          <th width="10%"></th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for outing in outings %}
-        <tr>
-          <td>{{ outing.name }}</td>
-          <td>{{ outing.begining }}</td>
-          <td><a href="#okModal{{ outing.pk }}" role="button" class="btn btn-mini btn-success" data-toggle="modal"><i class="icon-ok-sign"></i></a><a href="#" class="btn btn-mini btn-warning"><i class="icon-time"></i></a>
-            <div id="okModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="okModal{{ outing.pk }}Label" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-div="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-                <h3 id="okModal{{ outing.pk }}Label">Finishing outing</h3>
-              </div>
-              <div class="modal-body">
-                <p>Confirm that you are back home safe from «{{ outing.name }}» ?</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                <a href="{% url 'outings.finish' outing.pk %}" class="btn btn-success">Finish</a>
-              </div>
-            </div>
-          </td>
-          <td><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
-            <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-                <h3 id="deleteModal{{ outing.pk }}Label">Delete outing</h3>
-              </div>
-              <div class="modal-body">
-                <p>Are you sure you want to delete the outing: «{{ outing.name }}» ?</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">Delete</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    <h4 class="modal-header">Drafts</h4>
-    {% if draft_outings %}
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Begin</th>
-          <th width="10%"></th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for outing in draft_outings %}
-        <tr>
-          <td>{{ outing.name }}</td>
-          <td>{{ outing.begining }}</td>
-          <td><a href="{% url 'outings.confirm' outing.pk %}" class="btn btn-mini btn-success"><i class="icon-ok"></i></a><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
-            <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-                <h3 id="deleteModal{{ outing.pk }}Label">Delete outing</h3>
-              </div>
-              <div class="modal-body">
-                <p>Are you sure you want to delete the outing: «{{ outing.name }}» ?</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">Delete</a>
-              </div>
-            </div>
-          </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-    <p>No drafts</p>
-    {% endif %}
-
+    <h3>Outings</h3>
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#current" data-toggle="tab">Current</a></li>
+        <li><a href="#draft" data-toggle="tab">Draft</a></li>
+        <li><a href="#finished" data-toggle="tab">Finished</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="current">
+          {% if outings %}
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Begin</th>
+                <th width="10%"></th>
+                <th width="10%"></th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for outing in outings %}
+              <tr>
+                <td>{{ outing.name }}</td>
+                <td>{{ outing.begining }}</td>
+                <td><a href="#okModal{{ outing.pk }}" role="button" class="btn btn-mini btn-success" data-toggle="modal"><i class="icon-ok-sign"></i></a><a href="#" class="btn btn-mini btn-warning"><i class="icon-time"></i></a>
+                  <div id="okModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="okModal{{ outing.pk }}Label" aria-hidden="true">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-div="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+                      <h3 id="okModal{{ outing.pk }}Label">Finishing outing</h3>
+                    </div>
+                    <div class="modal-body">
+                      <p>Confirm that you are back home safe from «{{ outing.name }}» ?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                      <a href="{% url 'outings.finish' outing.pk %}" class="btn btn-success">Finish</a>
+                    </div>
+                  </div>
+                </td>
+                <td><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
+                  <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+                      <h3 id="deleteModal{{ outing.pk }}Label">Delete outing</h3>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to delete the outing: «{{ outing.name }}» ?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                      <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">Delete</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <p>No current outings</p>
+          {% endif %}
+        </div>
+        <div class="tab-pane" id="draft">
+          {% if draft_outings %}
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Begin</th>
+                <th width="10%"></th>
+                <th width="10%"></th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for outing in draft_outings %}
+              <tr>
+                <td>{{ outing.name }}</td>
+                <td>{{ outing.begining }}</td>
+                <td></td>
+                <td><a href="{% url 'outings.confirm' outing.pk %}" class="btn btn-mini btn-success"><i class="icon-ok"></i></a><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
+                  <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+                      <h3 id="deleteModal{{ outing.pk }}Label">Delete outing</h3>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to delete the outing: «{{ outing.name }}» ?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                      <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">Delete</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <p>No drafts</p>
+          {% endif %}
+        </div>
+        <div class="tab-pane" id="finished">
+          <p>No finished outings</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
