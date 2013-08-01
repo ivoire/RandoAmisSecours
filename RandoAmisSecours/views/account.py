@@ -6,11 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from RandoAmisSecours.models import Profile, CONFIRMED, DRAFT
+from RandoAmisSecours.models import Profile, CONFIRMED, DRAFT, LATE, FINISHED
 
 
 class RASAuthenticationForm(AuthenticationForm):
@@ -70,6 +71,7 @@ def register(request):
 
 @login_required
 def profile(request):
-    outings = request.user.outing_set.filter(status=CONFIRMED)
+    outings = request.user.outing_set.filter(Q(status=CONFIRMED) | Q(status=LATE))
     draft_outings = request.user.outing_set.filter(status=DRAFT)
-    return render_to_response('RandoAmisSecours/account/profile.html', {'outings': outings, 'draft_outings': draft_outings}, context_instance=RequestContext(request))
+    finished_outings = request.user.outing_set.filter(status=FINISHED)
+    return render_to_response('RandoAmisSecours/account/profile.html', {'outings': outings, 'draft_outings': draft_outings, 'finished_outings': finished_outings}, context_instance=RequestContext(request))

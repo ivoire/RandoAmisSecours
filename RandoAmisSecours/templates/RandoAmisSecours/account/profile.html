@@ -38,7 +38,7 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Begin</th>
+                <th>Begin in</th>
                 <th width="10%"></th>
                 <th width="10%"></th>
               </tr>
@@ -47,7 +47,7 @@
             {% for outing in outings %}
               <tr>
                 <td>{{ outing.name }}</td>
-                <td>{{ outing.begining }}</td>
+                <td>{{ outing.begining|timeuntil }}</td>
                 <td><a href="#okModal{{ outing.pk }}" role="button" class="btn btn-mini btn-success" data-toggle="modal"><i class="icon-ok-sign"></i></a><a href="#" class="btn btn-mini btn-warning"><i class="icon-time"></i></a>
                   <div id="okModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="okModal{{ outing.pk }}Label" aria-hidden="true">
                     <div class="modal-header">
@@ -92,7 +92,7 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Begin</th>
+                <th>Begin in</th>
                 <th width="10%"></th>
                 <th width="10%"></th>
               </tr>
@@ -101,7 +101,7 @@
             {% for outing in draft_outings %}
               <tr>
                 <td>{{ outing.name }}</td>
-                <td>{{ outing.begining }}</td>
+                <td>{{ outing.begining|timeuntil }}</td>
                 <td></td>
                 <td><a href="{% url 'outings.confirm' outing.pk %}" class="btn btn-mini btn-success"><i class="icon-ok"></i></a><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
                   <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
@@ -127,7 +127,30 @@
           {% endif %}
         </div>
         <div class="tab-pane" id="finished">
+          {% if finished_outings %}
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Began</th>
+                <th>End planned</th>
+                <th>Finished</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for outing in finished_outings %}
+              <tr>
+                <td>{{ outing.name }}</td>
+                <td>{{ outing.begining }}</td>
+                <td>{{ outing.ending }}</td>
+                <td></td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
           <p>No finished outings</p>
+          {% endif %}
         </div>
       </div>
     </div>
