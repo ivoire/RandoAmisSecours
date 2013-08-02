@@ -24,7 +24,7 @@
   </div>
   {% endif %}
   <div class="span12">
-    <h3>My Outings:</h3>
+    <h3>My Outings <small><a href="{% url 'outings.create' %}">(new)</a></small></h3>
     <div class="tabbable">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#current" data-toggle="tab">Current</a></li>
@@ -164,6 +164,23 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="span12">
+    <h3>My Friends</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      {% for friend in user.profile.friends.all %}
+      <tr>
+        <td>{{ friend.get_full_name }}</td>
+        <td><a href="tel://{{ friend.profile.phone_number }}">{{ friend.profile.phone_number }}</a></td>
+      </tr>
+      {% endfor %}
+    </table>
   </div>
 </div>
 {% endblock %}

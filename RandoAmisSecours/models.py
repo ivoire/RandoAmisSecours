@@ -33,7 +33,8 @@ class Profile(models.Model):
     class Meta:
         app_label = 'RandoAmisSecours'
 
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User)
+    friends = models.ManyToManyField(User, related_name='friends_set', blank=True)
     phone_number = models.CharField(max_length=30, blank=True, null=True)
     hash_id = models.CharField(unique=True, max_length=30, default=random_hash)
 
