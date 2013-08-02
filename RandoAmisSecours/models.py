@@ -82,3 +82,18 @@ class Outing(models.Model):
             return (((self.ending - self.begining).total_seconds()) / float((self.alert - self.begining).total_seconds()) * 100,
                     ((current_time - self.ending).total_seconds()) / float((self.alert - self.begining).total_seconds()) * 100,
                     0)
+
+    def is_running(self):
+        """ Return True if begining <= now < end """
+        now = datetime.utcnow().replace(tzinfo=utc)
+        return self.begining <= now and now < self.ending
+
+    def is_late(self):
+        """ Return True if end <= now < alert """
+        now = datetime.utcnow().replace(tzinfo=utc)
+        return self.ending <= now and now < self.alert
+
+    def is_alerting(self):
+        """ Return True if alert <= now """
+        now = datetime.utcnow().replace(tzinfo=utc)
+        return self.alert <= now
