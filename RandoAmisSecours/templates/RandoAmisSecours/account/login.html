@@ -51,6 +51,7 @@
       {{ form.password }}
     <button class="btn btn-large btn-primary" type="submit">Sign in</button>
     <input type="hidden" name="next" value="{{ next }}" />
+    <a href="{% url 'accounts.register' %}">Create an account</a>
   </form>
 </div>
 {% endblock %}
