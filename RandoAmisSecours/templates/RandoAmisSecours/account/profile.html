@@ -55,7 +55,7 @@
               {% else %}
               <tr>
               {% endif %}
-                <td>{{ outing.name }}</td>
+                <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
                 <td>{{ outing.begining|timeuntil }}</td>
                 <td>{{ outing.ending|timeuntil }}</td>
                 <td><a href="#okModal{{ outing.pk }}" role="button" class="btn btn-mini btn-success" data-toggle="modal"><i class="icon-ok-sign"></i></a><a href="#" class="btn btn-mini btn-warning"><i class="icon-time"></i></a>
@@ -110,7 +110,7 @@
             <tbody>
             {% for outing in draft_outings %}
               <tr>
-                <td>{{ outing.name }}</td>
+                <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
                 <td>{{ outing.begining|timeuntil }}</td>
                 <td>{{ outing.ending|timeuntil }}</td>
                 <td><a href="{% url 'outings.confirm' outing.pk %}" class="btn btn-mini btn-success"><i class="icon-ok"></i></a><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
@@ -150,7 +150,7 @@
             <tbody>
             {% for outing in finished_outings %}
               <tr>
-                <td>{{ outing.name }}</td>
+                <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
                 <td>{{ outing.begining }}</td>
                 <td>{{ outing.ending }}</td>
                 <td></td>
