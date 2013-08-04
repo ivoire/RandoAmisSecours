@@ -1,0 +1,56 @@
+{% extends 'RandoAmisSecours/base.html' %}
+
+{% block title %}Search friends{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
+  <li><a href="#">Friends</a> <span class="divider">/</span></li>
+  <li class="active">Search</li>
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+  <h2>Search friends</h2>
+</div>
+
+<div class="row">
+  {% if messages %}
+  <div class="span12">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags|default:'error' }}">
+      <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+      <strong>{{ message.tags|default:'error'|capfirst }}:</strong> {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="span8 offset2">
+    <p>Search for friends using the field below.</p>
+    <form action="." method="get"class="form-search">
+      <input type="text" name="query" class="input-medium search-query">
+      <button type="submit" class="btn">Search</button>
+    </form>
+  </div>
+  <div class="span8 offset2">
+    {% if query %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th width="10%"></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for user in results %}
+        <tr>
+          <td>{{ user.get_full_name }}</td>
+          <td><a href="{% url 'friends.invite' user.pk %}" class="btn btn-mini btn-success" title="invite"><i class="icon-plus"></i></a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -21,6 +21,11 @@ urlpatterns += patterns('RandoAmisSecours.views.account',
     url(r'^accounts/profile/$', 'profile', name='accounts.profile'),
 )
 
+urlpatterns += patterns('RandoAmisSecours.views.friends',
+    url(r'^friends/search/$', 'search', name='friends.search'),
+    url(r'^friends/invite/(?P<user_id>\d+)/$', 'invite', name='friends.invite'),
+)
+
 # Outing
 urlpatterns += patterns('RandoAmisSecours.views.outing',
     url(r'^outings/$', 'index', name='outings.index'),
