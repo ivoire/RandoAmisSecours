@@ -18,6 +18,7 @@ urlpatterns += patterns('django.contrib.auth.views',
 
 urlpatterns += patterns('RandoAmisSecours.views.account',
     url(r'^accounts/register/$', 'register', name='accounts.register'),
+    url(r'^accounts/register/(?P<user_id>\d+)/confirm/(?P<user_hash>\w+)/$', 'register_confirm', name='accounts.register.confirm'),
     url(r'^accounts/profile/$', 'profile', name='accounts.profile'),
 )
 

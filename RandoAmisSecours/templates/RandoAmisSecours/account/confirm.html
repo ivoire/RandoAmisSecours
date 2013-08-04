@@ -1,0 +1,26 @@
+{% extends 'RandoAmisSecours/base.html' %}
+
+{% block title %}Confirm{% endblock %}
+
+{% block head %}
+  <meta http-equiv="refresh" content="5;url={% url 'accounts.login' %}">
+{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'accounts.profile' %}">Account</a> <span class="divider">/</span></li>
+  <li class="activate">Confirm</li>
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+  <h1>Registration confirmed</h1>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <p class="lead">Thanks for registering to R.A.S.</p>
+    <p>You will be <a href="{% url 'accounts.login' %}">redirected</a> to the login page in 5 seconds ...</p>
+  </div>
+</div>
+{% endblock %}

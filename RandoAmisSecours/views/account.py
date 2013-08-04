@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
 from RandoAmisSecours.models import Profile, CONFIRMED, DRAFT, LATE, FINISHED
@@ -49,9 +49,16 @@ class RASUserCreationForm(UserCreationForm):
         self.fields['last_name'].required = True
 
     def save(self, commit=True):
+        """
+        Create the new User and the associated Profile
+        The User is not activated until the register_confirm url has been
+        visited
+        """
         if not commit:
             raise NotImplementedError('Cannot create Profile and User without commit')
-        user = super(RASUserCreationForm, self).save(commit=True)
+        user = super(RASUserCreationForm, self).save(commit=False)
+        user.is_active = False
+        user.save()
         profile = Profile(user=user)
         profile.save()
         return user
@@ -67,6 +74,17 @@ def register(request):
         user_form = RASUserCreationForm()
 
     return render_to_response('RandoAmisSecours/account/register.html', {'user_form': user_form}, context_instance=RequestContext(request))
+
+
+def register_confirm(request, user_id, user_hash):
+    """
+    Check that the User and the Hash are correct before activating the User
+    """
+    user = get_object_or_404(User, pk=user_id, profile__hash_id=user_hash)
+    user.is_active = True
+    user.save
+
+    return render_to_response('RandoAmisSecours/account/confirm.html', {'user': user}, context_instance=RequestContext(request))
 
 
 @login_required
