@@ -166,7 +166,8 @@
     </div>
   </div>
   <div class="span12">
-    <h3>My Friends</h3>
+    <h3>My Friends <small><a href="{% url 'friends.search' %}">(search)</a></small></h3>
+    {% if user.profile.friends.all %}
     <table class="table table-striped">
       <thead>
         <tr>
@@ -181,6 +182,9 @@
       </tr>
       {% endfor %}
     </table>
+    {% else %}
+    <p>You don't have friends here for the moment.</p>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
