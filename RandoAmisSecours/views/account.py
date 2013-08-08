@@ -69,7 +69,7 @@ def register(request):
         user_form = RASUserCreationForm(request.POST)
         if user_form.is_valid():
             new_user = user_form.save()
-            return HttpResponseRedirect(reverse('accounts.profile'))
+            return render_to_response('RandoAmisSecours/account/register_end.html', context_instance=RequestContext(request))
     else:
         user_form = RASUserCreationForm()
 

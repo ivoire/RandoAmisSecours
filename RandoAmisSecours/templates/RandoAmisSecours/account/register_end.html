@@ -1,0 +1,23 @@
+{% extends 'RandoAmisSecours/base.html' %}
+
+{% block title %}Register end{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'accounts.profile' %}">Account</a> <span class="divider">/</span></li>
+  <li class="activate">Register end</li>
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+  <h1>email confirmation</h1>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <p class="lead">Check your mailbox for the confirmation mail.</p>
+    <p>This mail will contains instructions to activate your account. Just click on the link to activate your account and log in R.A.S.</p>
+    <p>If you haven't received the mail, check the spam folder.</p>
+  </div>
+</div>
+{% endblock %}
