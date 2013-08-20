@@ -116,5 +116,5 @@ def finish(request, outing_id):
 
     outing.status = FINISHED
     outing.save()
-    messages.info(request, u"«%s» is now finished" % (outing.name))
+    messages.success(request, u"«%s» is now finished" % (outing.name))
     return HttpResponseRedirect(reverse('accounts.profile'))
