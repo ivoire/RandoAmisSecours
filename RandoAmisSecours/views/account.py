@@ -93,3 +93,8 @@ def profile(request):
     draft_outings = request.user.outing_set.filter(status=DRAFT)
     finished_outings = request.user.outing_set.filter(status=FINISHED)
     return render_to_response('RandoAmisSecours/account/profile.html', {'outings': outings, 'draft_outings': draft_outings, 'finished_outings': finished_outings}, context_instance=RequestContext(request))
+
+
+@login_required
+def update(request):
+    pass
