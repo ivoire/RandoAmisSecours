@@ -24,7 +24,7 @@
   </div>
   {% endif %}
   <div class="span12">
-    <h3>My Outings <small><a href="{% url 'outings.create' %}">(new)</a></small></h3>
+    <h3>Outings <small><a href="{% url 'outings.create' %}">(new)</a></small></h3>
     <div class="tabbable">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#current" data-toggle="tab">Current</a></li>
@@ -166,7 +166,7 @@
     </div>
   </div>
   <div class="span12">
-    <h3>My Friends <small><a href="{% url 'friends.search' %}">(search)</a></small></h3>
+    <h3>Friends <small><a href="{% url 'friends.search' %}">(search)</a></small></h3>
     {% if user.profile.friends.all %}
     <table class="table table-striped">
       <thead>
@@ -185,6 +185,19 @@
     {% else %}
     <p>You don't have friends here for the moment.</p>
     {% endif %}
+  </div>
+  <div class="span12">
+    <h3>Information <small><a href="#">(update)</a></small></h3>
+    <dl class="dl-horizontal">
+      <dt>name</dt>
+      <dd>{{ user.get_full_name }}</dd>
+      <dt>email</dt>
+      <dd>{{ user.email }}</dd>
+      <dt>phone</dt>
+      <dd>{{ user.profile.phone_number|default:"?" }}</dd>
+      <dt>token</dt>
+      <dd>{{ user.profile.hash_id }}</dd>
+    </dl>
   </div>
 </div>
 {% endblock %}
