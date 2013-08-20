@@ -34,7 +34,7 @@ class Profile(models.Model):
         app_label = 'RandoAmisSecours'
 
     user = models.OneToOneField(User)
-    friends = models.ManyToManyField(User, related_name='friends_set', blank=True)
+    friends = models.ManyToManyField('self', blank=True, null=True)
     phone_number = models.CharField(max_length=30, blank=True, null=True)
     hash_id = models.CharField(unique=True, max_length=30, default=random_hash)
 
