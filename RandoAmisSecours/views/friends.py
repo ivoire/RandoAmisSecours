@@ -29,8 +29,8 @@ def search(request):
 def invite(request, user_id):
     # TODO: send a mail to the user and print something in the friend profile
     # page
-    new_friend = get_object_or_404(User, pk=user_id)
+    new_friend = get_object_or_404(Profile, user__pk=user_id)
     request.user.profile.friends.add(new_friend)
-    messages.success(request, u"«%s» added to your friends" % (new_friend.get_full_name()))
+    messages.success(request, u"«%s» added to your friends" % (new_friend.user.get_full_name()))
 
     return HttpResponseRedirect(reverse('friends.search'))
