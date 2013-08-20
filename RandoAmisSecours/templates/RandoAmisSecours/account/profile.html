@@ -177,8 +177,8 @@
       </thead>
       {% for friend in user.profile.friends.all %}
       <tr>
-        <td>{{ friend.get_full_name }}</td>
-        <td><a href="tel://{{ friend.profile.phone_number }}">{{ friend.profile.phone_number }}</a></td>
+        <td>{{ friend.user.get_full_name }}</td>
+        <td><a href="tel://{{ friend.phone_number }}">{{ friend.phone_number }}</a></td>
       </tr>
       {% endfor %}
     </table>
