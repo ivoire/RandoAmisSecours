@@ -46,7 +46,7 @@ def index(request, status='confirmed'):
 def details(request, outing_id):
     outing = get_object_or_404(Outing, pk=outing_id)
 
-    return render_to_response('RandoAmisSecours/outing/details.html', {'outing': outing}, context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/outing/details.html', {'outing': outing, 'FINISHED': FINISHED}, context_instance=RequestContext(request))
 
 
 @login_required
@@ -67,6 +67,9 @@ def create(request):
 @login_required
 def update(request, outing_id):
     outing = get_object_or_404(Outing, pk=outing_id)
+
+    if outing.status == FINISHED:
+        raise Http404
 
     if outing.user != request.user:
         messages.error(request, 'Only the outing owner can update it')
