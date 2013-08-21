@@ -187,7 +187,7 @@
     {% endif %}
   </div>
   <div class="span12">
-    <h3>Information <small><a href="#">(update)</a></small></h3>
+    <h3>Information <small><a href="{% url 'accounts.profile.update' %}">(update)</a></small></h3>
     <dl class="dl-horizontal">
       <dt>name</dt>
       <dd>{{ user.get_full_name }}</dd>
