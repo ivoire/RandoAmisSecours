@@ -45,7 +45,7 @@
       {% for profile in results %}
         <tr>
           <td>{{ profile.user.get_full_name }}</td>
-          <td>{% if profile not in user.profile.friends.all %}<a href="{% url 'friends.invite' profile.pk %}" class="btn btn-mini btn-success" title="invite"><i class="icon-plus"></i></a>{% endif %}</td>
+          <td>{% if profile not in user.profile.friends.all %}<a href="{% url 'friends.invite' profile.user.pk %}" class="btn btn-mini btn-success" title="invite"><i class="icon-plus"></i></a>{% endif %}</td>
         </tr>
       {% endfor %}
       </tbody>
