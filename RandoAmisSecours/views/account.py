@@ -2,12 +2,14 @@
 # vim: set ts=4
 
 from django import forms
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponseRedirect
+from django.forms import ModelForm
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
@@ -64,6 +66,24 @@ class RASUserCreationForm(UserCreationForm):
         return user
 
 
+class RASUserUpdateForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')
+
+    def __init__(self, *args, **kwargs):
+        super(RASUserUpdateForm, self).__init__(*args, **kwargs)
+        # first_name and last_name are required
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+
+
+class RASProfileUpdateForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('phone_number', )
+
+
 def register(request):
     if request.method == 'POST':
         user_form = RASUserCreationForm(request.POST)
@@ -97,4 +117,18 @@ def profile(request):
 
 @login_required
 def update(request):
-    pass
+    profile = get_object_or_404(Profile, user__pk=request.user.pk)
+
+    if request.method == 'POST':
+        user_form = RASUserUpdateForm(request.POST, instance=request.user)
+        profile_form = RASProfileUpdateForm(request.POST, instance=profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            profile = profile_form.save()
+            messages.success(request, "Personnal information updated")
+            return HttpResponseRedirect(reverse('accounts.profile'))
+    else:
+        user_form = RASUserUpdateForm(instance=request.user)
+        profile_form = RASProfileUpdateForm(instance=profile)
+
+    return render_to_response('RandoAmisSecours/account/update.html', {'user_form': user_form, 'profile_form': profile_form}, context_instance=RequestContext(request))
