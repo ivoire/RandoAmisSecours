@@ -154,7 +154,7 @@
         $('#id_latitude').val(latlng.lat);
         $('#id_longitude').val(latlng.lng);
       });
-    };
+    }
 
     // Add the marker at the right place if latitude and longitude are defined
     if($('#id_latitude').val() && $('#id_longitude').val()) {
@@ -173,7 +173,7 @@
       } else {
         marker.setLatLng(e.latlng);
       }
-    })
+    });
 
     // datetime pickers
     $('#beginning_picker, #ending_picker, #alert_picker').datetimepicker({
@@ -181,6 +181,6 @@
       pickSeconds: false,
       language: 'en',
     });
-  })
+  });
 </script>
 {% endblock %}

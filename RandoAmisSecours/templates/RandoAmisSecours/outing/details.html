@@ -73,6 +73,6 @@
         maxZoom: 18}).addTo(map);
     var marker = L.marker([{{ outing.latitude }}, {{ outing.longitude }}]).addTo(map)
                     .bindPopup('Ending');
-  })
+  });
 </script>
 {% endblock %}
