@@ -90,6 +90,8 @@ def register(request):
         if user_form.is_valid():
             new_user = user_form.save()
             return render_to_response('RandoAmisSecours/account/register_end.html', context_instance=RequestContext(request))
+        else:
+          messages.error(request, "Some information are missing or mistyped")
     else:
         user_form = RASUserCreationForm()
 
