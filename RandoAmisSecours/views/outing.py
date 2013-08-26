@@ -23,7 +23,7 @@ class OutingForm(ModelForm):
         super(OutingForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs['placeholder'] = _('Outing name')
         self.fields['name'].widget.attrs['autofocus'] = 'autofocus'
-        self.fields['description'].widget.attrs['placeholder'] = _('description')
+        self.fields['description'].widget.attrs['placeholder'] = _('Description')
         self.fields['latitude'].widget.attrs['placeholder'] = _('Latitude')
         self.fields['longitude'].widget.attrs['placeholder'] = _('Longitude')
 
