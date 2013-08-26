@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-26 21:43+0200\n"
+"POT-Creation-Date: 2013-08-26 22:12+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -65,8 +65,9 @@ msgid "About"
 msgstr "À propos"
 
 #: templates/RandoAmisSecours/account/confirm.html:4
+#: templates/RandoAmisSecours/account/confirm.html:13
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmer"
 
 #: templates/RandoAmisSecours/account/confirm.html:12
 #: templates/RandoAmisSecours/account/logged_out.html:27
@@ -80,18 +81,20 @@ msgstr "Compte"
 
 #: templates/RandoAmisSecours/account/confirm.html:18
 msgid "Registration confirmed"
-msgstr ""
+msgstr "Inscription confirmée"
 
 #: templates/RandoAmisSecours/account/confirm.html:23
 msgid "Thanks for registering to R.A.S."
-msgstr ""
+msgstr "Merci de vous être inscrit à R.A.S."
 
-#: templates/RandoAmisSecours/account/confirm.html:24
+#: templates/RandoAmisSecours/account/confirm.html:25
 #, python-format
 msgid ""
 "You will be <a href=\"%(URL)s\">redirected</a> to the login page in 5 "
 "seconds ..."
 msgstr ""
+"Vous allez être <a href=\"%(URL)s\">redirigé</a> sur la page de connexion "
+"dans 5 secondes ..."
 
 #: templates/RandoAmisSecours/account/logged_out.html:4
 #: templates/RandoAmisSecours/account/logged_out.html:34
@@ -133,7 +136,7 @@ msgstr "nouveau"
 
 #: templates/RandoAmisSecours/account/profile.html:33
 msgid "Current"
-msgstr "Actuel"
+msgstr "Actuelle"
 
 #: templates/RandoAmisSecours/account/profile.html:34
 msgid "Draft"
@@ -142,7 +145,7 @@ msgstr "Brouillon"
 #: templates/RandoAmisSecours/account/profile.html:35
 #: templates/RandoAmisSecours/account/profile.html:150
 msgid "Finished"
-msgstr "Terminé"
+msgstr "Terminée"
 
 #: templates/RandoAmisSecours/account/profile.html:43
 #: templates/RandoAmisSecours/account/profile.html:107
@@ -158,12 +161,12 @@ msgstr "Nom"
 #: templates/RandoAmisSecours/account/profile.html:44
 #: templates/RandoAmisSecours/account/profile.html:108
 msgid "Begin in"
-msgstr ""
+msgstr "Débute à"
 
 #: templates/RandoAmisSecours/account/profile.html:45
 #: templates/RandoAmisSecours/account/profile.html:109
 msgid "End in"
-msgstr ""
+msgstr "Finie à"
 
 #: templates/RandoAmisSecours/account/profile.html:71
 #, python-format
@@ -178,7 +181,7 @@ msgstr "Annuler"
 
 #: templates/RandoAmisSecours/account/profile.html:75
 msgid "Finish"
-msgstr ""
+msgstr "Terminée"
 
 #: templates/RandoAmisSecours/account/profile.html:86
 #: templates/RandoAmisSecours/account/profile.html:126
@@ -189,7 +192,7 @@ msgstr "Etes-vous sur de vouloir supprimer la sortie : «%(name)s» ?"
 #: templates/RandoAmisSecours/account/profile.html:90
 #: templates/RandoAmisSecours/account/profile.html:130
 msgid "Delete"
-msgstr ""
+msgstr "Supprime"
 
 #: templates/RandoAmisSecours/account/profile.html:99
 msgid "No current outings"
@@ -201,11 +204,11 @@ msgstr "Pas de brouillons"
 
 #: templates/RandoAmisSecours/account/profile.html:148
 msgid "Began"
-msgstr ""
+msgstr "Début"
 
 #: templates/RandoAmisSecours/account/profile.html:149
 msgid "End planned"
-msgstr ""
+msgstr "Fin planifiée"
 
 #: templates/RandoAmisSecours/account/profile.html:165
 msgid "No finished outings"
@@ -218,7 +221,7 @@ msgstr "Amis"
 
 #: templates/RandoAmisSecours/account/profile.html:173
 msgid "search"
-msgstr ""
+msgstr "chercher"
 
 #: templates/RandoAmisSecours/account/profile.html:179
 #: templates/RandoAmisSecours/account/profile.html:201
@@ -233,11 +236,11 @@ msgstr "Vous n'avez pas d'amis ici pour le moment."
 
 #: templates/RandoAmisSecours/account/profile.html:195
 msgid "Information"
-msgstr ""
+msgstr "Informations"
 
 #: templates/RandoAmisSecours/account/profile.html:195
 msgid "update"
-msgstr ""
+msgstr "mettre à jour"
 
 #: templates/RandoAmisSecours/account/profile.html:199
 #: templates/RandoAmisSecours/account/register.html:80
@@ -286,25 +289,27 @@ msgstr "Nom"
 #: templates/RandoAmisSecours/account/register_end.html:4
 #: templates/RandoAmisSecours/account/register_end.html:9
 msgid "Register end"
-msgstr ""
+msgstr "Fin de l'enregistrement"
 
 #: templates/RandoAmisSecours/account/register_end.html:14
 msgid "email confirmation"
-msgstr ""
+msgstr "Confirmation par email"
 
 #: templates/RandoAmisSecours/account/register_end.html:19
 msgid "Check your mailbox for the confirmation mail."
-msgstr ""
+msgstr "Vérifier votre messagerie pour le mail de confirmation."
 
 #: templates/RandoAmisSecours/account/register_end.html:20
 msgid ""
 "This mail will contains instructions to activate your account. Just click on "
 "the link to activate your account and log in R.A.S."
 msgstr ""
+"Ce mail contient des instructions pour activer votre compte. Clicker sur le "
+"liens dans ce mail pour activer votre compte et vous connecter."
 
 #: templates/RandoAmisSecours/account/register_end.html:21
 msgid "If you haven't received the mail, check the spam folder."
-msgstr ""
+msgstr "Si vous n'avez pas reçu de mail, vérifiez le répertoire de spam."
 
 #: templates/RandoAmisSecours/account/update.html:4
 #: templates/RandoAmisSecours/account/update.html:9
