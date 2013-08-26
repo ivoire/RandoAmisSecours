@@ -1,7 +1,7 @@
 {% extends 'RandoAmisSecours/base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Login" %}{% endblock %}
+{% block title %}{% trans "Log in" %}{% endblock %}
 
 {% block style %}
   .form-signin {
@@ -33,7 +33,7 @@
 {% block breadcrumb %}
   <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
   <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a> <span class="divider">/</span></li>
-  <li class="activate">{% trans "Login" %}</li>
+  <li class="activate">{% trans "Log in" %}</li>
 {% endblock %}
 
 {% block body %}
