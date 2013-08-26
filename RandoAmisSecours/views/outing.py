@@ -24,8 +24,8 @@ class OutingForm(ModelForm):
         self.fields['name'].widget.attrs['placeholder'] = _('Outing name')
         self.fields['name'].widget.attrs['autofocus'] = 'autofocus'
         self.fields['description'].widget.attrs['placeholder'] = _('description')
-        self.fields['latitude'].widget.attrs['placeholder'] = _('latitude')
-        self.fields['longitude'].widget.attrs['placeholder'] = _('longitude')
+        self.fields['latitude'].widget.attrs['placeholder'] = _('Latitude')
+        self.fields['longitude'].widget.attrs['placeholder'] = _('Longitude')
 
 
 def index(request, status='confirmed'):
