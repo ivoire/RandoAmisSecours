@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-26 21:23+0200\n"
+"POT-Creation-Date: 2013-08-26 21:43+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -116,7 +116,7 @@ msgstr ""
 
 #: templates/RandoAmisSecours/account/login.html:50
 msgid "Please sign in"
-msgstr ""
+msgstr "Veuillez vous identifier"
 
 #: templates/RandoAmisSecours/account/login.html:55
 #: templates/RandoAmisSecours/account/register.html:14
@@ -252,11 +252,11 @@ msgstr ""
 #: templates/RandoAmisSecours/account/register.html:9
 #: templates/RandoAmisSecours/account/register.html:94
 msgid "Register"
-msgstr ""
+msgstr "S'inscrire"
 
 #: templates/RandoAmisSecours/account/register.html:30
 msgid "Account information"
-msgstr ""
+msgstr "Informations sur le compte"
 
 #: templates/RandoAmisSecours/account/register.html:32 views/account.py:28
 #: views/account.py:44
@@ -271,17 +271,17 @@ msgstr ""
 
 #: templates/RandoAmisSecours/account/register.html:60
 msgid "Personnal information"
-msgstr ""
+msgstr "Informations personnelles"
 
 #: templates/RandoAmisSecours/account/register.html:62
 #: templates/RandoAmisSecours/account/update.html:22
 msgid "First name"
-msgstr ""
+msgstr "Prénom"
 
 #: templates/RandoAmisSecours/account/register.html:71
 #: templates/RandoAmisSecours/account/update.html:31
 msgid "Last name"
-msgstr ""
+msgstr "Nom"
 
 #: templates/RandoAmisSecours/account/register_end.html:4
 #: templates/RandoAmisSecours/account/register_end.html:9
@@ -432,33 +432,27 @@ msgid "Longitude"
 msgstr ""
 
 #: templates/RandoAmisSecours/outing/create.html:73
-msgid "begin"
-msgstr ""
-
-#: templates/RandoAmisSecours/outing/create.html:85
-msgid "end"
-msgstr ""
-
-#: templates/RandoAmisSecours/outing/create.html:97
-msgid "alert"
-msgstr ""
-
-#: templates/RandoAmisSecours/outing/details.html:6
-#, python-format
-msgid "Outing «%(name)s»"
-msgstr ""
-
-#: templates/RandoAmisSecours/outing/details.html:23
-msgid "(update)"
-msgstr ""
-
 #: templates/RandoAmisSecours/outing/details.html:47
 msgid "Begin"
 msgstr "Début"
 
+#: templates/RandoAmisSecours/outing/create.html:85
 #: templates/RandoAmisSecours/outing/details.html:49
 msgid "End"
 msgstr "Fin"
+
+#: templates/RandoAmisSecours/outing/create.html:97
+msgid "Alert"
+msgstr "Alerte"
+
+#: templates/RandoAmisSecours/outing/details.html:6
+#, python-format
+msgid "Outing «%(name)s»"
+msgstr "Sortie «%(name)s»"
+
+#: templates/RandoAmisSecours/outing/details.html:23
+msgid "(update)"
+msgstr ""
 
 #: templates/RandoAmisSecours/outing/details.html:51
 msgid "Alert at"
