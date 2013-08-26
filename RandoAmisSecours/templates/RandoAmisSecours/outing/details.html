@@ -65,7 +65,7 @@
     <h4 class="modal-header">Late outing</h4>
     <p>{{ outing.user.get_full_name }} is really late, you can try to contact him:</p>
     <dl class="dl-horizontal">
-      <dt>name</dd>
+      <dt>name</dt>
       <dd>{{ outing.user.get_full_name }}</dd>
       <dt>phone</dt>
       <dd>{% if outing.user.profile.phone_number %}<a href="tel:{{ outing.user.profile.phone_number }}">{{ outing.user.profile.phone_number }}</a>{% else %}?{% endif %}</dd>
