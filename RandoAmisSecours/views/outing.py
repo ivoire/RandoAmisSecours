@@ -9,6 +9,7 @@ from django.forms import ModelForm
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from django.utils.translation import ugettext as _
 
 from RandoAmisSecours.models import Outing, DRAFT, CONFIRMED, LATE, FINISHED, CANCELED
 
@@ -20,11 +21,11 @@ class OutingForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(OutingForm, self).__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs['placeholder'] = 'Outing name'
+        self.fields['name'].widget.attrs['placeholder'] = _('Outing name')
         self.fields['name'].widget.attrs['autofocus'] = 'autofocus'
-        self.fields['description'].widget.attrs['placeholder'] = 'description'
-        self.fields['latitude'].widget.attrs['placeholder'] = 'latitude'
-        self.fields['longitude'].widget.attrs['placeholder'] = 'longitude'
+        self.fields['description'].widget.attrs['placeholder'] = _('description')
+        self.fields['latitude'].widget.attrs['placeholder'] = _('latitude')
+        self.fields['longitude'].widget.attrs['placeholder'] = _('longitude')
 
 
 def index(request, status='confirmed'):
@@ -72,7 +73,7 @@ def update(request, outing_id):
         raise Http404
 
     if outing.user != request.user:
-        messages.error(request, 'Only the outing owner can update it')
+        messages.error(request, _('Only the outing owner can update it'))
         return HttpResponseRedirect(reverse('outings.details', args=[outing_id]))
 
     if request.method == 'POST':
@@ -90,7 +91,7 @@ def update(request, outing_id):
 def delete(request, outing_id):
     outing = get_object_or_404(Outing, pk=outing_id)
     if outing.user != request.user:
-        messages.error(request, 'Only the outing owner can delete it')
+        messages.error(request, _('Only the outing owner can delete it'))
         return HttpResponseRedirect(reverse('outings.index'))
     outing.delete()
 
@@ -101,12 +102,12 @@ def delete(request, outing_id):
 def confirm(request, outing_id):
     outing = get_object_or_404(Outing, pk=outing_id)
     if outing.user != request.user:
-        messages.error(request, 'Only the outing owner can update it')
+        messages.error(request, _('Only the outing owner can update it'))
         return HttpResponseRedirect(reverse('outings.index'))
 
     outing.status = CONFIRMED
     outing.save()
-    messages.info(request, u"«%s» is now confirmed" % (outing.name))
+    messages.info(request, _(u"«%(name)s» is now confirmed") % ({'name': outing.name}))
     return HttpResponseRedirect(reverse('accounts.profile'))
 
 
@@ -114,10 +115,10 @@ def confirm(request, outing_id):
 def finish(request, outing_id):
     outing = get_object_or_404(Outing, pk=outing_id)
     if outing.user != request.user:
-        messages.error(request, 'Only the outing owner can finish it')
+        messages.error(request, _('Only the outing owner can finish it'))
         return HttpResponseRedirect(reverse('outings.index'))
 
     outing.status = FINISHED
     outing.save()
-    messages.success(request, u"«%s» is now finished" % (outing.name))
+    messages.success(request, _(u"«%(name)s» is now finished") % ({'name': outing.name}))
     return HttpResponseRedirect(reverse('accounts.profile'))
