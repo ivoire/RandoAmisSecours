@@ -1,7 +1,8 @@
 {% extends 'RandoAmisSecours/base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}{{ update|yesno:"Update,New outing" }}{% endblock %}
+{% block title %}{{ update|yesno:_("Update,New outing") }}{% endblock %}
 
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.css" />
@@ -14,13 +15,13 @@
 {% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
-  <li><a href="{% url 'outings.index' %}">Outings</a> <span class="divider">/</span></li>
-  <li class="active">{{ update|yesno:"Update,Create" }}</li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'outings.index' %}">{% trans "Outings" %}</a> <span class="divider">/</span></li>
+  <li class="active">{{ update|yesno:_("Update,Create") }}</li>
 {% endblock %}
 
 {% block body %}
-<h2>{% if update %}Update «{{ outing.name }}»{% else %}New outing{% endif %}</h2>
+<h2>{% if update %}{% blocktrans with outing.name as name %}Update «{{ name }}»{% endblocktrans %}{% else %}{% trans "New outing" %}{% endif %}</h2>
 
 <div class="row">
   <div class="span12">
@@ -28,9 +29,9 @@
     {% csrf_token %}
     <div class="row">
       <div class="span6">
-        <h4 class="modal-header">Global information</h4>
+        <h4 class="modal-header">{% trans "Global information" %}</h4>
         <div class="control-group{% if form.name.errors %} error{% endif %}">
-          <label class="control-label" for="id_name">Name</label>
+          <label class="control-label" for="id_name">{% trans "Name" %}</label>
           <div class="controls">
             {{ form.name }}
             {% for error in form.name.errors %}
@@ -39,7 +40,7 @@
           </div>
         </div>
         <div class="control-group{% if form.description.errors %} error{% endif %}">
-          <label class="control-label" for="id_description">Description</label>
+          <label class="control-label" for="id_description">{% trans "Description" %}</label>
           <div class="controls">
             {{ form.description }}
             {% for error in form.description.errors %}
@@ -48,7 +49,7 @@
           </div>
         </div>
         <div class="control-group{% if form.latitude.errors %} error{% endif %}">
-          <label class="control-label" for="id_latitude">Latitude</label>
+          <label class="control-label" for="id_latitude">{% trans "Latitude" %}</label>
           <div class="controls">
             {{ form.latitude }}
             {% for error in form.latitude.errors %}
@@ -57,7 +58,7 @@
           </div>
         </div>
         <div class="control-group{% if form.longitude.errors %} error{% endif %}">
-          <label class="control-label" for="id_longitude">Longitude</label>
+          <label class="control-label" for="id_longitude">{% trans "Longitude" %}</label>
           <div class="controls">
             {{ form.longitude }}
             {% for error in form.longitude.errors %}
@@ -69,7 +70,7 @@
       <div class="span6">
         <h4 class="modal-header">Timing</h4>
         <div class="control-group{% if form.begining.errors %} error{% endif %}">
-          <label class="control-label" for="id_begining">begin</label>
+          <label class="control-label" for="id_begining">{% trans "begin" %}</label>
           <div class="controls">
             <div id="beginning_picker" class="input-append date">
               {{ form.begining }}
@@ -81,7 +82,7 @@
           </div>
         </div>
         <div class="control-group{% if form.ending.errors %} error{% endif %}">
-          <label class="control-label" for="id_ending">end</label>
+          <label class="control-label" for="id_ending">{% trans "end" %}</label>
           <div class="controls">
             <div id="ending_picker" class="input-append date">
               {{ form.ending }}
@@ -93,7 +94,7 @@
           </div>
         </div>
         <div class="control-group{% if form.alert.errors %} error{% endif %}">
-          <label class="control-label" for="id_alert">alert</label>
+          <label class="control-label" for="id_alert">{% trans "alert" %}</label>
           <div class="controls">
             <div id="alert_picker" class="input-append date">
               {{ form.alert }}
@@ -111,7 +112,7 @@
       </div>
     </div>
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">{{ update|yesno:"Update,Create" }}</button>
+      <button type="submit" class="btn btn-primary">{{ update|yesno:_("Update,Create") }}</button>
     </div>
   </form>
   </div>
