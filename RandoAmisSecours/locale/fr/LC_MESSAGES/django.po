@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-26 22:12+0200\n"
+"POT-Creation-Date: 2013-08-26 22:25+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -168,6 +168,10 @@ msgstr "Débute à"
 msgid "End in"
 msgstr "Finie à"
 
+#: templates/RandoAmisSecours/account/profile.html:68
+msgid "Finishing outing"
+msgstr "Cloturer la sortie"
+
 #: templates/RandoAmisSecours/account/profile.html:71
 #, python-format
 msgid "Confirm that you are back home safe from «%(name)s» ?"
@@ -182,6 +186,10 @@ msgstr "Annuler"
 #: templates/RandoAmisSecours/account/profile.html:75
 msgid "Finish"
 msgstr "Terminée"
+
+#: templates/RandoAmisSecours/account/profile.html:83
+msgid "Delete outing"
+msgstr "Supprimer la sortie"
 
 #: templates/RandoAmisSecours/account/profile.html:86
 #: templates/RandoAmisSecours/account/profile.html:126
@@ -239,6 +247,7 @@ msgid "Information"
 msgstr "Informations"
 
 #: templates/RandoAmisSecours/account/profile.html:195
+#: templates/RandoAmisSecours/outing/details.html:23
 msgid "update"
 msgstr "mettre à jour"
 
@@ -273,6 +282,7 @@ msgid "Password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/register.html:60
+#: templates/RandoAmisSecours/account/update.html:20
 msgid "Personnal information"
 msgstr "Informations personnelles"
 
@@ -315,29 +325,29 @@ msgstr "Si vous n'avez pas reçu de mail, vérifiez le répertoire de spam."
 #: templates/RandoAmisSecours/account/update.html:9
 #: templates/RandoAmisSecours/account/update.html:51
 msgid "Update"
-msgstr ""
+msgstr "Mettre à jour"
 
 #: templates/RandoAmisSecours/account/update.html:14
 msgid "Update my account"
-msgstr ""
+msgstr "Mettre à jour le compte"
 
 #: templates/RandoAmisSecours/friends/search.html:4
 #: templates/RandoAmisSecours/friends/search.html:14
 msgid "Search friends"
-msgstr ""
+msgstr "Chercher des amis"
 
 #: templates/RandoAmisSecours/friends/search.html:9
 #: templates/RandoAmisSecours/friends/search.html:33
 msgid "Search"
-msgstr ""
+msgstr "Chercher"
 
 #: templates/RandoAmisSecours/friends/search.html:30
 msgid "Search for friends using the field below."
-msgstr ""
+msgstr "Utilisez le champs ci-dessous pour rechercher des amis."
 
 #: templates/RandoAmisSecours/main/index.html:4
 msgid "Main Page"
-msgstr ""
+msgstr "Page principale"
 
 #: templates/RandoAmisSecours/main/index.html:32
 msgid "Don't wait for an accident !"
@@ -403,38 +413,38 @@ msgstr "Rechercher »"
 
 #: templates/RandoAmisSecours/outing/create.html:5
 msgid "Update,New outing"
-msgstr ""
+msgstr "Mettre à jour,Nouvelle sortie"
 
 #: templates/RandoAmisSecours/outing/create.html:20
 #: templates/RandoAmisSecours/outing/create.html:115
 msgid "Update,Create"
-msgstr ""
+msgstr "Mettre à jour,Créer"
 
 #: templates/RandoAmisSecours/outing/create.html:24
 #, python-format
 msgid "Update «%(name)s»"
-msgstr ""
+msgstr "Mettre à jour «%(name)s»"
 
 #: templates/RandoAmisSecours/outing/create.html:24
 msgid "New outing"
-msgstr ""
+msgstr "Nouvelle sortie"
 
 #: templates/RandoAmisSecours/outing/create.html:32
 msgid "Global information"
-msgstr ""
+msgstr "Informations générales"
 
 #: templates/RandoAmisSecours/outing/create.html:43
 #: templates/RandoAmisSecours/outing/details.html:57
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: templates/RandoAmisSecours/outing/create.html:52 views/outing.py:27
 msgid "Latitude"
-msgstr ""
+msgstr "Latitude"
 
 #: templates/RandoAmisSecours/outing/create.html:61 views/outing.py:28
 msgid "Longitude"
-msgstr ""
+msgstr "Logitude"
 
 #: templates/RandoAmisSecours/outing/create.html:73
 #: templates/RandoAmisSecours/outing/details.html:47
@@ -454,10 +464,6 @@ msgstr "Alerte"
 #, python-format
 msgid "Outing «%(name)s»"
 msgstr "Sortie «%(name)s»"
-
-#: templates/RandoAmisSecours/outing/details.html:23
-msgid "(update)"
-msgstr ""
 
 #: templates/RandoAmisSecours/outing/details.html:51
 msgid "Alert at"
@@ -487,22 +493,22 @@ msgstr "description"
 
 #: views/outing.py:76 views/outing.py:105
 msgid "Only the outing owner can update it"
-msgstr ""
+msgstr "Seul le créateur d'une sortie peux la modifier"
 
 #: views/outing.py:94
 msgid "Only the outing owner can delete it"
-msgstr ""
+msgstr "Seul le créateur d'une sortie peux la supprimer"
 
 #: views/outing.py:110
 #, python-format
 msgid "«%(name)s» is now confirmed"
-msgstr ""
+msgstr "«%(name)s» est maintenant confirmée"
 
 #: views/outing.py:118
 msgid "Only the outing owner can finish it"
-msgstr ""
+msgstr "Seul le créateur d'une sortie peux la terminer"
 
 #: views/outing.py:123
 #, python-format
 msgid "«%(name)s» is now finished"
-msgstr ""
+msgstr "«%(name)s» est maintenant terminée"
