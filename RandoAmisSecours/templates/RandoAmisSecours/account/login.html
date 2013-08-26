@@ -1,6 +1,7 @@
 {% extends 'RandoAmisSecours/base.html' %}
+{% load i18n %}
 
-{% block title %}Login{% endblock %}
+{% block title %}{% trans "Login" %}{% endblock %}
 
 {% block style %}
   .form-signin {
@@ -30,9 +31,9 @@
 {% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
-  <li><a href="{% url 'accounts.profile' %}">Account</a> <span class="divider">/</span></li>
-  <li class="activate">Login</li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a> <span class="divider">/</span></li>
+  <li class="activate">{% trans "Login" %}</li>
 {% endblock %}
 
 {% block body %}
@@ -40,18 +41,18 @@
   {% if form.errors %}
     <div class="alert alert-error">
       <button class="close" data-dismiss="alert" type="button"><i class="icon-remove"></i></button>
-      <strong>Wrong username or password</strong>: Note that both fields may be case-sensitive
+      {% trans "<strong>Wrong username or password</strong>: Note that both fields may be case-sensitive" %}
     </div>
   {% endif %}
 
   <form class="form-signin" method="post" action="{% url 'accounts.login' %}">
     {% csrf_token %}
-    <h2 class="form-signin-heading">Please sign in</h2>
+    <h2 class="form-signin-heading">{% trans "Please sign in" %}</h2>
       {{ form.username }}
       {{ form.password }}
-    <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+    <button class="btn btn-large btn-primary" type="submit">{% trans "Sign in" %}</button>
     <input type="hidden" name="next" value="{{ next }}" />
-    <a href="{% url 'accounts.register' %}">Create an account</a>
+    <a href="{% url 'accounts.register' %}">{% trans "Create an account" %}</a>
   </form>
 </div>
 {% endblock %}
