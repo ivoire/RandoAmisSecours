@@ -12,6 +12,7 @@ from django.http import HttpResponseRedirect
 from django.forms import ModelForm
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from django.utils.translation import ugettext as _
 
 from RandoAmisSecours.models import Profile, CONFIRMED, DRAFT, LATE, FINISHED
 
@@ -24,9 +25,9 @@ class RASAuthenticationForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(RASAuthenticationForm, self).__init__(*args, **kwargs)
         # Add HTML5 attributes
-        self.fields['username'].widget.attrs['placeholder'] = u'Username'
-        self.fields['username'].widget.attrs['autofocus'] = u'autofocus'
-        self.fields['password'].widget.attrs['placeholder'] = u'Password'
+        self.fields['username'].widget.attrs['placeholder'] = _('Username')
+        self.fields['username'].widget.attrs['autofocus'] = 'autofocus'
+        self.fields['password'].widget.attrs['placeholder'] = _('Password')
 
 
 class RASUserCreationForm(UserCreationForm):
@@ -40,10 +41,10 @@ class RASUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(RASUserCreationForm, self).__init__(*args, **kwargs)
         # Add HTML5 attributes
-        self.fields['username'].widget.attrs['placeholder'] = u'Username'
-        self.fields['username'].widget.attrs['autofocus'] = u'autofocus'
-        self.fields['password1'].widget.attrs['placeholder'] = u'Password'
-        self.fields['password2'].widget.attrs['placeholder'] = u'Password again'
+        self.fields['username'].widget.attrs['placeholder'] = _('Username')
+        self.fields['username'].widget.attrs['autofocus'] = _('autofocus')
+        self.fields['password1'].widget.attrs['placeholder'] = _('Password')
+        self.fields['password2'].widget.attrs['placeholder'] = _('Password')
 
         # email, first_name and last_name are required
         self.fields['email'].required = True
@@ -91,7 +92,7 @@ def register(request):
             new_user = user_form.save()
             return render_to_response('RandoAmisSecours/account/register_end.html', context_instance=RequestContext(request))
         else:
-          messages.error(request, "Some information are missing or mistyped")
+          messages.error(request, _("Some information are missing or mistyped"))
     else:
         user_form = RASUserCreationForm()
 
@@ -127,7 +128,7 @@ def update(request):
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             profile = profile_form.save()
-            messages.success(request, "Personnal information updated")
+            messages.success(request, _("Personnal information updated"))
             return HttpResponseRedirect(reverse('accounts.profile'))
     else:
         user_form = RASUserUpdateForm(instance=request.user)
