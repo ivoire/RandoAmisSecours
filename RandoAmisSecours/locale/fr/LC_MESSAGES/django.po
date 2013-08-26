@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-26 22:25+0200\n"
+"POT-Creation-Date: 2013-08-26 22:31+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -204,7 +204,7 @@ msgstr "Supprime"
 
 #: templates/RandoAmisSecours/account/profile.html:99
 msgid "No current outings"
-msgstr ""
+msgstr "Pas de sortie confirmée"
 
 #: templates/RandoAmisSecours/account/profile.html:139
 msgid "No drafts"
@@ -434,7 +434,7 @@ msgid "Global information"
 msgstr "Informations générales"
 
 #: templates/RandoAmisSecours/outing/create.html:43
-#: templates/RandoAmisSecours/outing/details.html:57
+#: templates/RandoAmisSecours/outing/details.html:57 views/outing.py:26
 msgid "Description"
 msgstr "Description"
 
@@ -486,10 +486,6 @@ msgstr "Informations personelles mise à jour"
 #: views/outing.py:24
 msgid "Outing name"
 msgstr "Nom de la sortie"
-
-#: views/outing.py:26
-msgid "description"
-msgstr "description"
 
 #: views/outing.py:76 views/outing.py:105
 msgid "Only the outing owner can update it"
