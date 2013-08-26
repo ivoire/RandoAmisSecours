@@ -10,7 +10,7 @@
 {% block breadcrumb %}
   <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
   <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a> <span class="divider">/</span></li>
-  <li class="activate">{% tran "Confirm" %}</li>
+  <li class="activate">{% trans "Confirm" %}</li>
 {% endblock %}
 
 {% block body %}
@@ -21,7 +21,8 @@
 <div class="row">
   <div class="span12">
     <p class="lead">{% trans "Thanks for registering to R.A.S." %}</p>
-    <p>{% blocktrans with url 'accounts.login' as URL %}You will be <a href="{{ URL }}">redirected</a> to the login page in 5 seconds ...{% endblocktrans %}</p>
+    {% url 'accounts.login' as URL %}
+    <p>{% blocktrans %}You will be <a href="{{ URL }}">redirected</a> to the login page in 5 seconds ...{% endblocktrans %}</p>
   </div>
 </div>
 {% endblock %}
