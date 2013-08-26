@@ -42,7 +42,7 @@ class RASUserCreationForm(UserCreationForm):
         super(RASUserCreationForm, self).__init__(*args, **kwargs)
         # Add HTML5 attributes
         self.fields['username'].widget.attrs['placeholder'] = _('Username')
-        self.fields['username'].widget.attrs['autofocus'] = _('autofocus')
+        self.fields['username'].widget.attrs['autofocus'] = 'autofocus'
         self.fields['password1'].widget.attrs['placeholder'] = _('Password')
         self.fields['password2'].widget.attrs['placeholder'] = _('Password')
 
