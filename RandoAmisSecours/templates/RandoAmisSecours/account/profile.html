@@ -1,15 +1,17 @@
 {% extends 'RandoAmisSecours/base.html' %}
+{% load humanize %}
+{% load i18n %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}{% trans "Profile" %}{% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
-  <li class="active">Account</li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li class="active">{% trans "Account" %}</li>
 {% endblock %}
 
 {% block body %}
 <div class="page-header">
-  <h2>My profile</h2>
+  <h2>{% trans "My profile" %}</h2>
 </div>
 
 <div class="row">
@@ -24,12 +26,13 @@
   </div>
   {% endif %}
   <div class="span12">
-    <h3>Outings <small><a href="{% url 'outings.create' %}">(new)</a></small></h3>
+    {% url 'outings.create' as URL %}
+    <h3>{% blocktrans %}Outings <small><a href="{{ URL }}">(new)</a></small>{% endblocktrans %}</h3>
     <div class="tabbable">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#current" data-toggle="tab">Current</a></li>
-        <li><a href="#draft" data-toggle="tab">Draft</a></li>
-        <li><a href="#finished" data-toggle="tab">Finished</a></li>
+        <li class="active"><a href="#current" data-toggle="tab">{% trans "Current" %}</a></li>
+        <li><a href="#draft" data-toggle="tab">{% trans "Draft" %}</a></li>
+        <li><a href="#finished" data-toggle="tab">{% trans "Finished" %}</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="current">
@@ -37,9 +40,9 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Begin in</th>
-                <th>End in</th>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Begin in" %}</th>
+                <th>{% trans "End in" %}</th>
                 <th width="8%"></th>
                 <th width="8%"></th>
               </tr>
@@ -56,8 +59,8 @@
               <tr>
               {% endif %}
                 <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
-                <td>{{ outing.begining|timeuntil }}</td>
-                <td>{{ outing.ending|timeuntil }}</td>
+                <td>{{ outing.begining|naturaltime }}</td>
+                <td>{{ outing.ending|naturaltime }}</td>
                 <td><a href="#okModal{{ outing.pk }}" role="button" class="btn btn-mini btn-success" title="finish" data-toggle="modal"><i class="icon-ok-sign"></i></a><a href="#" class="btn btn-mini btn-warning" title="late"><i class="icon-time"></i></a>
                   <div id="okModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="okModal{{ outing.pk }}Label" aria-hidden="true">
                     <div class="modal-header">
@@ -65,11 +68,11 @@
                       <h3 id="okModal{{ outing.pk }}Label">Finishing outing</h3>
                     </div>
                     <div class="modal-body">
-                      <p>Confirm that you are back home safe from «{{ outing.name }}» ?</p>
+                      <p>{% blocktrans with outing.name as name %}Confirm that you are back home safe from «{{ name }}» ?{% endblocktrans %}</p>
                     </div>
                     <div class="modal-footer">
-                      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                      <a href="{% url 'outings.finish' outing.pk %}" class="btn btn-success">Finish</a>
+                      <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
+                      <a href="{% url 'outings.finish' outing.pk %}" class="btn btn-success">{% trans "Finish" %}</a>
                     </div>
                   </div>
                 </td>
@@ -80,11 +83,11 @@
                       <h3 id="deleteModal{{ outing.pk }}Label">Delete outing</h3>
                     </div>
                     <div class="modal-body">
-                      <p>Are you sure you want to delete the outing: «{{ outing.name }}» ?</p>
+                      <p>{% blocktrans with outing.name as name %}Are you sure you want to delete the outing: «{{ name }}» ?{% endblocktrans %}</p>
                     </div>
                     <div class="modal-footer">
-                      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                      <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">Delete</a>
+                      <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
+                      <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
                     </div>
                   </div>
                 </td>
@@ -93,7 +96,7 @@
             </tbody>
           </table>
           {% else %}
-          <p>No current outings</p>
+          <p>{% trans "No current outings" %}</p>
           {% endif %}
         </div>
         <div class="tab-pane" id="draft">
@@ -101,9 +104,9 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Begin in</th>
-                <th>End in</th>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Begin in" %}</th>
+                <th>{% trans "End in" %}</th>
                 <th width="12%"></th>
               </tr>
             </thead>
@@ -111,8 +114,8 @@
             {% for outing in draft_outings %}
               <tr>
                 <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
-                <td>{{ outing.begining|timeuntil }}</td>
-                <td>{{ outing.ending|timeuntil }}</td>
+                <td>{{ outing.begining|naturaltime }}</td>
+                <td>{{ outing.ending|naturaltime }}</td>
                 <td><a href="{% url 'outings.confirm' outing.pk %}" class="btn btn-mini btn-success"><i class="icon-ok"></i></a><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" data-toggle="modal"><i class="icon-trash"></i></a>
                   <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
                     <div class="modal-header">
@@ -120,11 +123,11 @@
                       <h3 id="deleteModal{{ outing.pk }}Label">Delete outing</h3>
                     </div>
                     <div class="modal-body">
-                      <p>Are you sure you want to delete the outing: «{{ outing.name }}» ?</p>
+                      <p>{% blocktrans with outing.name as name %}Are you sure you want to delete the outing: «{{ name }}» ?{% endblocktrans %}</p>
                     </div>
                     <div class="modal-footer">
-                      <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                      <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">Delete</a>
+                      <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
+                      <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
                     </div>
                   </div>
                 </td>
@@ -133,7 +136,7 @@
             </tbody>
           </table>
           {% else %}
-          <p>No drafts</p>
+          <p>{% trans "No drafts" %}</p>
           {% endif %}
         </div>
         <div class="tab-pane" id="finished">
@@ -141,10 +144,10 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Began</th>
-                <th>End planned</th>
-                <th>Finished</th>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Began" %}</th>
+                <th>{% trans "End planned" %}</th>
+                <th>{% trans "Finished" %}</th>
               </tr>
             </thead>
             <tbody>
@@ -159,20 +162,21 @@
             </tbody>
           </table>
           {% else %}
-          <p>No finished outings</p>
+          <p>{% trans "No finished outings" %}</p>
           {% endif %}
         </div>
       </div>
     </div>
   </div>
   <div class="span12">
-    <h3>Friends <small><a href="{% url 'friends.search' %}">(search)</a></small></h3>
+    {% url 'friends.search' as URL %}
+    <h3>{% blocktrans %}Friends <small><a href="{{ URL }}">(search)</a></small>{% endblocktrans %}</h3>
     {% if user.profile.friends.all %}
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Phone</th>
+          <th>{% trans "Name" %}</th>
+          <th>{% trans "Phone" %}</th>
         </tr>
       </thead>
       {% for friend in user.profile.friends.all %}
@@ -183,19 +187,20 @@
       {% endfor %}
     </table>
     {% else %}
-    <p>You don't have friends here for the moment.</p>
+    <p>{% trans "You don't have friends here for the moment." %}</p>
     {% endif %}
   </div>
   <div class="span12">
-    <h3>Information <small><a href="{% url 'accounts.profile.update' %}">(update)</a></small></h3>
+    {% url 'accounts.profile.update' as URL %}
+    <h3>{% blocktrans %}Information <small><a href="{{ URL }}">(update)</a></small>{% endblocktrans %}</h3>
     <dl class="dl-horizontal">
-      <dt>name</dt>
+      <dt>{% trans "Name" %}</dt>
       <dd>{{ user.get_full_name }}</dd>
-      <dt>email</dt>
+      <dt>{% trans "email" %}</dt>
       <dd>{{ user.email }}</dd>
-      <dt>phone</dt>
+      <dt>{% trans "phone" %}</dt>
       <dd>{{ user.profile.phone_number|default:"?" }}</dd>
-      <dt>token</dt>
+      <dt>{% trans "token" %}</dt>
       <dd>{{ user.profile.hash_id }}</dd>
     </dl>
   </div>
