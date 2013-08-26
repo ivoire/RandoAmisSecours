@@ -50,7 +50,7 @@
     <h2 class="form-signin-heading">{% trans "Please sign in" %}</h2>
       {{ form.username }}
       {{ form.password }}
-    <button class="btn btn-large btn-primary" type="submit">{% trans "Sign in" %}</button>
+    <button class="btn btn-large btn-primary" type="submit">{% trans "Log in" %}</button>
     <input type="hidden" name="next" value="{{ next }}" />
     <a href="{% url 'accounts.register' %}">{% trans "Create an account" %}</a>
   </form>
