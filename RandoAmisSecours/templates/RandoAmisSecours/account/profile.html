@@ -182,7 +182,7 @@
       {% for friend in user.profile.friends.all %}
       <tr>
         <td>{{ friend.user.get_full_name }}</td>
-        <td><a href="tel:{{ friend.phone_number }}">{{ friend.phone_number }}</a></td>
+        <td>{% if friend.phone_number %}<a href="tel:{{ friend.phone_number }}">{{ friend.phone_number }}</a>{% else %}?{% endif %}</td>
       </tr>
       {% endfor %}
     </table>
