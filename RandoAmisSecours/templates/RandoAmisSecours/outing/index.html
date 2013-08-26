@@ -1,11 +1,13 @@
 {% extends 'RandoAmisSecours/base.html' %}
 {% load static %}
+{% load l10n %}
+{% load i18n %}
 
-{% block title %}Outings{% endblock %}
+{% block title %}{% trans "Outings" %}{% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
-  <li class="active">Outings</li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li class="active">{% trans "Outings" %}</li>
 {% endblock %}
 
 {% block head %}
@@ -33,7 +35,7 @@
             <div class="bar bar-warning" style="width: {{ percents.1 }}%"></div>
             <div class="bar bar-danger" style="width: {{ percents.2 }}%"></div>
           </div>
-          <div id="map{{ outing.pk }}" class="outing-map" data-lat="{{ outing.latitude }}" data-lng="{{ outing.longitude }}">
+          <div id="map{{ outing.pk }}" class="outing-map" data-lat="{{ outing.latitude|unlocalize }}" data-lng="{{ outing.longitude|unlocalize }}">
           </div>
           <div class="caption">
             <h3><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></h3>
