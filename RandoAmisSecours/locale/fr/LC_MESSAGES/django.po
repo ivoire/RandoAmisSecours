@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-26 22:31+0200\n"
+"POT-Creation-Date: 2013-08-26 22:37+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -482,6 +482,11 @@ msgstr "Certains éléments sont manquants ou malformatés"
 #: views/account.py:132
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
+
+#: views/friends.py:35
+#, python-format
+msgid "«%(name)s» added to your friends"
+msgstr "«%(name)s» ajouté à vos amis"
 
 #: views/outing.py:24
 msgid "Outing name"
