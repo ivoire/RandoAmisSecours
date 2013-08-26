@@ -1,6 +1,7 @@
 {% extends 'RandoAmisSecours/base.html' %}
+{% load i18n %}
 
-{% block title %}Logged out{% endblock %}
+{% block title %}{% trans "Logged out" %}{% endblock %}
 
 {% block style %}
     .div-signout {
@@ -22,17 +23,17 @@
 {% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
-  <li><a href="{% url 'accounts.profile' %}">Account</a> <span class="divider">/</span></li>
-  <li class="activate">Logout</li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a> <span class="divider">/</span></li>
+  <li class="activate">{% trans "Logout" %}</li>
 {% endblock %}
 
 {% block body %}
 <div class="container">
   <div class="div-signout">
-    <h2 class="div-signout-heading">Logged out</h2>
-    <p>Thanks for using RandoAmisSecours.</p>
-    <a href="{% url 'accounts.login' %}" class="btn btn-primary">Log in again</a>
+    <h2 class="div-signout-heading">{% trans "Logged out" %}</h2>
+    <p>{% trans "Thanks for using RandoAmisSecours." %}</p>
+    <a href="{% url 'accounts.login' %}" class="btn btn-primary">{% trans "Log in again" %}</a>
   </div>
 </div>
 {% endblock %}
