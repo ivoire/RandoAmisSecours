@@ -1,16 +1,17 @@
 {% extends 'RandoAmisSecours/base.html' %}
+{% load i18n %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{% trans "Register" %}{% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
-  <li><a href="{% url 'accounts.profile' %}">Account</a> <span class="divider">/</span></li>
-  <li class="activate">Register</li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a> <span class="divider">/</span></li>
+  <li class="activate">{% trans "Register" %}</li>
 {% endblock %}
 
 {% block body %}
 <div class="page-header">
-  <h1>Create an account</h1>
+  <h1>{% trans "Create an account" %}</h1>
 </div>
 <div class="row">
   {% if messages %}
@@ -26,9 +27,9 @@
   <form class="form-horizontal" method="post" action="{% url 'accounts.register' %}">
   {% csrf_token %}
   <div class="span6">
-    <h4 class="modal-header">Account information</h4>
+    <h4 class="modal-header">{% trans "Account information" %}</h4>
     <div class="control-group{% if user_form.username.errors %} error{% endif %}">
-      <label class="control-label" for="id_username">Username</label>
+      <label class="control-label" for="id_username">{% trans "Username" %}</label>
       <div class="controls">
         {{ user_form.username }}
         {% for error in user_form.username.errors %}
@@ -37,7 +38,7 @@
       </div>
     </div>
     <div class="control-group{% if user_form.password1.errors %} error{% endif %}">
-      <label class="control-label" for="id_password1">Password</label>
+      <label class="control-label" for="id_password1">{% trans "Password" %}</label>
       <div class="controls">
         {{ user_form.password1 }}
         {% for error in user_form.password1.errors %}
@@ -46,7 +47,7 @@
       </div>
     </div>
     <div class="control-group{% if user_form.password2.errors %} error{% endif %}">
-      <label class="control-label" for="id_password2">Password</label>
+      <label class="control-label" for="id_password2">{% trans "Password" %}</label>
       <div class="controls">
         {{ user_form.password2 }}
         {% for error in user_form.password2.errors %}
@@ -56,9 +57,9 @@
     </div>
   </div>
   <div class="span6">
-    <h4 class="modal-header">Personnal information</h4>
+    <h4 class="modal-header">{% trans "Personnal information" %}</h4>
     <div class="control-group{% if user_form.first_name.errors %} error{% endif %}">
-      <label class="control-label" for="id_first_name">First name</label>
+      <label class="control-label" for="id_first_name">{% trans "First name" %}</label>
       <div class="controls">
         {{ user_form.first_name }}
         {% for error in user_form.first_name.errors %}
@@ -67,7 +68,7 @@
       </div>
     </div>
     <div class="control-group{% if user_form.last_name.errors %} error{% endif %}">
-      <label class="control-label" for="id_last_name">Last name</label>
+      <label class="control-label" for="id_last_name">{% trans "Last name" %}</label>
       <div class="controls">
         {{ user_form.last_name }}
         {% for error in user_form.last_name.errors %}
@@ -76,7 +77,7 @@
       </div>
     </div>
     <div class="control-group{% if user_form.email.errors %} error{% endif %}">
-      <label class="control-label" for="id_email">Email</label>
+      <label class="control-label" for="id_email">{% trans "email" %}</label>
       <div class="controls">
         <div class="input-append">
           {{ user_form.email }}
@@ -90,7 +91,7 @@
   </div>
   <div class="span12">
     <div class="form-actions">
-      <button class="btn btn-primary" type="submit">Register</button>
+      <button class="btn btn-primary" type="submit">{% trans "Register" %}</button>
     </div>
   </div>
   </form>
