@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block body %}
-<h2>{{ outing.name }}{% if outing.status != FINISHED %} <small><a href="{% url 'outings.update' outing.pk %}">({% trans "update" %})</a></small>{% endif %}</h2>
+<h2>{{ outing.name }}{% if outing.status != FINISHED and outing.user == user %} <small><a href="{% url 'outings.update' outing.pk %}">({% trans "update" %})</a></small>{% endif %}</h2>
 
 <div class="row">
   {% if messages %}
