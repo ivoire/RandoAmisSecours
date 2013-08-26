@@ -1,26 +1,27 @@
 {% extends 'RandoAmisSecours/base.html' %}
+{% load i18n %}
 
-{% block title %}Confirm{% endblock %}
+{% block title %}{% trans "Confirm" %}{% endblock %}
 
 {% block head %}
   <meta http-equiv="refresh" content="5;url={% url 'accounts.login' %}">
 {% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">Home</a> <span class="divider">/</span></li>
-  <li><a href="{% url 'accounts.profile' %}">Account</a> <span class="divider">/</span></li>
-  <li class="activate">Confirm</li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a> <span class="divider">/</span></li>
+  <li class="activate">{% tran "Confirm" %}</li>
 {% endblock %}
 
 {% block body %}
 <div class="page-header">
-  <h1>Registration confirmed</h1>
+  <h1>{% trans "Registration confirmed" %}</h1>
 </div>
 
 <div class="row">
   <div class="span12">
-    <p class="lead">Thanks for registering to R.A.S.</p>
-    <p>You will be <a href="{% url 'accounts.login' %}">redirected</a> to the login page in 5 seconds ...</p>
+    <p class="lead">{% trans "Thanks for registering to R.A.S." %}</p>
+    <p>{% blocktrans with url 'accounts.login' as URL %}You will be <a href="{{ URL }}">redirected</a> to the login page in 5 seconds ...{% endblocktrans %}</p>
   </div>
 </div>
 {% endblock %}
