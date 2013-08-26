@@ -1,6 +1,7 @@
 {% extends 'RandoAmisSecours/base.html' %}
+{% load i18n %}
 
-{% block title %}Main Page{% endblock %}
+{% block title %}{% trans "Main Page" %}{% endblock %}
 
 {% block style %}
     .jumbotron {
@@ -22,18 +23,18 @@
 {% endblock %}
 
 {% block breadcrumb %}
-  <li class="active">Home</li>
+  <li class="active">{% trans "Home" %}</li>
 {% endblock %}
 
 {% block body %}
 <div class="jumbotron">
   <h1>R.A.S.</h1>
-  <p class="lead">Don't wait for an accident !</p>
-  <p class="lead">Let your friends some information about your destination.</p>
+  <p class="lead">{% trans "Don't wait for an accident !" %}</p>
+  <p class="lead">{% trans "Let your friends some information about your destination." %}</p>
   {% if user.is_authenticated %}
-  <a class="btn btn-large btn-success" href="{% url 'accounts.profile' %}">Profile</a>
+  <a class="btn btn-large btn-success" href="{% url 'accounts.profile' %}">{% trans "Profile" %}</a>
   {% else %}
-  <a class="btn btn-large btn-success" href="{% url 'accounts.login' %}">Log in</a>
+  <a class="btn btn-large btn-success" href="{% url 'accounts.login' %}">{% trans "Log in" %}</a>
   {% endif %}
 </div>
 
@@ -41,20 +42,20 @@
 
 <div class="row">
   <div class="span4">
-    <h2>Subscribe</h2>
-    <p>Create an account on R.A.S. We only keep information that are required to contact you in case of emergency. We will never use these information for something else.</p>
-    <a class="btn" href="{% url 'accounts.register' %}">Register »</a>
+    <h2>{% trans "Subscribe" %}</h2>
+    <p>{% trans "Create an account on R.A.S. We only keep information that are required to contact you in case of emergency. We will never use these information for something else." %}</p>
+    <a class="btn" href="{% url 'accounts.register' %}">{% trans "Register »" %}</a>
   </div>
   <div class="span4">
-    <h2>Declare outings</h2>
-    <p>Declare every planned outings with beginning and ending. Your friends will be alerted if you are not back on time.</p>
-    <a class="btn" href="{% url 'outings.create' %}">Create »</a>
+    <h2>{% trans "Declare outings" %}</h2>
+    <p>{% trans "Declare every planned outings with beginning and ending. Your friends will be alerted if you are not back on time." %}</p>
+    <a class="btn" href="{% url 'outings.create' %}">{% trans "Create »" %}</a>
   </div>
   <div class="span4">
-    <h2>Look for friends</h2>
-    <p>Link your profile with friends profiles. Only your friends will see your outings unless you are late.</p>
-    <p>R.A.S. will email your friends if you are not back on time.</p>
-    <a class="btn" href="{% url 'friends.search' %}">Search »</a>
+    <h2>{% trans "Look for friends" %}</h2>
+    <p>{% trans "Link your profile with friends profiles. Only your friends will see your outings unless you are late." %}</p>
+    <p>{% trans "R.A.S. will email your friends if you are not back on time." %}</p>
+    <a class="btn" href="{% url 'friends.search' %}">{% trans "Search »" %}</a>
   </div>
 </div>
 {% endblock %}
