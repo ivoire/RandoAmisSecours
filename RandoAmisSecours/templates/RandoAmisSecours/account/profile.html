@@ -176,7 +176,7 @@
       <thead>
         <tr>
           <th>{% trans "Name" %}</th>
-          <th>{% trans "Phone" %}</th>
+          <th>{% trans "Phone number" %}</th>
         </tr>
       </thead>
       {% for friend in user.profile.friends.all %}
@@ -198,7 +198,7 @@
       <dd>{{ user.get_full_name }}</dd>
       <dt>{% trans "email" %}</dt>
       <dd>{{ user.email }}</dd>
-      <dt>{% trans "phone" %}</dt>
+      <dt>{% trans "Phone number" %}</dt>
       <dd>{{ user.profile.phone_number|default:"?" }}</dd>
       <dt>{% trans "token" %}</dt>
       <dd>{{ user.profile.hash_id }}</dd>
