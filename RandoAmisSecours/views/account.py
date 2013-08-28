@@ -105,7 +105,7 @@ def register_confirm(request, user_id, user_hash):
     """
     user = get_object_or_404(User, pk=user_id, profile__hash_id=user_hash)
     user.is_active = True
-    user.save
+    user.save()
 
     return render_to_response('RandoAmisSecours/account/confirm.html', {'user': user}, context_instance=RequestContext(request))
 
