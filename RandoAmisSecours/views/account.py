@@ -95,7 +95,7 @@ def register(request):
             email_body = _("""Hello %(fullname)s,
 
 Thanks for registering to R.A.S.
-In order to activate your account, click on the <a href=\"%(URL)s\">confirmation link</a>.
+In order to activate your account, click on the confirmation link: %(URL)s.
 
 If you haven't registered to R.A.S., just delete this mail and the registration will be canceled.
 
