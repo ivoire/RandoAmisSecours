@@ -8,13 +8,13 @@ from RandoAmisSecours.models import Outing, Profile, CONFIRMED
 
 
 class Command(BaseCommand):
-  args = None
-  help = 'Alert the user or his friends that he is late'
+    args = None
+    help = 'Alert the user or his friends that he is late'
 
-  def handle(self, *args, **kwargs):
-    self.stdout.write("Listing alerting outings")
-    now = datetime.utcnow().replace(tzinfo=utc)
-    outings = Outing.objects.filter(status=CONFIRMED, alert__lt=now)
+    def handle(self, *args, **kwargs):
+        self.stdout.write("Listing alerting outings")
+        now = datetime.utcnow().replace(tzinfo=utc)
+        outings = Outing.objects.filter(status=CONFIRMED, alert__lt=now)
 
-    for outing in outings:
-      self.stdout.write(" - %s" % (outing.name))
+        for outing in outings:
+            self.stdout.write(" - %s" % (outing.name))
