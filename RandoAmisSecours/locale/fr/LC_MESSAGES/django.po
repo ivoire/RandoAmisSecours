@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-26 22:37+0200\n"
+"POT-Creation-Date: 2013-08-28 22:05+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -270,14 +270,14 @@ msgstr "S'inscrire"
 msgid "Account information"
 msgstr "Informations sur le compte"
 
-#: templates/RandoAmisSecours/account/register.html:32 views/account.py:28
-#: views/account.py:44
+#: templates/RandoAmisSecours/account/register.html:32 views/account.py:30
+#: views/account.py:46
 msgid "Username"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/register.html:41
-#: templates/RandoAmisSecours/account/register.html:50 views/account.py:30
-#: views/account.py:46 views/account.py:47
+#: templates/RandoAmisSecours/account/register.html:50 views/account.py:32
+#: views/account.py:48 views/account.py:49
 msgid "Password"
 msgstr ""
 
@@ -475,11 +475,42 @@ msgid "%(full_name)s is really late, you can try to contact him:"
 msgstr ""
 "%(full_name)s est très en retard, vous pouvez essayer de le contacter :"
 
-#: views/account.py:96
+#: views/account.py:95
+#, python-format
+msgid ""
+"Hello %(fullname)s,\n"
+"\n"
+"Thanks for registering to R.A.S.\n"
+"In order to activate your account, click on the <a href=\"%(URL)s"
+"\">confirmation link</a>.\n"
+"\n"
+"If you haven't registered to R.A.S., just delete this mail and the "
+"registration will be canceled.\n"
+"\n"
+"-- \n"
+"R.A.S. Team"
+msgstr ""
+"Bonjour %(fullname)s,\n"
+"\n"
+"Merci pour votre inscription à R.A.S.\n"
+"Afin d'activer votre compte, merci de clicker sur le <a"
+"href=\"%(URL)s\">lien de confirmation</a>.\n"
+"\n"
+"Si vous n'avez pas demandez à être inscrit à R.A.S., ignorez simplement ce "
+"message pour annuler votre inscription.\n"
+"\n"
+"-- \n"
+"L'équipe R.A.S."
+
+#: views/account.py:107
+msgid "Subscription to R.A.S."
+msgstr ""
+
+#: views/account.py:112
 msgid "Some information are missing or mistyped"
 msgstr "Certains éléments sont manquants ou malformatés"
 
-#: views/account.py:132
+#: views/account.py:148
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
 
