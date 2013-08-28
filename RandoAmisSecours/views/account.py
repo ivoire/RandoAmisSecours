@@ -2,10 +2,12 @@
 # vim: set ts=4
 
 from django import forms
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponseRedirect
@@ -90,9 +92,24 @@ def register(request):
         user_form = RASUserCreationForm(request.POST)
         if user_form.is_valid():
             new_user = user_form.save()
+            email_body = _("""Hello %(fullname)s,
+
+Thanks for registering to R.A.S.
+In order to activate your account, click on the <a href=\"%(URL)s\">confirmation link</a>.
+
+If you haven't registered to R.A.S., just delete this mail and the registration will be canceled.
+
+-- 
+R.A.S. Team""") % {'URL': request.build_absolute_uri(reverse('accounts.register.confirm',
+                                                             args=[new_user.pk, new_user.profile.hash_id])),
+                   'fullname': new_user.get_full_name()}
+
+            send_mail(_('Subscription to R.A.S.'), email_body,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [new_user.email], fail_silently=False)
             return render_to_response('RandoAmisSecours/account/register_end.html', context_instance=RequestContext(request))
         else:
-          messages.error(request, _("Some information are missing or mistyped"))
+            messages.error(request, _("Some information are missing or mistyped"))
     else:
         user_form = RASUserCreationForm()
 
