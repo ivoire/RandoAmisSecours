@@ -57,7 +57,7 @@ def index(request, status='confirmed'):
         outings = Outing.objects.filter(status=CANCELED)
     else:
         raise Http404
-    return render_to_response('RandoAmisSecours/outing/index.html', {'outings': outings, 'status': status}, context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/outing/index.html', {'outings': outings, 'status': _(status)}, context_instance=RequestContext(request))
 
 
 def details(request, outing_id):

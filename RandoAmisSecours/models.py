@@ -21,6 +21,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.timezone import datetime, utc
+from django.utils.translation import ugettext_lazy as _
 
 import binascii
 import os
@@ -33,11 +34,11 @@ LATE = 3
 FINISHED = 4
 CANCELED = 5
 OUTING_STATUS = (
-    (DRAFT, 'draft'),
-    (CONFIRMED, 'confirmed'),
-    (LATE, 'late'),
-    (FINISHED, 'finished'),
-    (CANCELED, 'canceled')
+    (DRAFT, _('draft')),
+    (CONFIRMED, _('confirmed')),
+    (LATE, _('late')),
+    (FINISHED, _('finished')),
+    (CANCELED, _('canceled'))
 )
 
 
