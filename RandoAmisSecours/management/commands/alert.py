@@ -42,9 +42,15 @@ class Command(BaseCommand):
                 dest='alert',
                 default=60,
                 type=int,
-                help='Alerting interval'))
+                help='Alerting interval'),
+    make_option('--url',
+                dest='base_url',
+                help='Base URL of the website'))
 
   def handle(self, *args, **kwargs):
+    if kwargs.get('base_url', None) is None:
+      raise CommandError('url option is required')
+
     self.stdout.write("Listing alerting outings")
     self.stdout.write("Interval %d" % (kwargs['interval']))
 
@@ -69,7 +75,7 @@ If you are back home safe, please click on %(SAFE_URL)s.
 
 -- 
 The R.A.S team""") % {'fullname': outing.user.get_full_name(),
-                      'URL': reverse('outings.details', args=[outing.pk]),
+                      'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
                       'SAFE_URL': reverse('outings.finish', args=[outing.pk])}
           send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, outing.user.email)
 
@@ -89,6 +95,7 @@ Hello,
 You can try to contact him to get more information about the situation.
 
 -- 
-The R.A.S team""") % {'fullname': outing.user.get_full_name(), 'URL': reverse('outings.details', args=[outing.pk])}
+The R.A.S team""") % {'fullname': outing.user.get_full_name(),
+                      'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk]))}
           emails = [f.user.email for f in outing.user.profile.friends.all()]
           send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, emails)
