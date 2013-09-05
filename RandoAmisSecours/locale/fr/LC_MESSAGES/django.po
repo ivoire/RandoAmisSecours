@@ -8,13 +8,84 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-28 22:25+0200\n"
+"POT-Creation-Date: 2013-09-05 16:49+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: models.py:37
+msgid "draft"
+msgstr "brouillons"
+
+#: models.py:38
+msgid "confirmed"
+msgstr "confirmées"
+
+#: models.py:39
+msgid "late"
+msgstr "en retard"
+
+#: models.py:40
+msgid "finished"
+msgstr "terminées"
+
+#: models.py:41
+msgid "canceled"
+msgstr "annulées"
+
+#: management/commands/alert.py:69
+#, python-format
+msgid ""
+"\n"
+"Hello,\n"
+"\n"
+"you are late from you outing %(URL)s.\n"
+"\n"
+"If you are back home safe, please click on %(SAFE_URL)s.\n"
+"\n"
+"-- \n"
+"The R.A.S team"
+msgstr ""
+"\n"
+"Bonjour,\n"
+"\n"
+"vous êtes en retard sur l'horaire pévus pour la sortie %(URL)s.\n"
+"\n"
+"Si vous êtes de retour, merci de terminer la sortie en cliquant sur %(SAFE_URL)s.\n"
+"\n"
+"-- \n"
+"L'équipe R.A.S."
+
+#: management/commands/alert.py:80 management/commands/alert.py:101
+msgid "[R.A.S] Alert"
+msgstr "[R.A.S] Alerte"
+
+#: management/commands/alert.py:90
+#, python-format
+msgid ""
+"\n"
+"Hello,\n"
+"\n"
+"%(fullname)s is late from his outing %(URL)s.\n"
+"\n"
+"You can try to contact him to get more information about the situation.\n"
+"\n"
+"-- \n"
+"The R.A.S team"
+msgstr ""
+"\n"
+"Bonjour,\n"
+"\n"
+"%(fullname)s est en retard sur l'horaire prévus pour la sortie %(URL)s.\n"
+"\n"
+"Pour plus d'information, vous pouvez essayer de le contacter.\n"
+"\n"
+"-- \n"
+"L'équipe R.A.S."
+
 
 #: templates/RandoAmisSecours/base.html:34
 #: templates/RandoAmisSecours/account/confirm.html:11
@@ -270,14 +341,14 @@ msgstr "S'inscrire"
 msgid "Account information"
 msgstr "Informations sur le compte"
 
-#: templates/RandoAmisSecours/account/register.html:32 views/account.py:30
-#: views/account.py:46
+#: templates/RandoAmisSecours/account/register.html:32 views/account.py:46
+#: views/account.py:62
 msgid "Username"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/register.html:41
-#: templates/RandoAmisSecours/account/register.html:50 views/account.py:32
-#: views/account.py:48 views/account.py:49
+#: templates/RandoAmisSecours/account/register.html:50 views/account.py:48
+#: views/account.py:64 views/account.py:65
 msgid "Password"
 msgstr ""
 
@@ -434,15 +505,15 @@ msgid "Global information"
 msgstr "Informations générales"
 
 #: templates/RandoAmisSecours/outing/create.html:43
-#: templates/RandoAmisSecours/outing/details.html:57 views/outing.py:26
+#: templates/RandoAmisSecours/outing/details.html:57 views/outing.py:42
 msgid "Description"
 msgstr "Description"
 
-#: templates/RandoAmisSecours/outing/create.html:52 views/outing.py:27
+#: templates/RandoAmisSecours/outing/create.html:52 views/outing.py:43
 msgid "Latitude"
 msgstr "Latitude"
 
-#: templates/RandoAmisSecours/outing/create.html:61 views/outing.py:28
+#: templates/RandoAmisSecours/outing/create.html:61 views/outing.py:44
 msgid "Longitude"
 msgstr "Logitude"
 
@@ -475,7 +546,12 @@ msgid "%(full_name)s is really late, you can try to contact him:"
 msgstr ""
 "%(full_name)s est très en retard, vous pouvez essayer de le contacter :"
 
-#: views/account.py:95
+#: templates/RandoAmisSecours/outing/index.html:23
+#, python-format
+msgid "%(status)s outings"
+msgstr "Sortie %(status)s"
+
+#: views/account.py:111
 #, python-format
 msgid ""
 "Hello %(fullname)s,\n"
@@ -501,45 +577,45 @@ msgstr ""
 "-- \n"
 "L'équipe R.A.S."
 
-#: views/account.py:107
+#: views/account.py:123
 msgid "Subscription to R.A.S."
 msgstr "Inscription à R.A.S."
 
-#: views/account.py:112
+#: views/account.py:128
 msgid "Some information are missing or mistyped"
 msgstr "Certains éléments sont manquants ou malformatés"
 
-#: views/account.py:148
+#: views/account.py:164
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
 
-#: views/friends.py:35
+#: views/friends.py:51
 #, python-format
 msgid "«%(name)s» added to your friends"
 msgstr "«%(name)s» ajouté à vos amis"
 
-#: views/outing.py:24
+#: views/outing.py:40
 msgid "Outing name"
 msgstr "Nom de la sortie"
 
-#: views/outing.py:76 views/outing.py:105
+#: views/outing.py:92 views/outing.py:121
 msgid "Only the outing owner can update it"
 msgstr "Seul le créateur d'une sortie peux la modifier"
 
-#: views/outing.py:94
+#: views/outing.py:110
 msgid "Only the outing owner can delete it"
 msgstr "Seul le créateur d'une sortie peux la supprimer"
 
-#: views/outing.py:110
+#: views/outing.py:126
 #, python-format
 msgid "«%(name)s» is now confirmed"
 msgstr "«%(name)s» est maintenant confirmée"
 
-#: views/outing.py:118
+#: views/outing.py:134
 msgid "Only the outing owner can finish it"
 msgstr "Seul le créateur d'une sortie peux la terminer"
 
-#: views/outing.py:123
+#: views/outing.py:139
 #, python-format
 msgid "«%(name)s» is now finished"
 msgstr "«%(name)s» est maintenant terminée"
