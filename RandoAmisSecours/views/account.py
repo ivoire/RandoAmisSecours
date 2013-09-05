@@ -116,7 +116,7 @@ In order to activate your account, click on the confirmation link: %(URL)s.
 If you haven't registered to R.A.S., just delete this mail and the registration will be canceled.
 
 -- 
-R.A.S. Team""") % {'URL': request.build_absolute_uri(reverse('accounts.register.confirm',
+The R.A.S. team""") % {'URL': request.build_absolute_uri(reverse('accounts.register.confirm',
                                                              args=[new_user.pk, new_user.profile.hash_id])),
                    'fullname': new_user.get_full_name()}
 
