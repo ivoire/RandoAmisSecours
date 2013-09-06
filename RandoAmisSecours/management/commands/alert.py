@@ -98,4 +98,5 @@ You can try to contact him to get more information about the situation.
 The R.A.S team""") % {'fullname': outing.user.get_full_name(),
                       'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk]))}
           emails = [f.user.email for f in outing.user.profile.friends.all()]
+          emails.append(outing.user.email)
           send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, emails)
