@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-08 09:13+0200\n"
+"POT-Creation-Date: 2013-09-08 09:27+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -345,10 +345,6 @@ msgstr "Informations"
 #: templates/RandoAmisSecours/account/profile.html:199
 #: templates/RandoAmisSecours/account/register.html:80
 msgid "email"
-msgstr ""
-
-#: templates/RandoAmisSecours/account/profile.html:203
-msgid "token"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/register.html:4
