@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-08 08:59+0200\n"
+"POT-Creation-Date: 2013-09-08 09:07+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr "brouillons"
 msgid "confirmed"
 msgstr "confirmées"
 
-#: models.py:39
+#: models.py:39 templates/RandoAmisSecours/account/profile.html:64
 msgid "late"
 msgstr "en retard"
 
@@ -239,6 +239,10 @@ msgstr "Débute à"
 msgid "End in"
 msgstr "Finie à"
 
+#: templates/RandoAmisSecours/account/profile.html:64
+msgid "finish"
+msgstr "cloture"
+
 #: templates/RandoAmisSecours/account/profile.html:68
 msgid "Finishing outing"
 msgstr "Cloturer la sortie"
@@ -257,6 +261,18 @@ msgstr "Annuler"
 #: templates/RandoAmisSecours/account/profile.html:75
 msgid "Finish"
 msgstr "Terminée"
+
+#: templates/RandoAmisSecours/account/profile.html:79
+#: templates/RandoAmisSecours/account/profile.html:119
+#: templates/RandoAmisSecours/account/profile.html:195
+#: templates/RandoAmisSecours/outing/details.html:23
+msgid "update"
+msgstr "mettre à jour"
+
+#: templates/RandoAmisSecours/account/profile.html:79
+#: templates/RandoAmisSecours/account/profile.html:119
+msgid "delete"
+msgstr "supprime"
 
 #: templates/RandoAmisSecours/account/profile.html:83
 #: templates/RandoAmisSecours/account/profile.html:123
@@ -277,6 +293,10 @@ msgstr "Supprime"
 #: templates/RandoAmisSecours/account/profile.html:99
 msgid "No current outings"
 msgstr "Pas de sortie confirmée"
+
+#: templates/RandoAmisSecours/account/profile.html:119
+msgid "confirm"
+msgstr "confirme"
 
 #: templates/RandoAmisSecours/account/profile.html:139
 msgid "No drafts"
@@ -317,11 +337,6 @@ msgstr "Vous n'avez pas d'amis ici pour le moment."
 #: templates/RandoAmisSecours/account/profile.html:195
 msgid "Information"
 msgstr "Informations"
-
-#: templates/RandoAmisSecours/account/profile.html:195
-#: templates/RandoAmisSecours/outing/details.html:23
-msgid "update"
-msgstr "mettre à jour"
 
 #: templates/RandoAmisSecours/account/profile.html:199
 #: templates/RandoAmisSecours/account/register.html:80
