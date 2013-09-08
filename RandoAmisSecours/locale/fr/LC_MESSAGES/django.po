@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-08 09:07+0200\n"
+"POT-Creation-Date: 2013-09-08 09:13+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -231,13 +231,17 @@ msgstr "Nom"
 
 #: templates/RandoAmisSecours/account/profile.html:44
 #: templates/RandoAmisSecours/account/profile.html:108
-msgid "Begin in"
-msgstr "Débute à"
+#: templates/RandoAmisSecours/outing/create.html:73
+#: templates/RandoAmisSecours/outing/details.html:47
+msgid "Begin"
+msgstr "Début"
 
 #: templates/RandoAmisSecours/account/profile.html:45
 #: templates/RandoAmisSecours/account/profile.html:109
-msgid "End in"
-msgstr "Finie à"
+#: templates/RandoAmisSecours/outing/create.html:85
+#: templates/RandoAmisSecours/outing/details.html:49
+msgid "End"
+msgstr "Fin"
 
 #: templates/RandoAmisSecours/account/profile.html:64
 msgid "finish"
@@ -536,16 +540,6 @@ msgstr "Logitude"
 #: templates/RandoAmisSecours/outing/create.html:71
 msgid "Timing"
 msgstr ""
-
-#: templates/RandoAmisSecours/outing/create.html:73
-#: templates/RandoAmisSecours/outing/details.html:47
-msgid "Begin"
-msgstr "Début"
-
-#: templates/RandoAmisSecours/outing/create.html:85
-#: templates/RandoAmisSecours/outing/details.html:49
-msgid "End"
-msgstr "Fin"
 
 #: templates/RandoAmisSecours/outing/create.html:97
 msgid "Alert"
