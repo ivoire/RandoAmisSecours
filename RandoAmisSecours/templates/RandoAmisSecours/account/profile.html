@@ -120,7 +120,7 @@
                   <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-                      <h3 id="deleteModal{{ outing.pk }}Label">Delete outing</h3>
+                      <h3 id="deleteModal{{ outing.pk }}Label">{% trans "Delete outing" %}</h3>
                     </div>
                     <div class="modal-body">
                       <p>{% blocktrans with outing.name as name %}Are you sure you want to delete the outing: «{{ name }}» ?{% endblocktrans %}</p>

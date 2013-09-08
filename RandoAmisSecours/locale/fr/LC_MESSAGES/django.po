@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 16:55+0200\n"
+"POT-Creation-Date: 2013-09-08 08:59+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgstr ""
 "-- \n"
 "L'équipe R.A.S."
 
-#: management/commands/alert.py:80 management/commands/alert.py:101
+#: management/commands/alert.py:80 management/commands/alert.py:102
 msgid "[R.A.S] Alert"
 msgstr "[R.A.S] Alerte"
 
@@ -259,6 +259,7 @@ msgid "Finish"
 msgstr "Terminée"
 
 #: templates/RandoAmisSecours/account/profile.html:83
+#: templates/RandoAmisSecours/account/profile.html:123
 msgid "Delete outing"
 msgstr "Supprimer la sortie"
 
@@ -333,7 +334,7 @@ msgstr ""
 
 #: templates/RandoAmisSecours/account/register.html:4
 #: templates/RandoAmisSecours/account/register.html:9
-#: templates/RandoAmisSecours/account/register.html:94
+#: templates/RandoAmisSecours/account/register.html:91
 msgid "Register"
 msgstr "S'inscrire"
 
@@ -516,6 +517,10 @@ msgstr "Latitude"
 #: templates/RandoAmisSecours/outing/create.html:61 views/outing.py:44
 msgid "Longitude"
 msgstr "Logitude"
+
+#: templates/RandoAmisSecours/outing/create.html:71
+msgid "Timing"
+msgstr ""
 
 #: templates/RandoAmisSecours/outing/create.html:73
 #: templates/RandoAmisSecours/outing/details.html:47
