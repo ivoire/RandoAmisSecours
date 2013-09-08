@@ -300,7 +300,7 @@ msgstr "confirme"
 
 #: templates/RandoAmisSecours/account/profile.html:139
 msgid "No drafts"
-msgstr "Pas de brouillons"
+msgstr "Pas de brouillon"
 
 #: templates/RandoAmisSecours/account/profile.html:148
 msgid "Began"
@@ -312,7 +312,7 @@ msgstr "Fin planifiée"
 
 #: templates/RandoAmisSecours/account/profile.html:165
 msgid "No finished outings"
-msgstr "Pas de sortie terminés"
+msgstr "Pas de sortie terminée"
 
 #: templates/RandoAmisSecours/account/profile.html:173
 #: templates/RandoAmisSecours/friends/search.html:8
@@ -569,7 +569,7 @@ msgstr ""
 #: templates/RandoAmisSecours/outing/index.html:23
 #, python-format
 msgid "%(status)s outings"
-msgstr "Sortie %(status)s"
+msgstr "Sorties %(status)s"
 
 #: views/account.py:111
 #, python-format
