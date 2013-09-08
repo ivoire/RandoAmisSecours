@@ -79,10 +79,7 @@
     <div class="control-group{% if user_form.email.errors %} error{% endif %}">
       <label class="control-label" for="id_email">{% trans "email" %}</label>
       <div class="controls">
-        <div class="input-append">
-          {{ user_form.email }}
-          <span class="add-on">@</span>
-        </div>
+        {{ user_form.email }}
         {% for error in user_form.email.errors %}
         <span class="help-inline">{{ error }}</span>
         {% endfor %}
