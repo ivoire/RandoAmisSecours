@@ -116,7 +116,7 @@ msgstr "Sorties"
 #: templates/RandoAmisSecours/account/profile.html:5
 #: templates/RandoAmisSecours/main/index.html:35
 msgid "Profile"
-msgstr "Profile"
+msgstr "Profil"
 
 #: templates/RandoAmisSecours/base.html:44
 #: templates/RandoAmisSecours/account/logged_out.html:28
@@ -199,7 +199,7 @@ msgstr "Créer un compte"
 
 #: templates/RandoAmisSecours/account/profile.html:14
 msgid "My profile"
-msgstr "Mon profile"
+msgstr "Mon profil"
 
 #: templates/RandoAmisSecours/account/profile.html:30
 msgid "new"
@@ -471,7 +471,7 @@ msgid ""
 "Link your profile with friends profiles. Only your friends will see your "
 "outings unless you are late."
 msgstr ""
-"Connectez votre profile avec celui de vos amis. Seuls vos amis verrons vos "
+"Connectez votre profil avec celui de vos amis. Seuls vos amis verrons vos "
 "sorties tant que vous n'êtes pas en retard."
 
 #: templates/RandoAmisSecours/main/index.html:57
