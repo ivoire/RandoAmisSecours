@@ -105,6 +105,16 @@
             {% endfor %}
           </div>
         </div>
+        <p>{% trans "RandoAmisSecours will use the three fields above to decide upon when to send email:" %}</p>
+        <dl class="dl-horizontal">
+          <dt>{% trans "Beginning" %}</dt>
+          <dd>{% trans "the beginning of the outing" %}</dd>
+          <dt>{% trans "Ending" %}</dt>
+          <dd>{% trans "the planned ending" %}</dd>
+          <dt>{% trans "Alert" %}</dt>
+          <dd>{% trans "the time to alert friends" %}</dd>
+        </dl>
+        <p>{% trans "After the ending R.A.S. sends emails to the owner. After the alert, friends are also emailed until the outing is closed." %}</p>
       </div>
       <div class="span8 offset2">
         <div id="map">
