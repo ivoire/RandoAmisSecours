@@ -59,7 +59,7 @@
               <tr>
               {% endif %}
                 <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
-                <td>{{ outing.begining|naturaltime }}</td>
+                <td>{{ outing.beginning|naturaltime }}</td>
                 <td>{{ outing.ending|naturaltime }}</td>
                 <td><a href="#okModal{{ outing.pk }}" role="button" class="btn btn-mini btn-success" title="{% trans "finish" %}" data-toggle="modal"><i class="icon-ok-sign"></i></a><a href="#" class="btn btn-mini btn-warning" title="{% trans "late" %}"><i class="icon-time"></i></a>
                   <div id="okModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="okModal{{ outing.pk }}Label" aria-hidden="true">
@@ -114,7 +114,7 @@
             {% for outing in draft_outings %}
               <tr>
                 <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
-                <td>{{ outing.begining|naturaltime }}</td>
+                <td>{{ outing.beginning|naturaltime }}</td>
                 <td>{{ outing.ending|naturaltime }}</td>
                 <td><a href="{% url 'outings.confirm' outing.pk %}" class="btn btn-mini btn-success" title="{% trans "confirm" %}"><i class="icon-ok"></i></a><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info" title="{% trans "update" %}"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" title="{% trans "delete" %}" data-toggle="modal"><i class="icon-trash"></i></a>
                   <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
@@ -154,7 +154,7 @@
             {% for outing in finished_outings %}
               <tr>
                 <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
-                <td>{{ outing.begining }}</td>
+                <td>{{ outing.beginning }}</td>
                 <td>{{ outing.ending }}</td>
                 <td></td>
               </tr>

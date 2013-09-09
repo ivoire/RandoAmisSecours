@@ -69,14 +69,14 @@
       </div>
       <div class="span6">
         <h4 class="modal-header">{% trans "Timing" %}</h4>
-        <div class="control-group{% if form.begining.errors %} error{% endif %}">
-          <label class="control-label" for="id_begining">{% trans "Begin" %}</label>
+        <div class="control-group{% if form.beginning.errors %} error{% endif %}">
+          <label class="control-label" for="id_beginning">{% trans "Begin" %}</label>
           <div class="controls">
             <div id="beginning_picker" class="input-append date">
-              {{ form.begining }}
+              {{ form.beginning }}
               <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
             </div>
-            {% for error in form.begining.errors %}
+            {% for error in form.beginning.errors %}
             <span class="help-inline">{{ error }}</span>
             {% endfor %}
           </div>

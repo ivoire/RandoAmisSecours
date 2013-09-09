@@ -33,7 +33,7 @@ from RandoAmisSecours.models import Outing, DRAFT, CONFIRMED, LATE, FINISHED, CA
 class OutingForm(ModelForm):
     class Meta:
         model = Outing
-        fields = ('name', 'description', 'begining', 'ending', 'alert', 'latitude', 'longitude')
+        fields = ('name', 'description', 'beginning', 'ending', 'alert', 'latitude', 'longitude')
 
     def __init__(self, *args, **kwargs):
         super(OutingForm, self).__init__(*args, **kwargs)
@@ -45,16 +45,16 @@ class OutingForm(ModelForm):
 
     def clean(self):
         cleaned_data = super(OutingForm, self).clean()
-        begining = cleaned_data.get('begining')
+        beginning = cleaned_data.get('beginning')
         ending = cleaned_data.get('ending')
         alert = cleaned_data.get('alert')
 
-        if begining and ending and alert:
-            if begining >= ending or ending >= alert:
-                self._errors['begining'] = self.error_class([_('Begining should happens first')])
-                self._errors['ending'] = self.error_class([_('Ending should happens after the begining')])
+        if beginning and ending and alert:
+            if beginning >= ending or ending >= alert:
+                self._errors['beginning'] = self.error_class([_('Beginning should happens first')])
+                self._errors['ending'] = self.error_class([_('Ending should happens after the beginning')])
                 self._errors['alert'] = self.error_class([_('Alert should happens at the end')])
-                del cleaned_data['begining']
+                del cleaned_data['beginning']
                 del cleaned_data['ending']
                 del cleaned_data['alert']
 

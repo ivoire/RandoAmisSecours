@@ -63,7 +63,7 @@ class Profile(models.Model):
 class Outing(models.Model):
     class Meta:
         app_label = 'RandoAmisSecours'
-        ordering = ['begining', 'ending', 'alert', 'name']
+        ordering = ['beginning', 'ending', 'alert', 'name']
 
     user = models.ForeignKey(User)
 
@@ -73,7 +73,7 @@ class Outing(models.Model):
     status = models.IntegerField(choices=OUTING_STATUS, default=DRAFT)
 
     # Time frame: (begin, end, alert)
-    begining = models.DateTimeField()
+    beginning = models.DateTimeField()
     ending = models.DateTimeField()
     alert = models.DateTimeField()
 
@@ -87,25 +87,25 @@ class Outing(models.Model):
     def getPercents(self):
         current_time = datetime.utcnow().replace(tzinfo=utc)
         # now < begin < end < alert
-        if current_time < self.begining:
+        if current_time < self.beginning:
             return (0, 0, 0)
         # begin < end < alert < now
         elif self.alert < current_time:
             return (0, 0, 100)
         # begin < now < end < alert
         elif current_time < self.ending:
-            return (((current_time - self.begining).total_seconds()) / float((self.alert - self.begining).total_seconds()) * 100, 0, 0)
+            return (((current_time - self.beginning).total_seconds()) / float((self.alert - self.beginning).total_seconds()) * 100, 0, 0)
         # begin < end < now < alert
         else:
             assert(current_time < self.alert)
-            return (((self.ending - self.begining).total_seconds()) / float((self.alert - self.begining).total_seconds()) * 100,
-                    ((current_time - self.ending).total_seconds()) / float((self.alert - self.begining).total_seconds()) * 100,
+            return (((self.ending - self.beginning).total_seconds()) / float((self.alert - self.beginning).total_seconds()) * 100,
+                    ((current_time - self.ending).total_seconds()) / float((self.alert - self.beginning).total_seconds()) * 100,
                     0)
 
     def is_running(self):
-        """ Return True if begining <= now < end """
+        """ Return True if beginning <= now < end """
         now = datetime.utcnow().replace(tzinfo=utc)
-        return self.begining <= now and now < self.ending
+        return self.beginning <= now and now < self.ending
 
     def is_late(self):
         """ Return True if end <= now < alert """
