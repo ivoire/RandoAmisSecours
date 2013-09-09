@@ -43,6 +43,23 @@ class OutingForm(ModelForm):
         self.fields['latitude'].widget.attrs['placeholder'] = _('Latitude')
         self.fields['longitude'].widget.attrs['placeholder'] = _('Longitude')
 
+    def clean(self):
+        cleaned_data = super(OutingForm, self).clean()
+        begining = cleaned_data.get('begining')
+        ending = cleaned_data.get('ending')
+        alert = cleaned_data.get('alert')
+
+        if begining and ending and alert:
+            if begining >= ending or ending >= alert:
+                self._errors['begining'] = self.error_class([_('Begining should happens first')])
+                self._errors['ending'] = self.error_class([_('Ending should happens after the begining')])
+                self._errors['alert'] = self.error_class([_('Alert should happens at the end')])
+                del cleaned_data['begining']
+                del cleaned_data['ending']
+                del cleaned_data['alert']
+
+        return cleaned_data
+
 
 def index(request, status='confirmed'):
     if status == 'confirmed':
