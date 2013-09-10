@@ -37,9 +37,9 @@
   <div class="span12">
     <div class="progress">
       {% with outing.getPercents as percents %}
-      <div class="bar bar-success" style="width: {{ percents.0 }}%"></div>
-      <div class="bar bar-warning" style="width: {{ percents.1 }}%"></div>
-      <div class="bar bar-danger" style="width: {{ percents.2 }}%"></div>
+      <div class="bar bar-success" style="width: {{ percents.0|unlocalize }}%"></div>
+      <div class="bar bar-warning" style="width: {{ percents.1|unlocalize }}%"></div>
+      <div class="bar bar-danger" style="width: {{ percents.2|unlocalize }}%"></div>
       {% endwith %}
     </div>
   </div>

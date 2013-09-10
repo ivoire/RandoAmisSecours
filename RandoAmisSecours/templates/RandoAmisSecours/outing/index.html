@@ -31,9 +31,9 @@
       <li class="span4">
         <div class="thumbnail">
           <div class="progress">
-            <div class="bar bar-success" style="width: {{ percents.0 }}%"></div>
-            <div class="bar bar-warning" style="width: {{ percents.1 }}%"></div>
-            <div class="bar bar-danger" style="width: {{ percents.2 }}%"></div>
+            <div class="bar bar-success" style="width: {{ percents.0|unlocalize }}%"></div>
+            <div class="bar bar-warning" style="width: {{ percents.1|unlocalize }}%"></div>
+            <div class="bar bar-danger" style="width: {{ percents.2|unlocalize }}%"></div>
           </div>
           <div id="map{{ outing.pk }}" class="outing-map" data-lat="{{ outing.latitude|unlocalize }}" data-lng="{{ outing.longitude|unlocalize }}">
           </div>
