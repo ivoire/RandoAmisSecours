@@ -55,7 +55,7 @@ class Command(BaseCommand):
         self.stdout.write("Interval %d" % (kwargs['interval']))
 
         now = datetime.utcnow().replace(tzinfo=utc)
-        outings = Outing.objects.filter(status=CONFIRMED, alert__lt=now)
+        outings = Outing.objects.filter(status=CONFIRMED, ending__lt=now)
 
         for outing in outings:
             self.stdout.write(" - %s" % (outing.name))
@@ -77,7 +77,7 @@ If you are back home safe, please click on %(SAFE_URL)s.
 The R.A.S team""") % {'fullname': outing.user.get_full_name(),
                       'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
                       'SAFE_URL': reverse('outings.finish', args=[outing.pk])}
-                    send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, outing.user.email)
+                    send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [outing.user.email])
 
             # Alerting outings
             elif outing.alert <= now:
