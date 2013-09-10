@@ -1262,7 +1262,7 @@
 		getDefaultFormat: function (type, field) {
 			if (type == "standard") {
 				if (field == 'input')
-					return 'yyyy-mm-dd hh:ii';
+					return 'yyyy-mm-dd hh:ii:ss';
 				else
 					return 'yyyy-mm-dd hh:ii:ss';
 			} else if (type == "php") {
