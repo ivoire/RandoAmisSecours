@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-09 19:30+0200\n"
+"POT-Creation-Date: 2013-09-10 18:58+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -658,24 +658,36 @@ msgstr "La fin doit arriver après le début"
 msgid "Alert should happens at the end"
 msgstr "L'alerte doit arriver après la fin"
 
-#: views/outing.py:109 views/outing.py:138
+#: views/outing.py:94
+msgid ""
+"Outing successfully created. The outing is still a draft and should be "
+"confirmed."
+msgstr ""
+"La sortie a été crée. Celle-ci est encore un brouillon et doit être validée."
+
+#: views/outing.py:110 views/outing.py:140
 msgid "Only the outing owner can update it"
 msgstr "Seul le créateur d'une sortie peux la modifier"
 
-#: views/outing.py:127
+#: views/outing.py:128
 msgid "Only the outing owner can delete it"
 msgstr "Seul le créateur d'une sortie peux la supprimer"
 
-#: views/outing.py:143
+#: views/outing.py:130
+#, python-format
+msgid "«%(name)s» deleted"
+msgstr "La sortie «%(name)s» a été supprimée"
+
+#: views/outing.py:145
 #, python-format
 msgid "«%(name)s» is now confirmed"
 msgstr "«%(name)s» est maintenant confirmée"
 
-#: views/outing.py:151
+#: views/outing.py:153
 msgid "Only the outing owner can finish it"
 msgstr "Seul le créateur d'une sortie peux la terminer"
 
-#: views/outing.py:156
+#: views/outing.py:158
 #, python-format
 msgid "«%(name)s» is now finished"
 msgstr "«%(name)s» est maintenant terminée"
