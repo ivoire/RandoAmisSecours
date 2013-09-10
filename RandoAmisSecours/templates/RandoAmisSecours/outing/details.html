@@ -33,6 +33,7 @@
     {% endfor %}
   </div>
   {% endif %}
+  {% if outing.status == CONFIRMED %}
   <div class="span12">
     <div class="progress">
       {% with outing.getPercents as percents %}
@@ -42,6 +43,7 @@
       {% endwith %}
     </div>
   </div>
+  {% endif %}
   <div class="span6">
     <dl class="dl-horizontal">
       <dt>{% trans "Begin" %}</dt>
@@ -62,7 +64,7 @@
     <div id="map">
     </div>
   </div>
-  {% if user.is_authenticated and outing.is_alerting %}
+  {% if user.is_authenticated and outing.status == CONFIRMED and outing.is_alerting %}
   <div class="span12">
     <h4 class="modal-header">Late outing</h4>
     <p>{% blocktrans with outing.user.get_full_name as full_name %}{{ full_name }} is really late, you can try to contact him:{% endblocktrans %}</p>
