@@ -7,7 +7,7 @@
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.css" />
   <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/l.geosearch.css" />
-  <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/bootstrap-datetimepicker.min.css" />
+  <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/datetimepicker.css" />
 {% endblock %}
 
 {% block style %}
@@ -74,7 +74,7 @@
           <div class="controls">
             <div id="beginning_picker" class="input-append date">
               {{ form.beginning }}
-              <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+              <span class="add-on"><i class="icon-th"></i></span>
             </div>
             {% for error in form.beginning.errors %}
             <span class="help-inline">{{ error }}</span>
@@ -86,7 +86,7 @@
           <div class="controls">
             <div id="ending_picker" class="input-append date">
               {{ form.ending }}
-              <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+              <span class="add-on"><i class="icon-th"></i></span>
             </div>
             {% for error in form.ending.errors %}
             <span class="help-inline">{{ error }}</span>
@@ -98,7 +98,7 @@
           <div class="controls">
             <div id="alert_picker" class="input-append date">
               {{ form.alert }}
-              <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+              <span class="add-on"><i class="icon-th"></i></span>
             </div>
             {% for error in form.alert.errors %}
             <span class="help-inline">{{ error }}</span>
@@ -133,7 +133,8 @@
 <script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet.js"></script>
 <script src="{% get_static_prefix %}RandoAmisSecours/js/l.control.geosearch.js"></script>
 <script src="{% get_static_prefix %}RandoAmisSecours/js/l.geosearch.provider.openstreetmap.js"></script>
-<script src="{% get_static_prefix %}RandoAmisSecours/js/bootstrap-datetimepicker.min.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/bootstrap-datetimepicker.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/locales/bootstrap-datetimepicker.fr.js"></script>
 <script>
   $(function(){
     var osmURL = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
@@ -188,9 +189,10 @@
 
     // datetime pickers
     $('#beginning_picker, #ending_picker, #alert_picker').datetimepicker({
-      format: 'yyyy-MM-dd hh:mm',
-      pickSeconds: false,
-      language: 'en',
+      todayBtn: true,
+      language: 'fr',
+      minuteStep: 15,
+      pickerPosition: "bottom-left"
     });
   });
 </script>
