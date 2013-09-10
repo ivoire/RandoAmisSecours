@@ -91,6 +91,7 @@ def create(request):
             outing = form.save(commit=False)
             outing.user = request.user
             outing.save()
+            messages.success(request, _('Outing successfully created. The outing is still a draft and should be confirmed.'))
             return HttpResponseRedirect(reverse('outings.details', args=[outing.pk]))
     else:
         form = OutingForm()
@@ -126,6 +127,7 @@ def delete(request, outing_id):
     if outing.user != request.user:
         messages.error(request, _('Only the outing owner can delete it'))
         return HttpResponseRedirect(reverse('outings.index'))
+    messages.success(request, _(u"«%(name)s» deleted") % ({'name': outing.name}))
     outing.delete()
 
     return HttpResponseRedirect(reverse('accounts.profile'))
@@ -140,7 +142,7 @@ def confirm(request, outing_id):
 
     outing.status = CONFIRMED
     outing.save()
-    messages.info(request, _(u"«%(name)s» is now confirmed") % ({'name': outing.name}))
+    messages.success(request, _(u"«%(name)s» is now confirmed") % ({'name': outing.name}))
     return HttpResponseRedirect(reverse('accounts.profile'))
 
 
