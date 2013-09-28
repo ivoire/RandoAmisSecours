@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 19:16+0200\n"
+"POT-Creation-Date: 2013-09-28 10:22+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -52,10 +52,9 @@ msgstr ""
 "\n"
 "Bonjour,\n"
 "\n"
-"vous êtes en retard sur l'horaire pévus pour la sortie %(URL)s.\n"
+"vous êtes en retard sur l'horaire prévu pour la sortie %(URL)s.\n"
 "\n"
-"Si vous êtes de retour, merci de terminer la sortie en cliquant sur "
-"%(SAFE_URL)s.\n"
+"Si vous êtes de retour, merci de le signaler en cliquant sur %(SAFE_URL)s.\n"
 "\n"
 "-- \n"
 "L'équipe R.A.S."
@@ -80,9 +79,9 @@ msgstr ""
 "\n"
 "Bonjour,\n"
 "\n"
-"%(fullname)s est en retard sur l'horaire prévus pour la sortie %(URL)s.\n"
+"%(fullname)s est en retard sur l'horaire prévu pour la sortie %(URL)s.\n"
 "\n"
-"Pour plus d'information, vous pouvez essayer de le contacter.\n"
+"Pour en savoir plus, essayez de le contacter directement.\n"
 "\n"
 "-- \n"
 "L'équipe R.A.S."
@@ -264,7 +263,7 @@ msgstr "Annuler"
 
 #: templates/RandoAmisSecours/account/profile.html:75
 msgid "Finish"
-msgstr "Terminée"
+msgstr "Terminer"
 
 #: templates/RandoAmisSecours/account/profile.html:79
 #: templates/RandoAmisSecours/account/profile.html:119
@@ -276,7 +275,7 @@ msgstr "mettre à jour"
 #: templates/RandoAmisSecours/account/profile.html:79
 #: templates/RandoAmisSecours/account/profile.html:119
 msgid "delete"
-msgstr "supprime"
+msgstr "supprimer"
 
 #: templates/RandoAmisSecours/account/profile.html:83
 #: templates/RandoAmisSecours/account/profile.html:123
@@ -442,7 +441,7 @@ msgstr "N'attendez pas un accident !"
 
 #: templates/RandoAmisSecours/main/index.html:33
 msgid "Let your friends some information about your destination."
-msgstr "Laissez à vos amis des détails sur votre destination."
+msgstr "Laissez à vos amis des précisions sur votre destination."
 
 #: templates/RandoAmisSecours/main/index.html:45
 msgid "Subscribe"
@@ -454,9 +453,9 @@ msgid ""
 "contact you in case of emergency. We will never use these information for "
 "something else."
 msgstr ""
-"Créez un compte sur R.A.S. Nous gardons seulement le informations "
-"nécessairepour vous contacter en cas d'urgence. Nous n'utiliserons jamais "
-"ces informations pour autre chose."
+"Créez un compte sur R.A.S. Nous gardons seulement les informations "
+"nécessaire pour vous contacter en cas d'urgence. Nous n'utiliserons jamais "
+"ces informations à d'autres fins."
 
 #: templates/RandoAmisSecours/main/index.html:47
 msgid "Register »"
@@ -564,20 +563,20 @@ msgstr "Fin"
 
 #: templates/RandoAmisSecours/outing/create.html:113
 msgid "the planned ending"
-msgstr "horraire prévu de fin"
+msgstr "horaire prévu de fin"
 
 #: templates/RandoAmisSecours/outing/create.html:115
 msgid "the time to alert friends"
-msgstr "horraire d'alerte"
+msgstr "horaire d'alerte"
 
 #: templates/RandoAmisSecours/outing/create.html:117
 msgid ""
 "After the ending R.A.S. sends emails to the owner. After the alert, friends "
 "are also emailed until the outing is closed."
 msgstr ""
-"Dés que l'horaire de fin est passé, R.A.S. enverra un mail au créateur de la "
-"sortie. Dés que l'horaire de l'alerte est passé, les mails seront alors "
-"aussi envoyés aux amis, et ce jusqu'à ce que la sortie soit cloturée."
+"Dés que l'horaire de fin est passé, R.A.S. vous enverra un mail. Si "
+"l'horaire de l'alerte est atteint, les mails seront également envoyés à vos "
+"amis, et ce jusqu'à ce que la sortie soit cloturée."
 
 #: templates/RandoAmisSecours/outing/details.html:6
 #, python-format
