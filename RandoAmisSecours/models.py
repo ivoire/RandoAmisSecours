@@ -21,7 +21,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.timezone import datetime, utc
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_noop as _
 
 import binascii
 import os
