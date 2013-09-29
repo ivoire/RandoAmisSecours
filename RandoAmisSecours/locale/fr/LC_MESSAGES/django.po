@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 10:22+0200\n"
+"POT-Creation-Date: 2013-09-29 19:54+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -224,21 +224,21 @@ msgstr "Terminée"
 #: templates/RandoAmisSecours/account/profile.html:197
 #: templates/RandoAmisSecours/friends/search.html:41
 #: templates/RandoAmisSecours/outing/create.html:34
-#: templates/RandoAmisSecours/outing/details.html:72
+#: templates/RandoAmisSecours/outing/details.html:80
 msgid "Name"
 msgstr "Nom"
 
 #: templates/RandoAmisSecours/account/profile.html:44
 #: templates/RandoAmisSecours/account/profile.html:108
 #: templates/RandoAmisSecours/outing/create.html:73
-#: templates/RandoAmisSecours/outing/details.html:49
+#: templates/RandoAmisSecours/outing/details.html:57
 msgid "Begin"
 msgstr "Début"
 
 #: templates/RandoAmisSecours/account/profile.html:45
 #: templates/RandoAmisSecours/account/profile.html:109
 #: templates/RandoAmisSecours/outing/create.html:85
-#: templates/RandoAmisSecours/outing/details.html:51
+#: templates/RandoAmisSecours/outing/details.html:59
 msgid "End"
 msgstr "Fin"
 
@@ -329,7 +329,7 @@ msgstr "chercher"
 #: templates/RandoAmisSecours/account/profile.html:179
 #: templates/RandoAmisSecours/account/profile.html:201
 #: templates/RandoAmisSecours/account/update.html:40
-#: templates/RandoAmisSecours/outing/details.html:74
+#: templates/RandoAmisSecours/outing/details.html:82
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
@@ -520,7 +520,7 @@ msgid "Global information"
 msgstr "Informations générales"
 
 #: templates/RandoAmisSecours/outing/create.html:43
-#: templates/RandoAmisSecours/outing/details.html:59 views/outing.py:42
+#: templates/RandoAmisSecours/outing/details.html:67 views/outing.py:42
 msgid "Description"
 msgstr "Description"
 
@@ -583,11 +583,24 @@ msgstr ""
 msgid "Outing «%(name)s»"
 msgstr "Sortie «%(name)s»"
 
-#: templates/RandoAmisSecours/outing/details.html:53
+#: templates/RandoAmisSecours/outing/details.html:40
+msgid "Warning:"
+msgstr "Attention :"
+
+#: templates/RandoAmisSecours/outing/details.html:40
+#, python-format
+msgid ""
+"This outing is not validated. You should <a href=\"%(confirmed_url)s"
+"\">confirmed it!</a>"
+msgstr ""
+"Cette sortie n'est pas validée. Vous devriez <a href=\"%(confirmed_url)s\">la "
+"confirmer !</a>"
+
+#: templates/RandoAmisSecours/outing/details.html:61
 msgid "Alert at"
 msgstr "Alerter à"
 
-#: templates/RandoAmisSecours/outing/details.html:70
+#: templates/RandoAmisSecours/outing/details.html:78
 #, python-format
 msgid "%(full_name)s is really late, you can try to contact him:"
 msgstr ""
