@@ -7,7 +7,7 @@ back on time, the application will email your friends about it.
 
 
 Installing
-==========
+----------
 
 In order to install RandoAmisSecours, you need to install the dependencies
 written in requirements.txt. If you use virtualenv and pip, just type:
@@ -19,14 +19,14 @@ in the INSTALLED_APPS.
 
 
 Translation
-===========
+-----------
 
 RandoAmisSecours is available in English and Frensh. Feal free to translate RAS
 in another language.
 
 
 Contributing
-============
+------------
 
 If you want to contribute to RandoAmisSecours, just fork it on github and send
 me some pull requests.
