@@ -33,6 +33,14 @@
     {% endfor %}
   </div>
   {% endif %}
+  {% if outing.status == DRAFT %}
+  <div class="span12">
+    <div class="alert alert-warning">
+      {% url 'outings.confirm' outing.pk as confirmed_url %}
+      <strong>{% trans "Warning:" %}</strong> {% blocktrans %}This outing is not validated. You should <a href="{{ confirmed_url }}">confirmed it!</a>{% endblocktrans %}
+    </div>
+  </div>
+  {% endif %}
   {% if outing.status == CONFIRMED %}
   <div class="span12">
     <div class="progress">
