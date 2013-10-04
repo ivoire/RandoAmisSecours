@@ -29,8 +29,10 @@
   <div class="span8 offset2">
     <p>{% trans "Search for friends using the field below." %}</p>
     <form action="." method="get" class="form-search">
-      <input type="text" name="query" autofocus="autofocus" class="input-medium search-query">
-      <button type="submit" class="btn">{% trans "Search" %}</button>
+      <div class="input-append">
+        <input type="text" name="query" class="input-medium search-query" autofocus="autofocus" placeholder="{% trans "Search" %}">
+        <button type="submit" class="btn"><i class="icon-search"></i></button>
+      </div>
     </form>
   </div>
   <div class="span8 offset2">
