@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-29 19:54+0200\n"
+"POT-Creation-Date: 2013-10-04 16:47+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -222,7 +222,7 @@ msgstr "Terminée"
 #: templates/RandoAmisSecours/account/profile.html:147
 #: templates/RandoAmisSecours/account/profile.html:178
 #: templates/RandoAmisSecours/account/profile.html:197
-#: templates/RandoAmisSecours/friends/search.html:41
+#: templates/RandoAmisSecours/friends/search.html:43
 #: templates/RandoAmisSecours/outing/create.html:34
 #: templates/RandoAmisSecours/outing/details.html:80
 msgid "Name"
@@ -593,8 +593,8 @@ msgid ""
 "This outing is not validated. You should <a href=\"%(confirmed_url)s"
 "\">confirmed it!</a>"
 msgstr ""
-"Cette sortie n'est pas validée. Vous devriez <a href=\"%(confirmed_url)s\">la "
-"confirmer !</a>"
+"Cette sortie n'est pas validée. Vous devriez <a href=\"%(confirmed_url)s"
+"\">la confirmer !</a>"
 
 #: templates/RandoAmisSecours/outing/details.html:61
 msgid "Alert at"
