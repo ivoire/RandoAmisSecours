@@ -1,0 +1,28 @@
+{% extends 'RandoAmisSecours/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Page not found" %}{% endblock %}
+
+{% block style %}
+  .center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+  }
+{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li class="activate">{% trans "Error 404" %}</li>
+{% endblock %}
+
+{% block body %}
+<div class="hero-unit center">
+  <h1>{% trans "Page not found" %} <small><font face="Tahoma" color="red">{% trans "Error 404" %}</font></small></h1>
+  <br />
+  <p>{% trans "The page you requested could not be found, either contact your webmaster or try again later. Use your browsers <b>Back</b> button to navigate to the page you have prevously come from." %}</p>
+  <a href="{% url 'index' %}" class="btn btn-medium btn-info"><i class="icon-home icon-white"></i> {% trans "Take Me Home" %}</a>
+</div>
+{% endblock %}
