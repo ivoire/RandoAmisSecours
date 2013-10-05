@@ -1,7 +1,7 @@
 {% extends 'RandoAmisSecours/base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Internal error" %}{% endblock %}
+{% block title %}{% trans "Server error" %}{% endblock %}
 
 {% block style %}
   .center {
@@ -20,7 +20,7 @@
 
 {% block body %}
 <div class="hero-unit center">
-  <h1>{% trans "Internal error" %} <small><font face="Tahoma" color="red">{% trans "Error 500" %}</font></small></h1>
+  <h1>{% trans "Server error" %} <small><font face="Tahoma" color="red">{% trans "Error 500" %}</font></small></h1>
   <br />
   <p>{% trans "The server cannot server the page you requested, either contact your webmaster or try again later. Use your browsers <b>Back</b> button to navigate to the page you have prevously come from." %}</p>
   <a href="{% url 'index' %}" class="btn btn-medium btn-info"><i class="icon-home icon-white"></i> {% trans "Take Me Home" %}</a>
