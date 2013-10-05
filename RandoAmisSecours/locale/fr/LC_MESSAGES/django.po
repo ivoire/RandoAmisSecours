@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 19:40+0200\n"
+"POT-Creation-Date: 2013-10-05 08:45+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -86,12 +86,11 @@ msgstr ""
 "-- \n"
 "L'équipe R.A.S."
 
-#: templates/RandoAmisSecours/404.html:4
-#: templates/RandoAmisSecours/404.html:23
+#: templates/404.html:4 templates/404.html.py:23
 msgid "Page not found"
 msgstr ""
 
-#: templates/RandoAmisSecours/404.html:17
+#: templates/404.html:17 templates/500.html:17
 #: templates/RandoAmisSecours/base.html:34
 #: templates/RandoAmisSecours/account/confirm.html:11
 #: templates/RandoAmisSecours/account/logged_out.html:26
@@ -108,12 +107,11 @@ msgstr ""
 msgid "Home"
 msgstr "Accueil"
 
-#: templates/RandoAmisSecours/404.html:18
-#: templates/RandoAmisSecours/404.html:23
+#: templates/404.html:18 templates/404.html.py:23
 msgid "Error 404"
 msgstr "Erreur 404"
 
-#: templates/RandoAmisSecours/404.html:25
+#: templates/404.html:25
 msgid ""
 "The page you requested could not be found, either contact your webmaster or "
 "try again later. Use your browsers <b>Back</b> button to navigate to the "
@@ -123,9 +121,27 @@ msgstr ""
 "réessayez plus tard. Revenez à la page précédente en cliquant sur le boutton "
 "<b>Précédent</b> de votre navigateur."
 
-#: templates/RandoAmisSecours/404.html:26
+#: templates/404.html:26 templates/500.html:26
 msgid "Take Me Home"
 msgstr "Allez à l'accueil"
+
+#: templates/500.html:4 templates/500.html.py:23
+msgid "Server error"
+msgstr ""
+
+#: templates/500.html:18 templates/500.html.py:23
+msgid "Error 500"
+msgstr "Erreur 500"
+
+#: templates/500.html:25
+msgid ""
+"The server cannot server the page you requested, either contact your "
+"webmaster or try again later. Use your browsers <b>Back</b> button to "
+"navigate to the page you have prevously come from."
+msgstr ""
+"Le serveur n'a pas pu servir la page que vous avez demandé. Contactez le "
+"webmaster ou réessayez plus tard. Revenez à la page précédente en cliquant "
+"sur le boutton <b>Précédent</b> de votre navigateur."
 
 #: templates/RandoAmisSecours/base.html:35
 #: templates/RandoAmisSecours/account/profile.html:30
