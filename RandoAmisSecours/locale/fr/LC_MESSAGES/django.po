@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-05 08:45+0200\n"
+"POT-Creation-Date: 2013-10-09 19:11+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -95,6 +95,11 @@ msgstr ""
 #: templates/RandoAmisSecours/account/confirm.html:11
 #: templates/RandoAmisSecours/account/logged_out.html:26
 #: templates/RandoAmisSecours/account/login.html:34
+#: templates/RandoAmisSecours/account/password_change.html:7
+#: templates/RandoAmisSecours/account/password_reset.html:7
+#: templates/RandoAmisSecours/account/password_reset_complete.html:7
+#: templates/RandoAmisSecours/account/password_reset_confirm.html:7
+#: templates/RandoAmisSecours/account/password_reset_done.html:7
 #: templates/RandoAmisSecours/account/profile.html:8
 #: templates/RandoAmisSecours/account/register.html:7
 #: templates/RandoAmisSecours/account/register_end.html:7
@@ -167,6 +172,7 @@ msgstr ""
 #: templates/RandoAmisSecours/account/login.html:4
 #: templates/RandoAmisSecours/account/login.html:36
 #: templates/RandoAmisSecours/account/login.html:53
+#: templates/RandoAmisSecours/account/password_reset_complete.html:20
 #: templates/RandoAmisSecours/main/index.html:37
 msgid "Log in"
 msgstr ""
@@ -183,6 +189,11 @@ msgstr "Confirmer"
 #: templates/RandoAmisSecours/account/confirm.html:12
 #: templates/RandoAmisSecours/account/logged_out.html:27
 #: templates/RandoAmisSecours/account/login.html:35
+#: templates/RandoAmisSecours/account/password_change.html:8
+#: templates/RandoAmisSecours/account/password_reset.html:8
+#: templates/RandoAmisSecours/account/password_reset_complete.html:8
+#: templates/RandoAmisSecours/account/password_reset_confirm.html:8
+#: templates/RandoAmisSecours/account/password_reset_done.html:8
 #: templates/RandoAmisSecours/account/profile.html:9
 #: templates/RandoAmisSecours/account/register.html:8
 #: templates/RandoAmisSecours/account/register_end.html:8
@@ -236,6 +247,128 @@ msgstr "Veuillez vous identifier"
 #: templates/RandoAmisSecours/account/register.html:14
 msgid "Create an account"
 msgstr "Créer un compte"
+
+#: templates/RandoAmisSecours/account/password_change.html:4
+#: templates/RandoAmisSecours/account/password_change.html:9
+#: templates/RandoAmisSecours/account/password_change.html:14
+msgid "Change password"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_change.html:22
+msgid "Old password"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_change.html:31
+#: templates/RandoAmisSecours/account/password_change.html:40
+#: views/account.py:85 views/account.py:87
+msgid "New password"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_change.html:49
+msgid "Change"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset.html:4
+#: templates/RandoAmisSecours/account/password_reset.html:9
+#: templates/RandoAmisSecours/account/password_reset.html:14
+#: templates/RandoAmisSecours/account/password_reset_complete.html:9
+#: templates/RandoAmisSecours/account/password_reset_confirm.html:4
+#: templates/RandoAmisSecours/account/password_reset_done.html:9
+msgid "Password reset"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset.html:19
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset.html:23
+msgid "Email address:"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset.html:33
+msgid "Reset my password"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_complete.html:4
+#: templates/RandoAmisSecours/account/password_reset_complete.html:14
+msgid "Password reset complete"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_complete.html:19
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_confirm.html:9
+msgid "Password reset confirmation"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_confirm.html:15
+msgid "Enter new password"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_confirm.html:20
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_confirm.html:24
+msgid "New password:"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_confirm.html:33
+msgid "Confirm password:"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_confirm.html:43
+msgid "Change my password"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_confirm.html:51
+msgid "Password reset unsuccessful"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_confirm.html:56
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_done.html:4
+#: templates/RandoAmisSecours/account/password_reset_done.html:14
+msgid "Password reset successful"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_done.html:19
+msgid ""
+"We've emailed you instructions for setting your password to the email "
+"address you submitted. You should be receiving it shortly."
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_email.txt:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_email.txt:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_email.txt:7
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_email.txt:9
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/password_reset_email.txt:12
+msgid "The R.A.S. team"
+msgstr "L'équipe R.A.S."
 
 #: templates/RandoAmisSecours/account/profile.html:14
 msgid "My profile"
@@ -383,7 +516,7 @@ msgid "Information"
 msgstr "Informations"
 
 #: templates/RandoAmisSecours/account/profile.html:199
-#: templates/RandoAmisSecours/account/register.html:80
+#: templates/RandoAmisSecours/account/register.html:80 views/account.py:73
 msgid "email"
 msgstr ""
 
@@ -398,13 +531,13 @@ msgid "Account information"
 msgstr "Informations sur le compte"
 
 #: templates/RandoAmisSecours/account/register.html:32 views/account.py:46
-#: views/account.py:62
+#: views/account.py:101
 msgid "Username"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/register.html:41
 #: templates/RandoAmisSecours/account/register.html:50 views/account.py:48
-#: views/account.py:64 views/account.py:65
+#: views/account.py:103 views/account.py:104
 msgid "Password"
 msgstr ""
 
@@ -652,7 +785,15 @@ msgstr ""
 msgid "%(status)s outings"
 msgstr "Sorties %(status)s"
 
-#: views/account.py:111
+#: views/account.py:59
+msgid "Old Password"
+msgstr ""
+
+#: views/account.py:61 views/account.py:62
+msgid "New Password"
+msgstr ""
+
+#: views/account.py:150
 #, python-format
 msgid ""
 "Hello %(fullname)s,\n"
@@ -678,17 +819,21 @@ msgstr ""
 "-- \n"
 "L'équipe R.A.S."
 
-#: views/account.py:123
+#: views/account.py:162
 msgid "Subscription to R.A.S."
 msgstr "Inscription à R.A.S."
 
-#: views/account.py:128
+#: views/account.py:167
 msgid "Some information are missing or mistyped"
 msgstr "Certains éléments sont manquants ou malformatés"
 
-#: views/account.py:164
+#: views/account.py:203
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
+
+#: views/account.py:214
+msgid "Password changed successfully"
+msgstr ""
 
 #: views/friends.py:51
 #, python-format
