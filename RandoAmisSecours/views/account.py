@@ -83,7 +83,7 @@ class RASSetPasswordForm(SetPasswordForm):
         super(RASSetPasswordForm, self).__init__(*args, **kwargs)
         # Add HTML5 attributes
         self.fields['new_password1'].widget.attrs['placeholder'] = _('New password')
-        self.fields['new_password1'].widget.attrs['autofocus'] = _('autofocus')
+        self.fields['new_password1'].widget.attrs['autofocus'] = 'autofocus'
         self.fields['new_password2'].widget.attrs['placeholder'] = _('New password')
 
 
