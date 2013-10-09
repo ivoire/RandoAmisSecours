@@ -21,7 +21,7 @@ from django import forms
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
@@ -60,6 +60,31 @@ class RASPasswordChangeForm(PasswordChangeForm):
         self.fields['old_password'].widget.attrs['autofocus'] = 'autofocus'
         self.fields['new_password1'].widget.attrs['placeholder'] = _('New Password')
         self.fields['new_password2'].widget.attrs['placeholder'] = _('New Password')
+
+
+class RASPasswordResetForm(PasswordResetForm):
+    """
+    Override the default PasswordResetForm in order to add HTML5 attributes.
+    This is the only change done and needed
+    """
+    def __init__(self, *args, **kwargs):
+        super(RASPasswordResetForm, self).__init__(*args, **kwargs)
+        # Add HTML5 attributes
+        self.fields['email'].widget.attrs['placeholder'] = _('email')
+        self.fields['email'].widget.attrs['autofocus'] = 'autofocus'
+
+
+class RASSetPasswordForm(SetPasswordForm):
+    """
+    Override the default SetPasswordForm in order to add HTML5 attributes.
+    This is the only change done and needed
+    """
+    def __init__(self, *args, **kwargs):
+        super(RASSetPasswordForm, self).__init__(*args, **kwargs)
+        # Add HTML5 attributes
+        self.fields['new_password1'].widget.attrs['placeholder'] = _('New password')
+        self.fields['new_password1'].widget.attrs['autofocus'] = _('autofocus')
+        self.fields['new_password2'].widget.attrs['placeholder'] = _('New password')
 
 
 class RASUserCreationForm(UserCreationForm):
@@ -188,3 +213,7 @@ def update(request):
 def password_change_done(request):
     messages.success(request, _('Password changed successfully'))
     return HttpResponseRedirect(reverse('accounts.profile'))
+
+
+def password_reset_done(request):
+    return render_to_response('RandoAmisSecours/account/password_reset_done.html', context_instance=RequestContext(request))

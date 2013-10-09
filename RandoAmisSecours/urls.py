@@ -20,7 +20,7 @@
 from django.conf.urls import patterns, url
 from django.core.urlresolvers import reverse_lazy
 
-from RandoAmisSecours.views.account import RASAuthenticationForm, RASPasswordChangeForm
+from RandoAmisSecours.views.account import RASAuthenticationForm, RASPasswordChangeForm, RASPasswordResetForm, RASSetPasswordForm
 
 
 # Main page
@@ -33,6 +33,9 @@ urlpatterns += patterns('django.contrib.auth.views',
     url(r'^accounts/login/$', 'login', {'template_name': 'RandoAmisSecours/account/login.html', 'authentication_form': RASAuthenticationForm}, name='accounts.login'),
     url(r'^accounts/logout/$', 'logout', {'template_name': 'RandoAmisSecours/account/logged_out.html'}, name='accounts.logout'),
     url(r'^accounts/password/change/$', 'password_change', {'template_name': 'RandoAmisSecours/account/password_change.html', 'password_change_form': RASPasswordChangeForm, 'post_change_redirect': reverse_lazy('accounts.password_change_done')}, name='accounts.password_change'),
+    url(r'^accounts/password/reset/$', 'password_reset', {'template_name': 'RandoAmisSecours/account/password_reset.html', 'email_template_name': 'RandoAmisSecours/account/password_reset_email.txt', 'password_reset_form': RASPasswordResetForm, 'post_reset_redirect': reverse_lazy('accounts.password_reset_done')}, name='accounts.password_reset'),
+    url(r'^accounts/password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', 'password_reset_confirm', {'template_name': 'RandoAmisSecours/account/password_reset_confirm.html', 'set_password_form': RASSetPasswordForm}, name='accounts.password_reset_confirm'),
+    url(r'^accounts/password/reset/complete/$', 'password_reset_complete', {'template_name': 'RandoAmisSecours/account/password_reset_complete.html'}, name='accounts.password_reset_complete'),
 )
 
 urlpatterns += patterns('RandoAmisSecours.views.account',
@@ -41,6 +44,7 @@ urlpatterns += patterns('RandoAmisSecours.views.account',
     url(r'^accounts/profile/$', 'profile', name='accounts.profile'),
     url(r'^accounts/profile/update/$', 'update', name='accounts.profile.update'),
     url(r'^accounts/password/change/done/$', 'password_change_done', name='accounts.password_change_done'),
+    url(r'^accounts/password/reset/done/$', 'password_reset_done', name='accounts.password_reset_done'),
 )
 
 urlpatterns += patterns('RandoAmisSecours.views.friends',
