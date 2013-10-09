@@ -18,8 +18,9 @@
 # along with RandoAmisSecours.  If not, see <http://www.gnu.org/licenses/>
 
 from django.conf.urls import patterns, url
+from django.core.urlresolvers import reverse_lazy
 
-from RandoAmisSecours.views.account import RASAuthenticationForm
+from RandoAmisSecours.views.account import RASAuthenticationForm, RASPasswordChangeForm
 
 
 # Main page
@@ -31,6 +32,7 @@ urlpatterns = patterns('RandoAmisSecours.views.main',
 urlpatterns += patterns('django.contrib.auth.views',
     url(r'^accounts/login/$', 'login', {'template_name': 'RandoAmisSecours/account/login.html', 'authentication_form': RASAuthenticationForm}, name='accounts.login'),
     url(r'^accounts/logout/$', 'logout', {'template_name': 'RandoAmisSecours/account/logged_out.html'}, name='accounts.logout'),
+    url(r'^accounts/password/change/$', 'password_change', {'template_name': 'RandoAmisSecours/account/password_change.html', 'password_change_form': RASPasswordChangeForm, 'post_change_redirect': reverse_lazy('accounts.password_change_done')}, name='accounts.password_change'),
 )
 
 urlpatterns += patterns('RandoAmisSecours.views.account',
@@ -38,6 +40,7 @@ urlpatterns += patterns('RandoAmisSecours.views.account',
     url(r'^accounts/register/(?P<user_id>\d+)/confirm/(?P<user_hash>\w+)/$', 'register_confirm', name='accounts.register.confirm'),
     url(r'^accounts/profile/$', 'profile', name='accounts.profile'),
     url(r'^accounts/profile/update/$', 'update', name='accounts.profile.update'),
+    url(r'^accounts/password/change/done/$', 'password_change_done', name='accounts.password_change_done'),
 )
 
 urlpatterns += patterns('RandoAmisSecours.views.friends',

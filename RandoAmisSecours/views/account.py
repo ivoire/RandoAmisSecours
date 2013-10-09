@@ -21,7 +21,7 @@ from django import forms
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
@@ -46,6 +46,20 @@ class RASAuthenticationForm(AuthenticationForm):
         self.fields['username'].widget.attrs['placeholder'] = _('Username')
         self.fields['username'].widget.attrs['autofocus'] = 'autofocus'
         self.fields['password'].widget.attrs['placeholder'] = _('Password')
+
+
+class RASPasswordChangeForm(PasswordChangeForm):
+    """
+    Override the default PasswordChangeForm in order to add HTML5 attributes.
+    This is the only change done and needed
+    """
+    def __init__(self, *args, **kwargs):
+        super(RASPasswordChangeForm, self).__init__(*args, **kwargs)
+        # Add HTML5 attributes
+        self.fields['old_password'].widget.attrs['placeholder'] = _('Old Password')
+        self.fields['old_password'].widget.attrs['autofocus'] = 'autofocus'
+        self.fields['new_password1'].widget.attrs['placeholder'] = _('New Password')
+        self.fields['new_password2'].widget.attrs['placeholder'] = _('New Password')
 
 
 class RASUserCreationForm(UserCreationForm):
@@ -168,3 +182,9 @@ def update(request):
         profile_form = RASProfileUpdateForm(instance=profile)
 
     return render_to_response('RandoAmisSecours/account/update.html', {'user_form': user_form, 'profile_form': profile_form}, context_instance=RequestContext(request))
+
+
+@login_required
+def password_change_done(request):
+    messages.success(request, _('Password changed successfully'))
+    return HttpResponseRedirect(reverse('accounts.profile'))
