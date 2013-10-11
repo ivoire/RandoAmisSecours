@@ -56,10 +56,10 @@ class RASPasswordChangeForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super(RASPasswordChangeForm, self).__init__(*args, **kwargs)
         # Add HTML5 attributes
-        self.fields['old_password'].widget.attrs['placeholder'] = _('Old Password')
+        self.fields['old_password'].widget.attrs['placeholder'] = _('Old password')
         self.fields['old_password'].widget.attrs['autofocus'] = 'autofocus'
-        self.fields['new_password1'].widget.attrs['placeholder'] = _('New Password')
-        self.fields['new_password2'].widget.attrs['placeholder'] = _('New Password')
+        self.fields['new_password1'].widget.attrs['placeholder'] = _('New password')
+        self.fields['new_password2'].widget.attrs['placeholder'] = _('New password')
 
 
 class RASPasswordResetForm(PasswordResetForm):
