@@ -761,7 +761,7 @@ msgid ""
 "After the ending R.A.S. sends emails to the owner. After the alert, friends "
 "are also emailed until the outing is closed."
 msgstr ""
-"Dés que l'horaire de fin est passé, R.A.S. vous enverra un mail. Si "
+"Dès que l'horaire de fin est passé, R.A.S. vous enverra un mail. Si "
 "l'horaire de l'alerte est atteint, les mails seront également envoyés à vos "
 "amis, et ce jusqu'à ce que la sortie soit cloturée."
 
