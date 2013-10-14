@@ -174,8 +174,8 @@
     <div class="tabbable">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#friends" data-toggle="tab">Friends</a></li>
-        <li><a href="#received" data-toggle="tab">Received</a></li>
-        <li><a href="#sent" data-toggle="tab">Sent</a></li>
+        <li><a href="#received" data-toggle="tab">Received{% if friend_requests %} <span class="badge">{{ friend_requests.count }}</span>{% endif %}</a></li>
+        <li><a href="#sent" data-toggle="tab">Sent{% if friend_requests_sent %} <span class="badge">{{ friend_requests_sent.count }}</span>{% endif %}</a></li>
       </ul>
     </div>
     <div class="tab-content">
