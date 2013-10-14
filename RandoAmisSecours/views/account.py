@@ -32,7 +32,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 
-from RandoAmisSecours.models import Profile, CONFIRMED, DRAFT, LATE, FINISHED
+from RandoAmisSecours.models import Profile, FriendRequest, CONFIRMED, DRAFT, LATE, FINISHED
 
 
 class RASAuthenticationForm(AuthenticationForm):
@@ -187,7 +187,11 @@ def profile(request):
     outings = request.user.outing_set.filter(Q(status=CONFIRMED) | Q(status=LATE))
     draft_outings = request.user.outing_set.filter(status=DRAFT)
     finished_outings = request.user.outing_set.filter(status=FINISHED)
-    return render_to_response('RandoAmisSecours/account/profile.html', {'outings': outings, 'draft_outings': draft_outings, 'finished_outings': finished_outings}, context_instance=RequestContext(request))
+
+    friend_requests = FriendRequest.objects.filter(to=request.user)
+    friend_requests_sent = FriendRequest.objects.filter(user=request.user)
+
+    return render_to_response('RandoAmisSecours/account/profile.html', {'outings': outings, 'draft_outings': draft_outings, 'finished_outings': finished_outings, 'friend_requests': friend_requests, 'friend_requests_sent': friend_requests_sent}, context_instance=RequestContext(request))
 
 
 @login_required

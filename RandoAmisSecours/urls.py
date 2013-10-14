@@ -50,6 +50,9 @@ urlpatterns += patterns('RandoAmisSecours.views.account',
 urlpatterns += patterns('RandoAmisSecours.views.friends',
     url(r'^friends/search/$', 'search', name='friends.search'),
     url(r'^friends/invite/(?P<user_id>\d+)/$', 'invite', name='friends.invite'),
+    url(r'^friends/accept/(?P<request_id>\d+)/$', 'accept', name='friends.accept'),
+    url(r'^friends/refuse/(?P<request_id>\d+)/$', 'refuse', name='friends.refuse'),
+    url(r'^friends/cancel/(?P<request_id>\d+)/$', 'cancel', name='friends.cancel'),
 )
 
 # Outing

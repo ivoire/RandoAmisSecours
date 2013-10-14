@@ -27,7 +27,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 
-from RandoAmisSecours.models import Profile
+from RandoAmisSecours.models import Profile, FriendRequest
 
 
 @login_required
@@ -44,10 +44,42 @@ def search(request):
 
 @login_required
 def invite(request, user_id):
-    # TODO: send a mail to the user and print something in the friend profile
-    # page
     new_friend = get_object_or_404(Profile, user__pk=user_id)
-    request.user.profile.friends.add(new_friend)
-    messages.success(request, _(u"«%(name)s» added to your friends") % ({'name': new_friend.user.get_full_name()}))
+    # Create the friend request
+    # TODO: send a mail to the requested user
+    friend_request = FriendRequest(user=request.user, to=new_friend.user)
+    friend_request.save()
+    messages.success(request, _(u"Friend request sent to «%(name)s»") % ({'name': new_friend.user.get_full_name()}))
 
     return HttpResponseRedirect(reverse('friends.search'))
+
+@login_required
+def accept(request, request_id):
+    friend_request = get_object_or_404(FriendRequest, pk=request_id, to=request.user)
+    new_friend = get_object_or_404(Profile, user=friend_request.user)
+
+    # Add the friend
+    # TODO: send a mail to the requester
+    request.user.profile.friends.add(new_friend)
+    friend_request.delete()
+    messages.success(request, _(u"«%(name)s» added to your friends") % ({'name': new_friend.user.get_full_name()}))
+
+    return HttpResponseRedirect(reverse('accounts.profile'))
+
+@login_required
+def refuse(request, request_id):
+    friend_request = get_object_or_404(FriendRequest, pk=request_id, to=request.user)
+    requester = get_object_or_404(Profile, user=friend_request.user)
+    friend_request.delete()
+
+    messages.success(request, _(u"Request from «%(name)s» refused") % ({'name': requester.user.get_full_name()}))
+    return HttpResponseRedirect(reverse('accounts.profile'))
+
+@login_required
+def cancel(request, request_id):
+    friend_request = get_object_or_404(FriendRequest, pk=request_id, user=request.user)
+    requested = get_object_or_404(Profile, user=friend_request.to)
+    friend_request.delete()
+
+    messages.success(request, _(u"Request to «%(name)s» canceled") % ({'name': requested.user.get_full_name()}))
+    return HttpResponseRedirect(reverse('accounts.profile'))

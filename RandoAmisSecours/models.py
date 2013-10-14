@@ -60,6 +60,18 @@ class Profile(models.Model):
         return unicode(self.user)
 
 
+class FriendRequest(models.Model):
+    class Meta:
+        app_label = 'RandoAmisSecours'
+
+    user = models.ForeignKey(User, related_name='+')
+    to = models.ForeignKey(User, related_name='+')
+    creation = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u"%s => %s" % (self.user.get_full_name(), self.to.get_full_name())
+
+
 class Outing(models.Model):
     class Meta:
         app_label = 'RandoAmisSecours'

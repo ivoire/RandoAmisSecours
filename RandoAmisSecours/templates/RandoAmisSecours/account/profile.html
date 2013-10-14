@@ -171,24 +171,79 @@
   <div class="span12">
     {% url 'friends.search' as URL %}
     <h3>{% trans "Friends" %} <a class="btn btn-info btn-mini" href="{% url 'friends.search' %}"><i class="icon-search icon-white"></i> {% trans "search" %}</a></h3>
-    {% if user.profile.friends.all %}
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>{% trans "Name" %}</th>
-          <th>{% trans "Phone number" %}</th>
-        </tr>
-      </thead>
-      {% for friend in user.profile.friends.all %}
-      <tr>
-        <td>{{ friend.user.get_full_name }}</td>
-        <td>{% if friend.phone_number %}<a href="tel:{{ friend.phone_number }}">{{ friend.phone_number }}</a>{% else %}?{% endif %}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    {% else %}
-    <p>{% trans "You don't have friends here for the moment." %}</p>
-    {% endif %}
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#friends" data-toggle="tab">Friends</a></li>
+        <li><a href="#received" data-toggle="tab">Received</a></li>
+        <li><a href="#sent" data-toggle="tab">Sent</a></li>
+      </ul>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane active" id="friends">
+        {% if user.profile.friends.all %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>{% trans "Name" %}</th>
+              <th>{% trans "Phone number" %}</th>
+            </tr>
+          </thead>
+          {% for friend in user.profile.friends.all %}
+          <tr>
+            <td>{{ friend.user.get_full_name }}</td>
+            <td>{% if friend.phone_number %}<a href="tel:{{ friend.phone_number }}">{{ friend.phone_number }}</a>{% else %}?{% endif %}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>{% trans "You don't have friends here for the moment." %}</p>
+        {% endif %}
+      </div>
+      <div class="tab-pane" id="received">
+        {% if friend_requests %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>{% trans "Name" %}</th>
+              <th>{% trans "Received" %}</th>
+              <th>{% trans "Action" %}</th>
+            </tr>
+          </thead>
+          {% for f_r in friend_requests %}
+          <tr>
+            <td>{{ f_r.user.get_full_name }}</td>
+            <td>{{ f_r.creation|timesince }}</td>
+            <td><a href="{% url 'friends.accept' f_r.pk %}" class="btn btn-mini btn-success" title="{% trans "Accept" %}"><i class="icon-ok-sign"></i></a><a href="{% url 'friends.refuse' f_r.pk %}" class="btn btn-mini btn-danger" title="{% trans "Refuse" %}"><i class="icon-trash"></i></a></td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>{% trans "Not any request received" %}</p>
+        {% endif %}
+      </div>
+      <div class="tab-pane" id="sent">
+        {% if friend_requests_sent %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>{% trans "Name" %}</th>
+              <th>{% trans "Sent" %}</th>
+              <th>{% trans "Action" %}</th>
+            </tr>
+          </thead>
+          {% for f_r in friend_requests_sent %}
+          <tr>
+            <td>{{ f_r.to.get_full_name }}</td>
+            <td>{{ f_r.creation|timesince }}</td>
+            <td><a href="{% url 'friends.cancel' f_r.pk %}" class="btn btn-mini btn-danger" title="{% trans "Cancel" %}"><i class="icon-trash"></i></a></td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <p>{% trans "Not any request sent" %}</p>
+        {% endif %}
+      </div>
+    </div>
   </div>
   <div class="span12">
     {% url 'accounts.profile.update' as URL %}
