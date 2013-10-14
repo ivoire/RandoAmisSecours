@@ -21,7 +21,7 @@ in the INSTALLED_APPS.
 Translation
 -----------
 
-RandoAmisSecours is available in English and Frensh. Feal free to translate RAS
+RandoAmisSecours is available in English and French. Feel free to translate RAS
 in another language.
 
 
