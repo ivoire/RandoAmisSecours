@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-12 10:32+0200\n"
+"POT-Creation-Date: 2013-10-14 19:47+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -405,8 +405,10 @@ msgstr "Terminée"
 #: templates/RandoAmisSecours/account/profile.html:43
 #: templates/RandoAmisSecours/account/profile.html:107
 #: templates/RandoAmisSecours/account/profile.html:147
-#: templates/RandoAmisSecours/account/profile.html:178
-#: templates/RandoAmisSecours/account/profile.html:197
+#: templates/RandoAmisSecours/account/profile.html:187
+#: templates/RandoAmisSecours/account/profile.html:207
+#: templates/RandoAmisSecours/account/profile.html:229
+#: templates/RandoAmisSecours/account/profile.html:252
 #: templates/RandoAmisSecours/friends/search.html:43
 #: templates/RandoAmisSecours/outing/create.html:34
 #: templates/RandoAmisSecours/outing/details.html:80
@@ -443,6 +445,7 @@ msgstr "Confirmer que vous êtes rentré en sureté de «%(name)s» ?"
 #: templates/RandoAmisSecours/account/profile.html:74
 #: templates/RandoAmisSecours/account/profile.html:89
 #: templates/RandoAmisSecours/account/profile.html:129
+#: templates/RandoAmisSecours/account/profile.html:238
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -452,8 +455,8 @@ msgstr "Terminer"
 
 #: templates/RandoAmisSecours/account/profile.html:79
 #: templates/RandoAmisSecours/account/profile.html:119
-#: templates/RandoAmisSecours/account/profile.html:195
-#: templates/RandoAmisSecours/account/profile.html:204
+#: templates/RandoAmisSecours/account/profile.html:250
+#: templates/RandoAmisSecours/account/profile.html:259
 #: templates/RandoAmisSecours/outing/details.html:23
 msgid "update"
 msgstr "mettre à jour"
@@ -512,27 +515,56 @@ msgstr "Amis"
 msgid "search"
 msgstr "chercher"
 
-#: templates/RandoAmisSecours/account/profile.html:179
-#: templates/RandoAmisSecours/account/profile.html:201
+#: templates/RandoAmisSecours/account/profile.html:188
+#: templates/RandoAmisSecours/account/profile.html:256
 #: templates/RandoAmisSecours/account/update.html:40
 #: templates/RandoAmisSecours/outing/details.html:82
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
-#: templates/RandoAmisSecours/account/profile.html:190
+#: templates/RandoAmisSecours/account/profile.html:199
 msgid "You don't have friends here for the moment."
 msgstr "Vous n'avez pas d'amis ici pour le moment."
 
-#: templates/RandoAmisSecours/account/profile.html:195
+#: templates/RandoAmisSecours/account/profile.html:208
+msgid "Received"
+msgstr "Reçu"
+
+#: templates/RandoAmisSecours/account/profile.html:209
+#: templates/RandoAmisSecours/account/profile.html:231
+msgid "Action"
+msgstr "Action"
+
+#: templates/RandoAmisSecours/account/profile.html:216
+msgid "Accept"
+msgstr "Accepter"
+
+#: templates/RandoAmisSecours/account/profile.html:216
+msgid "Refuse"
+msgstr "Refuser"
+
+#: templates/RandoAmisSecours/account/profile.html:221
+msgid "Not any request received"
+msgstr "Aucune demande reçue"
+
+#: templates/RandoAmisSecours/account/profile.html:230
+msgid "Sent"
+msgstr "Envoyée"
+
+#: templates/RandoAmisSecours/account/profile.html:243
+msgid "Not any request sent"
+msgstr "Aucune demande envoyée"
+
+#: templates/RandoAmisSecours/account/profile.html:250
 msgid "Information"
 msgstr "Informations"
 
-#: templates/RandoAmisSecours/account/profile.html:199
+#: templates/RandoAmisSecours/account/profile.html:254
 #: templates/RandoAmisSecours/account/register.html:80 views/account.py:73
 msgid "email"
 msgstr ""
 
-#: templates/RandoAmisSecours/account/profile.html:203
+#: templates/RandoAmisSecours/account/profile.html:258
 #: templates/RandoAmisSecours/account/register.html:41
 #: templates/RandoAmisSecours/account/register.html:50 views/account.py:48
 #: views/account.py:103 views/account.py:104
@@ -787,6 +819,11 @@ msgstr ""
 msgid "Alert at"
 msgstr "Alerter à"
 
+#: templates/RandoAmisSecours/outing/details.html:77
+#, fuzzy
+msgid "Late outing"
+msgstr "Nouvelle sortie"
+
 #: templates/RandoAmisSecours/outing/details.html:78
 #, python-format
 msgid "%(full_name)s is really late, you can try to contact him:"
@@ -832,18 +869,33 @@ msgstr "Inscription à R.A.S."
 msgid "Some information are missing or mistyped"
 msgstr "Certains éléments sont manquants ou malformatés"
 
-#: views/account.py:203
+#: views/account.py:207
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
 
-#: views/account.py:214
+#: views/account.py:218
 msgid "Password changed successfully"
 msgstr ""
 
-#: views/friends.py:51
+#: views/friends.py:52
+#, python-format
+msgid "Friend request sent to «%(name)s»"
+msgstr "Demande envoyée à «%(name)s»"
+
+#: views/friends.py:65
 #, python-format
 msgid "«%(name)s» added to your friends"
 msgstr "«%(name)s» ajouté à vos amis"
+
+#: views/friends.py:75
+#, python-format
+msgid "Request from «%(name)s» refused"
+msgstr "La demande de «%(name)s» a été refusée"
+
+#: views/friends.py:84
+#, python-format
+msgid "Request to «%(name)s» canceled"
+msgstr "La demande à «%(name)s» a été annulée"
 
 #: views/outing.py:40
 msgid "Outing name"
