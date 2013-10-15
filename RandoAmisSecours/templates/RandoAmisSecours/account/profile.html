@@ -148,6 +148,7 @@
                 <th>{% trans "Began" %}</th>
                 <th>{% trans "End planned" %}</th>
                 <th>{% trans "Finished" %}</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -157,6 +158,21 @@
                 <td>{{ outing.beginning }}</td>
                 <td>{{ outing.ending }}</td>
                 <td></td>
+                <td><a href="#deleteFinishedModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" title="{% trans "delete" %}" data-toggle="modal"><i class="icon-trash"></i></a>
+                  <div id="deleteFinishedModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteFinishedModal{{ outing.pk }}Label" aria-hidden="true">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+                      <h3 id="deleteFinishedModal{{ outing.pk }}Label">{% trans "Delete outing" %}</h3>
+                    </div>
+                    <div class="modal-body">
+                      <p>{% blocktrans with outing.name as name %}Are you sure you want to delete the outing: «{{ name }}» ?{% endblocktrans %}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
+                      <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
+                    </div>
+                  </div>
+                </td>
               </tr>
             {% endfor %}
             </tbody>
