@@ -83,3 +83,11 @@ def cancel(request, request_id):
 
     messages.success(request, _(u"Request to «%(name)s» canceled") % ({'name': requested.user.get_full_name()}))
     return HttpResponseRedirect(reverse('accounts.profile'))
+
+@login_required
+def delete(request, user_id):
+    friend = get_object_or_404(Profile, user__pk=user_id)
+    request.user.profile.friends.remove(friend)
+
+    messages.success(request, _(u"Removed «%(name)s» from friend list") % ({'name': friend.user.get_full_name()}))
+    return HttpResponseRedirect(reverse('accounts.profile'))

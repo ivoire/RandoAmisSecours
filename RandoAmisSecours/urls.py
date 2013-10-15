@@ -53,6 +53,7 @@ urlpatterns += patterns('RandoAmisSecours.views.friends',
     url(r'^friends/accept/(?P<request_id>\d+)/$', 'accept', name='friends.accept'),
     url(r'^friends/refuse/(?P<request_id>\d+)/$', 'refuse', name='friends.refuse'),
     url(r'^friends/cancel/(?P<request_id>\d+)/$', 'cancel', name='friends.cancel'),
+    url(r'^friends/delete/(?P<user_id>\d+)/$', 'delete', name='friends.delete'),
 )
 
 # Outing
