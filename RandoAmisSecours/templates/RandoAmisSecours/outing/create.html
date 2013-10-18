@@ -192,12 +192,35 @@
     });
 
     // datetime pickers
-    $('#beginning_picker, #ending_picker, #alert_picker').datetimepicker({
+    $('#beginning_picker').datetimepicker({
       todayBtn: true,
       language: 'fr',
       autoclose: true,
       minuteStep: 15,
-      pickerPosition: "bottom-left"
+      pickerPosition: "bottom-left",
+      format: "dd/mm/yyyy hh:ii:ss"
+    }).on('changeDate', function(ev){
+        var start_date = new Date(ev.date.valueOf() + 60000 * ev.date.getTimezoneOffset());
+        $('#ending_picker, #alert_picker').datetimepicker('setStartDate', start_date);
+    });
+    $('#ending_picker').datetimepicker({
+      todayBtn: true,
+      language: 'fr',
+      autoclose: true,
+      minuteStep: 15,
+      pickerPosition: "bottom-left",
+      format: "dd/mm/yyyy hh:ii:ss"
+    }).on('changeDate', function(ev){
+        var start_date = new Date(ev.date.valueOf() + 60000 * ev.date.getTimezoneOffset());
+        $('#alert_picker').datetimepicker('setStartDate', start_date);
+    });
+    $('#alert_picker').datetimepicker({
+      todayBtn: true,
+      language: 'fr',
+      autoclose: true,
+      minuteStep: 15,
+      pickerPosition: "bottom-left",
+      format: "dd/mm/yyyy hh:ii:ss"
     });
   });
 </script>
