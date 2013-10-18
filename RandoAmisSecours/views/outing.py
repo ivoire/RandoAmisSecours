@@ -82,8 +82,14 @@ def index(request, status='confirmed'):
     return render_to_response('RandoAmisSecours/outing/index.html', {'outings': outings, 'status': _(status)}, context_instance=RequestContext(request))
 
 
+@login_required
 def details(request, outing_id):
     outing = get_object_or_404(Outing, pk=outing_id)
+    # Return 404 if the outing does not belong to the user or his friends
+    profiles = [profile.pk for profile in request.user.profile.friends.all()]
+    if not outing.user.pk is request.user.pk and \
+       not outing.user.profile.pk in profiles:
+        raise Http404
 
     return render_to_response('RandoAmisSecours/outing/details.html', {'outing': outing, 'FINISHED': FINISHED, 'CONFIRMED': CONFIRMED, 'DRAFT': DRAFT}, context_instance=RequestContext(request))
 
