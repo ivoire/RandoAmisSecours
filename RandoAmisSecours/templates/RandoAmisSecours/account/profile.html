@@ -213,7 +213,7 @@
             <div id="deleteFriendModal{{ friend.user.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteFriendModal{{ friend.user.pk }}Label" aria-hidden="true">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-                <h3 id="deleteFriendModal{{ friend.user.pk }}">{% trans "Remove friend" %}</h3>
+                <h3 id="deleteFriendModal{{ friend.user.pk }}">{% trans "Remove friend from list" %}</h3>
               </div>
               <div class="modal-body">
                 <p>{% blocktrans with friend.user.get_full_name as name %}Are you sure you want to remove «{{ name }}» from your friends?{% endblocktrans %}</p>
