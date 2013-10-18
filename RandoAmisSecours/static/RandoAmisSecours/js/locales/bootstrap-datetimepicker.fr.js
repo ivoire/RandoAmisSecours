@@ -13,6 +13,6 @@
 		suffix: [],
 		meridiem: ["am", "pm"],
 		weekStart: 1,
-		format: "dd/mm/yyyy hh:ii:ss"
+		format: "dd/mm/yyyy"
 	};
 }(jQuery));
