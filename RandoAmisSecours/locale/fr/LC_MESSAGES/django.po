@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-14 19:47+0200\n"
+"POT-Creation-Date: 2013-10-18 12:16-0500\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -405,10 +405,10 @@ msgstr "Terminée"
 #: templates/RandoAmisSecours/account/profile.html:43
 #: templates/RandoAmisSecours/account/profile.html:107
 #: templates/RandoAmisSecours/account/profile.html:147
-#: templates/RandoAmisSecours/account/profile.html:187
-#: templates/RandoAmisSecours/account/profile.html:207
-#: templates/RandoAmisSecours/account/profile.html:229
-#: templates/RandoAmisSecours/account/profile.html:252
+#: templates/RandoAmisSecours/account/profile.html:203
+#: templates/RandoAmisSecours/account/profile.html:238
+#: templates/RandoAmisSecours/account/profile.html:260
+#: templates/RandoAmisSecours/account/profile.html:283
 #: templates/RandoAmisSecours/friends/search.html:43
 #: templates/RandoAmisSecours/outing/create.html:34
 #: templates/RandoAmisSecours/outing/details.html:80
@@ -445,7 +445,9 @@ msgstr "Confirmer que vous êtes rentré en sureté de «%(name)s» ?"
 #: templates/RandoAmisSecours/account/profile.html:74
 #: templates/RandoAmisSecours/account/profile.html:89
 #: templates/RandoAmisSecours/account/profile.html:129
-#: templates/RandoAmisSecours/account/profile.html:238
+#: templates/RandoAmisSecours/account/profile.html:171
+#: templates/RandoAmisSecours/account/profile.html:222
+#: templates/RandoAmisSecours/account/profile.html:269
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -455,30 +457,36 @@ msgstr "Terminer"
 
 #: templates/RandoAmisSecours/account/profile.html:79
 #: templates/RandoAmisSecours/account/profile.html:119
-#: templates/RandoAmisSecours/account/profile.html:250
-#: templates/RandoAmisSecours/account/profile.html:259
+#: templates/RandoAmisSecours/account/profile.html:281
+#: templates/RandoAmisSecours/account/profile.html:290
 #: templates/RandoAmisSecours/outing/details.html:23
 msgid "update"
 msgstr "mettre à jour"
 
 #: templates/RandoAmisSecours/account/profile.html:79
 #: templates/RandoAmisSecours/account/profile.html:119
+#: templates/RandoAmisSecours/account/profile.html:161
+#: templates/RandoAmisSecours/account/profile.html:212
 msgid "delete"
 msgstr "supprimer"
 
 #: templates/RandoAmisSecours/account/profile.html:83
 #: templates/RandoAmisSecours/account/profile.html:123
+#: templates/RandoAmisSecours/account/profile.html:165
 msgid "Delete outing"
 msgstr "Supprimer la sortie"
 
 #: templates/RandoAmisSecours/account/profile.html:86
 #: templates/RandoAmisSecours/account/profile.html:126
+#: templates/RandoAmisSecours/account/profile.html:168
 #, python-format
 msgid "Are you sure you want to delete the outing: «%(name)s» ?"
 msgstr "Etes-vous sur de vouloir supprimer la sortie : «%(name)s» ?"
 
 #: templates/RandoAmisSecours/account/profile.html:90
 #: templates/RandoAmisSecours/account/profile.html:130
+#: templates/RandoAmisSecours/account/profile.html:172
+#: templates/RandoAmisSecours/account/profile.html:223
 msgid "Delete"
 msgstr "Supprime"
 
@@ -502,69 +510,78 @@ msgstr "Début"
 msgid "End planned"
 msgstr "Fin planifiée"
 
-#: templates/RandoAmisSecours/account/profile.html:165
+#: templates/RandoAmisSecours/account/profile.html:181
 msgid "No finished outings"
 msgstr "Pas de sortie terminée"
 
-#: templates/RandoAmisSecours/account/profile.html:173
+#: templates/RandoAmisSecours/account/profile.html:189
 #: templates/RandoAmisSecours/friends/search.html:8
 msgid "Friends"
 msgstr "Amis"
 
-#: templates/RandoAmisSecours/account/profile.html:173
+#: templates/RandoAmisSecours/account/profile.html:189
 msgid "search"
 msgstr "chercher"
 
-#: templates/RandoAmisSecours/account/profile.html:188
-#: templates/RandoAmisSecours/account/profile.html:256
+#: templates/RandoAmisSecours/account/profile.html:204
+#: templates/RandoAmisSecours/account/profile.html:287
 #: templates/RandoAmisSecours/account/update.html:40
 #: templates/RandoAmisSecours/outing/details.html:82
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
-#: templates/RandoAmisSecours/account/profile.html:199
+#: templates/RandoAmisSecours/account/profile.html:216
+msgid "Remove friend from list"
+msgstr "Supprimer un amis de votre liste"
+
+#: templates/RandoAmisSecours/account/profile.html:219
+#, python-format
+msgid "Are you sure you want to remove «%(name)s» from your friends?"
+msgstr "Etes-vous sur de vouloir supprimer «%(name)s» de votre liste d'amis ?"
+
+#: templates/RandoAmisSecours/account/profile.html:230
 msgid "You don't have friends here for the moment."
 msgstr "Vous n'avez pas d'amis ici pour le moment."
 
-#: templates/RandoAmisSecours/account/profile.html:208
+#: templates/RandoAmisSecours/account/profile.html:239
 msgid "Received"
 msgstr "Reçu"
 
-#: templates/RandoAmisSecours/account/profile.html:209
-#: templates/RandoAmisSecours/account/profile.html:231
+#: templates/RandoAmisSecours/account/profile.html:240
+#: templates/RandoAmisSecours/account/profile.html:262
 msgid "Action"
 msgstr "Action"
 
-#: templates/RandoAmisSecours/account/profile.html:216
+#: templates/RandoAmisSecours/account/profile.html:247
 msgid "Accept"
 msgstr "Accepter"
 
-#: templates/RandoAmisSecours/account/profile.html:216
+#: templates/RandoAmisSecours/account/profile.html:247
 msgid "Refuse"
 msgstr "Refuser"
 
-#: templates/RandoAmisSecours/account/profile.html:221
+#: templates/RandoAmisSecours/account/profile.html:252
 msgid "Not any request received"
 msgstr "Aucune demande reçue"
 
-#: templates/RandoAmisSecours/account/profile.html:230
+#: templates/RandoAmisSecours/account/profile.html:261
 msgid "Sent"
 msgstr "Envoyée"
 
-#: templates/RandoAmisSecours/account/profile.html:243
+#: templates/RandoAmisSecours/account/profile.html:274
 msgid "Not any request sent"
 msgstr "Aucune demande envoyée"
 
-#: templates/RandoAmisSecours/account/profile.html:250
+#: templates/RandoAmisSecours/account/profile.html:281
 msgid "Information"
 msgstr "Informations"
 
-#: templates/RandoAmisSecours/account/profile.html:254
+#: templates/RandoAmisSecours/account/profile.html:285
 #: templates/RandoAmisSecours/account/register.html:80 views/account.py:73
 msgid "email"
 msgstr ""
 
-#: templates/RandoAmisSecours/account/profile.html:258
+#: templates/RandoAmisSecours/account/profile.html:289
 #: templates/RandoAmisSecours/account/register.html:41
 #: templates/RandoAmisSecours/account/register.html:50 views/account.py:48
 #: views/account.py:103 views/account.py:104
@@ -822,7 +839,7 @@ msgstr "Alerter à"
 #: templates/RandoAmisSecours/outing/details.html:77
 #, fuzzy
 msgid "Late outing"
-msgstr "Nouvelle sortie"
+msgstr "Sortie en retard"
 
 #: templates/RandoAmisSecours/outing/details.html:78
 #, python-format
@@ -897,6 +914,11 @@ msgstr "La demande de «%(name)s» a été refusée"
 msgid "Request to «%(name)s» canceled"
 msgstr "La demande à «%(name)s» a été annulée"
 
+#: views/friends.py:92
+#, python-format
+msgid "Removed «%(name)s» from friend list"
+msgstr "«%(name)s» supprimé de votre liste d'amis"
+
 #: views/outing.py:40
 msgid "Outing name"
 msgstr "Nom de la sortie"
@@ -913,36 +935,36 @@ msgstr "La fin doit arriver après le début"
 msgid "Alert should happens at the end"
 msgstr "L'alerte doit arriver après la fin"
 
-#: views/outing.py:94
+#: views/outing.py:105
 msgid ""
 "Outing successfully created. The outing is still a draft and should be "
 "confirmed."
 msgstr ""
 "La sortie a été crée. Celle-ci est encore un brouillon et doit être validée."
 
-#: views/outing.py:110 views/outing.py:140
+#: views/outing.py:121 views/outing.py:151
 msgid "Only the outing owner can update it"
 msgstr "Seul le créateur d'une sortie peux la modifier"
 
-#: views/outing.py:128
+#: views/outing.py:139
 msgid "Only the outing owner can delete it"
 msgstr "Seul le créateur d'une sortie peux la supprimer"
 
-#: views/outing.py:130
+#: views/outing.py:141
 #, python-format
 msgid "«%(name)s» deleted"
 msgstr "La sortie «%(name)s» a été supprimée"
 
-#: views/outing.py:145
+#: views/outing.py:156
 #, python-format
 msgid "«%(name)s» is now confirmed"
 msgstr "«%(name)s» est maintenant confirmée"
 
-#: views/outing.py:153
+#: views/outing.py:164
 msgid "Only the outing owner can finish it"
 msgstr "Seul le créateur d'une sortie peux la terminer"
 
-#: views/outing.py:158
+#: views/outing.py:169
 #, python-format
 msgid "«%(name)s» is now finished"
 msgstr "«%(name)s» est maintenant terminée"
