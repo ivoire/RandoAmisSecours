@@ -61,17 +61,22 @@ class OutingForm(ModelForm):
         return cleaned_data
 
 
+@login_required
 def index(request, status='confirmed'):
+    # List all outings owned by the user and his friends
+    outings = Outing.objects.filter(Q(user=request.user) | Q(user__profile__in=request.user.profile.friends.all()))
+
+    # Filter by type of outings
     if status == 'confirmed':
-        outings = Outing.objects.filter(Q(status=CONFIRMED) | Q(status=LATE))
+        outings = outings.filter(Q(status=CONFIRMED) | Q(status=LATE))
     elif status == 'draft':
-        outings = Outing.objects.filter(status=DRAFT)
+        outings = outings.filter(status=DRAFT)
     elif status == 'finished':
-        outings = Outing.objects.filter(status=FINISHED)
+        outings = outings.filter(status=FINISHED)
     elif status == 'late':
-        outings = Outing.objects.filter(status=LATE)
+        outings = outings.filter(status=LATE)
     elif status == 'canceled':
-        outings = Outing.objects.filter(status=CANCELED)
+        outings = outings.filter(status=CANCELED)
     else:
         raise Http404
     return render_to_response('RandoAmisSecours/outing/index.html', {'outings': outings, 'status': _(status)}, context_instance=RequestContext(request))
