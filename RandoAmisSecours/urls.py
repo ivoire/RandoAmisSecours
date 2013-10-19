@@ -28,6 +28,10 @@ urlpatterns = patterns('RandoAmisSecours.views.main',
     url(r'^$', 'index', name='index'),
 )
 
+urlpatterns += patterns('RandoAmisSecours.views.help',
+    url(r'^help/$', 'index', name='help.index'),
+)
+
 # Authentication
 urlpatterns += patterns('django.contrib.auth.views',
     url(r'^accounts/login/$', 'login', {'template_name': 'RandoAmisSecours/account/login.html', 'authentication_form': RASAuthenticationForm}, name='accounts.login'),

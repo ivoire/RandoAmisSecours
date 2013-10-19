@@ -33,6 +33,7 @@
         <ul class="nav">
           <li><a href="{% url 'index' %}"><i class="icon-home"></i> {% trans "Home" %}</a></li>
           <li><a href="{% url 'outings.index' %}"><i class="icon-tasks"></i> {%trans "Outings" %}</a></li>
+          <li><a href="{% url 'help.index' %}"><i class="icon-question-sign"></i> {% trans "Help" %}</a></li>
         </ul>
         <ul class="nav pull-right">
         {% if user.is_authenticated %}
