@@ -1,0 +1,27 @@
+{% extends 'RandoAmisSecours/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Q&A" %}{% endblock title %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'help.index' %}">{% trans "Help" %}</a> <span class="divider">/</span></li>
+  <li class="active">{% trans "Q&A" %}</li>
+{% endblock breadcrumb %}
+
+{% block body %}
+<div class="page-header">
+  <h2>{% trans "Questions and Answers" %}</h2>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <h3>{% trans "1/ Is R.A.S. team calling emergency services?" %}</h3>
+    <p>{% trans "The R.A.S. team will never call emergency services. If you are reported missing, your friends will have to call themself." %}</p>
+    <h3>{% trans "2/ Is the website realiable?" %}</h3>
+    <p>{% trans "We are trying to get R.A.S. as reliable as possible. But the website is provided without any warranties." %}</p>
+    <h3>{% trans "3/ Choosing a username?" %}</h3>
+    <p>{% trans "Try to get a specific username for R.A.S. Do not reuse a username and password from any other website." %}</p>
+  </div>
+</div>
+{% endblock body %}

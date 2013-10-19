@@ -14,15 +14,14 @@
 </div>
 
 <div class="row">
-  <div class="span4 offset2">
-    <h4>{% trans "Q&A" %}</h4>
+  <div class="span4 offset1">
+    <h4>{% trans "Questions and Answers" %}</h4>
     <p>{% trans "Find out more information about R.A.S. in the Q&A section. Most common questions along with their answers should be available their." %}</p>
-    <a href="#" class="btn btn-success">{% trans "Visit Q&A page" %}</a>
+    <a href="{% url 'help.qa' %}" class="btn btn-success">{% trans "Visit Q&A page" %}</a>
   </div>
-  <div class="span4">
+  <div class="span4 offset2">
     <h4>{% trans "Tutorial" %}</h4>
-    <p>{% trans "The tutorial describes how to create, confirm and then close an outing." %}</p>
-    <p>{% trans "This tutorial will be available soon." %}</p>
+    <p>{% trans "The tutorial describes how to create, confirm and then close an outing. This tutorial will be available soon." %}</p>
     <a href="#" class="btn btn-success disabled">{% trans "Tutorial" %}</a>
   </div>
 </div>

@@ -30,6 +30,7 @@ urlpatterns = patterns('RandoAmisSecours.views.main',
 
 urlpatterns += patterns('RandoAmisSecours.views.help',
     url(r'^help/$', 'index', name='help.index'),
+    url(r'^help/qa/$', 'qa', name='help.qa'),
 )
 
 # Authentication
