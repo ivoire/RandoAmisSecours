@@ -16,12 +16,17 @@
 
 <div class="row">
   <div class="span12">
-    <h3>{% trans "1/ Is R.A.S. team calling emergency services?" %}</h3>
-    <p>{% trans "The R.A.S. team will never call emergency services. If you are reported missing, your friends will have to call themself." %}</p>
-    <h3>{% trans "2/ Is the website realiable?" %}</h3>
-    <p>{% trans "We are trying to get R.A.S. as reliable as possible. But the website is provided without any warranties." %}</p>
-    <h3>{% trans "3/ Choosing a username?" %}</h3>
-    <p>{% trans "Try to get a specific username for R.A.S. Do not reuse a username and password from any other website." %}</p>
+    <p>This page lists the most common questions and concerns about the R.A.S. website. If your question is missing, contact the R.A.S. team.</p>
+  </div>
+  <div class="span12">
+    <h4 class="modal-header">{% trans "1/ Calling emergency services" %}</h4>
+    <p>{% trans "If you are reported missing, the R.A.S. team will never call emergency services directly. It's your friends duty to call public services if they can't contact you." %}</p>
+    <h4 class="modal-header">{% trans "2/ Reliability" %}</h4>
+    <p>{% trans "We are trying to get R.A.S. website as reliable as possible. The same great effort is made to keep the server hosting R.A.S. up and running. However we cannot 100% guarantee this." %}</p>
+    <h4 class="modal-header">{% trans "3/ Confidentiality" %}</h4>
+    <p>{% trans "The outings that you create, are only visible to yourself and your friends. This is the same for your personnal data (your phone number for instance). So be careful when accepting friends." %}</p>
+    <h4 class="modal-header">{% trans "4/ Warranties" %}</h4>
+    <p>{% trans "We are trying to get R.A.S. as secure and reliable as possible. However the service is provided without any warranties." %}</p>
   </div>
 </div>
 {% endblock body %}
