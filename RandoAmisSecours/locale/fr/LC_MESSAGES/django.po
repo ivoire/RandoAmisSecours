@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 12:16-0500\n"
+"POT-Creation-Date: 2013-10-22 19:26+0200\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -105,6 +105,8 @@ msgstr ""
 #: templates/RandoAmisSecours/account/register_end.html:7
 #: templates/RandoAmisSecours/account/update.html:7
 #: templates/RandoAmisSecours/friends/search.html:7
+#: templates/RandoAmisSecours/help/index.html:7
+#: templates/RandoAmisSecours/help/qa.html:7
 #: templates/RandoAmisSecours/main/index.html:26
 #: templates/RandoAmisSecours/outing/create.html:18
 #: templates/RandoAmisSecours/outing/details.html:17
@@ -157,18 +159,26 @@ msgstr ""
 msgid "Outings"
 msgstr "Sorties"
 
-#: templates/RandoAmisSecours/base.html:42
+#: templates/RandoAmisSecours/base.html:36
+#: templates/RandoAmisSecours/help/index.html:4
+#: templates/RandoAmisSecours/help/index.html:8
+#: templates/RandoAmisSecours/help/index.html:13
+#: templates/RandoAmisSecours/help/qa.html:8
+msgid "Help"
+msgstr "Aide"
+
+#: templates/RandoAmisSecours/base.html:43
 #: templates/RandoAmisSecours/account/profile.html:5
 #: templates/RandoAmisSecours/main/index.html:35
 msgid "Profile"
 msgstr "Profil"
 
-#: templates/RandoAmisSecours/base.html:44
+#: templates/RandoAmisSecours/base.html:45
 #: templates/RandoAmisSecours/account/logged_out.html:28
 msgid "Log out"
 msgstr ""
 
-#: templates/RandoAmisSecours/base.html:48
+#: templates/RandoAmisSecours/base.html:49
 #: templates/RandoAmisSecours/account/login.html:4
 #: templates/RandoAmisSecours/account/login.html:36
 #: templates/RandoAmisSecours/account/login.html:53
@@ -177,7 +187,7 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: templates/RandoAmisSecours/base.html:67
+#: templates/RandoAmisSecours/base.html:68
 msgid "About"
 msgstr "À propos"
 
@@ -667,6 +677,104 @@ msgstr "Chercher"
 msgid "Search for friends using the field below."
 msgstr "Utilisez le champs ci-dessous pour rechercher des amis."
 
+#: templates/RandoAmisSecours/help/index.html:18
+#: templates/RandoAmisSecours/help/qa.html:14
+msgid "Questions and Answers"
+msgstr "Questions et réponses"
+
+#: templates/RandoAmisSecours/help/index.html:19
+msgid ""
+"Find out more information about R.A.S. in the Q&A section. Most common "
+"questions along with their answers should be available their."
+msgstr ""
+"Plus d'informations sur R.A.S. dans la FAQ. Les questions les plus courantes "
+"devraient y être traitées."
+
+#: templates/RandoAmisSecours/help/index.html:20
+msgid "Visit Q&A page"
+msgstr "Visiter la FAQ"
+
+#: templates/RandoAmisSecours/help/index.html:23
+#: templates/RandoAmisSecours/help/index.html:25
+msgid "Tutorial"
+msgstr "Tutoriel"
+
+#: templates/RandoAmisSecours/help/index.html:24
+msgid ""
+"The tutorial describes how to create, confirm and then close an outing. This "
+"tutorial will be available soon."
+msgstr ""
+"Ce tutoriel explique comment créer, confirmer et cloturer une sortie. Celui-"
+"ci sera bientôt disponible."
+
+#: templates/RandoAmisSecours/help/qa.html:4
+#: templates/RandoAmisSecours/help/qa.html:9
+msgid "Q&A"
+msgstr "FAQ"
+
+#: templates/RandoAmisSecours/help/qa.html:19
+msgid ""
+"This page lists the most common questions and concerns about the R.A.S. "
+"website. If your question is missing, feel free to contact the R.A.S. team."
+msgstr ""
+"Cette page liste les question les plus courantes à propos de R.A.S. Si votre "
+"question ne s'y trouve pas, vous pouvez contacter l'équipe R.A.S."
+
+#: templates/RandoAmisSecours/help/qa.html:22
+msgid "1/ Calling emergency services"
+msgstr "1/ Appeler les secours"
+
+#: templates/RandoAmisSecours/help/qa.html:23
+msgid ""
+"If you are reported missing, the R.A.S. team will never call emergency "
+"services directly. It's your friends duty to call public services if they "
+"can't contact you."
+msgstr ""
+"Si vous n'êtes pas rentré à temps, l'équipe R.A.S. n'appelera pas les "
+"services de secours. Ce sont vos amis qui doivent alerter les services de "
+"secours s'ils n'arrivent pas à vous joindre."
+
+#: templates/RandoAmisSecours/help/qa.html:24
+msgid "2/ Reliability"
+msgstr "3/ Fiabilité"
+
+#: templates/RandoAmisSecours/help/qa.html:25
+#, python-format
+msgid ""
+"We are trying to get R.A.S. website as reliable as possible. The same great "
+"effort is made to keep the server hosting R.A.S. up and running. However we "
+"cannot 100%% guarantee this."
+msgstr ""
+"Nous nous efforçons de rendre le site web R.A.S. aussi sur que possible. "
+"Nous essayons également de garder le serveur hébergeant R.A.S. fonctionnel. "
+"Cependant, nous il ne nous est pas possible de le garantir à 100%%."
+
+#: templates/RandoAmisSecours/help/qa.html:26
+msgid "3/ Confidentiality"
+msgstr "3/ Confidentialité"
+
+#: templates/RandoAmisSecours/help/qa.html:27
+msgid ""
+"The outings that you create, are only visible to yourself and your friends. "
+"This is the same for your personnal data (your phone number for instance). "
+"So be careful when accepting friends."
+msgstr ""
+"Les sorties que vous créer sont uniquement visible pour vous et vos amis. Il "
+"en est de même pour vos données personnelles (votre numéro de téléphone par "
+"exemple). Soyez donc attentif lorsque vous acceptez de nouveaux amis."
+
+#: templates/RandoAmisSecours/help/qa.html:28
+msgid "4/ Warranties"
+msgstr "4/ Garanties"
+
+#: templates/RandoAmisSecours/help/qa.html:29
+msgid ""
+"We are trying to get R.A.S. as secure and reliable as possible. However the "
+"service is provided without any warranties."
+msgstr ""
+"Nous essayons de rendre R.A.S. aussi sécurisé et sur que possible. Cependant "
+"ce service est disponible sans aucune garanties."
+
 #: templates/RandoAmisSecours/main/index.html:4
 msgid "Main Page"
 msgstr "Page principale"
@@ -837,7 +945,6 @@ msgid "Alert at"
 msgstr "Alerter à"
 
 #: templates/RandoAmisSecours/outing/details.html:77
-#, fuzzy
 msgid "Late outing"
 msgstr "Sortie en retard"
 
@@ -935,36 +1042,36 @@ msgstr "La fin doit arriver après le début"
 msgid "Alert should happens at the end"
 msgstr "L'alerte doit arriver après la fin"
 
-#: views/outing.py:105
+#: views/outing.py:101
 msgid ""
 "Outing successfully created. The outing is still a draft and should be "
 "confirmed."
 msgstr ""
 "La sortie a été crée. Celle-ci est encore un brouillon et doit être validée."
 
-#: views/outing.py:121 views/outing.py:151
+#: views/outing.py:117 views/outing.py:147
 msgid "Only the outing owner can update it"
 msgstr "Seul le créateur d'une sortie peux la modifier"
 
-#: views/outing.py:139
+#: views/outing.py:135
 msgid "Only the outing owner can delete it"
 msgstr "Seul le créateur d'une sortie peux la supprimer"
 
-#: views/outing.py:141
+#: views/outing.py:137
 #, python-format
 msgid "«%(name)s» deleted"
 msgstr "La sortie «%(name)s» a été supprimée"
 
-#: views/outing.py:156
+#: views/outing.py:152
 #, python-format
 msgid "«%(name)s» is now confirmed"
 msgstr "«%(name)s» est maintenant confirmée"
 
-#: views/outing.py:164
+#: views/outing.py:160
 msgid "Only the outing owner can finish it"
 msgstr "Seul le créateur d'une sortie peux la terminer"
 
-#: views/outing.py:169
+#: views/outing.py:165
 #, python-format
 msgid "«%(name)s» is now finished"
 msgstr "«%(name)s» est maintenant terminée"
