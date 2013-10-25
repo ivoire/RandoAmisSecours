@@ -87,3 +87,61 @@ class TemplatesTest(TestCase):
                                        ending=current_time, alert=current_time,
                                        latitude=1, longitude=1)
         self.helper_template(reverse('outings.update', args=[outing.pk]), 'outing/create.html')
+
+class LoginRequired(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user('azertyuiop',
+                                             'django.test@project.org',
+                                             '12789azertyuiop')
+        self.user.profile = Profile.objects.create(user=self.user)
+        current_time = datetime.utcnow().replace(tzinfo=utc)
+        self.outing = Outing.objects.create(user=self.user, beginning=current_time,
+                                            ending=current_time, alert=current_time,
+                                            latitude=1, longitude=1)
+
+    def helper_test_login(self, url, redirect=None):
+        response = self.client.get(url, follow=True)
+        self.assertRedirects(response, "%s?next=%s" % (reverse('accounts.login'), url))
+
+        self.client.login(username='azertyuiop', password='12789azertyuiop')
+        response = self.client.get(url)
+        if redirect:
+            self.assertRedirects(response, redirect)
+        else:
+            self.assertEqual(response.status_code, 200)
+        self.client.logout()
+
+    def test_account(self):
+        self.helper_test_login(reverse('accounts.password_change'))
+        self.helper_test_login(reverse('accounts.profile'))
+        self.helper_test_login(reverse('accounts.profile.update'))
+        self.helper_test_login(reverse('accounts.password_change_done'), redirect=reverse('accounts.profile'))
+
+    def test_friends(self):
+        self.helper_test_login(reverse('friends.search'))
+
+        self.helper_test_login(reverse('friends.invite', args=[1]), redirect=reverse('friends.search'))
+        self.helper_test_login(reverse('friends.accept', args=[1]), redirect=reverse('accounts.profile'))
+        self.helper_test_login(reverse('friends.delete', args=[1]), redirect=reverse('accounts.profile'))
+
+        self.helper_test_login(reverse('friends.invite', args=[1]), redirect=reverse('friends.search'))
+        self.helper_test_login(reverse('friends.refuse', args=[1]), redirect=reverse('accounts.profile'))
+
+        self.helper_test_login(reverse('friends.invite', args=[1]), redirect=reverse('friends.search'))
+        self.helper_test_login(reverse('friends.cancel', args=[1]), redirect=reverse('accounts.profile'))
+
+
+    def test_outings(self):
+        self.helper_test_login(reverse('outings.index'))
+        self.helper_test_login(reverse('outings.index.draft'))
+        self.helper_test_login(reverse('outings.index.finished'))
+        self.helper_test_login(reverse('outings.index.late'))
+        self.helper_test_login(reverse('outings.index.canceled'))
+        self.helper_test_login(reverse('outings.create'))
+
+        self.helper_test_login(reverse('outings.details', args=[self.outing.pk]))
+        self.helper_test_login(reverse('outings.update', args=[self.outing.pk]))
+        self.helper_test_login(reverse('outings.confirm', args=[self.outing.pk]), redirect=reverse('accounts.profile'))
+        self.helper_test_login(reverse('outings.finish', args=[self.outing.pk]), redirect=reverse('accounts.profile'))
+        self.helper_test_login(reverse('outings.delete', args=[self.outing.pk]), redirect=reverse('accounts.profile'))
