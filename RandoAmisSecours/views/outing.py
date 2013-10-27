@@ -64,22 +64,24 @@ class OutingForm(ModelForm):
 @login_required
 def index(request, status='confirmed'):
     # List all outings owned by the user and his friends
-    outings = Outing.objects.filter(Q(user=request.user) | Q(user__profile__in=request.user.profile.friends.all()))
+    user_outings = Outing.objects.filter(user=request.user)
+    user_outings_confirmed = user_outings.filter(status=CONFIRMED)
+    user_outings_draft = user_outings.filter(status=DRAFT)
+    user_outings_finished = user_outings.filter(status=FINISHED)
 
-    # Filter by type of outings
-    if status == 'confirmed':
-        outings = outings.filter(Q(status=CONFIRMED) | Q(status=LATE))
-    elif status == 'draft':
-        outings = outings.filter(status=DRAFT)
-    elif status == 'finished':
-        outings = outings.filter(status=FINISHED)
-    elif status == 'late':
-        outings = outings.filter(status=LATE)
-    elif status == 'canceled':
-        outings = outings.filter(status=CANCELED)
-    else:
-        raise Http404
-    return render_to_response('RandoAmisSecours/outing/index.html', {'outings': outings, 'status': _(status)}, context_instance=RequestContext(request))
+    friends_outings = Outing.objects.filter(user__profile__in=request.user.profile.friends.all())
+    friends_outings_confirmed = friends_outings.filter(status=CONFIRMED)
+    friends_outings_draft = friends_outings.filter(status=DRAFT)
+    friends_outings_finished = friends_outings.filter(status=FINISHED)
+
+    return render_to_response('RandoAmisSecours/outing/index.html',
+                              {'user_outings_confirmed': user_outings_confirmed,
+                               'user_outings_draft': user_outings_draft,
+                               'user_outings_finished': user_outings_finished,
+                               'friends_outings_confirmed': friends_outings_confirmed,
+                               'friends_outings_draft': friends_outings_draft,
+                               'friends_outings_finished': friends_outings_finished},
+                               context_instance=RequestContext(request))
 
 
 @login_required

@@ -184,14 +184,13 @@ def register_confirm(request, user_id, user_hash):
 
 @login_required
 def profile(request):
-    outings = request.user.outing_set.filter(Q(status=CONFIRMED) | Q(status=LATE))
-    draft_outings = request.user.outing_set.filter(status=DRAFT)
-    finished_outings = request.user.outing_set.filter(status=FINISHED)
-
     friend_requests = FriendRequest.objects.filter(to=request.user)
     friend_requests_sent = FriendRequest.objects.filter(user=request.user)
 
-    return render_to_response('RandoAmisSecours/account/profile.html', {'outings': outings, 'draft_outings': draft_outings, 'finished_outings': finished_outings, 'friend_requests': friend_requests, 'friend_requests_sent': friend_requests_sent}, context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/account/profile.html',
+                              {'friend_requests': friend_requests,
+                               'friend_requests_sent': friend_requests_sent},
+                              context_instance=RequestContext(request))
 
 
 @login_required
