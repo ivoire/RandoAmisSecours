@@ -22,8 +22,10 @@ from django.template import RequestContext
 
 
 def index(request):
-    return render_to_response('RandoAmisSecours/help/index.html', context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/help/index.html',
+                              context_instance=RequestContext(request))
 
 
 def qa(request):
-    return render_to_response('RandoAmisSecours/help/qa.html', context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/help/qa.html',
+                              context_instance=RequestContext(request))

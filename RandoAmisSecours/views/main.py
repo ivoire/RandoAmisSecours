@@ -22,4 +22,5 @@ from django.template import RequestContext
 
 
 def index(request):
-    return render_to_response('RandoAmisSecours/main/index.html', context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/main/index.html',
+                              context_instance=RequestContext(request))

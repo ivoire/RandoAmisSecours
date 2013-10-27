@@ -89,7 +89,12 @@ def details(request, outing_id):
     # Return 404 if the outing does not belong to the user or his friends
     outing = get_object_or_404(Outing, Q(user=request.user) | Q(user__profile__in=request.user.profile.friends.all()), pk=outing_id)
 
-    return render_to_response('RandoAmisSecours/outing/details.html', {'outing': outing, 'FINISHED': FINISHED, 'CONFIRMED': CONFIRMED, 'DRAFT': DRAFT}, context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/outing/details.html',
+                              {'outing': outing,
+                               'FINISHED': FINISHED,
+                               'CONFIRMED': CONFIRMED,
+                               'DRAFT': DRAFT},
+                              context_instance=RequestContext(request))
 
 
 @login_required
@@ -105,7 +110,9 @@ def create(request):
     else:
         form = OutingForm()
 
-    return render_to_response('RandoAmisSecours/outing/create.html', {'form': form}, context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/outing/create.html',
+                              {'form': form},
+                              context_instance=RequestContext(request))
 
 
 @login_required
@@ -127,7 +134,9 @@ def update(request, outing_id):
     else:
         form = OutingForm(instance=outing)
 
-    return render_to_response('RandoAmisSecours/outing/create.html', {'form': form, 'update': True, 'outing': outing}, context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/outing/create.html',
+                              {'form': form, 'update': True, 'outing': outing},
+                              context_instance=RequestContext(request))
 
 
 @login_required

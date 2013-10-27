@@ -168,7 +168,9 @@ The R.A.S. team""") % {'URL': request.build_absolute_uri(reverse('accounts.regis
     else:
         user_form = RASUserCreationForm()
 
-    return render_to_response('RandoAmisSecours/account/register.html', {'user_form': user_form}, context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/account/register.html',
+                              {'user_form': user_form},
+                              context_instance=RequestContext(request))
 
 
 def register_confirm(request, user_id, user_hash):
@@ -179,7 +181,9 @@ def register_confirm(request, user_id, user_hash):
     user.is_active = True
     user.save()
 
-    return render_to_response('RandoAmisSecours/account/confirm.html', {'user': user}, context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/account/confirm.html',
+                              {'user': user},
+                              context_instance=RequestContext(request))
 
 
 @login_required
@@ -209,7 +213,9 @@ def update(request):
         user_form = RASUserUpdateForm(instance=request.user)
         profile_form = RASProfileUpdateForm(instance=profile)
 
-    return render_to_response('RandoAmisSecours/account/update.html', {'user_form': user_form, 'profile_form': profile_form}, context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/account/update.html',
+                              {'user_form': user_form, 'profile_form': profile_form},
+                              context_instance=RequestContext(request))
 
 
 @login_required
@@ -219,4 +225,5 @@ def password_change_done(request):
 
 
 def password_reset_done(request):
-    return render_to_response('RandoAmisSecours/account/password_reset_done.html', context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/account/password_reset_done.html',
+                              context_instance=RequestContext(request))
