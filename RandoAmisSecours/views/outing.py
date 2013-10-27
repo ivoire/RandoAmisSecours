@@ -148,7 +148,7 @@ def delete(request, outing_id):
     messages.success(request, _(u"«%(name)s» deleted") % ({'name': outing.name}))
     outing.delete()
 
-    return HttpResponseRedirect(reverse('accounts.profile'))
+    return HttpResponseRedirect(reverse('outings.index'))
 
 
 @login_required
@@ -161,7 +161,7 @@ def confirm(request, outing_id):
     outing.status = CONFIRMED
     outing.save()
     messages.success(request, _(u"«%(name)s» is now confirmed") % ({'name': outing.name}))
-    return HttpResponseRedirect(reverse('accounts.profile'))
+    return HttpResponseRedirect(reverse('outings.index'))
 
 
 @login_required
@@ -174,4 +174,4 @@ def finish(request, outing_id):
     outing.status = FINISHED
     outing.save()
     messages.success(request, _(u"«%(name)s» is now finished") % ({'name': outing.name}))
-    return HttpResponseRedirect(reverse('accounts.profile'))
+    return HttpResponseRedirect(reverse('outings.index'))

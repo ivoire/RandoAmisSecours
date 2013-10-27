@@ -142,6 +142,6 @@ class LoginRequired(TestCase):
 
         self.helper_test_login(reverse('outings.details', args=[self.outing.pk]))
         self.helper_test_login(reverse('outings.update', args=[self.outing.pk]))
-        self.helper_test_login(reverse('outings.confirm', args=[self.outing.pk]), redirect=reverse('accounts.profile'))
-        self.helper_test_login(reverse('outings.finish', args=[self.outing.pk]), redirect=reverse('accounts.profile'))
-        self.helper_test_login(reverse('outings.delete', args=[self.outing.pk]), redirect=reverse('accounts.profile'))
+        self.helper_test_login(reverse('outings.confirm', args=[self.outing.pk]), redirect=reverse('outings.index'))
+        self.helper_test_login(reverse('outings.finish', args=[self.outing.pk]), redirect=reverse('outings.index'))
+        self.helper_test_login(reverse('outings.delete', args=[self.outing.pk]), redirect=reverse('outings.index'))
