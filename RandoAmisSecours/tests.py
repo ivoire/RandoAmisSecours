@@ -145,3 +145,95 @@ class LoginRequired(TestCase):
         self.helper_test_login(reverse('outings.confirm', args=[self.outing.pk]), redirect=reverse('outings.index'))
         self.helper_test_login(reverse('outings.finish', args=[self.outing.pk]), redirect=reverse('outings.index'))
         self.helper_test_login(reverse('outings.delete', args=[self.outing.pk]), redirect=reverse('outings.index'))
+
+
+class ContextTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user1 = User.objects.create_user('ras',
+                                              'ras@project.org',
+                                              '12789azertyuiop')
+        self.user1.first_name = 'Rando'
+        self.user1.last_name = 'Secours'
+        self.user1.save()
+        self.user1.profile = Profile.objects.create(user=self.user1)
+        self.client.login(username='ras', password='12789azertyuiop')
+
+        self.user2 = User.objects.create_user('tester',
+                                              'tester@project.org',
+                                              'ertyfjnbfvfceqsryuj')
+        self.user2.first_name = 'Alpha'
+        self.user2.last_name = 'Beta Gamma'
+        self.user2.save()
+        self.user2.profile = Profile.objects.create(user=self.user2)
+
+        self.user3 = User.objects.create_user('Sophocle',
+                                              'sophocle@project.org',
+                                              'gzgvaryurvyyjchrvyhubtr')
+        self.user3.first_name = 'Sophocle'
+        self.user3.last_name = 'Philosophe'
+        self.user3.save()
+        self.user3.profile = Profile.objects.create(user=self.user3)
+
+
+    def test_friends_search(self):
+        # Empty without query
+        response = self.client.get(reverse('friends.search'))
+        ctx = response.context
+        self.assertEqual(ctx['query'], None)
+        self.assertEqual(ctx['results'], None)
+
+        # An empty query
+        response = self.client.get("%s?query=%s" % (reverse('friends.search'), ''))
+        ctx = response.context
+        self.assertEqual(ctx['query'], u'')
+        self.assertEqual(ctx['results'], None)
+
+        # Match on queries
+        response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'sop'))
+        ctx = response.context
+        self.assertEqual(ctx['query'], u'sop')
+        self.assertEqual(len(ctx['results']), 1)
+        self.assertEqual(ctx['results'][0], self.user3.profile)
+
+        response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'Sopho'))
+        ctx = response.context
+        self.assertEqual(ctx['query'], u'Sopho')
+        self.assertEqual(len(ctx['results']), 1)
+        self.assertEqual(ctx['results'][0], self.user3.profile)
+
+        response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'S'))
+        ctx = response.context
+        self.assertEqual(ctx['query'], u'S')
+        self.assertEqual(len(ctx['results']), 2)
+        self.assertEqual(ctx['results'][0], self.user2.profile)
+        self.assertEqual(ctx['results'][1], self.user3.profile)
+
+        response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'alpha'))
+        ctx = response.context
+        self.assertEqual(ctx['query'], u'alpha')
+        self.assertEqual(len(ctx['results']), 1)
+        self.assertEqual(ctx['results'][0], self.user2.profile)
+
+        # Does not match the requester
+        response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'ras'))
+        ctx = response.context
+        self.assertEqual(ctx['query'], u'ras')
+        self.assertEqual(len(ctx['results']), 0)
+
+        # match the emails
+        response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'project.org'))
+        ctx = response.context
+        self.assertEqual(ctx['query'], u'project.org')
+        self.assertEqual(len(ctx['results']), 2)
+        self.assertEqual(ctx['results'][0], self.user2.profile)
+        self.assertEqual(ctx['results'][1], self.user3.profile)
+
+        # Change the logged-in user
+        self.client.login(username='tester', password='ertyfjnbfvfceqsryuj')
+        response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'S'))
+        ctx = response.context
+        self.assertEqual(ctx['query'], u'S')
+        self.assertEqual(len(ctx['results']), 2)
+        self.assertEqual(ctx['results'][0], self.user1.profile)
+        self.assertEqual(ctx['results'][1], self.user3.profile)
