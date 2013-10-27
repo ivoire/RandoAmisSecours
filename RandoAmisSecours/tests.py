@@ -59,7 +59,7 @@ class TemplatesTest(TestCase):
     def test_auth(self):
         self.helper_template(reverse('accounts.password_change'), 'account/password_change.html')
         self.helper_template(reverse('accounts.password_reset'), 'account/password_reset.html')
-        self.helper_template(reverse('accounts.password_reset_confirm', args=[1,'1-1']), 'account/password_reset_confirm.html')
+        self.helper_template(reverse('accounts.password_reset_confirm', args=[1, '1-1']), 'account/password_reset_confirm.html')
         self.helper_template(reverse('accounts.password_reset_complete'), 'account/password_reset_complete.html')
         self.helper_template(reverse('accounts.logout'), 'account/logged_out.html')
         self.helper_template(reverse('accounts.login'), 'account/login.html')

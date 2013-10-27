@@ -53,6 +53,7 @@ def invite(request, user_id):
 
     return HttpResponseRedirect(reverse('friends.search'))
 
+
 @login_required
 def accept(request, request_id):
     friend_request = get_object_or_404(FriendRequest, pk=request_id, to=request.user)
@@ -66,6 +67,7 @@ def accept(request, request_id):
 
     return HttpResponseRedirect(reverse('accounts.profile'))
 
+
 @login_required
 def refuse(request, request_id):
     friend_request = get_object_or_404(FriendRequest, pk=request_id, to=request.user)
@@ -75,6 +77,7 @@ def refuse(request, request_id):
     messages.success(request, _(u"Request from «%(name)s» refused") % ({'name': requester.user.get_full_name()}))
     return HttpResponseRedirect(reverse('accounts.profile'))
 
+
 @login_required
 def cancel(request, request_id):
     friend_request = get_object_or_404(FriendRequest, pk=request_id, user=request.user)
@@ -83,6 +86,7 @@ def cancel(request, request_id):
 
     messages.success(request, _(u"Request to «%(name)s» canceled") % ({'name': requested.user.get_full_name()}))
     return HttpResponseRedirect(reverse('accounts.profile'))
+
 
 @login_required
 def delete(request, user_id):
