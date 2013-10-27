@@ -88,6 +88,7 @@ class TemplatesTest(TestCase):
                                        latitude=1, longitude=1)
         self.helper_template(reverse('outings.update', args=[outing.pk]), 'outing/create.html')
 
+
 class LoginRequired(TestCase):
     def setUp(self):
         self.client = Client()
@@ -130,7 +131,6 @@ class LoginRequired(TestCase):
 
         self.helper_test_login(reverse('friends.invite', args=[1]), redirect=reverse('friends.search'))
         self.helper_test_login(reverse('friends.cancel', args=[1]), redirect=reverse('accounts.profile'))
-
 
     def test_outings(self):
         self.helper_test_login(reverse('outings.index'))

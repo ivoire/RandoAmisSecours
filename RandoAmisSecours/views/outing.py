@@ -81,7 +81,7 @@ def index(request, status='confirmed'):
                                'friends_outings_confirmed': friends_outings_confirmed,
                                'friends_outings_draft': friends_outings_draft,
                                'friends_outings_finished': friends_outings_finished},
-                               context_instance=RequestContext(request))
+                              context_instance=RequestContext(request))
 
 
 @login_required
