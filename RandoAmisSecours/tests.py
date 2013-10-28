@@ -30,7 +30,7 @@ from django.test import TestCase
 from django.test.client import Client
 from django.utils.timezone import datetime, utc
 
-from RandoAmisSecours.models import Outing, Profile
+from RandoAmisSecours.models import FriendRequest, Outing, Profile
 
 
 class TemplatesTest(TestCase):
@@ -96,6 +96,11 @@ class LoginRequired(TestCase):
                                              'django.test@project.org',
                                              '12789azertyuiop')
         self.user.profile = Profile.objects.create(user=self.user)
+        self.user2 = User.objects.create_user('zarterzh',
+                                             'gzeryztye@example.org',
+                                             'help')
+        self.user2.profile = Profile.objects.create(user=self.user2)
+
         current_time = datetime.utcnow().replace(tzinfo=utc)
         self.outing = Outing.objects.create(user=self.user, beginning=current_time,
                                             ending=current_time, alert=current_time,
@@ -122,15 +127,19 @@ class LoginRequired(TestCase):
     def test_friends(self):
         self.helper_test_login(reverse('friends.search'))
 
-        self.helper_test_login(reverse('friends.invite', args=[1]), redirect=reverse('friends.search'))
-        self.helper_test_login(reverse('friends.accept', args=[1]), redirect=reverse('accounts.profile'))
-        self.helper_test_login(reverse('friends.delete', args=[1]), redirect=reverse('accounts.profile'))
+        self.helper_test_login(reverse('friends.invite', args=[self.user2.pk]), redirect=reverse('friends.search'))
+        FriendRequest.objects.all().delete()
+        FR = FriendRequest(user=self.user2, to=self.user)
+        FR.save()
+        self.helper_test_login(reverse('friends.accept', args=[FR.pk]), redirect=reverse('accounts.profile'))
+        self.helper_test_login(reverse('friends.delete', args=[self.user2.pk]), redirect=reverse('accounts.profile'))
 
-        self.helper_test_login(reverse('friends.invite', args=[1]), redirect=reverse('friends.search'))
-        self.helper_test_login(reverse('friends.refuse', args=[1]), redirect=reverse('accounts.profile'))
+        FR = FriendRequest(user=self.user2, to=self.user)
+        FR.save()
+        self.helper_test_login(reverse('friends.refuse', args=[FR.pk]), redirect=reverse('accounts.profile'))
 
-        self.helper_test_login(reverse('friends.invite', args=[1]), redirect=reverse('friends.search'))
-        self.helper_test_login(reverse('friends.cancel', args=[1]), redirect=reverse('accounts.profile'))
+        self.helper_test_login(reverse('friends.invite', args=[self.user2.pk]), redirect=reverse('friends.search'))
+        self.helper_test_login(reverse('friends.cancel', args=[FriendRequest.objects.all()[0].pk]), redirect=reverse('accounts.profile'))
 
     def test_outings(self):
         self.helper_test_login(reverse('outings.index'))

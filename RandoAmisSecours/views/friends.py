@@ -22,7 +22,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
@@ -44,6 +44,10 @@ def search(request):
 
 @login_required
 def invite(request, user_id):
+    # Cannot invite ourself
+    if request.user.pk == int(user_id):
+      raise Http404
+
     new_friend = get_object_or_404(Profile, user__pk=user_id)
     # Create the friend request
     # TODO: send a mail to the requested user
