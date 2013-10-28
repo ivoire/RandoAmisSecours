@@ -156,7 +156,7 @@ class LoginRequired(TestCase):
         self.helper_test_login(reverse('outings.delete', args=[self.outing.pk]), redirect=reverse('outings.index'))
 
 
-class ContextTest(TestCase):
+class FriendsTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.user1 = User.objects.create_user('ras',
@@ -184,8 +184,12 @@ class ContextTest(TestCase):
         self.user3.save()
         self.user3.profile = Profile.objects.create(user=self.user3)
 
+    # Compare Friend requests
+    def helper_compare_FR(self, fr, user, to):
+      self.assertEqual(fr.user, user)
+      self.assertEqual(fr.to, to)
 
-    def test_friends_search(self):
+    def test_search(self):
         # Empty without query
         response = self.client.get(reverse('friends.search'))
         ctx = response.context
@@ -246,3 +250,147 @@ class ContextTest(TestCase):
         self.assertEqual(len(ctx['results']), 2)
         self.assertEqual(ctx['results'][0], self.user1.profile)
         self.assertEqual(ctx['results'][1], self.user3.profile)
+
+    def test_invite(self):
+      response = self.client.get(reverse('friends.invite', args=[self.user1.profile.pk]))
+      self.assertEqual(response.status_code, 404)
+
+      response = self.client.get(reverse('friends.invite', args=[self.user2.profile.pk]))
+      self.assertRedirects(response, reverse('friends.search'))
+      self.assertEqual(FriendRequest.objects.all().count(), 1)
+      self.helper_compare_FR(FriendRequest.objects.all()[0], user=self.user1, to=self.user2)
+      self.assertEqual(self.user1.profile.friends.all().count(), 0)
+      self.assertEqual(self.user2.profile.friends.all().count(), 0)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+      response = self.client.get(reverse('friends.invite', args=[self.user3.profile.pk]))
+      self.assertRedirects(response, reverse('friends.search'))
+      self.assertEqual(FriendRequest.objects.all().count(), 2)
+      self.helper_compare_FR(FriendRequest.objects.all()[0], user=self.user1, to=self.user2)
+      self.helper_compare_FR(FriendRequest.objects.all()[1], user=self.user1, to=self.user3)
+      self.assertEqual(self.user1.profile.friends.all().count(), 0)
+      self.assertEqual(self.user2.profile.friends.all().count(), 0)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+    def test_accept_simple(self):
+      # Simple accept session
+      FR = FriendRequest(user=self.user2, to=self.user1)
+      FR.save()
+      self.assertEqual(FriendRequest.objects.all().count(), 1)
+      self.assertEqual(self.user1.profile.friends.all().count(), 0)
+      self.assertEqual(self.user2.profile.friends.all().count(), 0)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+      response = self.client.get(reverse('friends.accept', args=[FR.pk]))
+      self.assertRedirects(response, reverse('accounts.profile'))
+      self.assertEqual(FriendRequest.objects.all().count(), 0)
+      self.assertEqual(self.user1.profile.friends.all().count(), 1)
+      self.assertEqual(self.user1.profile.friends.all()[0].user.pk, self.user2.pk)
+      self.assertEqual(self.user2.profile.friends.all().count(), 1)
+      self.assertEqual(self.user2.profile.friends.all()[0].user.pk, self.user1.pk)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+    def test_accept_advance(self):
+      # Two at a time
+      FR1 = FriendRequest(user=self.user3, to=self.user1)
+      FR1.save()
+      FR2 = FriendRequest(user=self.user2, to=self.user1)
+      FR2.save()
+      self.assertEqual(FriendRequest.objects.all().count(), 2)
+      self.assertEqual(self.user1.profile.friends.all().count(), 0)
+      self.assertEqual(self.user2.profile.friends.all().count(), 0)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+      response = self.client.get(reverse('friends.accept', args=[FR2.pk]))
+      self.assertRedirects(response, reverse('accounts.profile'))
+      self.assertEqual(FriendRequest.objects.all().count(), 1)
+      self.assertEqual(self.user1.profile.friends.all().count(), 1)
+      self.assertEqual(self.user1.profile.friends.all()[0].user.pk, self.user2.pk)
+      self.assertEqual(self.user2.profile.friends.all().count(), 1)
+      self.assertEqual(self.user2.profile.friends.all()[0].user.pk, self.user1.pk)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+      response = self.client.get(reverse('friends.accept', args=[FR2.pk]))
+      self.assertEqual(response.status_code, 404)
+
+      response = self.client.get(reverse('friends.accept', args=[FR1.pk]))
+      self.assertRedirects(response, reverse('accounts.profile'))
+      self.assertEqual(FriendRequest.objects.all().count(), 0)
+      self.assertEqual(self.user1.profile.friends.all().count(), 2)
+      self.assertEqual(self.user1.profile.friends.all()[0].user.pk, self.user2.pk)
+      self.assertEqual(self.user1.profile.friends.all()[1].user.pk, self.user3.pk)
+      self.assertEqual(self.user2.profile.friends.all().count(), 1)
+      self.assertEqual(self.user2.profile.friends.all()[0].user.pk, self.user1.pk)
+      self.assertEqual(self.user3.profile.friends.all().count(), 1)
+      self.assertEqual(self.user3.profile.friends.all()[0].user.pk, self.user1.pk)
+
+      response = self.client.get(reverse('friends.accept', args=[FR1.pk]))
+      self.assertEqual(response.status_code, 404)
+
+      # Only the 'to' can accept it
+      FR3 = FriendRequest(user=self.user3, to=self.user2)
+      FR3.save()
+      response = self.client.get(reverse('friends.accept', args=[FR3.pk]))
+      self.assertEqual(response.status_code, 404)
+
+    def test_cancel(self):
+      FR1 = FriendRequest(user=self.user1, to=self.user3)
+      FR1.save()
+      FR2 = FriendRequest(user=self.user2, to=self.user1)
+      FR2.save()
+      self.assertEqual(FriendRequest.objects.all().count(), 2)
+      self.assertEqual(self.user1.profile.friends.all().count(), 0)
+      self.assertEqual(self.user2.profile.friends.all().count(), 0)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+      response = self.client.get(reverse('friends.cancel', args=[FR1.pk]))
+      self.assertRedirects(response, reverse('accounts.profile'))
+      self.assertEqual(FriendRequest.objects.all().count(), 1)
+      self.assertEqual(FriendRequest.objects.all()[0].pk, FR2.pk)
+      self.assertEqual(self.user1.profile.friends.all().count(), 0)
+      self.assertEqual(self.user2.profile.friends.all().count(), 0)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+      response = self.client.get(reverse('friends.cancel', args=[FR1.pk]))
+      self.assertEqual(response.status_code, 404)
+
+
+    def test_refuse(self):
+      FR1 = FriendRequest(user=self.user1, to=self.user3)
+      FR1.save()
+      FR2 = FriendRequest(user=self.user2, to=self.user1)
+      FR2.save()
+      self.assertEqual(FriendRequest.objects.all().count(), 2)
+      self.assertEqual(self.user1.profile.friends.all().count(), 0)
+      self.assertEqual(self.user2.profile.friends.all().count(), 0)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+      response = self.client.get(reverse('friends.refuse', args=[FR2.pk]))
+      self.assertRedirects(response, reverse('accounts.profile'))
+      self.assertEqual(FriendRequest.objects.all().count(), 1)
+      self.assertEqual(self.user1.profile.friends.all().count(), 0)
+      self.assertEqual(self.user2.profile.friends.all().count(), 0)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+      response = self.client.get(reverse('friends.refuse', args=[FR1.pk]))
+      self.assertEqual(response.status_code, 404)
+      self.assertEqual(FriendRequest.objects.all().count(), 1)
+      self.assertEqual(self.user1.profile.friends.all().count(), 0)
+      self.assertEqual(self.user2.profile.friends.all().count(), 0)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+    def test_delete(self):
+      self.user1.profile.friends.add(self.user2.profile)
+      self.assertEqual(self.user1.profile.friends.all().count(), 1)
+      self.assertEqual(self.user2.profile.friends.all().count(), 1)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+      response = self.client.get(reverse('friends.delete', args=[self.user2.pk]))
+      self.assertRedirects(response, reverse('accounts.profile'))
+      self.assertEqual(self.user1.profile.friends.all().count(), 0)
+      self.assertEqual(self.user2.profile.friends.all().count(), 0)
+      self.assertEqual(self.user3.profile.friends.all().count(), 0)
+
+      # No error when the user to remove from the friend list is not a friend
+      response = self.client.get(reverse('friends.delete', args=[self.user3.pk]))
+      self.assertRedirects(response, reverse('accounts.profile'))
