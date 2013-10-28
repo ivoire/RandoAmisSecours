@@ -1,2 +1,1 @@
-Django==1.5.4
-pep8
+Django==1.5.5
