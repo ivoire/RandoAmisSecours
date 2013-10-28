@@ -37,7 +37,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'RAS.urls'
+ROOT_URLCONF = 'test_urls'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
