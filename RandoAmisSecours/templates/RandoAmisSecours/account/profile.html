@@ -31,9 +31,9 @@
     <h3>{% trans "Friends" %} <a class="btn btn-info btn-mini" href="{% url 'friends.search' %}"><i class="icon-search icon-white"></i> {% trans "search" %}</a></h3>
     <div class="tabbable">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#friends" data-toggle="tab">Friends</a></li>
-        <li><a href="#received" data-toggle="tab">Received{% if friend_requests %} <span class="badge">{{ friend_requests.count }}</span>{% endif %}</a></li>
-        <li><a href="#sent" data-toggle="tab">Sent{% if friend_requests_sent %} <span class="badge">{{ friend_requests_sent.count }}</span>{% endif %}</a></li>
+        <li class="active"><a href="#friends" data-toggle="tab">{% trans "Friends" %}</a></li>
+        <li><a href="#received" data-toggle="tab">{% trans "Received" %}{% if friend_requests %} <span class="badge">{{ friend_requests.count }}</span>{% endif %}</a></li>
+        <li><a href="#sent" data-toggle="tab">{% trans "Sent" %}{% if friend_requests_sent %} <span class="badge">{{ friend_requests_sent.count }}</span>{% endif %}</a></li>
       </ul>
     </div>
     <div class="tab-content">
