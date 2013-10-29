@@ -53,3 +53,5 @@ INSTALLED_APPS = (
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+from RandoAmisSecours.settings import *
