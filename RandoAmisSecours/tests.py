@@ -76,10 +76,6 @@ class TemplatesTest(TestCase):
 
     def test_outings(self):
         self.helper_template(reverse('outings.index'), 'outing/index.html')
-        self.helper_template(reverse('outings.index.draft'), 'outing/index.html')
-        self.helper_template(reverse('outings.index.finished'), 'outing/index.html')
-        self.helper_template(reverse('outings.index.late'), 'outing/index.html')
-        self.helper_template(reverse('outings.index.canceled'), 'outing/index.html')
         self.helper_template(reverse('outings.create'), 'outing/create.html')
 
         current_time = datetime.utcnow().replace(tzinfo=utc)
@@ -143,10 +139,6 @@ class LoginRequired(TestCase):
 
     def test_outings(self):
         self.helper_test_login(reverse('outings.index'))
-        self.helper_test_login(reverse('outings.index.draft'))
-        self.helper_test_login(reverse('outings.index.finished'))
-        self.helper_test_login(reverse('outings.index.late'))
-        self.helper_test_login(reverse('outings.index.canceled'))
         self.helper_test_login(reverse('outings.create'))
 
         self.helper_test_login(reverse('outings.details', args=[self.outing.pk]))

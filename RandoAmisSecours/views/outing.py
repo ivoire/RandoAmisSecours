@@ -27,7 +27,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 
-from RandoAmisSecours.models import Outing, DRAFT, CONFIRMED, LATE, FINISHED, CANCELED
+from RandoAmisSecours.models import Outing, DRAFT, CONFIRMED, FINISHED
 
 
 class OutingForm(ModelForm):
@@ -62,7 +62,7 @@ class OutingForm(ModelForm):
 
 
 @login_required
-def index(request, status='confirmed'):
+def index(request):
     # List all outings owned by the user and his friends
     user_outings = Outing.objects.filter(user=request.user)
     user_outings_confirmed = user_outings.filter(status=CONFIRMED)
