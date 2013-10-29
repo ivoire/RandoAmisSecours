@@ -31,6 +31,7 @@ from django.test.client import Client
 from django.utils.timezone import datetime, utc
 
 from RandoAmisSecours.models import FriendRequest, Outing, Profile
+from RandoAmisSecours.models import CONFIRMED, DRAFT, FINISHED
 
 
 class TemplatesTest(TestCase):
@@ -385,3 +386,85 @@ class FriendsTest(TestCase):
         # No error when the user to remove from the friend list is not a friend
         response = self.client.get(reverse('friends.delete', args=[self.user3.pk]))
         self.assertRedirects(response, reverse('accounts.profile'))
+
+
+class OutingsTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user1 = User.objects.create_user('alpha',
+                                              'alpha@example.com',
+                                              '12789azertyuiop')
+        self.user1.first_name = 'Alpha'
+        self.user1.last_name = 'Tester'
+        self.user1.save()
+        self.user1.profile = Profile.objects.create(user=self.user1)
+        self.client.login(username='alpha', password='12789azertyuiop')
+
+        self.user2 = User.objects.create_user('Beta',
+                                              'beta@example.org',
+                                              'ertyfjnbfvfceqsryuj')
+        self.user2.first_name = 'Beta'
+        self.user2.last_name = 'Testing'
+        self.user2.save()
+        self.user2.profile = Profile.objects.create(user=self.user2)
+
+        self.user3 = User.objects.create_user('Gamma',
+                                              'gamma@example.net',
+                                              'gzgvaryurvyyjchrvyhubtr')
+        self.user3.first_name = 'Gamma'
+        self.user3.last_name = 'Ray'
+        self.user3.save()
+        self.user3.profile = Profile.objects.create(user=self.user3)
+
+        # user1 and user2 are friends
+        self.user1.profile.friends.add(self.user2.profile)
+
+        current_time = datetime.utcnow().replace(tzinfo=utc)
+        # 3 outings for user1, and one for each user 2 and user3
+        self.outing1 = Outing.objects.create(user=self.user1, beginning=current_time,
+                                             ending=current_time, alert=current_time,
+                                             latitude=1, longitude=1, status=CONFIRMED)
+        self.outing2 = Outing.objects.create(user=self.user1, beginning=current_time,
+                                             ending=current_time, alert=current_time,
+                                             latitude=1, longitude=1, status=DRAFT)
+        self.outing3 = Outing.objects.create(user=self.user1, beginning=current_time,
+                                             ending=current_time, alert=current_time,
+                                             latitude=1, longitude=1, status=FINISHED)
+        self.outing4 = Outing.objects.create(user=self.user2, beginning=current_time,
+                                             ending=current_time, alert=current_time,
+                                             latitude=1, longitude=1, status=FINISHED)
+        self.outing5 = Outing.objects.create(user=self.user3, beginning=current_time,
+                                             ending=current_time, alert=current_time,
+                                             latitude=1, longitude=1, status=CONFIRMED)
+
+    def test_index(self):
+        response = self.client.get(reverse('outings.index'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+
+        self.assertEqual(len(ctx['user_outings_confirmed']), 1)
+        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
+        self.assertEqual(len(ctx['user_outings_draft']), 1)
+        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(len(ctx['user_outings_finished']), 1)
+        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['friends_outings_draft']), 0)
+        self.assertEqual(len(ctx['friends_outings_finished']), 1)
+        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+
+    def test_details(self):
+        response = self.client.get(reverse('outings.details', args=[self.outing1.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['outing'], self.outing1)
+        response = self.client.get(reverse('outings.details', args=[self.outing2.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['outing'], self.outing2)
+        response = self.client.get(reverse('outings.details', args=[self.outing3.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['outing'], self.outing3)
+        response = self.client.get(reverse('outings.details', args=[self.outing4.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['outing'], self.outing4)
+        response = self.client.get(reverse('outings.details', args=[self.outing5.pk]))
+        self.assertEqual(response.status_code, 404)
