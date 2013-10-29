@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with RandoAmisSecours.  If not, see <http://www.gnu.org/licenses/>
 
+from __future__ import unicode_literals
+
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -145,7 +147,7 @@ def delete(request, outing_id):
     if outing.user != request.user:
         messages.error(request, _('Only the outing owner can delete it'))
         return HttpResponseRedirect(reverse('outings.index'))
-    messages.success(request, _(u"«%(name)s» deleted") % ({'name': outing.name}))
+    messages.success(request, _("«%(name)s» deleted") % ({'name': outing.name}))
     outing.delete()
 
     return HttpResponseRedirect(reverse('outings.index'))
@@ -160,7 +162,7 @@ def confirm(request, outing_id):
 
     outing.status = CONFIRMED
     outing.save()
-    messages.success(request, _(u"«%(name)s» is now confirmed") % ({'name': outing.name}))
+    messages.success(request, _("«%(name)s» is now confirmed") % ({'name': outing.name}))
     return HttpResponseRedirect(reverse('outings.index'))
 
 
@@ -173,5 +175,5 @@ def finish(request, outing_id):
 
     outing.status = FINISHED
     outing.save()
-    messages.success(request, _(u"«%(name)s» is now finished") % ({'name': outing.name}))
+    messages.success(request, _("«%(name)s» is now finished") % ({'name': outing.name}))
     return HttpResponseRedirect(reverse('outings.index'))

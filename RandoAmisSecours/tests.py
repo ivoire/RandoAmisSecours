@@ -17,12 +17,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with RandoAmisSecours.  If not, see <http://www.gnu.org/licenses/>
 
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
+from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -192,45 +187,45 @@ class FriendsTest(TestCase):
         # An empty query
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), ''))
         ctx = response.context
-        self.assertEqual(ctx['query'], u'')
+        self.assertEqual(ctx['query'], '')
         self.assertEqual(ctx['results'], None)
 
         # Match on queries
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'sop'))
         ctx = response.context
-        self.assertEqual(ctx['query'], u'sop')
+        self.assertEqual(ctx['query'], 'sop')
         self.assertEqual(len(ctx['results']), 1)
         self.assertEqual(ctx['results'][0], self.user3.profile)
 
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'Sopho'))
         ctx = response.context
-        self.assertEqual(ctx['query'], u'Sopho')
+        self.assertEqual(ctx['query'], 'Sopho')
         self.assertEqual(len(ctx['results']), 1)
         self.assertEqual(ctx['results'][0], self.user3.profile)
 
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'S'))
         ctx = response.context
-        self.assertEqual(ctx['query'], u'S')
+        self.assertEqual(ctx['query'], 'S')
         self.assertEqual(len(ctx['results']), 2)
         self.assertEqual(ctx['results'][0], self.user2.profile)
         self.assertEqual(ctx['results'][1], self.user3.profile)
 
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'alpha'))
         ctx = response.context
-        self.assertEqual(ctx['query'], u'alpha')
+        self.assertEqual(ctx['query'], 'alpha')
         self.assertEqual(len(ctx['results']), 1)
         self.assertEqual(ctx['results'][0], self.user2.profile)
 
         # Does not match the requester
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'ras'))
         ctx = response.context
-        self.assertEqual(ctx['query'], u'ras')
+        self.assertEqual(ctx['query'], 'ras')
         self.assertEqual(len(ctx['results']), 0)
 
         # match the emails
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'project.org'))
         ctx = response.context
-        self.assertEqual(ctx['query'], u'project.org')
+        self.assertEqual(ctx['query'], 'project.org')
         self.assertEqual(len(ctx['results']), 2)
         self.assertEqual(ctx['results'][0], self.user2.profile)
         self.assertEqual(ctx['results'][1], self.user3.profile)
@@ -239,7 +234,7 @@ class FriendsTest(TestCase):
         self.client.login(username='tester', password='ertyfjnbfvfceqsryuj')
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'S'))
         ctx = response.context
-        self.assertEqual(ctx['query'], u'S')
+        self.assertEqual(ctx['query'], 'S')
         self.assertEqual(len(ctx['results']), 2)
         self.assertEqual(ctx['results'][0], self.user1.profile)
         self.assertEqual(ctx['results'][1], self.user3.profile)

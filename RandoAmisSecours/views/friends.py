@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with RandoAmisSecours.  If not, see <http://www.gnu.org/licenses/>
 
+from __future__ import unicode_literals
+
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -53,7 +55,7 @@ def invite(request, user_id):
     # TODO: send a mail to the requested user
     friend_request = FriendRequest(user=request.user, to=new_friend.user)
     friend_request.save()
-    messages.success(request, _(u"Friend request sent to «%(name)s»") % ({'name': new_friend.user.get_full_name()}))
+    messages.success(request, _("Friend request sent to «%(name)s»") % ({'name': new_friend.user.get_full_name()}))
 
     return HttpResponseRedirect(reverse('friends.search'))
 
@@ -67,7 +69,7 @@ def accept(request, request_id):
     # TODO: send a mail to the requester
     request.user.profile.friends.add(new_friend)
     friend_request.delete()
-    messages.success(request, _(u"«%(name)s» added to your friends") % ({'name': new_friend.user.get_full_name()}))
+    messages.success(request, _("«%(name)s» added to your friends") % ({'name': new_friend.user.get_full_name()}))
 
     return HttpResponseRedirect(reverse('accounts.profile'))
 
@@ -78,7 +80,7 @@ def refuse(request, request_id):
     requester = get_object_or_404(Profile, user=friend_request.user)
     friend_request.delete()
 
-    messages.success(request, _(u"Request from «%(name)s» refused") % ({'name': requester.user.get_full_name()}))
+    messages.success(request, _("Request from «%(name)s» refused") % ({'name': requester.user.get_full_name()}))
     return HttpResponseRedirect(reverse('accounts.profile'))
 
 
@@ -88,7 +90,7 @@ def cancel(request, request_id):
     requested = get_object_or_404(Profile, user=friend_request.to)
     friend_request.delete()
 
-    messages.success(request, _(u"Request to «%(name)s» canceled") % ({'name': requested.user.get_full_name()}))
+    messages.success(request, _("Request to «%(name)s» canceled") % ({'name': requested.user.get_full_name()}))
     return HttpResponseRedirect(reverse('accounts.profile'))
 
 
@@ -97,5 +99,5 @@ def delete(request, user_id):
     friend = get_object_or_404(Profile, user__pk=user_id)
     request.user.profile.friends.remove(friend)
 
-    messages.success(request, _(u"Removed «%(name)s» from friend list") % ({'name': friend.user.get_full_name()}))
+    messages.success(request, _("Removed «%(name)s» from friend list") % ({'name': friend.user.get_full_name()}))
     return HttpResponseRedirect(reverse('accounts.profile'))

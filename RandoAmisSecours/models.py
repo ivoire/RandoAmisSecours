@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with RandoAmisSecours.  If not, see <http://www.gnu.org/licenses/>
 
+from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -69,7 +70,7 @@ class FriendRequest(models.Model):
     creation = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return u"%s => %s" % (self.user.get_full_name(), self.to.get_full_name())
+        return "%s => %s" % (self.user.get_full_name(), self.to.get_full_name())
 
 
 class Outing(models.Model):
@@ -94,7 +95,7 @@ class Outing(models.Model):
     longitude = models.FloatField()
 
     def __unicode__(self):
-        return u"%s: %s" % (self.user.get_full_name(), self.name)
+        return "%s: %s" % (self.user.get_full_name(), self.name)
 
     def getPercents(self):
         current_time = datetime.utcnow().replace(tzinfo=utc)
