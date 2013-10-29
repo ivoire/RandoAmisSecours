@@ -21,6 +21,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import datetime, utc
 from django.utils.translation import ugettext_noop as _
 
@@ -48,6 +49,7 @@ def random_hash():
     return binascii.b2a_hex(os.urandom(15))
 
 
+@python_2_unicode_compatible
 class Profile(models.Model):
     class Meta:
         app_label = 'RandoAmisSecours'
@@ -57,10 +59,11 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=30, blank=True, null=True)
     hash_id = models.CharField(unique=True, max_length=30, default=random_hash)
 
-    def __unicode__(self):
-        return unicode(self.user)
+    def __str__(self):
+        return "%s" % (self.user)
 
 
+@python_2_unicode_compatible
 class FriendRequest(models.Model):
     class Meta:
         app_label = 'RandoAmisSecours'
@@ -69,10 +72,11 @@ class FriendRequest(models.Model):
     to = models.ForeignKey(User, related_name='+')
     creation = models.DateTimeField(auto_now=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s => %s" % (self.user.get_full_name(), self.to.get_full_name())
 
 
+@python_2_unicode_compatible
 class Outing(models.Model):
     class Meta:
         app_label = 'RandoAmisSecours'
@@ -94,7 +98,7 @@ class Outing(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s: %s" % (self.user.get_full_name(), self.name)
 
     def getPercents(self):
