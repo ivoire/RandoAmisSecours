@@ -430,7 +430,7 @@ class OutingsTest(TestCase):
                                              latitude=1, longitude=1, status=FINISHED)
         self.outing5 = Outing.objects.create(user=self.user3, beginning=current_time,
                                              ending=current_time, alert=current_time,
-                                             latitude=1, longitude=1, status=CONFIRMED)
+                                             latitude=1, longitude=1, status=DRAFT)
 
     def test_index(self):
         response = self.client.get(reverse('outings.index'))
@@ -463,3 +463,143 @@ class OutingsTest(TestCase):
         self.assertEqual(response.context['outing'], self.outing4)
         response = self.client.get(reverse('outings.details', args=[self.outing5.pk]))
         self.assertEqual(response.status_code, 404)
+
+    def test_confirm(self):
+        # Initial state
+        response = self.client.get(reverse('outings.index'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+
+        self.assertEqual(len(ctx['user_outings_confirmed']), 1)
+        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
+        self.assertEqual(len(ctx['user_outings_draft']), 1)
+        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(len(ctx['user_outings_finished']), 1)
+        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['friends_outings_draft']), 0)
+        self.assertEqual(len(ctx['friends_outings_finished']), 1)
+        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+
+        # Confirm one outing
+        response = self.client.get(reverse('outings.confirm', args=[self.outing2.pk]))
+        self.assertRedirects(response, reverse('outings.index'))
+
+        # Test it
+        response = self.client.get(reverse('outings.index'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertEqual(len(ctx['user_outings_confirmed']), 2)
+        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
+        self.assertEqual(ctx['user_outings_confirmed'][1], self.outing2)
+        self.assertEqual(len(ctx['user_outings_draft']), 0)
+        self.assertEqual(len(ctx['user_outings_finished']), 1)
+        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['friends_outings_draft']), 0)
+        self.assertEqual(len(ctx['friends_outings_finished']), 1)
+        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+
+        # Cannot confirm others outings
+        response = self.client.get(reverse('outings.confirm', args=[self.outing5.pk]))
+        self.assertRedirects(response, reverse('outings.index'))
+        self.assertEqual(Outing.objects.get(pk=self.outing5.pk).status, DRAFT)
+
+    def test_finish(self):
+        # Initial state
+        response = self.client.get(reverse('outings.index'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+
+        self.assertEqual(len(ctx['user_outings_confirmed']), 1)
+        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
+        self.assertEqual(len(ctx['user_outings_draft']), 1)
+        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(len(ctx['user_outings_finished']), 1)
+        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['friends_outings_draft']), 0)
+        self.assertEqual(len(ctx['friends_outings_finished']), 1)
+        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+
+        # Confirm one outing
+        response = self.client.get(reverse('outings.finish', args=[self.outing1.pk]))
+        self.assertRedirects(response, reverse('outings.index'))
+
+        # Test it
+        response = self.client.get(reverse('outings.index'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertEqual(len(ctx['user_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['user_outings_draft']), 1)
+        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(len(ctx['user_outings_finished']), 2)
+        self.assertEqual(ctx['user_outings_finished'][0], self.outing1)
+        self.assertEqual(ctx['user_outings_finished'][1], self.outing3)
+        self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['friends_outings_draft']), 0)
+        self.assertEqual(len(ctx['friends_outings_finished']), 1)
+        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+
+        # Cannot finish others outings
+        response = self.client.get(reverse('outings.finish', args=[self.outing5.pk]))
+        self.assertRedirects(response, reverse('outings.index'))
+        self.assertEqual(Outing.objects.get(pk=self.outing5.pk).status, DRAFT)
+
+    def test_delete(self):
+        # Initial state
+        response = self.client.get(reverse('outings.index'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+
+        self.assertEqual(len(ctx['user_outings_confirmed']), 1)
+        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
+        self.assertEqual(len(ctx['user_outings_draft']), 1)
+        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(len(ctx['user_outings_finished']), 1)
+        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['friends_outings_draft']), 0)
+        self.assertEqual(len(ctx['friends_outings_finished']), 1)
+        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+
+        # Confirm one outing
+        response = self.client.get(reverse('outings.delete', args=[self.outing1.pk]))
+        self.assertRedirects(response, reverse('outings.index'))
+
+        # Test it
+        response = self.client.get(reverse('outings.index'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertEqual(len(ctx['user_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['user_outings_draft']), 1)
+        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(len(ctx['user_outings_finished']), 1)
+        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['friends_outings_draft']), 0)
+        self.assertEqual(len(ctx['friends_outings_finished']), 1)
+        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+
+        # delete more
+        response = self.client.get(reverse('outings.delete', args=[self.outing2.pk]))
+        self.assertRedirects(response, reverse('outings.index'))
+        response = self.client.get(reverse('outings.delete', args=[self.outing3.pk]))
+        self.assertRedirects(response, reverse('outings.index'))
+
+        # Test it
+        response = self.client.get(reverse('outings.index'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertEqual(len(ctx['user_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['user_outings_draft']), 0)
+        self.assertEqual(len(ctx['user_outings_finished']), 0)
+        self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['friends_outings_draft']), 0)
+        self.assertEqual(len(ctx['friends_outings_finished']), 1)
+        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+
+        # cannot delete others outings
+        response = self.client.get(reverse('outings.delete', args=[self.outing5.pk]))
+        self.assertRedirects(response, reverse('outings.index'))
+        self.assertEqual(Outing.objects.get(pk=self.outing5.pk).status, DRAFT)
