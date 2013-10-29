@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-27 18:49+0100\n"
+"POT-Creation-Date: 2013-10-29 19:13+0100\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: models.py:37
+#: models.py:39
 msgid "draft"
 msgstr "brouillons"
 
-#: models.py:38
+#: models.py:40
 msgid "confirmed"
 msgstr "confirmées"
 
-#: models.py:39 templates/RandoAmisSecours/outing/index.html:64
+#: models.py:41 templates/RandoAmisSecours/outing/index.html:64
 msgid "late"
 msgstr "en retard"
 
-#: models.py:40
+#: models.py:42
 msgid "finished"
 msgstr "terminées"
 
-#: models.py:41
+#: models.py:43
 msgid "canceled"
 msgstr "annulées"
 
-#: management/commands/alert.py:69
+#: management/commands/alert.py:71
 #, python-format
 msgid ""
 "\n"
@@ -59,11 +59,11 @@ msgstr ""
 "-- \n"
 "L'équipe R.A.S."
 
-#: management/commands/alert.py:80 management/commands/alert.py:102
+#: management/commands/alert.py:82 management/commands/alert.py:104
 msgid "[R.A.S] Alert"
 msgstr "[R.A.S] Alerte"
 
-#: management/commands/alert.py:90
+#: management/commands/alert.py:92
 #, python-format
 msgid ""
 "\n"
@@ -283,14 +283,14 @@ msgid "Change password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/password_change.html:22
-#: views/account.py:59
+#: views/account.py:61
 msgid "Old password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/password_change.html:31
 #: templates/RandoAmisSecours/account/password_change.html:40
-#: views/account.py:61 views/account.py:62 views/account.py:85
-#: views/account.py:87
+#: views/account.py:63 views/account.py:64 views/account.py:87
+#: views/account.py:89
 msgid "New password"
 msgstr ""
 
@@ -396,6 +396,7 @@ msgid "My profile"
 msgstr "Mon profil"
 
 #: templates/RandoAmisSecours/account/profile.html:31
+#: templates/RandoAmisSecours/account/profile.html:34
 #: templates/RandoAmisSecours/friends/search.html:8
 msgid "Friends"
 msgstr "Amis"
@@ -403,6 +404,16 @@ msgstr "Amis"
 #: templates/RandoAmisSecours/account/profile.html:31
 msgid "search"
 msgstr "chercher"
+
+#: templates/RandoAmisSecours/account/profile.html:35
+#: templates/RandoAmisSecours/account/profile.html:81
+msgid "Received"
+msgstr "Reçu"
+
+#: templates/RandoAmisSecours/account/profile.html:36
+#: templates/RandoAmisSecours/account/profile.html:103
+msgid "Sent"
+msgstr "Envoyée"
 
 #: templates/RandoAmisSecours/account/profile.html:45
 #: templates/RandoAmisSecours/account/profile.html:80
@@ -463,10 +474,6 @@ msgstr "Supprime"
 msgid "You don't have friends here for the moment."
 msgstr "Vous n'avez pas d'amis ici pour le moment."
 
-#: templates/RandoAmisSecours/account/profile.html:81
-msgid "Received"
-msgstr "Reçu"
-
 #: templates/RandoAmisSecours/account/profile.html:82
 #: templates/RandoAmisSecours/account/profile.html:104
 msgid "Action"
@@ -483,10 +490,6 @@ msgstr "Refuser"
 #: templates/RandoAmisSecours/account/profile.html:94
 msgid "Not any request received"
 msgstr "Aucune demande reçue"
-
-#: templates/RandoAmisSecours/account/profile.html:103
-msgid "Sent"
-msgstr "Envoyée"
 
 #: templates/RandoAmisSecours/account/profile.html:116
 msgid "Not any request sent"
@@ -505,14 +508,14 @@ msgid "update"
 msgstr "mettre à jour"
 
 #: templates/RandoAmisSecours/account/profile.html:127
-#: templates/RandoAmisSecours/account/register.html:80 views/account.py:73
+#: templates/RandoAmisSecours/account/register.html:80 views/account.py:75
 msgid "email"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/profile.html:131
 #: templates/RandoAmisSecours/account/register.html:41
-#: templates/RandoAmisSecours/account/register.html:50 views/account.py:48
-#: views/account.py:103 views/account.py:104
+#: templates/RandoAmisSecours/account/register.html:50 views/account.py:50
+#: views/account.py:105 views/account.py:106
 msgid "Password"
 msgstr ""
 
@@ -526,8 +529,8 @@ msgstr "S'inscrire"
 msgid "Account information"
 msgstr "Informations sur le compte"
 
-#: templates/RandoAmisSecours/account/register.html:32 views/account.py:46
-#: views/account.py:101
+#: templates/RandoAmisSecours/account/register.html:32 views/account.py:48
+#: views/account.py:103
 msgid "Username"
 msgstr ""
 
@@ -782,15 +785,15 @@ msgid "Global information"
 msgstr "Informations générales"
 
 #: templates/RandoAmisSecours/outing/create.html:43
-#: templates/RandoAmisSecours/outing/details.html:67 views/outing.py:42
+#: templates/RandoAmisSecours/outing/details.html:67 views/outing.py:44
 msgid "Description"
 msgstr "Description"
 
-#: templates/RandoAmisSecours/outing/create.html:52 views/outing.py:43
+#: templates/RandoAmisSecours/outing/create.html:52 views/outing.py:45
 msgid "Latitude"
 msgstr "Latitude"
 
-#: templates/RandoAmisSecours/outing/create.html:61 views/outing.py:44
+#: templates/RandoAmisSecours/outing/create.html:61 views/outing.py:46
 msgid "Longitude"
 msgstr "Logitude"
 
@@ -978,7 +981,7 @@ msgstr "Pas de sortie terminée"
 msgid "Friends Outings"
 msgstr "Sorties de vos amis"
 
-#: views/account.py:150
+#: views/account.py:152
 #, python-format
 msgid ""
 "Hello %(fullname)s,\n"
@@ -1004,93 +1007,93 @@ msgstr ""
 "-- \n"
 "L'équipe R.A.S."
 
-#: views/account.py:162
+#: views/account.py:164
 msgid "Subscription to R.A.S."
 msgstr "Inscription à R.A.S."
 
-#: views/account.py:167
+#: views/account.py:169
 msgid "Some information are missing or mistyped"
 msgstr "Certains éléments sont manquants ou malformatés"
 
-#: views/account.py:206
+#: views/account.py:212
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
 
-#: views/account.py:217
+#: views/account.py:225
 msgid "Password changed successfully"
 msgstr ""
 
-#: views/friends.py:52
+#: views/friends.py:58
 #, python-format
 msgid "Friend request sent to «%(name)s»"
 msgstr "Demande envoyée à «%(name)s»"
 
-#: views/friends.py:66
+#: views/friends.py:72
 #, python-format
 msgid "«%(name)s» added to your friends"
 msgstr "«%(name)s» ajouté à vos amis"
 
-#: views/friends.py:77
+#: views/friends.py:83
 #, python-format
 msgid "Request from «%(name)s» refused"
 msgstr "La demande de «%(name)s» a été refusée"
 
-#: views/friends.py:87
+#: views/friends.py:93
 #, python-format
 msgid "Request to «%(name)s» canceled"
 msgstr "La demande à «%(name)s» a été annulée"
 
-#: views/friends.py:96
+#: views/friends.py:102
 #, python-format
 msgid "Removed «%(name)s» from friend list"
 msgstr "«%(name)s» supprimé de votre liste d'amis"
 
-#: views/outing.py:40
+#: views/outing.py:42
 msgid "Outing name"
 msgstr "Nom de la sortie"
 
-#: views/outing.py:54
+#: views/outing.py:56
 msgid "Beginning should happens first"
 msgstr "Le début doit arriver en premier"
 
-#: views/outing.py:55
+#: views/outing.py:57
 msgid "Ending should happens after the beginning"
 msgstr "La fin doit arriver après le début"
 
-#: views/outing.py:56
+#: views/outing.py:58
 msgid "Alert should happens at the end"
 msgstr "L'alerte doit arriver après la fin"
 
-#: views/outing.py:103
+#: views/outing.py:110
 msgid ""
 "Outing successfully created. The outing is still a draft and should be "
 "confirmed."
 msgstr ""
 "La sortie a été crée. Celle-ci est encore un brouillon et doit être validée."
 
-#: views/outing.py:119 views/outing.py:149
+#: views/outing.py:128 views/outing.py:160
 msgid "Only the outing owner can update it"
 msgstr "Seul le créateur d'une sortie peux la modifier"
 
-#: views/outing.py:137
+#: views/outing.py:148
 msgid "Only the outing owner can delete it"
 msgstr "Seul le créateur d'une sortie peux la supprimer"
 
-#: views/outing.py:139
+#: views/outing.py:150
 #, python-format
 msgid "«%(name)s» deleted"
 msgstr "La sortie «%(name)s» a été supprimée"
 
-#: views/outing.py:154
+#: views/outing.py:165
 #, python-format
 msgid "«%(name)s» is now confirmed"
 msgstr "«%(name)s» est maintenant confirmée"
 
-#: views/outing.py:162
+#: views/outing.py:173
 msgid "Only the outing owner can finish it"
 msgstr "Seul le créateur d'une sortie peux la terminer"
 
-#: views/outing.py:167
+#: views/outing.py:178
 #, python-format
 msgid "«%(name)s» is now finished"
 msgstr "«%(name)s» est maintenant terminée"
