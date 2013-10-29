@@ -18,7 +18,7 @@
 # along with RandoAmisSecours.  If not, see <http://www.gnu.org/licenses/>
 
 from django.contrib import admin
-from models import *
+from RandoAmisSecours.models import *
 
 admin.site.register(FriendRequest)
 admin.site.register(Outing)
