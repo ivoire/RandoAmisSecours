@@ -35,8 +35,8 @@ class TemplatesTest(TestCase):
         self.user = User.objects.create_user('azertyuiop',
                                              'django.test@project.org',
                                              '12789azertyuiop')
-        self.client.login(username='azertyuiop', password='12789azertyuiop')
         self.user.profile = Profile.objects.create(user=self.user)
+        self.client.login(username='azertyuiop', password='12789azertyuiop')
 
     def helper_template(self, url, template):
         response = self.client.get(url)
