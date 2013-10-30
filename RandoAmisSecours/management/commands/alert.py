@@ -24,6 +24,7 @@ from django.core.mail import send_mail
 from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
 from django.utils.timezone import datetime, utc
+from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
 from RandoAmisSecours.models import Outing, Profile, CONFIRMED
@@ -68,6 +69,9 @@ class Command(BaseCommand):
 
                 if 0 <= minutes and minutes < kwargs['interval']:
                     self.stdout.write("Sending mail to owner")
+                    # send a mail to the user, translated into the right language
+                    if outing.user.profile.language:
+                        translation.activate(outing.user.profile.language)
                     body = _("""
 Hello,
 
@@ -80,6 +84,8 @@ The R.A.S team""") % {'fullname': outing.user.get_full_name(),
                       'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
                       'SAFE_URL': reverse('outings.finish', args=[outing.pk])}
                     send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [outing.user.email])
+                    if outing.user.profile.language:
+                        translation.deactivate()
 
             # Alerting outings
             elif outing.alert <= now:
@@ -89,7 +95,11 @@ The R.A.S team""") % {'fullname': outing.user.get_full_name(),
                 self.stdout.write("  minutes: %d" % (minutes))
                 if 0 <= minutes and minutes < kwargs['interval']:
                     self.stdout.write("emailing friends")
-                    body = _("""
+                    # Send on mail per user translated into the right language
+                    for friend_profile in outing.user.profile.friends.all():
+                        if friend_profile.language:
+                            translation.activate(friend_profile.language)
+                        body = _("""
 Hello,
 
 %(fullname)s is late from his outing %(URL)s.
@@ -99,6 +109,6 @@ You can try to contact him to get more information about the situation.
 -- 
 The R.A.S team""") % {'fullname': outing.user.get_full_name(),
                       'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk]))}
-                    emails = [f.user.email for f in outing.user.profile.friends.all()]
-                    emails.append(outing.user.email)
-                    send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, emails)
+                        send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [friend_profile.user.email])
+                        if friend_profile.language:
+                            translation.deactivate()
