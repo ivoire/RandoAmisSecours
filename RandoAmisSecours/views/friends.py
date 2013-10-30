@@ -48,7 +48,7 @@ def search(request):
 def invite(request, user_id):
     # Cannot invite ourself
     if request.user.pk == int(user_id):
-      raise Http404
+        raise Http404
 
     new_friend = get_object_or_404(Profile, user__pk=user_id)
     # Create the friend request
