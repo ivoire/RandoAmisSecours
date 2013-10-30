@@ -32,6 +32,7 @@ from django.http import HttpResponseRedirect
 from django.forms import ModelForm
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from django.utils import translation
 from django.utils.translation import ugettext as _
 
 from RandoAmisSecours.models import Profile, FriendRequest, CONFIRMED, DRAFT, LATE, FINISHED
@@ -141,7 +142,7 @@ class RASUserUpdateForm(ModelForm):
 class RASProfileUpdateForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ('phone_number', )
+        fields = ('phone_number', 'language')
 
 
 def register(request):
@@ -209,6 +210,11 @@ def update(request):
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             profile = profile_form.save()
+            # Update the language code and activate it for the message
+            if profile.language:
+                request.session['django_language'] = profile.language
+                translation.activate(profile.language)
+            # Print the message
             messages.success(request, _("Personnal information updated"))
             return HttpResponseRedirect(reverse('accounts.profile'))
     else:
