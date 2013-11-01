@@ -51,13 +51,16 @@
      <div class="control-group{% if profile_form.language.errors %} error{% endif %}">
       <label class="control-label" for="id_language">{% trans "Language" %}</label>
       <div class="controls">
-        {{ profile_form.language }}
+        <select id="id_language" name="language">
+          {% for value, text in profile_form.language.field.choices %}
+          <option value="{{ value }}"{% if value == user.profile.language %} selected="selected"{% endif %}>{% trans text %}</option>
+          {% endfor %}
+        </select>
         {% for error in profile_form.language.errors %}
         <span class="help-inline">{{ error }}</span>
         {% endfor %}
       </div>
     </div>
-
   </div>
   <div class="span12">
     <div class="form-actions">

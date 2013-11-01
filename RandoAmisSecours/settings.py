@@ -18,11 +18,11 @@
 # along with RandoAmisSecours.  If not, see <http://www.gnu.org/licenses/>
 
 # List the available languages
-ugettext = lambda s: s
+ugettext_lazy = lambda s: s
 
 LANGUAGES = (
-    ('fr', ugettext('French')),
-    ('en', ugettext('English')),
+    ('fr', ugettext_lazy('French')),
+    ('en', ugettext_lazy('English')),
 )
 
 # Accounts related urls
