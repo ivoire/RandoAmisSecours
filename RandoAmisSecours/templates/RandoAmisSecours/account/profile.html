@@ -137,7 +137,11 @@
       <div class="span6">
         <dl class="dl-horizontal">
           <dt>{% trans "Language" %}</dt>
-          <dd>{{ user.profile.get_language_display|default:_("undefined") }}</dd>
+          {% if user.profile.get_language_display %}
+          <dd>{% trans user.profile.get_language_display %}</dd>
+          {% else %}
+          <dd>{% trans "undefined" %}</dd>
+          {% endif %}
         </dl>
       </div>
     </div>
