@@ -137,6 +137,7 @@ class RASUserUpdateForm(ModelForm):
         # first_name and last_name are required
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
+        self.fields['first_name'].widget.attrs['autofocus'] = 'autofocus'
 
 
 class RASProfileUpdateForm(ModelForm):
