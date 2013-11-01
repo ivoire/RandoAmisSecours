@@ -32,7 +32,7 @@
   <p class="lead">{% trans "Don't wait for an accident !" %}</p>
   <p class="lead">{% trans "Let your friends some information about your destination." %}</p>
   {% if user.is_authenticated %}
-  <a class="btn btn-large btn-success" href="{% url 'accounts.profile' %}">{% trans "Profile" %}</a>
+  <a class="btn btn-large btn-success" href="{% url 'outings.index' %}">{% trans "My outings" %}</a>
   {% else %}
   <a class="btn btn-large btn-success" href="{% url 'accounts.login' %}">{% trans "Log in" %}</a>
   {% endif %}
