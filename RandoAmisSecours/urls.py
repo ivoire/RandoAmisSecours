@@ -52,6 +52,7 @@ urlpatterns += patterns('RandoAmisSecours.views.account',
     url(r'^accounts/profile/update/$', 'update', name='accounts.profile.update'),
     url(r'^accounts/password/change/done/$', 'password_change_done', name='accounts.password_change_done'),
     url(r'^accounts/password/reset/done/$', 'password_reset_done', name='accounts.password_reset_done'),
+    url(r'^accounts/delete/$', 'delete', name='accounts.delete'),
 )
 
 urlpatterns += patterns('RandoAmisSecours.views.friends',

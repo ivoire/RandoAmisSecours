@@ -146,5 +146,10 @@
       </div>
     </div>
   </div>
+  <div class="span12">
+    <h3>{% trans "Deleting my account" %}</h3>
+    <p>{% trans "If you want to remove your account, just click on the folowing button. Be careful as it will permanently remove all your outings and personal data." %}</p>
+    <a class="btn btn-danger" href="{% url 'accounts.delete' %}">{% trans "Deleting my account" %}</a>
+  </div>
 </div>
 {% endblock %}

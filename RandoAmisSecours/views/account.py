@@ -22,6 +22,7 @@ from __future__ import unicode_literals
 from django import forms
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
@@ -236,3 +237,9 @@ def password_change_done(request):
 def password_reset_done(request):
     return render_to_response('RandoAmisSecours/account/password_reset_done.html',
                               context_instance=RequestContext(request))
+
+
+@login_required
+def delete(request):
+    request.user.delete()
+    return HttpResponseRedirect(reverse('index'))
