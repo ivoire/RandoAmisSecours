@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-02 19:55+0100\n"
+"POT-Creation-Date: 2013-11-02 20:29+0100\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -290,14 +290,14 @@ msgid "Change password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/password_change.html:22
-#: views/account.py:62
+#: views/account.py:63
 msgid "Old password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/password_change.html:31
 #: templates/RandoAmisSecours/account/password_change.html:40
-#: views/account.py:64 views/account.py:65 views/account.py:88
-#: views/account.py:90
+#: views/account.py:65 views/account.py:66 views/account.py:89
+#: views/account.py:91
 msgid "New password"
 msgstr ""
 
@@ -515,14 +515,14 @@ msgid "update"
 msgstr "mettre à jour"
 
 #: templates/RandoAmisSecours/account/profile.html:129
-#: templates/RandoAmisSecours/account/register.html:80 views/account.py:76
+#: templates/RandoAmisSecours/account/register.html:80 views/account.py:77
 msgid "email"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/profile.html:133
 #: templates/RandoAmisSecours/account/register.html:41
-#: templates/RandoAmisSecours/account/register.html:50 views/account.py:51
-#: views/account.py:106 views/account.py:107
+#: templates/RandoAmisSecours/account/register.html:50 views/account.py:52
+#: views/account.py:107 views/account.py:108
 msgid "Password"
 msgstr ""
 
@@ -535,6 +535,19 @@ msgstr "Langue"
 msgid "undefined"
 msgstr "non définie"
 
+#: templates/RandoAmisSecours/account/profile.html:150
+msgid "Deleting my account"
+msgstr "Supprimer mon compte"
+
+#: templates/RandoAmisSecours/account/profile.html:151
+msgid ""
+"If you want to remove your account, just click on the folowing button. Be "
+"careful as it will permanently remove all your outings and personal data."
+msgstr ""
+"Si vous souhaitez supprimer votre compte, clicker sur le bouton ci-dessous. "
+"Faites attention car l'ensemble de vos sorties ainsi que vos données "
+"personnelles seront supprimées."
+
 #: templates/RandoAmisSecours/account/register.html:4
 #: templates/RandoAmisSecours/account/register.html:9
 #: templates/RandoAmisSecours/account/register.html:91
@@ -545,8 +558,8 @@ msgstr "S'inscrire"
 msgid "Account information"
 msgstr "Informations sur le compte"
 
-#: templates/RandoAmisSecours/account/register.html:32 views/account.py:49
-#: views/account.py:104
+#: templates/RandoAmisSecours/account/register.html:32 views/account.py:50
+#: views/account.py:105
 msgid "Username"
 msgstr ""
 
@@ -662,8 +675,8 @@ msgid ""
 "This page lists the most common questions and concerns about the R.A.S. "
 "website. If your question is missing, feel free to contact the R.A.S. team."
 msgstr ""
-"Cette page liste les questions les plus courantes à propos de R.A.S. Si votre "
-"question ne s'y trouve pas, vous pouvez contacter l'équipe R.A.S."
+"Cette page liste les questions les plus courantes à propos de R.A.S. Si "
+"votre question ne s'y trouve pas, vous pouvez contacter l'équipe R.A.S."
 
 #: templates/RandoAmisSecours/help/qa.html:22
 msgid "1/ Calling emergency services"
@@ -676,8 +689,8 @@ msgid ""
 "necessary."
 msgstr ""
 "Si vous n'êtes pas rentré à temps, l'équipe R.A.S. n'appelera pas les "
-"services de secours. C'est est de la responsabilité de vos amis d'appeler les "
-"secours, s'ils l'estiment nécessaire."
+"services de secours. C'est est de la responsabilité de vos amis d'appeler "
+"les secours, s'ils l'estiment nécessaire."
 
 #: templates/RandoAmisSecours/help/qa.html:24
 msgid "2/ Reliability"
@@ -1005,7 +1018,7 @@ msgstr "Pas de sortie terminée"
 msgid "Friends Outings"
 msgstr "Sorties de vos amis"
 
-#: views/account.py:154
+#: views/account.py:155
 #, python-format
 msgid ""
 "Hello %(fullname)s,\n"
@@ -1031,19 +1044,19 @@ msgstr ""
 "-- \n"
 "L'équipe R.A.S."
 
-#: views/account.py:166
+#: views/account.py:167
 msgid "Subscription to R.A.S."
 msgstr "Inscription à R.A.S."
 
-#: views/account.py:171
+#: views/account.py:172
 msgid "Some information are missing or mistyped"
 msgstr "Certains éléments sont manquants ou malformatés"
 
-#: views/account.py:219
+#: views/account.py:220
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
 
-#: views/account.py:232
+#: views/account.py:233
 msgid "Password changed successfully"
 msgstr ""
 
