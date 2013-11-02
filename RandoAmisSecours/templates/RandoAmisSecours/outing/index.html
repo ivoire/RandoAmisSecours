@@ -25,6 +25,17 @@
 </div>
 
 <div class="row">
+  {% if messages %}
+  <div class="span12">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags|default:'error' }}">
+      <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+      <strong>{{ message.tags|default:'error'|capfirst }}:</strong> {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <div class="span12">
     {% url 'outings.create' as URL %}
     <h3>{% trans "My outings" %} <a class="btn btn-info btn-mini" href="{% url 'outings.create' %}"><i class="icon-plus-sign icon-white"></i> {% trans "new" %}</a></h3>
