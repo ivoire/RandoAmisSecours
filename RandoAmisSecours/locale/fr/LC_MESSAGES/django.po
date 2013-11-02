@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-01 18:59+0100\n"
+"POT-Creation-Date: 2013-11-02 19:55+0100\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr "brouillons"
 msgid "confirmed"
 msgstr "confirmées"
 
-#: models.py:44 templates/RandoAmisSecours/outing/index.html:64
+#: models.py:44 templates/RandoAmisSecours/outing/index.html:75
 msgid "late"
 msgstr "en retard"
 
@@ -426,15 +426,15 @@ msgstr "Envoyée"
 #: templates/RandoAmisSecours/account/profile.html:80
 #: templates/RandoAmisSecours/account/profile.html:102
 #: templates/RandoAmisSecours/account/profile.html:127
-#: templates/RandoAmisSecours/friends/search.html:43
+#: templates/RandoAmisSecours/friends/search.html:44
 #: templates/RandoAmisSecours/outing/create.html:34
 #: templates/RandoAmisSecours/outing/details.html:80
-#: templates/RandoAmisSecours/outing/index.html:43
-#: templates/RandoAmisSecours/outing/index.html:107
-#: templates/RandoAmisSecours/outing/index.html:147
-#: templates/RandoAmisSecours/outing/index.html:205
-#: templates/RandoAmisSecours/outing/index.html:241
-#: templates/RandoAmisSecours/outing/index.html:267
+#: templates/RandoAmisSecours/outing/index.html:54
+#: templates/RandoAmisSecours/outing/index.html:118
+#: templates/RandoAmisSecours/outing/index.html:158
+#: templates/RandoAmisSecours/outing/index.html:216
+#: templates/RandoAmisSecours/outing/index.html:252
+#: templates/RandoAmisSecours/outing/index.html:278
 msgid "Name"
 msgstr "Nom"
 
@@ -446,9 +446,9 @@ msgid "Phone number"
 msgstr "Numéro de téléphone"
 
 #: templates/RandoAmisSecours/account/profile.html:54
-#: templates/RandoAmisSecours/outing/index.html:79
-#: templates/RandoAmisSecours/outing/index.html:119
-#: templates/RandoAmisSecours/outing/index.html:161
+#: templates/RandoAmisSecours/outing/index.html:90
+#: templates/RandoAmisSecours/outing/index.html:130
+#: templates/RandoAmisSecours/outing/index.html:172
 msgid "delete"
 msgstr "supprimer"
 
@@ -463,17 +463,17 @@ msgstr "Etes-vous sur de vouloir supprimer «%(name)s» de votre liste d'amis ?"
 
 #: templates/RandoAmisSecours/account/profile.html:64
 #: templates/RandoAmisSecours/account/profile.html:111
-#: templates/RandoAmisSecours/outing/index.html:74
-#: templates/RandoAmisSecours/outing/index.html:89
-#: templates/RandoAmisSecours/outing/index.html:129
-#: templates/RandoAmisSecours/outing/index.html:171
+#: templates/RandoAmisSecours/outing/index.html:85
+#: templates/RandoAmisSecours/outing/index.html:100
+#: templates/RandoAmisSecours/outing/index.html:140
+#: templates/RandoAmisSecours/outing/index.html:182
 msgid "Cancel"
 msgstr "Annuler"
 
 #: templates/RandoAmisSecours/account/profile.html:65
-#: templates/RandoAmisSecours/outing/index.html:90
-#: templates/RandoAmisSecours/outing/index.html:130
-#: templates/RandoAmisSecours/outing/index.html:172
+#: templates/RandoAmisSecours/outing/index.html:101
+#: templates/RandoAmisSecours/outing/index.html:141
+#: templates/RandoAmisSecours/outing/index.html:183
 msgid "Delete"
 msgstr "Supprime"
 
@@ -509,8 +509,8 @@ msgstr "Informations"
 #: templates/RandoAmisSecours/account/profile.html:123
 #: templates/RandoAmisSecours/account/profile.html:134
 #: templates/RandoAmisSecours/outing/details.html:23
-#: templates/RandoAmisSecours/outing/index.html:79
-#: templates/RandoAmisSecours/outing/index.html:119
+#: templates/RandoAmisSecours/outing/index.html:90
+#: templates/RandoAmisSecours/outing/index.html:130
 msgid "update"
 msgstr "mettre à jour"
 
@@ -618,6 +618,10 @@ msgstr "Chercher"
 msgid "Search for friends using the field below."
 msgstr "Utilisez le champs ci-dessous pour rechercher des amis."
 
+#: templates/RandoAmisSecours/friends/search.html:58
+msgid "No matching user"
+msgstr "Pas d'utilisateur correspondant"
+
 #: templates/RandoAmisSecours/help/index.html:18
 #: templates/RandoAmisSecours/help/qa.html:14
 msgid "Questions and Answers"
@@ -658,7 +662,7 @@ msgid ""
 "This page lists the most common questions and concerns about the R.A.S. "
 "website. If your question is missing, feel free to contact the R.A.S. team."
 msgstr ""
-"Cette page liste les question les plus courantes à propos de R.A.S. Si votre "
+"Cette page liste les questions les plus courantes à propos de R.A.S. Si votre "
 "question ne s'y trouve pas, vous pouvez contacter l'équipe R.A.S."
 
 #: templates/RandoAmisSecours/help/qa.html:22
@@ -668,27 +672,26 @@ msgstr "1/ Appeler les secours"
 #: templates/RandoAmisSecours/help/qa.html:23
 msgid ""
 "If you are reported missing, the R.A.S. team will never call emergency "
-"services directly. It's your friends duty to call public services if they "
-"can't contact you."
+"services directly. It's your friends' duty to call public services only if "
+"necessary."
 msgstr ""
 "Si vous n'êtes pas rentré à temps, l'équipe R.A.S. n'appelera pas les "
-"services de secours. Ce sont vos amis qui doivent alerter les services de "
-"secours s'ils n'arrivent pas à vous joindre."
+"services de secours. C'est est de la responsabilité de vos amis d'appeler les "
+"secours, s'ils l'estiment nécessaire."
 
 #: templates/RandoAmisSecours/help/qa.html:24
 msgid "2/ Reliability"
-msgstr "3/ Fiabilité"
+msgstr "2/ Fiabilité"
 
 #: templates/RandoAmisSecours/help/qa.html:25
-#, python-format
 msgid ""
 "We are trying to get R.A.S. website as reliable as possible. The same great "
 "effort is made to keep the server hosting R.A.S. up and running. However we "
-"cannot 100%% guarantee this."
+"cannot 100% guarantee this."
 msgstr ""
-"Nous nous efforçons de rendre le site web R.A.S. aussi sur que possible. "
+"Nous nous efforçons de rendre le site web R.A.S. aussi sûr que possible. "
 "Nous essayons également de garder le serveur hébergeant R.A.S. fonctionnel. "
-"Cependant, nous il ne nous est pas possible de le garantir à 100%%."
+"Il ne nous est cependant pas possible de le garantir à 100%.."
 
 #: templates/RandoAmisSecours/help/qa.html:26
 msgid "3/ Confidentiality"
@@ -713,7 +716,7 @@ msgid ""
 "We are trying to get R.A.S. as secure and reliable as possible. However the "
 "service is provided without any warranties."
 msgstr ""
-"Nous essayons de rendre R.A.S. aussi sécurisé et sur que possible. Cependant "
+"Nous essayons de rendre R.A.S. aussi sécurisé et sûr que possible. Cependant "
 "ce service est disponible sans aucune garanties."
 
 #: templates/RandoAmisSecours/main/index.html:4
@@ -729,7 +732,7 @@ msgid "Let your friends some information about your destination."
 msgstr "Laissez à vos amis des précisions sur votre destination."
 
 #: templates/RandoAmisSecours/main/index.html:35
-#: templates/RandoAmisSecours/outing/index.html:30
+#: templates/RandoAmisSecours/outing/index.html:41
 msgid "My outings"
 msgstr "Mes sorties"
 
@@ -828,19 +831,19 @@ msgstr ""
 
 #: templates/RandoAmisSecours/outing/create.html:73
 #: templates/RandoAmisSecours/outing/details.html:57
-#: templates/RandoAmisSecours/outing/index.html:44
-#: templates/RandoAmisSecours/outing/index.html:108
-#: templates/RandoAmisSecours/outing/index.html:206
-#: templates/RandoAmisSecours/outing/index.html:242
+#: templates/RandoAmisSecours/outing/index.html:55
+#: templates/RandoAmisSecours/outing/index.html:119
+#: templates/RandoAmisSecours/outing/index.html:217
+#: templates/RandoAmisSecours/outing/index.html:253
 msgid "Begin"
 msgstr "Début"
 
 #: templates/RandoAmisSecours/outing/create.html:85
 #: templates/RandoAmisSecours/outing/details.html:59
-#: templates/RandoAmisSecours/outing/index.html:45
-#: templates/RandoAmisSecours/outing/index.html:109
-#: templates/RandoAmisSecours/outing/index.html:207
-#: templates/RandoAmisSecours/outing/index.html:243
+#: templates/RandoAmisSecours/outing/index.html:56
+#: templates/RandoAmisSecours/outing/index.html:120
+#: templates/RandoAmisSecours/outing/index.html:218
+#: templates/RandoAmisSecours/outing/index.html:254
 msgid "End"
 msgstr "Fin"
 
@@ -918,87 +921,87 @@ msgid "%(full_name)s is really late, you can try to contact him:"
 msgstr ""
 "%(full_name)s est très en retard, vous pouvez essayer de le contacter :"
 
-#: templates/RandoAmisSecours/outing/index.html:30
+#: templates/RandoAmisSecours/outing/index.html:41
 msgid "new"
 msgstr "nouveau"
 
-#: templates/RandoAmisSecours/outing/index.html:33
-#: templates/RandoAmisSecours/outing/index.html:194
+#: templates/RandoAmisSecours/outing/index.html:44
+#: templates/RandoAmisSecours/outing/index.html:205
 msgid "Current"
 msgstr "Actuelle"
 
-#: templates/RandoAmisSecours/outing/index.html:34
-#: templates/RandoAmisSecours/outing/index.html:195
+#: templates/RandoAmisSecours/outing/index.html:45
+#: templates/RandoAmisSecours/outing/index.html:206
 msgid "Draft"
 msgstr "Brouillon"
 
-#: templates/RandoAmisSecours/outing/index.html:35
-#: templates/RandoAmisSecours/outing/index.html:150
-#: templates/RandoAmisSecours/outing/index.html:196
-#: templates/RandoAmisSecours/outing/index.html:270
+#: templates/RandoAmisSecours/outing/index.html:46
+#: templates/RandoAmisSecours/outing/index.html:161
+#: templates/RandoAmisSecours/outing/index.html:207
+#: templates/RandoAmisSecours/outing/index.html:281
 msgid "Finished"
 msgstr "Terminée"
 
-#: templates/RandoAmisSecours/outing/index.html:64
+#: templates/RandoAmisSecours/outing/index.html:75
 msgid "finish"
 msgstr "cloture"
 
-#: templates/RandoAmisSecours/outing/index.html:68
+#: templates/RandoAmisSecours/outing/index.html:79
 msgid "Finishing outing"
 msgstr "Cloturer la sortie"
 
-#: templates/RandoAmisSecours/outing/index.html:71
+#: templates/RandoAmisSecours/outing/index.html:82
 #, python-format
 msgid "Confirm that you are back home safe from «%(name)s» ?"
 msgstr "Confirmer que vous êtes rentré en sureté de «%(name)s» ?"
 
-#: templates/RandoAmisSecours/outing/index.html:75
+#: templates/RandoAmisSecours/outing/index.html:86
 msgid "Finish"
 msgstr "Terminer"
 
-#: templates/RandoAmisSecours/outing/index.html:83
-#: templates/RandoAmisSecours/outing/index.html:123
-#: templates/RandoAmisSecours/outing/index.html:165
+#: templates/RandoAmisSecours/outing/index.html:94
+#: templates/RandoAmisSecours/outing/index.html:134
+#: templates/RandoAmisSecours/outing/index.html:176
 msgid "Delete outing"
 msgstr "Supprimer la sortie"
 
-#: templates/RandoAmisSecours/outing/index.html:86
-#: templates/RandoAmisSecours/outing/index.html:126
-#: templates/RandoAmisSecours/outing/index.html:168
+#: templates/RandoAmisSecours/outing/index.html:97
+#: templates/RandoAmisSecours/outing/index.html:137
+#: templates/RandoAmisSecours/outing/index.html:179
 #, python-format
 msgid "Are you sure you want to delete the outing: «%(name)s» ?"
 msgstr "Etes-vous sur de vouloir supprimer la sortie : «%(name)s» ?"
 
-#: templates/RandoAmisSecours/outing/index.html:99
-#: templates/RandoAmisSecours/outing/index.html:232
+#: templates/RandoAmisSecours/outing/index.html:110
+#: templates/RandoAmisSecours/outing/index.html:243
 msgid "No current outings"
 msgstr "Pas de sortie confirmée"
 
-#: templates/RandoAmisSecours/outing/index.html:119
+#: templates/RandoAmisSecours/outing/index.html:130
 msgid "confirm"
 msgstr "confirme"
 
-#: templates/RandoAmisSecours/outing/index.html:139
-#: templates/RandoAmisSecours/outing/index.html:258
+#: templates/RandoAmisSecours/outing/index.html:150
+#: templates/RandoAmisSecours/outing/index.html:269
 msgid "No drafts"
 msgstr "Pas de brouillon"
 
-#: templates/RandoAmisSecours/outing/index.html:148
-#: templates/RandoAmisSecours/outing/index.html:268
+#: templates/RandoAmisSecours/outing/index.html:159
+#: templates/RandoAmisSecours/outing/index.html:279
 msgid "Began"
 msgstr "Début"
 
-#: templates/RandoAmisSecours/outing/index.html:149
-#: templates/RandoAmisSecours/outing/index.html:269
+#: templates/RandoAmisSecours/outing/index.html:160
+#: templates/RandoAmisSecours/outing/index.html:280
 msgid "End planned"
 msgstr "Fin planifiée"
 
-#: templates/RandoAmisSecours/outing/index.html:181
-#: templates/RandoAmisSecours/outing/index.html:286
+#: templates/RandoAmisSecours/outing/index.html:192
+#: templates/RandoAmisSecours/outing/index.html:297
 msgid "No finished outings"
 msgstr "Pas de sortie terminée"
 
-#: templates/RandoAmisSecours/outing/index.html:191
+#: templates/RandoAmisSecours/outing/index.html:202
 msgid "Friends Outings"
 msgstr "Sorties de vos amis"
 
