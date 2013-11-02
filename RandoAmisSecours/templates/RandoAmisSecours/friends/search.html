@@ -37,6 +37,7 @@
   </div>
   <div class="span8 offset2">
     {% if query %}
+    {% if results %}
     <table class="table table-striped">
       <thead>
         <tr>
@@ -53,6 +54,9 @@
       {% endfor %}
       </tbody>
     </table>
+    {% else %}
+    <p>{% trans "No matching user" %}</p>
+    {% endif %}
     {% endif %}
   </div>
 </div>
