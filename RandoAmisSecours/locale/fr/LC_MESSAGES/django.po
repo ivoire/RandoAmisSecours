@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-02 20:29+0100\n"
+"POT-Creation-Date: 2013-11-03 17:06+0100\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -446,6 +446,7 @@ msgid "Phone number"
 msgstr "Numéro de téléphone"
 
 #: templates/RandoAmisSecours/account/profile.html:54
+#: templates/RandoAmisSecours/account/profile.html:152
 #: templates/RandoAmisSecours/outing/index.html:90
 #: templates/RandoAmisSecours/outing/index.html:130
 #: templates/RandoAmisSecours/outing/index.html:172
@@ -463,6 +464,7 @@ msgstr "Etes-vous sur de vouloir supprimer «%(name)s» de votre liste d'amis ?"
 
 #: templates/RandoAmisSecours/account/profile.html:64
 #: templates/RandoAmisSecours/account/profile.html:111
+#: templates/RandoAmisSecours/account/profile.html:162
 #: templates/RandoAmisSecours/outing/index.html:85
 #: templates/RandoAmisSecours/outing/index.html:100
 #: templates/RandoAmisSecours/outing/index.html:140
@@ -536,6 +538,9 @@ msgid "undefined"
 msgstr "non définie"
 
 #: templates/RandoAmisSecours/account/profile.html:150
+#: templates/RandoAmisSecours/account/profile.html:152
+#: templates/RandoAmisSecours/account/profile.html:156
+#: templates/RandoAmisSecours/account/profile.html:163
 msgid "Deleting my account"
 msgstr "Supprimer mon compte"
 
@@ -544,9 +549,17 @@ msgid ""
 "If you want to remove your account, just click on the folowing button. Be "
 "careful as it will permanently remove all your outings and personal data."
 msgstr ""
-"Si vous souhaitez supprimer votre compte, clicker sur le bouton ci-dessous. "
+"Si vous souhaitez supprimer votre compte, cliquer sur le bouton ci-dessous. "
 "Faites attention car l'ensemble de vos sorties ainsi que vos données "
 "personnelles seront supprimées."
+
+#: templates/RandoAmisSecours/account/profile.html:159
+msgid ""
+"Are you sure you want to delete your account? It will permanently delete all "
+"your outings along with your personal data."
+msgstr ""
+"Etes-vous certain de vouloir supprimer votre compte ? L'ensemble de vos "
+"sorties ainsi que vos données personnelles seront supprimées."
 
 #: templates/RandoAmisSecours/account/register.html:4
 #: templates/RandoAmisSecours/account/register.html:9
