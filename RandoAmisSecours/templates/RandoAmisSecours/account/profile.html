@@ -149,7 +149,20 @@
   <div class="span12">
     <h3>{% trans "Deleting my account" %}</h3>
     <p>{% trans "If you want to remove your account, just click on the folowing button. Be careful as it will permanently remove all your outings and personal data." %}</p>
-    <a class="btn btn-danger" href="{% url 'accounts.delete' %}">{% trans "Deleting my account" %}</a>
+    <a href="#deleteAccountModal" role="button" class="btn btn-danger" title="{% trans "delete" %}" data-toggle="modal">{% trans "Deleting my account" %}</a>
+    <div id="deleteAccountModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModal" arua-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+        <h3 id="deleteAccountModal">{% trans "Deleting my account" %}</h3>
+      </div>
+      <div class="modal-body">
+        <p>{% trans "Are you sure you want to delete your account? It will permanently delete all your outings along with your personal data." %}</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" arai-hidden="true">{% trans "Cancel" %}</button>
+        <a href="{% url 'accounts.delete' %}" class="btn btn-danger">{% trans "Deleting my account" %}</a>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
