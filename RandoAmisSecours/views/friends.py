@@ -39,7 +39,7 @@ def search(request):
     if query:
         if len(query) >= 3:
             results = Profile.objects.filter(Q(user__first_name__icontains=query) |
-                                             Q(user__last_name__icontains=query)).filter(~Q(user__pk=request.user.pk))
+                                             Q(user__last_name__icontains=query)).filter(~Q(user__pk=request.user.pk)).select_related()
         else:
             results = None
             error = True
