@@ -37,8 +37,7 @@ def search(request):
     query = request.GET.get('query')
     if query:
         results = Profile.objects.filter(Q(user__first_name__icontains=query) |
-                                         Q(user__last_name__icontains=query) |
-                                         Q(user__email__icontains=query)).filter(~Q(user=request.user))
+                                         Q(user__last_name__icontains=query))
     else:
         results = None
     return render_to_response('RandoAmisSecours/friends/search.html', {'query': query, 'results': results}, context_instance=RequestContext(request))
