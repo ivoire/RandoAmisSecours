@@ -35,12 +35,18 @@ from RandoAmisSecours.models import Profile, FriendRequest
 @login_required
 def search(request):
     query = request.GET.get('query')
+    error = False
     if query:
-        results = Profile.objects.filter(Q(user__first_name__icontains=query) |
-                                         Q(user__last_name__icontains=query)).filter(~Q(user__pk=request.user.pk))
+        if len(query) >= 3:
+            results = Profile.objects.filter(Q(user__first_name__icontains=query) |
+                                             Q(user__last_name__icontains=query)).filter(~Q(user__pk=request.user.pk))
+        else:
+            results = None
+            error = True
     else:
         results = None
-    return render_to_response('RandoAmisSecours/friends/search.html', {'query': query, 'results': results}, context_instance=RequestContext(request))
+    return render_to_response('RandoAmisSecours/friends/search.html', {'query': query, 'results': results, 'error': error},
+                              context_instance=RequestContext(request))
 
 
 @login_required

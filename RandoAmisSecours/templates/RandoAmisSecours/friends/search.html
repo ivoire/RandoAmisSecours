@@ -29,14 +29,21 @@
   <div class="span8 offset2">
     <p>{% trans "Search for friends using the field below." %}</p>
     <form action="." method="get" class="form-search">
-      <div class="input-append">
-        <input type="text" name="query" class="input-medium search-query" autofocus="autofocus" placeholder="{% trans "Search" %}">
-        <button type="submit" class="btn"><i class="icon-search"></i></button>
+      <div class="control-group{% if error %} error{% endif %}">
+        <div class="controls">
+          <div class="input-append">
+            <input type="text" name="query" class="input-medium search-query" autofocus="autofocus" placeholder="{% trans "Search" %}">
+            <button type="submit" class="btn"><i class="icon-search"></i></button>
+          </div>
+          {% if error %}
+          <span class="help-inline">{% trans "The query should be at least 3 characters long." %}</span>
+          {% endif %}
+        </div>
       </div>
     </form>
   </div>
   <div class="span8 offset2">
-    {% if query %}
+    {% if query and not error %}
     {% if results %}
     <table class="table table-striped">
       <thead>

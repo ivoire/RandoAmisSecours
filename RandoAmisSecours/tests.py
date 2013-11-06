@@ -183,12 +183,14 @@ class FriendsTest(TestCase):
         ctx = response.context
         self.assertEqual(ctx['query'], None)
         self.assertEqual(ctx['results'], None)
+        self.assertFalse(ctx['error'])
 
         # An empty query
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), ''))
         ctx = response.context
         self.assertEqual(ctx['query'], '')
         self.assertEqual(ctx['results'], None)
+        self.assertFalse(ctx['error'])
 
         # Match on queries
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'sop'))
@@ -196,48 +198,50 @@ class FriendsTest(TestCase):
         self.assertEqual(ctx['query'], 'sop')
         self.assertEqual(len(ctx['results']), 1)
         self.assertEqual(ctx['results'][0], self.user3.profile)
+        self.assertFalse(ctx['error'])
 
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'Sopho'))
         ctx = response.context
         self.assertEqual(ctx['query'], 'Sopho')
         self.assertEqual(len(ctx['results']), 1)
         self.assertEqual(ctx['results'][0], self.user3.profile)
+        self.assertFalse(ctx['error'])
 
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'S'))
         ctx = response.context
         self.assertEqual(ctx['query'], 'S')
-        self.assertEqual(len(ctx['results']), 2)
-        self.assertEqual(ctx['results'][0], self.user2.profile)
-        self.assertEqual(ctx['results'][1], self.user3.profile)
+        self.assertEqual(ctx['results'], None)
+        self.assertTrue(ctx['error'])
 
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'alpha'))
         ctx = response.context
         self.assertEqual(ctx['query'], 'alpha')
         self.assertEqual(len(ctx['results']), 1)
         self.assertEqual(ctx['results'][0], self.user2.profile)
+        self.assertFalse(ctx['error'])
 
         # Does not match the requester
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'ras'))
         ctx = response.context
         self.assertEqual(ctx['query'], 'ras')
         self.assertEqual(len(ctx['results']), 0)
+        self.assertFalse(ctx['error'])
 
         # match the emails
         response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'project.org'))
         ctx = response.context
         self.assertEqual(ctx['query'], 'project.org')
-        self.assertEqual(len(ctx['results']), 2)
-        self.assertEqual(ctx['results'][0], self.user2.profile)
-        self.assertEqual(ctx['results'][1], self.user3.profile)
+        self.assertEqual(len(ctx['results']), 0)
+        self.assertFalse(ctx['error'])
 
         # Change the logged-in user
         self.client.login(username='tester', password='ertyfjnbfvfceqsryuj')
-        response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'S'))
+        response = self.client.get("%s?query=%s" % (reverse('friends.search'), 'Sec'))
         ctx = response.context
-        self.assertEqual(ctx['query'], 'S')
-        self.assertEqual(len(ctx['results']), 2)
+        self.assertEqual(ctx['query'], 'Sec')
+        self.assertEqual(len(ctx['results']), 1)
         self.assertEqual(ctx['results'][0], self.user1.profile)
-        self.assertEqual(ctx['results'][1], self.user3.profile)
+        self.assertFalse(ctx['error'])
 
     def test_invite(self):
         response = self.client.get(reverse('friends.invite', args=[self.user1.profile.pk]))
