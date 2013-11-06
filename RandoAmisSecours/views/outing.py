@@ -71,7 +71,7 @@ def index(request):
     user_outings_draft = user_outings.filter(status=DRAFT)
     user_outings_finished = user_outings.filter(status=FINISHED)
 
-    friends_outings = Outing.objects.filter(user__profile__in=request.user.profile.friends.all())
+    friends_outings = Outing.objects.filter(user__profile__in=request.user.profile.friends.all()).select_related()
     friends_outings_confirmed = friends_outings.filter(status=CONFIRMED)
     friends_outings_draft = friends_outings.filter(status=DRAFT)
     friends_outings_finished = friends_outings.filter(status=FINISHED)
