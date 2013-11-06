@@ -38,7 +38,8 @@
     </div>
     <div class="tab-content">
       <div class="tab-pane active" id="friends">
-        {% if user.profile.friends.all %}
+        {% with user.profile.friends.all.select_related as friends %}
+        {% if friends %}
         <table class="table table-striped">
           <thead>
             <tr>
@@ -47,7 +48,7 @@
               <th></th>
             </tr>
           </thead>
-          {% for friend in user.profile.friends.all %}
+          {% for friend in friends %}
           <tr>
             <td>{{ friend.user.get_full_name }}</td>
             <td>{% if friend.phone_number %}<a href="tel:{{ friend.phone_number }}">{{ friend.phone_number }}</a>{% else %}?{% endif %}</td>
@@ -71,6 +72,7 @@
         {% else %}
         <p>{% trans "You don't have friends here for the moment." %}</p>
         {% endif %}
+        {% endwith %}
       </div>
       <div class="tab-pane" id="received">
         {% if friend_requests %}
