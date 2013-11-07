@@ -32,7 +32,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.forms import ModelForm
 from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
+from django.template import loader, RequestContext
 from django.utils import translation
 from django.utils.translation import ugettext as _
 
@@ -152,17 +152,10 @@ def register(request):
         user_form = RASUserCreationForm(request.POST)
         if user_form.is_valid():
             new_user = user_form.save()
-            email_body = _("""Hello %(fullname)s,
-
-Thanks for registering to R.A.S.
-In order to activate your account, click on the confirmation link: %(URL)s.
-
-If you haven't registered to R.A.S., just delete this mail and the registration will be canceled.
-
--- 
-The R.A.S. team""") % {'URL': request.build_absolute_uri(reverse('accounts.register.confirm',
+            ctx = {'URL': request.build_absolute_uri(reverse('accounts.register.confirm',
                                                              args=[new_user.pk, new_user.profile.hash_id])),
                    'fullname': new_user.get_full_name()}
+            email_body = loader.render_to_string('RandoAmisSecours/account/register_email.html', ctx)
 
             send_mail(_('Subscription to R.A.S.'), email_body,
                     settings.DEFAULT_FROM_EMAIL,
