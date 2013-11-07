@@ -23,6 +23,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
+from django.template import loader
 from django.utils.timezone import datetime, utc
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
@@ -72,17 +73,10 @@ class Command(BaseCommand):
                     # send a mail to the user, translated into the right language
                     if outing.user.profile.language:
                         translation.activate(outing.user.profile.language)
-                    body = _("""
-Hello,
 
-you are late from you outing %(URL)s.
-
-If you are back home safe, please click on %(SAFE_URL)s.
-
--- 
-The R.A.S team""") % {'fullname': outing.user.get_full_name(),
-                      'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
-                      'SAFE_URL': reverse('outings.finish', args=[outing.pk])}
+                    ctx = {'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
+                           'SAFE_URL': reverse('outings.finish', args=[outing.pk])}
+                    body = loader.render_to_string('RandoAmisSecours/alert/late.html', ctx)
                     send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [outing.user.email])
                     if outing.user.profile.language:
                         translation.deactivate()
@@ -99,16 +93,10 @@ The R.A.S team""") % {'fullname': outing.user.get_full_name(),
                     for friend_profile in outing.user.profile.friends.all():
                         if friend_profile.language:
                             translation.activate(friend_profile.language)
-                        body = _("""
-Hello,
+                        ctx = {'fullname': outing.user.get_full_name(),
+                               'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk]))}
+                        body = loader.render_to_string('RandoAmisSecours/alert/alert.html', ctx)
 
-%(fullname)s is late from his outing %(URL)s.
-
-You can try to contact him to get more information about the situation.
-
--- 
-The R.A.S team""") % {'fullname': outing.user.get_full_name(),
-                      'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk]))}
                         send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [friend_profile.user.email])
                         if friend_profile.language:
                             translation.deactivate()
