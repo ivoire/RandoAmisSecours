@@ -29,6 +29,7 @@ from django.utils.timezone import datetime, utc
 from django.utils.translation import ugettext_noop as _
 
 import binascii
+import pytz
 import os
 
 
@@ -62,6 +63,7 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=30, blank=True, null=True)
     hash_id = models.CharField(unique=True, max_length=30, default=random_hash)
     language = models.CharField(max_length=4, blank=True, null=True, choices=settings.LANGUAGES)
+    timezone = models.CharField(max_length=40, choices=[(tz, tz) for tz in pytz.all_timezones], default='UTC')
 
     def __str__(self):
         return "%s" % (self.user)
@@ -69,10 +71,14 @@ class Profile(models.Model):
 
 @receiver(user_logged_in)
 def set_profile_info(sender, **kwargs):
-    """ Set the languages if defined in the profile """
+    """ Set language and timezone if defined in the profile """
     language = kwargs['user'].profile.language
     if language:
         kwargs['request'].session['django_language'] = language
+
+    timezone = kwargs['user'].profile.timezone
+    if timezone:
+        kwargs['request'].session['django_timezone'] = timezone
 
 
 @python_2_unicode_compatible
