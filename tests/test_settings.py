@@ -31,6 +31,7 @@ SECRET_KEY = 'secretsecretsecretsecretsecretsecretsecretsecret00'
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'RandoAmisSecours.middleware.TimezoneMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
