@@ -24,6 +24,7 @@ from django.core.mail import send_mail
 from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
 from django.template import loader
+from django.utils import timezone
 from django.utils.timezone import datetime, utc
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
@@ -31,6 +32,7 @@ from django.utils.translation import ugettext_lazy as _
 from RandoAmisSecours.models import Outing, Profile, CONFIRMED
 
 from optparse import make_option
+import pytz
 
 
 class Command(BaseCommand):
@@ -73,10 +75,13 @@ class Command(BaseCommand):
                     # send a mail to the user, translated into the right language
                     if outing.user.profile.language:
                         translation.activate(outing.user.profile.language)
+                    if friend_profile.timezone:
+                        timezone.activate(pytz.timezone(friend_profile.timezone))
 
                     ctx = {'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
                            'SAFE_URL': reverse('outings.finish', args=[outing.pk])}
                     body = loader.render_to_string('RandoAmisSecours/alert/late.html', ctx)
+
                     send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [outing.user.email])
                     if outing.user.profile.language:
                         translation.deactivate()
@@ -93,6 +98,9 @@ class Command(BaseCommand):
                     for friend_profile in outing.user.profile.friends.all():
                         if friend_profile.language:
                             translation.activate(friend_profile.language)
+                        if friend_profile.timezone:
+                            timezone.activate(pytz.timezone(friend_profile.timezone))
+
                         ctx = {'fullname': outing.user.get_full_name(),
                                'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk]))}
                         body = loader.render_to_string('RandoAmisSecours/alert/alert.html', ctx)
