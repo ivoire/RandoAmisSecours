@@ -17,6 +17,9 @@ written in requirements.txt. If you use virtualenv and pip, just type:
 RandoAmisSecours also uses *django.contrib.humanize* which should be present
 in the INSTALLED_APPS.
 
+In order for timezones to work, you should install the TimezoneMiddleware. Add
+*RandoAmisSecours.middleware.TimezoneMiddleware* to your *MIDDLEWARE_CLASSES*.
+
 
 Translation
 -----------
