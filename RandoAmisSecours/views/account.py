@@ -38,6 +38,8 @@ from django.utils.translation import ugettext as _
 
 from RandoAmisSecours.models import Profile, FriendRequest, CONFIRMED, DRAFT, LATE, FINISHED
 
+import pytz
+
 
 class RASAuthenticationForm(AuthenticationForm):
     """
@@ -144,7 +146,7 @@ class RASUserUpdateForm(ModelForm):
 class RASProfileUpdateForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ('phone_number', 'language')
+        fields = ('phone_number', 'language', 'timezone')
 
 
 def register(request):
@@ -208,6 +210,7 @@ def update(request):
             # Update the language code and activate it for the message
             if profile.language:
                 request.session['django_language'] = profile.language
+                request.session['django_timezone'] = pytz.timezone(profile.timezone)
                 translation.activate(profile.language)
             # Print the message
             messages.success(request, _("Personnal information updated"))
