@@ -102,7 +102,9 @@ class Command(BaseCommand):
                             timezone.activate(pytz.timezone(friend_profile.timezone))
 
                         ctx = {'fullname': outing.user.get_full_name(),
-                               'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk]))}
+                               'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
+                               'name': outing.name,
+                               'ending': outing.ending}
                         body = loader.render_to_string('RandoAmisSecours/alert/alert.html', ctx)
 
                         send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [friend_profile.user.email])

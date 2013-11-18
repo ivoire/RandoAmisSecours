@@ -1,8 +1,10 @@
 {% load i18n %}{% blocktrans %}Hello,
 
-{{ fullname }} is late from his outing {{ URL }}.
+{{ fullname }} is late from his outing «{{ name }}», that was supposed to finish {{ ending }}.
 
-You can try to contact him to get more information about the situation.
+For more information about the outing, visit: {{ URL }}.
+
+You can also try to contact {{ fullname }} to get more information about the situation.
 
 -- 
 The R.A.S team{% endblocktrans %}
