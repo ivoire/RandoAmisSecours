@@ -1,6 +1,5 @@
 {% extends 'RandoAmisSecours/base.html' %}
-{% load static %}
-{% load i18n %}
+{% load static i18n %}
 
 {% block title %}{{ update|yesno:_("Update,New outing") }}{% endblock %}
 
@@ -68,7 +67,7 @@
         </div>
       </div>
       <div class="span6">
-        <h4 class="modal-header">{% trans "Timing" %}</h4>
+        <h4 class="modal-header">{% blocktrans with user.profile.timezone as TIME_ZONE %}Timing (in {{ TIME_ZONE }}){% endblocktrans %}</h4>
         <div class="control-group{% if form.beginning.errors %} error{% endif %}">
           <label class="control-label" for="id_beginning">{% trans "Begin" %}</label>
           <div class="controls">
