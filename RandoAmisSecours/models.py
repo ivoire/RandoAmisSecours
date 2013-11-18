@@ -76,9 +76,9 @@ def set_profile_info(sender, **kwargs):
     if language:
         kwargs['request'].session['django_language'] = language
 
-    timezone = kwargs['user'].profile.timezone
-    if timezone:
-        kwargs['request'].session['django_timezone'] = timezone
+    tz = kwargs['user'].profile.timezone
+    if tz:
+        kwargs['request'].session['django_timezone'] = pytz.timezone(tz)
 
 
 @python_2_unicode_compatible
