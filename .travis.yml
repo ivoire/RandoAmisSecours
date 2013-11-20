@@ -8,6 +8,7 @@ python:
 
 install:
     - pip install -q -r requirements.txt --use-mirrors
+    - pip install -q --use-mirrors pep8
 
 script:
     - ./tests/manage.py test RandoAmisSecours
