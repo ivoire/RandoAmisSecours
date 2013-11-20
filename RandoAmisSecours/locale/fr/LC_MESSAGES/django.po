@@ -926,7 +926,7 @@ msgstr "Latitude"
 
 #: templates/RandoAmisSecours/outing/create.html:60 views/outing.py:46
 msgid "Longitude"
-msgstr "Logitude"
+msgstr "Longitude"
 
 #: templates/RandoAmisSecours/outing/create.html:70
 #, python-format
