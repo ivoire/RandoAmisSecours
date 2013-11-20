@@ -11,3 +11,4 @@ install:
 
 script:
     - ./tests/manage.py test RandoAmisSecours
+    - pep8 --statistics RandoAmisSecours
