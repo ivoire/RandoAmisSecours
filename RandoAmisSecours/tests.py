@@ -396,7 +396,7 @@ class OutingsTest(TestCase):
         self.user1.first_name = 'Alpha'
         self.user1.last_name = 'Tester'
         self.user1.save()
-        self.user1.profile = Profile.objects.create(user=self.user1)
+        self.user1.profile = Profile.objects.create(user=self.user1, timezone='Europe/Paris')
         self.client.login(username='alpha', password='12789azertyuiop')
 
         self.user2 = User.objects.create_user('Beta',
@@ -405,7 +405,7 @@ class OutingsTest(TestCase):
         self.user2.first_name = 'Beta'
         self.user2.last_name = 'Testing'
         self.user2.save()
-        self.user2.profile = Profile.objects.create(user=self.user2)
+        self.user2.profile = Profile.objects.create(user=self.user2, timezone='Europe/London')
 
         self.user3 = User.objects.create_user('Gamma',
                                               'gamma@example.net',
@@ -413,7 +413,7 @@ class OutingsTest(TestCase):
         self.user3.first_name = 'Gamma'
         self.user3.last_name = 'Ray'
         self.user3.save()
-        self.user3.profile = Profile.objects.create(user=self.user3)
+        self.user3.profile = Profile.objects.create(user=self.user3, timezone='America/Chicago')
 
         # user1 and user2 are friends
         self.user1.profile.friends.add(self.user2.profile)
@@ -607,3 +607,92 @@ class OutingsTest(TestCase):
         response = self.client.get(reverse('outings.delete', args=[self.outing5.pk]))
         self.assertRedirects(response, reverse('outings.index'))
         self.assertEqual(Outing.objects.get(pk=self.outing5.pk).status, DRAFT)
+
+    def test_create(self):
+        # Initial state
+        response = self.client.get(reverse('outings.index'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+
+        self.assertEqual(len(ctx['user_outings_confirmed']), 1)
+        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
+        self.assertEqual(len(ctx['user_outings_draft']), 1)
+        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(len(ctx['user_outings_finished']), 1)
+        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
+        self.assertEqual(len(ctx['friends_outings_draft']), 0)
+        self.assertEqual(len(ctx['friends_outings_finished']), 1)
+        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+
+        # Test errors
+        response = self.client.post(reverse('outings.create'), {})
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertNotEqual(ctx['form']['name'].errors, None)
+        self.assertNotEqual(ctx['form']['description'].errors, None)
+        self.assertNotEqual(ctx['form']['beginning'].errors, None)
+        self.assertNotEqual(ctx['form']['ending'].errors, None)
+        self.assertNotEqual(ctx['form']['alert'].errors, None)
+        self.assertNotEqual(ctx['form']['latitude'].errors, None)
+        self.assertNotEqual(ctx['form']['longitude'].errors, None)
+
+        data = {'name': 'Les Drus',
+                'description': 'Les fameux Drus',
+                'beginning': datetime(2013, 10, 11, 14, 0),
+                'ending': datetime(2013, 10, 11, 4, 0),
+                'alert': datetime(2013, 10, 11, 2, 0),
+                'latitude': 45.93194945945032,
+                'longitude': 6.956169605255127}
+        response = self.client.post(reverse('outings.create'), data)
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertEqual(ctx['form']['name'].errors, [])
+        self.assertEqual(ctx['form']['description'].errors, [])
+        self.assertNotEqual(ctx['form']['beginning'].errors, [])
+        self.assertNotEqual(ctx['form']['ending'].errors, None)
+        self.assertNotEqual(ctx['form']['alert'].errors, None)
+        self.assertEqual(ctx['form']['latitude'].errors, [])
+        self.assertEqual(ctx['form']['longitude'].errors, [])
+
+        # Create a good sample
+        data = {'name': 'Les Drus',
+                'description': 'Les fameux Drus',
+                'beginning': datetime(2013, 10, 11, 4, 0),
+                'ending': datetime(2013, 10, 11, 14, 0),
+                'alert': datetime(2013, 10, 11, 18, 0),
+                'latitude': 45.93194945945032,
+                'longitude': 6.956169605255127}
+        response = self.client.post(reverse('outings.create'), data)
+        outing = Outing.objects.get(name='Les Drus')
+        self.assertRedirects(response, reverse('outings.details', args=[outing.pk]))
+
+        self.assertEqual(outing.beginning, datetime(2013, 10, 11, 2, 0).replace(tzinfo=utc))
+        self.assertEqual(outing.ending, datetime(2013, 10, 11, 12, 0).replace(tzinfo=utc))
+        self.assertEqual(outing.alert, datetime(2013, 10, 11, 16, 0).replace(tzinfo=utc))
+
+        # Create the same sample from another user
+        # Create a good sample
+        self.client.logout()
+        self.client.login(username='Beta', password='ertyfjnbfvfceqsryuj')
+        data = {'name': 'Les Drus',
+                'description': 'Les fameux Drus une seconde fois',
+                'beginning': datetime(2013, 10, 11, 4, 0),
+                'ending': datetime(2013, 10, 11, 14, 0),
+                'alert': datetime(2013, 10, 11, 18, 0),
+                'latitude': 45.93194945945032,
+                'longitude': 6.956169605255127}
+        response = self.client.post(reverse('outings.create'), data)
+        outing = Outing.objects.get(name='Les Drus', user=self.user2)
+        self.assertRedirects(response, reverse('outings.details', args=[outing.pk]))
+
+        self.assertEqual(outing.beginning, datetime(2013, 10, 11, 3, 0).replace(tzinfo=utc))
+        self.assertEqual(outing.ending, datetime(2013, 10, 11, 13, 0).replace(tzinfo=utc))
+        self.assertEqual(outing.alert, datetime(2013, 10, 11, 17, 0).replace(tzinfo=utc))
+
+    def test_update(self):
+        # Test the errors
+        response = self.client.post(reverse('outings.update', args=[self.outing5.pk]))
+        self.assertEqual(response.status_code, 302)
+        response = self.client.post(reverse('outings.update', args=[self.outing3.pk]))
+        self.assertEqual(response.status_code, 404)
