@@ -62,7 +62,7 @@ class TemplatesTest(TestCase):
 
     def test_profile(self):
         self.helper_template(reverse('accounts.register'), 'account/register.html')
-        self.helper_template(reverse('accounts.register.confirm', args=[1, self.user.profile.hash_id]), 'account/confirm.html')
+        self.helper_template(reverse('accounts.register.confirm', args=[self.user.pk, self.user.profile.hash_id]), 'account/confirm.html')
         self.helper_template(reverse('accounts.profile'), 'account/profile.html')
         self.helper_template(reverse('accounts.profile.update'), 'account/update.html')
         self.helper_template(reverse('accounts.password_reset_done'), 'account/password_reset_done.html')
