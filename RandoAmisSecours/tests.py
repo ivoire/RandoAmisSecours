@@ -442,15 +442,15 @@ class OutingsTest(TestCase):
         ctx = response.context
 
         self.assertEqual(len(ctx['user_outings_confirmed']), 1)
-        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
+        self.assertEqual(ctx['user_outings_confirmed'][0].pk, self.outing1.pk)
         self.assertEqual(len(ctx['user_outings_draft']), 1)
-        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(ctx['user_outings_draft'][0].pk, self.outing2.pk)
         self.assertEqual(len(ctx['user_outings_finished']), 1)
-        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(ctx['user_outings_finished'][0].pk, self.outing3.pk)
         self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
         self.assertEqual(len(ctx['friends_outings_draft']), 0)
         self.assertEqual(len(ctx['friends_outings_finished']), 1)
-        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+        self.assertEqual(ctx['friends_outings_finished'][0].pk, self.outing4.pk)
 
     def test_details(self):
         response = self.client.get(reverse('outings.details', args=[self.outing1.pk]))
@@ -475,15 +475,15 @@ class OutingsTest(TestCase):
         ctx = response.context
 
         self.assertEqual(len(ctx['user_outings_confirmed']), 1)
-        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
+        self.assertEqual(ctx['user_outings_confirmed'][0].pk, self.outing1.pk)
         self.assertEqual(len(ctx['user_outings_draft']), 1)
-        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(ctx['user_outings_draft'][0].pk, self.outing2.pk)
         self.assertEqual(len(ctx['user_outings_finished']), 1)
-        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(ctx['user_outings_finished'][0].pk, self.outing3.pk)
         self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
         self.assertEqual(len(ctx['friends_outings_draft']), 0)
         self.assertEqual(len(ctx['friends_outings_finished']), 1)
-        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+        self.assertEqual(ctx['friends_outings_finished'][0].pk, self.outing4.pk)
 
         # Confirm one outing
         response = self.client.get(reverse('outings.confirm', args=[self.outing2.pk]))
@@ -494,15 +494,15 @@ class OutingsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         ctx = response.context
         self.assertEqual(len(ctx['user_outings_confirmed']), 2)
-        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
-        self.assertEqual(ctx['user_outings_confirmed'][1], self.outing2)
+        self.assertEqual(ctx['user_outings_confirmed'][0].pk, self.outing1.pk)
+        self.assertEqual(ctx['user_outings_confirmed'][1].pk, self.outing2.pk)
         self.assertEqual(len(ctx['user_outings_draft']), 0)
         self.assertEqual(len(ctx['user_outings_finished']), 1)
-        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(ctx['user_outings_finished'][0].pk, self.outing3.pk)
         self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
         self.assertEqual(len(ctx['friends_outings_draft']), 0)
         self.assertEqual(len(ctx['friends_outings_finished']), 1)
-        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+        self.assertEqual(ctx['friends_outings_finished'][0].pk, self.outing4.pk)
 
         # Cannot confirm others outings
         response = self.client.get(reverse('outings.confirm', args=[self.outing5.pk]))
@@ -516,15 +516,15 @@ class OutingsTest(TestCase):
         ctx = response.context
 
         self.assertEqual(len(ctx['user_outings_confirmed']), 1)
-        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
+        self.assertEqual(ctx['user_outings_confirmed'][0].pk, self.outing1.pk)
         self.assertEqual(len(ctx['user_outings_draft']), 1)
-        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(ctx['user_outings_draft'][0].pk, self.outing2.pk)
         self.assertEqual(len(ctx['user_outings_finished']), 1)
-        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(ctx['user_outings_finished'][0].pk, self.outing3.pk)
         self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
         self.assertEqual(len(ctx['friends_outings_draft']), 0)
         self.assertEqual(len(ctx['friends_outings_finished']), 1)
-        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+        self.assertEqual(ctx['friends_outings_finished'][0].pk, self.outing4.pk)
 
         # Confirm one outing
         response = self.client.get(reverse('outings.finish', args=[self.outing1.pk]))
@@ -536,14 +536,14 @@ class OutingsTest(TestCase):
         ctx = response.context
         self.assertEqual(len(ctx['user_outings_confirmed']), 0)
         self.assertEqual(len(ctx['user_outings_draft']), 1)
-        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(ctx['user_outings_draft'][0].pk, self.outing2.pk)
         self.assertEqual(len(ctx['user_outings_finished']), 2)
-        self.assertEqual(ctx['user_outings_finished'][0], self.outing1)
-        self.assertEqual(ctx['user_outings_finished'][1], self.outing3)
+        self.assertEqual(ctx['user_outings_finished'][0].pk, self.outing1.pk)
+        self.assertEqual(ctx['user_outings_finished'][1].pk, self.outing3.pk)
         self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
         self.assertEqual(len(ctx['friends_outings_draft']), 0)
         self.assertEqual(len(ctx['friends_outings_finished']), 1)
-        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+        self.assertEqual(ctx['friends_outings_finished'][0].pk, self.outing4.pk)
 
         # Cannot finish others outings
         response = self.client.get(reverse('outings.finish', args=[self.outing5.pk]))
@@ -557,15 +557,15 @@ class OutingsTest(TestCase):
         ctx = response.context
 
         self.assertEqual(len(ctx['user_outings_confirmed']), 1)
-        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
+        self.assertEqual(ctx['user_outings_confirmed'][0].pk, self.outing1.pk)
         self.assertEqual(len(ctx['user_outings_draft']), 1)
-        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(ctx['user_outings_draft'][0].pk, self.outing2.pk)
         self.assertEqual(len(ctx['user_outings_finished']), 1)
-        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(ctx['user_outings_finished'][0].pk, self.outing3.pk)
         self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
         self.assertEqual(len(ctx['friends_outings_draft']), 0)
         self.assertEqual(len(ctx['friends_outings_finished']), 1)
-        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+        self.assertEqual(ctx['friends_outings_finished'][0].pk, self.outing4.pk)
 
         # Confirm one outing
         response = self.client.get(reverse('outings.delete', args=[self.outing1.pk]))
@@ -577,13 +577,13 @@ class OutingsTest(TestCase):
         ctx = response.context
         self.assertEqual(len(ctx['user_outings_confirmed']), 0)
         self.assertEqual(len(ctx['user_outings_draft']), 1)
-        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(ctx['user_outings_draft'][0].pk, self.outing2.pk)
         self.assertEqual(len(ctx['user_outings_finished']), 1)
-        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(ctx['user_outings_finished'][0].pk, self.outing3.pk)
         self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
         self.assertEqual(len(ctx['friends_outings_draft']), 0)
         self.assertEqual(len(ctx['friends_outings_finished']), 1)
-        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+        self.assertEqual(ctx['friends_outings_finished'][0].pk, self.outing4.pk)
 
         # delete more
         response = self.client.get(reverse('outings.delete', args=[self.outing2.pk]))
@@ -601,7 +601,7 @@ class OutingsTest(TestCase):
         self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
         self.assertEqual(len(ctx['friends_outings_draft']), 0)
         self.assertEqual(len(ctx['friends_outings_finished']), 1)
-        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+        self.assertEqual(ctx['friends_outings_finished'][0].pk, self.outing4.pk)
 
         # cannot delete others outings
         response = self.client.get(reverse('outings.delete', args=[self.outing5.pk]))
@@ -615,15 +615,15 @@ class OutingsTest(TestCase):
         ctx = response.context
 
         self.assertEqual(len(ctx['user_outings_confirmed']), 1)
-        self.assertEqual(ctx['user_outings_confirmed'][0], self.outing1)
+        self.assertEqual(ctx['user_outings_confirmed'][0].pk, self.outing1.pk)
         self.assertEqual(len(ctx['user_outings_draft']), 1)
-        self.assertEqual(ctx['user_outings_draft'][0], self.outing2)
+        self.assertEqual(ctx['user_outings_draft'][0].pk, self.outing2.pk)
         self.assertEqual(len(ctx['user_outings_finished']), 1)
-        self.assertEqual(ctx['user_outings_finished'][0], self.outing3)
+        self.assertEqual(ctx['user_outings_finished'][0].pk, self.outing3.pk)
         self.assertEqual(len(ctx['friends_outings_confirmed']), 0)
         self.assertEqual(len(ctx['friends_outings_draft']), 0)
         self.assertEqual(len(ctx['friends_outings_finished']), 1)
-        self.assertEqual(ctx['friends_outings_finished'][0], self.outing4)
+        self.assertEqual(ctx['friends_outings_finished'][0].pk, self.outing4.pk)
 
         # Test errors
         response = self.client.post(reverse('outings.create'), {})
