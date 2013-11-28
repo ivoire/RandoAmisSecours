@@ -24,3 +24,15 @@ install:
 script:
     - ./tests/manage.py test RandoAmisSecours
     - pep8 --statistics RandoAmisSecours
+
+# Exclude some combinations as:
+# - mysql-python does not work under python3
+# - psycopg2 does not work under pypy
+matrix:
+    exclude:
+        - python: "3.2"
+          env: DB=mysql
+        - python: "3.3"
+          env: DB=mysql
+        - python: "pypy"
+          env: DB=pgsql
