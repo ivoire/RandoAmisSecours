@@ -24,9 +24,8 @@ from django.core.mail import send_mail
 from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
 from django.template import loader
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.utils.timezone import datetime, utc
-from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
 from RandoAmisSecours.models import Outing, Profile, CONFIRMED
@@ -75,14 +74,16 @@ class Command(BaseCommand):
                     # send a mail to the user, translated into the right language
                     if outing.user.profile.language:
                         translation.activate(outing.user.profile.language)
-                    if friend_profile.timezone:
-                        timezone.activate(pytz.timezone(friend_profile.timezone))
+                    if outing.user.profile.timezone:
+                        timezone.activate(pytz.timezone(outing.user.profile.timezone))
 
                     ctx = {'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
                            'SAFE_URL': reverse('outings.finish', args=[outing.pk])}
                     body = loader.render_to_string('RandoAmisSecours/alert/late.html', ctx)
 
                     send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [outing.user.email])
+                    if outing.user.profile.timezone:
+                        timezone.deactivate()
                     if outing.user.profile.language:
                         translation.deactivate()
 
@@ -108,5 +109,7 @@ class Command(BaseCommand):
                         body = loader.render_to_string('RandoAmisSecours/alert/alert.html', ctx)
 
                         send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [friend_profile.user.email])
+                        if friend_profile.timezone:
+                            timezone.deactivate()
                         if friend_profile.language:
                             translation.deactivate()
