@@ -418,22 +418,26 @@ class OutingsTest(TestCase):
         # user1 and user2 are friends
         self.user1.profile.friends.add(self.user2.profile)
 
-        current_time = datetime.utcnow().replace(tzinfo=utc)
+        date = datetime(2011, 02, 15, 02, 0).replace(tzinfo=utc)
         # 3 outings for user1, and one for each user 2 and user3
-        self.outing1 = Outing.objects.create(user=self.user1, beginning=current_time,
-                                             ending=current_time, alert=current_time,
+        self.outing1 = Outing.objects.create(user=self.user1, beginning=date,
+                                             ending=date, alert=date,
                                              latitude=1, longitude=1, status=CONFIRMED)
-        self.outing2 = Outing.objects.create(user=self.user1, beginning=current_time,
-                                             ending=current_time, alert=current_time,
+        date = datetime(2011, 02, 15, 02, 10).replace(tzinfo=utc)
+        self.outing2 = Outing.objects.create(user=self.user1, beginning=date,
+                                             ending=date, alert=date,
                                              latitude=1, longitude=1, status=DRAFT)
-        self.outing3 = Outing.objects.create(user=self.user1, beginning=current_time,
-                                             ending=current_time, alert=current_time,
+        date = datetime(2012, 11, 01, 06, 30).replace(tzinfo=utc)
+        self.outing3 = Outing.objects.create(user=self.user1, beginning=date,
+                                             ending=date, alert=date,
                                              latitude=1, longitude=1, status=FINISHED)
-        self.outing4 = Outing.objects.create(user=self.user2, beginning=current_time,
-                                             ending=current_time, alert=current_time,
+        date = datetime(2013, 04, 10, 22, 0).replace(tzinfo=utc)
+        self.outing4 = Outing.objects.create(user=self.user2, beginning=date,
+                                             ending=date, alert=date,
                                              latitude=1, longitude=1, status=FINISHED)
-        self.outing5 = Outing.objects.create(user=self.user3, beginning=current_time,
-                                             ending=current_time, alert=current_time,
+        date = datetime(2014, 02, 1, 8, 0).replace(tzinfo=utc)
+        self.outing5 = Outing.objects.create(user=self.user3, beginning=date,
+                                             ending=date, alert=date,
                                              latitude=1, longitude=1, status=DRAFT)
 
     def test_index(self):
