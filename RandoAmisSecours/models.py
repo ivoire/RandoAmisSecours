@@ -21,9 +21,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.auth.signals import user_logged_in
 from django.db import models
-from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import datetime, utc
 from django.utils.translation import ugettext_noop as _
@@ -67,18 +65,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return "%s" % (self.user)
-
-
-@receiver(user_logged_in)
-def set_profile_info(sender, **kwargs):
-    """ Set language and timezone if defined in the profile """
-    language = kwargs['user'].profile.language
-    if language:
-        kwargs['request'].session['django_language'] = language
-
-    tz = kwargs['user'].profile.timezone
-    if tz:
-        kwargs['request'].session['django_timezone'] = pytz.timezone(tz)
 
 
 @python_2_unicode_compatible

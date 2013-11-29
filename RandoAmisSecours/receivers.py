@@ -17,4 +17,21 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with RandoAmisSecours.  If not, see <http://www.gnu.org/licenses/>
 
-import receivers
+from __future__ import unicode_literals
+
+from django.contrib.auth.signals import user_logged_in
+from django.dispatch import receiver
+
+import pytz
+
+
+@receiver(user_logged_in)
+def set_profile_info(sender, **kwargs):
+    """ Set language and timezone if defined in the profile """
+    language = kwargs['user'].profile.language
+    if language:
+        kwargs['request'].session['django_language'] = language
+
+    tz = kwargs['user'].profile.timezone
+    if tz:
+        kwargs['request'].session['django_timezone'] = pytz.timezone(tz)
