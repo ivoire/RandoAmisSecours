@@ -100,9 +100,14 @@ def accept(request, request_id):
     new_friend = get_object_or_404(Profile, user=friend_request.user)
 
     # Add the friend
-    # TODO: send a mail to the requester
     request.user.profile.friends.add(new_friend)
     friend_request.delete()
+
+    send_localized_mail(request.user, _('[R.A.S.] Friend request accepted'),
+                        'RandoAmisSecours/friends/request_accepted_email.html',
+                        {'from': request.user.get_full_name(),
+                         'to': new_friend.user.get_full_name()})
+
     messages.success(request, _("«%(name)s» added to your friends") % ({'name': new_friend.user.get_full_name()}))
 
     return HttpResponseRedirect(reverse('accounts.profile'))
