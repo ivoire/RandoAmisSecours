@@ -78,7 +78,7 @@ class Command(BaseCommand):
                         timezone.activate(pytz.timezone(outing.user.profile.timezone))
 
                     ctx = {'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
-                           'SAFE_URL': reverse('outings.finish', args=[outing.pk])}
+                           'SAFE_URL': "%s%s" % (kwargs['base_url'], reverse('outings.finish', args=[outing.pk]))}
                     body = loader.render_to_string('RandoAmisSecours/alert/late.html', ctx)
 
                     send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [outing.user.email])
