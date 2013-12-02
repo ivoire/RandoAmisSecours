@@ -19,17 +19,37 @@
 
 from __future__ import unicode_literals
 
-from django.db.models import Q
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
+from django.template import loader, RequestContext
+from django.utils import timezone, translation
 from django.utils.translation import ugettext as _
 
 from RandoAmisSecours.models import Profile, FriendRequest
+
+import pytz
+
+
+def send_localized_mail(user, subject, template_name, ctx):
+    if user.profile.language:
+        translation.activate(user.profile.language)
+    if user.profile.timezone:
+        timezone.activate(pytz.timezone(user.profile.timezone))
+
+    body = loader.render_to_string(template_name, ctx)
+    send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [user.email])
+
+    if user.profile.timezone:
+        timezone.deactivate()
+    if user.profile.language:
+        translation.deactivate()
 
 
 @login_required
@@ -55,11 +75,20 @@ def invite(request, user_id):
     if request.user.pk == int(user_id):
         raise Http404
 
+    # Find the friend to request
     new_friend = get_object_or_404(Profile, user__pk=user_id)
+
     # Create the friend request
-    # TODO: send a mail to the requested user
     friend_request = FriendRequest(user=request.user, to=new_friend.user)
     friend_request.save()
+
+    # Alert the requester and the requested
+    send_localized_mail(new_friend.user, _('[R.A.S.] Friend request'),
+                        'RandoAmisSecours/friends/request_email.html',
+                        {'from': friend_request.user.get_full_name(),
+                         'to': friend_request.to.get_full_name(),
+                         'accept': reverse('friends.accept', args=[friend_request.pk]),
+                         'refuse': reverse('friends.refuse', args=[friend_request.pk])})
     messages.success(request, _("Friend request sent to «%(name)s»") % ({'name': new_friend.user.get_full_name()}))
 
     return HttpResponseRedirect(reverse('friends.search'))
