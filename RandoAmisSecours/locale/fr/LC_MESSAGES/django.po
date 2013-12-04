@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 19:36+0100\n"
+"POT-Creation-Date: 2013-12-04 19:59+0100\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgstr "Français"
 msgid "English"
 msgstr "Anglais"
 
-#: management/commands/alert.py:84 management/commands/alert.py:111
+#: management/commands/alert.py:72 management/commands/alert.py:87
 msgid "[R.A.S] Alert"
 msgstr "[R.A.S] Alerte"
 
@@ -244,14 +244,14 @@ msgid "Change password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/password_change.html:22
-#: views/account.py:65
+#: views/account.py:64
 msgid "Old password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/password_change.html:31
 #: templates/RandoAmisSecours/account/password_change.html:40
-#: views/account.py:67 views/account.py:68 views/account.py:91
-#: views/account.py:93
+#: views/account.py:66 views/account.py:67 views/account.py:90
+#: views/account.py:92
 msgid "New password"
 msgstr ""
 
@@ -510,14 +510,14 @@ msgid "update"
 msgstr "mettre à jour"
 
 #: templates/RandoAmisSecours/account/profile.html:171
-#: templates/RandoAmisSecours/account/register.html:80 views/account.py:79
+#: templates/RandoAmisSecours/account/register.html:80 views/account.py:78
 msgid "email"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/profile.html:175
 #: templates/RandoAmisSecours/account/register.html:41
-#: templates/RandoAmisSecours/account/register.html:50 views/account.py:54
-#: views/account.py:109 views/account.py:110
+#: templates/RandoAmisSecours/account/register.html:50 views/account.py:53
+#: views/account.py:108 views/account.py:109
 msgid "Password"
 msgstr ""
 
@@ -569,8 +569,8 @@ msgstr "S'inscrire"
 msgid "Account information"
 msgstr "Informations sur le compte"
 
-#: templates/RandoAmisSecours/account/register.html:32 views/account.py:52
-#: views/account.py:107
+#: templates/RandoAmisSecours/account/register.html:32 views/account.py:51
+#: views/account.py:106
 msgid "Username"
 msgstr ""
 
@@ -1152,51 +1152,51 @@ msgstr "Pas de sortie terminée"
 msgid "Friends Outings"
 msgstr "Sorties de vos amis"
 
-#: views/account.py:162
+#: views/account.py:156
 msgid "Subscription to R.A.S."
 msgstr "Inscription à R.A.S."
 
-#: views/account.py:167
+#: views/account.py:163
 msgid "Some information are missing or mistyped"
 msgstr "Certains éléments sont manquants ou malformatés"
 
-#: views/account.py:216
+#: views/account.py:212
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
 
-#: views/account.py:229
+#: views/account.py:225
 msgid "Password changed successfully"
 msgstr ""
 
-#: views/friends.py:86
+#: views/friends.py:66
 msgid "[R.A.S.] Friend request"
 msgstr "[R.A.S.] Demande d'ajout à la liste d'amis"
 
-#: views/friends.py:94
+#: views/friends.py:74
 #, python-format
 msgid "Friend request sent to «%(name)s»"
 msgstr "Demande envoyée à «%(name)s»"
 
-#: views/friends.py:108
+#: views/friends.py:88
 msgid "[R.A.S.] Friend request accepted"
 msgstr "[R.A.S.] Demande d'ajout à la liste d'amis acceptée"
 
-#: views/friends.py:113
+#: views/friends.py:93
 #, python-format
 msgid "«%(name)s» added to your friends"
 msgstr "«%(name)s» ajouté à vos amis"
 
-#: views/friends.py:124
+#: views/friends.py:104
 #, python-format
 msgid "Request from «%(name)s» refused"
 msgstr "La demande de «%(name)s» a été refusée"
 
-#: views/friends.py:134
+#: views/friends.py:114
 #, python-format
 msgid "Request to «%(name)s» canceled"
 msgstr "La demande à «%(name)s» a été annulée"
 
-#: views/friends.py:143
+#: views/friends.py:123
 #, python-format
 msgid "Removed «%(name)s» from friend list"
 msgstr "«%(name)s» supprimé de votre liste d'amis"
