@@ -87,8 +87,10 @@ def invite(request, user_id):
                         'RandoAmisSecours/friends/request_email.html',
                         {'from': friend_request.user.get_full_name(),
                          'to': friend_request.to.get_full_name(),
-                         'accept': reverse('friends.accept', args=[friend_request.pk]),
-                         'refuse': reverse('friends.refuse', args=[friend_request.pk])})
+                         'accept': request.build_absolute_uri(reverse('friends.accept',
+                                                                      args=[friend_request.pk])),
+                         'refuse': request.build_absolute_uri(reverse('friends.refuse',
+                                                                      args=[friend_request.pk]))})
     messages.success(request, _("Friend request sent to «%(name)s»") % ({'name': new_friend.user.get_full_name()}))
 
     return HttpResponseRedirect(reverse('friends.search'))
