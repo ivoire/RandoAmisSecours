@@ -19,16 +19,13 @@
 
 from __future__ import unicode_literals
 
-from django.conf import settings
-from django.core.mail import send_mail
 from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
-from django.template import loader
-from django.utils import timezone, translation
 from django.utils.timezone import datetime, utc
 from django.utils.translation import ugettext_lazy as _
 
 from RandoAmisSecours.models import Outing, Profile, CONFIRMED
+from RandoAmisSecours.utils import send_localized_mail
 
 from optparse import make_option
 import pytz
@@ -72,20 +69,10 @@ class Command(BaseCommand):
                 if 0 <= minutes and minutes < kwargs['interval']:
                     self.stdout.write("Sending mail to owner")
                     # send a mail to the user, translated into the right language
-                    if outing.user.profile.language:
-                        translation.activate(outing.user.profile.language)
-                    if outing.user.profile.timezone:
-                        timezone.activate(pytz.timezone(outing.user.profile.timezone))
-
-                    ctx = {'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
-                           'SAFE_URL': "%s%s" % (kwargs['base_url'], reverse('outings.finish', args=[outing.pk]))}
-                    body = loader.render_to_string('RandoAmisSecours/alert/late.html', ctx)
-
-                    send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [outing.user.email])
-                    if outing.user.profile.timezone:
-                        timezone.deactivate()
-                    if outing.user.profile.language:
-                        translation.deactivate()
+                    send_localized_mail(outing.user, _('[R.A.S] Alert'),
+                                        'RandoAmisSecours/alert/late.html',
+                                        {'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
+                                         'SAFE_URL': "%s%s" % (kwargs['base_url'], reverse('outings.finish', args=[outing.pk]))})
 
             # Alerting outings
             elif outing.alert <= now:
@@ -97,19 +84,8 @@ class Command(BaseCommand):
                     self.stdout.write("emailing friends")
                     # Send on mail per user translated into the right language
                     for friend_profile in outing.user.profile.friends.all():
-                        if friend_profile.language:
-                            translation.activate(friend_profile.language)
-                        if friend_profile.timezone:
-                            timezone.activate(pytz.timezone(friend_profile.timezone))
-
-                        ctx = {'fullname': outing.user.get_full_name(),
-                               'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
-                               'name': outing.name,
-                               'ending': outing.ending}
-                        body = loader.render_to_string('RandoAmisSecours/alert/alert.html', ctx)
-
-                        send_mail(_("[R.A.S] Alert"), body, settings.DEFAULT_FROM_EMAIL, [friend_profile.user.email])
-                        if friend_profile.timezone:
-                            timezone.deactivate()
-                        if friend_profile.language:
-                            translation.deactivate()
+                        send_localized_mail(friend_profile.user, _('[R.A.S] Alert'),
+                                            'RandoAmisSecours/alert/alert.html',
+                                            {'fullname': outing.user.get_full_name(),
+                                             'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
+                                             'name': outing.name, 'ending': outing.ending})
