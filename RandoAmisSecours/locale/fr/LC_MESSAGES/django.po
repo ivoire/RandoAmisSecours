@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 20:48+0100\n"
+"POT-Creation-Date: 2013-12-04 19:36+0100\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -16,23 +16,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: models.py:43
+#: models.py:41
 msgid "draft"
 msgstr "brouillons"
 
-#: models.py:44
+#: models.py:42
 msgid "confirmed"
 msgstr "confirmées"
 
-#: models.py:45 templates/RandoAmisSecours/outing/index.html:72
+#: models.py:43 templates/RandoAmisSecours/outing/index.html:72
 msgid "late"
 msgstr "en retard"
 
-#: models.py:46
+#: models.py:44
 msgid "finished"
 msgstr "terminées"
 
-#: models.py:47
+#: models.py:45
 msgid "canceled"
 msgstr "annulées"
 
@@ -44,7 +44,7 @@ msgstr "Français"
 msgid "English"
 msgstr "Anglais"
 
-#: management/commands/alert.py:85 management/commands/alert.py:110
+#: management/commands/alert.py:84 management/commands/alert.py:111
 msgid "[R.A.S] Alert"
 msgstr "[R.A.S] Alerte"
 
@@ -703,6 +703,49 @@ msgstr ""
 "-- \n"
 "L'équipe R.A.S."
 
+#: templates/RandoAmisSecours/friends/request_accepted_email.html:1
+#, python-format
+msgid ""
+"Hello %(to)s,\n"
+"\n"
+"%(from)s has accepted your friend request on RandoAmisSecours.\n"
+"\n"
+"-- \n"
+"The R.A.S. team"
+msgstr ""
+"Bonjour %(to)s,\n"
+"\n"
+"%(from)s a accepté votre demande d'ajout à votre liste d'amis sur "
+"RandoAmisSecours.\n"
+"\n"
+"-- \n"
+"L'équipe R.A.S."
+
+#: templates/RandoAmisSecours/friends/request_email.html:1
+#, python-format
+msgid ""
+"Hello %(to)s,\n"
+"\n"
+"%(from)s would like to add you as a friend on RandoAmisSecours.\n"
+"\n"
+"You can either:\n"
+" * accept: %(accept)s\n"
+" * refuse: %(refuse)s\n"
+"\n"
+"-- \n"
+"The R.A.S. team"
+msgstr ""
+"Bonjour %(to)s,\n"
+"\n"
+"%(from)s voudrait vous ajouter à sa liste d'amis sur RandoAmisSecours.\n"
+"\n"
+"Vous pouvez :\n"
+" * accepter : %(accept)s\n"
+" * refuser : %(refuse)s\n"
+"\n"
+"-- \n"
+"L'équipe R.A.S."
+
 #: templates/RandoAmisSecours/friends/search.html:4
 #: templates/RandoAmisSecours/friends/search.html:14
 msgid "Search friends"
@@ -1125,27 +1168,35 @@ msgstr "Informations personelles mise à jour"
 msgid "Password changed successfully"
 msgstr ""
 
-#: views/friends.py:63
+#: views/friends.py:86
+msgid "[R.A.S.] Friend request"
+msgstr "[R.A.S.] Demande d'ajout à la liste d'amis"
+
+#: views/friends.py:94
 #, python-format
 msgid "Friend request sent to «%(name)s»"
 msgstr "Demande envoyée à «%(name)s»"
 
-#: views/friends.py:77
+#: views/friends.py:108
+msgid "[R.A.S.] Friend request accepted"
+msgstr "[R.A.S.] Demande d'ajout à la liste d'amis acceptée"
+
+#: views/friends.py:113
 #, python-format
 msgid "«%(name)s» added to your friends"
 msgstr "«%(name)s» ajouté à vos amis"
 
-#: views/friends.py:88
+#: views/friends.py:124
 #, python-format
 msgid "Request from «%(name)s» refused"
 msgstr "La demande de «%(name)s» a été refusée"
 
-#: views/friends.py:98
+#: views/friends.py:134
 #, python-format
 msgid "Request to «%(name)s» canceled"
 msgstr "La demande à «%(name)s» a été annulée"
 
-#: views/friends.py:107
+#: views/friends.py:143
 #, python-format
 msgid "Removed «%(name)s» from friend list"
 msgstr "«%(name)s» supprimé de votre liste d'amis"
