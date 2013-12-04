@@ -20,23 +20,22 @@
 from __future__ import unicode_literals
 
 from django import forms
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
-from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.forms import ModelForm
 from django.shortcuts import get_object_or_404, render_to_response
-from django.template import loader, RequestContext
+from django.template import RequestContext
 from django.utils import translation
 from django.utils.translation import ugettext as _
 
 from RandoAmisSecours.models import Profile, FriendRequest, CONFIRMED, DRAFT, LATE, FINISHED
+from RandoAmisSecours.utils import send_localized_mail
 
 import pytz
 
@@ -154,14 +153,11 @@ def register(request):
         user_form = RASUserCreationForm(request.POST)
         if user_form.is_valid():
             new_user = user_form.save()
-            ctx = {'URL': request.build_absolute_uri(reverse('accounts.register.confirm',
-                                                             args=[new_user.pk, new_user.profile.hash_id])),
-                   'fullname': new_user.get_full_name()}
-            email_body = loader.render_to_string('RandoAmisSecours/account/register_email.html', ctx)
-
-            send_mail(_('Subscription to R.A.S.'), email_body,
-                    settings.DEFAULT_FROM_EMAIL,
-                    [new_user.email], fail_silently=False)
+            send_localized_mail(new_user, _('Subscription to R.A.S.'),
+                                'RandoAmisSecours/account/register_email.html',
+                                {'URL': request.build_absolute_uri(reverse('accounts.register.confirm',
+                                                                   args=[new_user.pk, new_user.profile.hash_id])),
+                                 'fullname': new_user.get_full_name()})
             return render_to_response('RandoAmisSecours/account/register_end.html', context_instance=RequestContext(request))
         else:
             messages.error(request, _("Some information are missing or mistyped"))
