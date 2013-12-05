@@ -27,7 +27,7 @@ from tastypie.authorization import Authorization
 from tastypie.exceptions import Unauthorized
 from tastypie.resources import ModelResource
 
-from RandoAmisSecours.models import Outing
+from RandoAmisSecours.models import Outing, Profile
 
 
 class UserAuthorization(Authorization):
@@ -38,6 +38,34 @@ class UserAuthorization(Authorization):
     def read_detail(self, object_list, bundle):
         return (bundle.obj.pk == bundle.request.user.pk or
                 bundle.obj.profile in bundle.request.user.profile.friends.all())
+
+    def create_list(self, object_list, bundle):
+        raise Unauthorized('Creation impossible')
+
+    def create_detail(self, object_list, bundle):
+        raise Unauthorized('Creation impossible')
+
+    def update_list(self, object_list, bundle):
+        raise Unauthorized('Updating impossible')
+
+    def update_detail(seld, object_list, bundle):
+        raise Unauthorized('Updating impossible')
+
+    def delete_list(self, object_list, bundle):
+        raise Unathorized('Deletion impossible')
+
+    def delete_detail(self, object_list, bundle):
+        raise Unathorized('Deletion impossible')
+
+
+class ProfileAuthorization(Authorization):
+    def read_list(self, object_list, bundle):
+        return object_list.filter(Q(user=bundle.request.user) |
+                                  Q(pk__in=bundle.request.user.profile.friends.all()))
+
+    def read_detail(self, object_list, bundle):
+        return (bundle.obj.user.pk == bundle.request.user.pk or
+                bundle.obj in bundle.request.user.profile.friends.all())
 
     def create_list(self, object_list, bundle):
         raise Unauthorized('Creation impossible')
@@ -87,12 +115,35 @@ class OutingAuthorization(Authorization):
 
 
 class UserResource(ModelResource):
+    profile = fields.ForeignKey('RandoAmisSecours.api.ProfileResource', 'profile')
+
     class Meta:
         queryset = User.objects.all()
         resource_name = 'user'
         fields = ['first_name', 'last_name', 'email']
         allowed_method = ['get']
         authorization = UserAuthorization()
+
+
+class ProfileResource(ModelResource):
+    user = fields.ForeignKey(UserResource, 'user')
+    friends = fields.ToManyField('self', 'friends')
+
+    class Meta:
+        queryset = Profile.objects.all()
+        resource_name = 'profile'
+        fields = ['phone_number', 'friends', 'language', 'timezone', 'friends']
+        allowed_method = ['get']
+        authorization = ProfileAuthorization()
+
+    def dehydrate(self, bundle):
+        """ Hide private informations to friends """
+        if not bundle.request.user == bundle.obj.user:
+            del bundle.data['language']
+            del bundle.data['timezone']
+            del bundle.data['friends']
+
+        return bundle
 
 
 class OutingResource(ModelResource):
