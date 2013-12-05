@@ -132,7 +132,7 @@ class ProfileResource(ModelResource):
     class Meta:
         queryset = Profile.objects.all()
         resource_name = 'profile'
-        fields = ['phone_number', 'friends', 'language', 'timezone', 'friends']
+        fields = ['phone_number', 'language', 'timezone', 'friends']
         allowed_method = ['get']
         authorization = ProfileAuthorization()
 
