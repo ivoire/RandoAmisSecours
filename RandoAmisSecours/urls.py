@@ -19,9 +19,11 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, url
+from django.conf.urls import include, patterns, url
 from django.core.urlresolvers import reverse_lazy
+from tastypie.api import Api
 
+from RandoAmisSecours.api import OutingResource, UserResource
 from RandoAmisSecours.views.account import RASAuthenticationForm, RASPasswordChangeForm, RASPasswordResetForm, RASSetPasswordForm
 
 
@@ -55,6 +57,7 @@ urlpatterns += patterns('RandoAmisSecours.views.account',
     url(r'^accounts/delete/$', 'delete', name='accounts.delete'),
 )
 
+# Friends
 urlpatterns += patterns('RandoAmisSecours.views.friends',
     url(r'^friends/search/$', 'search', name='friends.search'),
     url(r'^friends/invite/(?P<user_id>\d+)/$', 'invite', name='friends.invite'),
@@ -73,4 +76,13 @@ urlpatterns += patterns('RandoAmisSecours.views.outing',
     url(r'^outings/(?P<outing_id>\d+)/delete/$', 'delete', name='outings.delete'),
     url(r'^outings/(?P<outing_id>\d+)/confirm/$', 'confirm', name='outings.confirm'),
     url(r'^outings/(?P<outing_id>\d+)/finish/$', 'finish', name='outings.finish'),
+)
+
+# API v1.0
+api_1_0 = Api(api_name='1.0')
+api_1_0.register(OutingResource())
+api_1_0.register(UserResource())
+
+urlpatterns += patterns('',
+  url(r'^api/', include(api_1_0.urls)),
 )
