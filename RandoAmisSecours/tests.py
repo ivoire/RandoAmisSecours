@@ -729,7 +729,6 @@ class APITest(ResourceTestCase):
         self.user3.profile = Profile.objects.create(user=self.user3, timezone='Europe/Paris', language='fr')
         self.user3.profile.friends.add(self.user2.profile)
 
-
     def get_credentials(self):
         return self.create_basic(username='ras', password='mdp')
 
