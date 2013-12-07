@@ -23,6 +23,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 
 from tastypie import fields
+from tastypie.authentication import BasicAuthentication
 from tastypie.authorization import Authorization
 from tastypie.exceptions import Unauthorized
 from tastypie.resources import ModelResource
@@ -122,6 +123,7 @@ class UserResource(ModelResource):
         resource_name = 'user'
         fields = ['first_name', 'last_name', 'email']
         allowed_method = ['get']
+        authentication = BasicAuthentication()
         authorization = UserAuthorization()
 
 
@@ -134,6 +136,7 @@ class ProfileResource(ModelResource):
         resource_name = 'profile'
         fields = ['phone_number', 'language', 'timezone', 'friends']
         allowed_method = ['get']
+        authentication = BasicAuthentication()
         authorization = ProfileAuthorization()
 
     def dehydrate(self, bundle):
@@ -153,4 +156,5 @@ class OutingResource(ModelResource):
         queryset = Outing.objects.all()
         resource_name = 'outing'
         fields = ['name', 'description', 'status', 'beginning', 'ending', 'alert', 'latitude', 'longitude']
+        authentication = BasicAuthentication()
         authorization = OutingAuthorization()
