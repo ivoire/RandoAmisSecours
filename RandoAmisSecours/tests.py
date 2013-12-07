@@ -87,11 +87,11 @@ class LoginRequired(TestCase):
         self.user = User.objects.create_user('azertyuiop',
                                              'django.test@project.org',
                                              '12789azertyuiop')
-        self.user.profile = Profile.objects.create(user=self.user)
+        self.user.profile = Profile.objects.create(user=self.user, timezone='Europe/Paris', language='fr')
         self.user2 = User.objects.create_user('zarterzh',
                                              'gzeryztye@example.org',
                                              'help')
-        self.user2.profile = Profile.objects.create(user=self.user2)
+        self.user2.profile = Profile.objects.create(user=self.user2, timezone='Europe/London', language='en')
 
         current_time = datetime.utcnow().replace(tzinfo=utc)
         self.outing = Outing.objects.create(user=self.user, beginning=current_time,
@@ -396,7 +396,7 @@ class OutingsTest(TestCase):
         self.user1.first_name = 'Alpha'
         self.user1.last_name = 'Tester'
         self.user1.save()
-        self.user1.profile = Profile.objects.create(user=self.user1, timezone='Europe/Paris')
+        self.user1.profile = Profile.objects.create(user=self.user1, timezone='Europe/Paris', language='fr')
         self.client.login(username='alpha', password='12789azertyuiop')
 
         self.user2 = User.objects.create_user('Beta',
@@ -405,7 +405,7 @@ class OutingsTest(TestCase):
         self.user2.first_name = 'Beta'
         self.user2.last_name = 'Testing'
         self.user2.save()
-        self.user2.profile = Profile.objects.create(user=self.user2, timezone='Europe/London')
+        self.user2.profile = Profile.objects.create(user=self.user2, timezone='Europe/London', language='en')
 
         self.user3 = User.objects.create_user('Gamma',
                                               'gamma@example.net',
@@ -413,7 +413,7 @@ class OutingsTest(TestCase):
         self.user3.first_name = 'Gamma'
         self.user3.last_name = 'Ray'
         self.user3.save()
-        self.user3.profile = Profile.objects.create(user=self.user3, timezone='America/Chicago')
+        self.user3.profile = Profile.objects.create(user=self.user3, timezone='America/Chicago', language='en')
 
         # user1 and user2 are friends
         self.user1.profile.friends.add(self.user2.profile)
