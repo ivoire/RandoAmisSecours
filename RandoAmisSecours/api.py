@@ -37,6 +37,7 @@ class UserAuthorization(Authorization):
                                   Q(profile__in=bundle.request.user.profile.friends.all()))
 
     def read_detail(self, object_list, bundle):
+        # bundle.obj is a User
         return (bundle.obj.pk == bundle.request.user.pk or
                 bundle.obj.profile in bundle.request.user.profile.friends.all())
 
@@ -65,7 +66,8 @@ class ProfileAuthorization(Authorization):
                                   Q(pk__in=bundle.request.user.profile.friends.all()))
 
     def read_detail(self, object_list, bundle):
-        return (bundle.obj.user.pk == bundle.request.user.pk or
+        # bundle.obj is a Profile
+        return (bundle.obj.user == bundle.request.user or
                 bundle.obj in bundle.request.user.profile.friends.all())
 
     def create_list(self, object_list, bundle):
@@ -92,8 +94,9 @@ class OutingAuthorization(Authorization):
         return object_list.filter(Q(user=bundle.request.user) | Q(user__profile__in=bundle.request.user.profile.friends.all()))
 
     def read_detail(self, object_list, bundle):
+        # bundle.obj is an Outing
         return (bundle.obj.user == bundle.request.user or
-                bundle.obj.user in bundle.request.user.profile.friends.all())
+                bundle.obj.user.profile in bundle.request.user.profile.friends.all())
 
     def create_list(self, object_list, bundle):
         # TODO: is the user auto assigned
