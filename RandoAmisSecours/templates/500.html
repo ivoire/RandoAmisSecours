@@ -14,15 +14,15 @@
 {% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a>/li>
   <li class="activate">{% trans "Error 500" %}</li>
 {% endblock %}
 
 {% block body %}
-<div class="hero-unit center">
+<div class="jumbotron center">
   <h1>{% trans "Server error" %} <small><font face="Tahoma" color="red">{% trans "Error 500" %}</font></small></h1>
   <br />
   <p>{% trans "The server cannot server the page you requested, either contact your webmaster or try again later. Use your browsers <b>Back</b> button to navigate to the page you have prevously come from." %}</p>
-  <a href="{% url 'index' %}" class="btn btn-medium btn-info"><i class="icon-home icon-white"></i> {% trans "Take Me Home" %}</a>
+  <a href="{% url 'index' %}" class="btn btn-medium btn-info"><div class="glyphicon glyphicon-home"></div> {% trans "Take Me Home" %}</a>
 </div>
 {% endblock %}
