@@ -14,8 +14,8 @@
 {% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
-  <li><a href="{% url 'outings.index' %}">{% trans "Outings" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+  <li><a href="{% url 'outings.index' %}">{% trans "Outings" %}</a></li>
   <li class="active">{{ update|yesno:_("Update,Create") }}</li>
 {% endblock %}
 
@@ -23,13 +23,13 @@
 <h2>{% if update %}{% blocktrans with outing.name as name %}Update «{{ name }}»{% endblocktrans %}{% else %}{% trans "New outing" %}{% endif %}</h2>
 
 <div class="row">
-  <div class="span12">
+  <div class="col-md-12">
   <form action="." method="post" class="form-horizontal">
     {% csrf_token %}
     <div class="row">
-      <div class="span6">
+      <div class="col-md-6">
         <h4 class="modal-header">{% trans "Global information" %}</h4>
-        <div class="control-group{% if form.name.errors %} error{% endif %}">
+        <div class="control-group{% if form.name.errors %} hass-error{% endif %}">
           <label class="control-label" for="id_name">{% trans "Name" %}</label>
           <div class="controls">
             {{ form.name }}
@@ -38,7 +38,7 @@
             {% endfor %}
           </div>
         </div>
-        <div class="control-group{% if form.description.errors %} error{% endif %}">
+        <div class="control-group{% if form.description.errors %} has-error{% endif %}">
           <label class="control-label" for="id_description">{% trans "Description" %}</label>
           <div class="controls">
             {{ form.description }}
@@ -47,7 +47,7 @@
             {% endfor %}
           </div>
         </div>
-        <div class="control-group{% if form.latitude.errors %} error{% endif %}">
+        <div class="control-group{% if form.latitude.errors %} has-error{% endif %}">
           <label class="control-label" for="id_latitude">{% trans "Latitude" %}</label>
           <div class="controls">
             {{ form.latitude }}
@@ -56,7 +56,7 @@
             {% endfor %}
           </div>
         </div>
-        <div class="control-group{% if form.longitude.errors %} error{% endif %}">
+        <div class="control-group{% if form.longitude.errors %} has-error{% endif %}">
           <label class="control-label" for="id_longitude">{% trans "Longitude" %}</label>
           <div class="controls">
             {{ form.longitude }}
@@ -66,38 +66,38 @@
           </div>
         </div>
       </div>
-      <div class="span6">
+      <div class="col-md-6">
         <h4 class="modal-header">{% blocktrans with user.profile.timezone as TIME_ZONE %}Timing (in {{ TIME_ZONE }}){% endblocktrans %}</h4>
-        <div class="control-group{% if form.beginning.errors %} error{% endif %}">
+        <div class="control-group{% if form.beginning.errors %} has-error{% endif %}">
           <label class="control-label" for="id_beginning">{% trans "Begin" %}</label>
           <div class="controls">
             <div id="beginning_picker" class="input-append date">
               {{ form.beginning }}
-              <span class="add-on"><i class="icon-th"></i></span>
+              <span class="add-on"><div class="glyphicon glyphicon-th"></div></span>
             </div>
             {% for error in form.beginning.errors %}
             <span class="help-inline">{{ error }}</span>
             {% endfor %}
           </div>
         </div>
-        <div class="control-group{% if form.ending.errors %} error{% endif %}">
+        <div class="control-group{% if form.ending.errors %} has-error{% endif %}">
           <label class="control-label" for="id_ending">{% trans "End" %}</label>
           <div class="controls">
             <div id="ending_picker" class="input-append date">
               {{ form.ending }}
-              <span class="add-on"><i class="icon-th"></i></span>
+              <span class="add-on"><div class="glyphicon glyphicon-th"></div></span>
             </div>
             {% for error in form.ending.errors %}
             <span class="help-inline">{{ error }}</span>
             {% endfor %}
           </div>
         </div>
-        <div class="control-group{% if form.alert.errors %} error{% endif %}">
+        <div class="control-group{% if form.alert.errors %} hass-error{% endif %}">
           <label class="control-label" for="id_alert">{% trans "Alert" %}</label>
           <div class="controls">
             <div id="alert_picker" class="input-append date">
               {{ form.alert }}
-              <span class="add-on"><i class="icon-th"></i></span>
+              <span class="add-on"><div class="glyphicon glyphicon-th"></div></span>
             </div>
             {% for error in form.alert.errors %}
             <span class="help-inline">{{ error }}</span>
@@ -115,7 +115,7 @@
         </dl>
         <p>{% trans "After the ending R.A.S. sends emails to the owner. After the alert, friends are also emailed until the outing is closed." %}</p>
       </div>
-      <div class="span8 offset2">
+      <div class="col-md-8 col-md-offset-2">
         <div id="map">
         </div>
       </div>

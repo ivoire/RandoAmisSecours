@@ -12,8 +12,8 @@
 {% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
-  <li><a href="{% url 'outings.index' %}">{% trans "Outings" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+  <li><a href="{% url 'outings.index' %}">{% trans "Outings" %}</a></li>
   <li class="active">{{ outing.name }}</li>
 {% endblock %}
 
@@ -25,7 +25,7 @@
   <div class="span12">
     {% for message in messages %}
     <div class="alert alert-{{ message.tags|default:'error' }}">
-      <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
       <strong>{{ message.tags|default:'error'|capfirst }}:</strong> {{ message }}
     </div>
     {% endfor %}
@@ -40,17 +40,17 @@
   </div>
   {% endif %}
   {% if outing.status == CONFIRMED %}
-  <div class="span12">
+  <div class="col-md-12">
     <div class="progress">
       {% with outing.getPercents as percents %}
-      <div class="bar bar-success" style="width: {{ percents.0|unlocalize }}%"></div>
-      <div class="bar bar-warning" style="width: {{ percents.1|unlocalize }}%"></div>
-      <div class="bar bar-danger" style="width: {{ percents.2|unlocalize }}%"></div>
+      <div class="progress-bar progress-bar-success" style="width: {{ percents.0|unlocalize }}%"></div>
+      <div class="progress-bar progress-bar-warning" style="width: {{ percents.1|unlocalize }}%"></div>
+      <div class="progress-bar progress-bar-danger" style="width: {{ percents.2|unlocalize }}%"></div>
       {% endwith %}
     </div>
   </div>
   {% endif %}
-  <div class="span6">
+  <div class="col-md-6">
     <dl class="dl-horizontal">
       <dt>{% trans "Begin" %}</dt>
       <dd>{{ outing.beginning }}</dd>
@@ -60,18 +60,18 @@
       <dd>{{ outing.alert }}</dd>
     </dl>
   </div>
-  <div class="span6">
+  <div class="col-md-6">
     <dl class="dl-horizontal">
       <dt>{% trans "Description" %}</dt>
       <dd>{{ outing.description|urlize }}</dd>
     </dl>
   </div>
-  <div class="span6 offset3">
+  <div class="col-md-6 col-md-offset-3">
     <div id="map">
     </div>
   </div>
   {% if user.is_authenticated and outing.status == CONFIRMED and outing.is_alerting %}
-  <div class="span12">
+  <div class="col-md-12">
       <h4 class="modal-header">{% trans "Late outing" %}</h4>
     <p>{% blocktrans with outing.user.get_full_name as full_name %}{{ full_name }} is really late, you can try to contact him:{% endblocktrans %}</p>
     <dl class="dl-horizontal">

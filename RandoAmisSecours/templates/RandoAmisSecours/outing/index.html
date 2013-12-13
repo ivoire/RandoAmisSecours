@@ -4,7 +4,7 @@
 {% block title %}{% trans "Outings" %}{% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
   <li class="active">{% trans "Outings" %}</li>
 {% endblock %}
 
@@ -23,19 +23,19 @@
 
 <div class="row">
   {% if messages %}
-  <div class="span12">
+  <div class="col-md-12">
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags|default:'error' }}">
-      <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+    <div class="alert alert-{{ message.tags|default:'danger' }}">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
       <strong>{{ message.tags|default:'error'|capfirst }}:</strong> {{ message }}
     </div>
     {% endfor %}
   </div>
   {% endif %}
 
-  <div class="span12">
+  <div class="col-md-12">
     {% url 'outings.create' as URL %}
-    <h3>{% trans "My outings" %} <a class="btn btn-info btn-mini" href="{% url 'outings.create' %}"><i class="icon-plus-sign icon-white"></i> {% trans "new" %}</a></h3>
+    <h3>{% trans "My outings" %} <a class="btn btn-info btn-xs" href="{% url 'outings.create' %}"><div class="glyphicon glyphicon-plus-sign"></div> {% trans "new" %}</a></h3>
     <div class="tabbable">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#current" data-toggle="tab">{% trans "Current" %}</a></li>
@@ -45,7 +45,7 @@
       <div class="tab-content">
         <div class="tab-pane active" id="current">
           {% if user_outings_confirmed %}
-          <table class="table table-striped">
+          <table class="table">
             <thead>
               <tr>
                 <th>{% trans "Name" %}</th>
@@ -62,17 +62,17 @@
               {% elif outing.is_late %}
               <tr class="warning">
               {% elif outing.is_alerting %}
-              <tr class="error">
+              <tr class="danger">
               {% else %}
               <tr>
               {% endif %}
                 <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
                 <td>{{ outing.beginning|naturaltime }}</td>
                 <td>{{ outing.ending|naturaltime }}</td>
-                <td><a href="#okModal{{ outing.pk }}" role="button" class="btn btn-mini btn-success" title="{% trans "finish" %}" data-toggle="modal"><i class="icon-ok-sign"></i></a><a href="#" class="btn btn-mini btn-warning" title="{% trans "late" %}"><i class="icon-time"></i></a>
+                <td><a href="#okModal{{ outing.pk }}" role="button" class="btn btn-xs btn-success" title="{% trans "finish" %}" data-toggle="modal"><div class="glyphicon glyphicon-ok-sign"></div></a><a href="#" class="btn btn-xs btn-warning" title="{% trans "late" %}"><div class="glyphicon glyphicon-time"></div></a>
                   <div id="okModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="okModal{{ outing.pk }}Label" aria-hidden="true">
                     <div class="modal-header">
-                      <button type="button" class="close" data-div="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+                      <button type="button" class="close" data-div="modal" aria-hidden="true">&times;</button>
                       <h3 id="okModal{{ outing.pk }}Label">{% trans "Finishing outing" %}</h3>
                     </div>
                     <div class="modal-body">
@@ -84,10 +84,10 @@
                     </div>
                   </div>
                 </td>
-                <td><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info" title="{% trans "update" %}"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" title="{% trans "delete" %}" data-toggle="modal"><i class="icon-trash"></i></a>
+                <td><a href="{% url 'outings.update' outing.pk %}" class="btn btn-xs btn-info" title="{% trans "update" %}"><div class="glyphicon glyphicon-pencil"></div></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-xs btn-danger" title="{% trans "delete" %}" data-toggle="modal"><div class="glyphicon glyphicon-trash"></div></a>
                   <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                       <h3 id="deleteModal{{ outing.pk }}Label">{% trans "Delete outing" %}</h3>
                     </div>
                     <div class="modal-body">
@@ -109,7 +109,7 @@
         </div>
         <div class="tab-pane" id="draft">
           {% if user_outings_draft %}
-          <table class="table table-striped">
+          <table class="table">
             <thead>
               <tr>
                 <th>{% trans "Name" %}</th>
@@ -124,10 +124,10 @@
                 <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
                 <td>{{ outing.beginning|naturaltime }}</td>
                 <td>{{ outing.ending|naturaltime }}</td>
-                <td><a href="{% url 'outings.confirm' outing.pk %}" class="btn btn-mini btn-success" title="{% trans "confirm" %}"><i class="icon-ok"></i></a><a href="{% url 'outings.update' outing.pk %}" class="btn btn-mini btn-info" title="{% trans "update" %}"><i class="icon-pencil"></i></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" title="{% trans "delete" %}" data-toggle="modal"><i class="icon-trash"></i></a>
+                <td><a href="{% url 'outings.confirm' outing.pk %}" class="btn btn-xs btn-success" title="{% trans "confirm" %}"><div class="glyphicon glyphicon-ok"></div></a><a href="{% url 'outings.update' outing.pk %}" class="btn btn-xs btn-info" title="{% trans "update" %}"><div class="glyphicon glyphicon-pencil"></div></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-xs btn-danger" title="{% trans "delete" %}" data-toggle="modal"><div class="glyphicon glyphicon-trash"></div></a>
                   <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                       <h3 id="deleteModal{{ outing.pk }}Label">{% trans "Delete outing" %}</h3>
                     </div>
                     <div class="modal-body">
@@ -149,7 +149,7 @@
         </div>
         <div class="tab-pane" id="finished">
           {% if user_outings_finished %}
-          <table class="table table-striped">
+          <table class="table">
             <thead>
               <tr>
                 <th>{% trans "Name" %}</th>
@@ -166,10 +166,10 @@
                 <td>{{ outing.beginning }}</td>
                 <td>{{ outing.ending }}</td>
                 <td></td>
-                <td><a href="#deleteFinishedModal{{ outing.pk }}" role="button" class="btn btn-mini btn-danger" title="{% trans "delete" %}" data-toggle="modal"><i class="icon-trash"></i></a>
+                <td><a href="#deleteFinishedModal{{ outing.pk }}" role="button" class="btn btn-xs btn-danger" title="{% trans "delete" %}" data-toggle="modal"><div class="glyphicon glyphicon-trash"></div></a>
                   <div id="deleteFinishedModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteFinishedModal{{ outing.pk }}Label" aria-hidden="true">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                       <h3 id="deleteFinishedModal{{ outing.pk }}Label">{% trans "Delete outing" %}</h3>
                     </div>
                     <div class="modal-body">
@@ -195,7 +195,7 @@
 </div>
 
 <div class="row">
-  <div class="span12">
+  <div class="col-md-12">
     <h3>{% trans "Friends Outings" %}</h3>
     <div class="tabbable">
       <ul class="nav nav-tabs">
@@ -206,7 +206,7 @@
       <div class="tab-content">
         <div class="tab-pane active" id="friends_current">
           {% if friends_outings_confirmed %}
-          <table class="table table-striped">
+          <table class="table">
             <thead>
               <tr>
                 <th></th>
@@ -223,7 +223,7 @@
               {% elif outing.is_late %}
               <tr class="warning">
               {% elif outing.is_alerting %}
-              <tr class="error">
+              <tr class="danger">
               {% else %}
               <tr>
               {% endif %}
@@ -242,7 +242,7 @@
         </div>
         <div class="tab-pane" id="friends_draft">
           {% if friends_outings_draft %}
-          <table class="table table-striped">
+          <table class="table">
             <thead>
               <tr>
                 <th></th>
@@ -268,7 +268,7 @@
         </div>
         <div class="tab-pane" id="friends_finished">
           {% if friends_outings_finished %}
-          <table class="table table-striped">
+          <table class="table">
             <thead>
               <tr>
                 <th></th>
