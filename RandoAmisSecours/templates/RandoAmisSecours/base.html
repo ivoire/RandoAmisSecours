@@ -15,44 +15,44 @@
     }
     {% block style %}{% endblock %}
   </style>
-  <link href="{% get_static_prefix %}RandoAmisSecours/css/bootstrap-responsive.min.css" rel="stylesheet">
   {% block head %}{% endblock %}
 </head>
 
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="brand" href="{% url 'index' %}">R.A.S.</a>
-      <div class="nav-collapse collapse">
-        <ul class="nav">
-          <li><a href="{% url 'index' %}"><i class="icon-home"></i> {% trans "Home" %}</a></li>
-          <li><a href="{% url 'outings.index' %}"><i class="icon-tasks"></i> {%trans "Outings" %}</a></li>
-          <li><a href="{% url 'help.index' %}"><i class="icon-question-sign"></i> {% trans "Help" %}</a></li>
-        </ul>
-        <ul class="nav pull-right">
-        {% if user.is_authenticated %}
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> {{ user.get_full_name }}<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="{% url 'accounts.profile' %}"><i class="icon-cog"></i> {% trans "Profile" %}</a></li>
-              <li class="divider"></li>
-              <li><a href="{% url 'accounts.logout' %}"><i class="icon-off"></i> {% trans "Log out" %}</a></li>
-            </ul>
-          </li>
-        {% else %}
-          <li><a href="{% url 'accounts.login' %}"><i class="icon-user"></i> {% trans "Log in" %}</a></li>
-        {% endif %}
-        </ul>
-      </div>
+      <a href="{% url 'index' %}" class="navbar-brand">R.A.S.</a>
     </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="{% url 'index' %}"><div class="glyphicon glyphicon-home"></div> {% trans "Home" %}</a></li>
+        <li><a href="{% url 'outings.index' %}"><div class="glyphicon glyphicon-tasks"></div> {%trans "Outings" %}</a></li>
+        <li><a href="{% url 'help.index' %}"><div class="glyphicon glyphicon-question-sign"></div> {% trans "Help" %}</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><div class="glyphicon glyphicon-user"></div> {{ user.get_full_name }}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'accounts.profile' %}"><div class="glyphicon glyphicon-cog"></div> {% trans "Profile" %}</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'accounts.logout' %}"><div class="glyphicon glyphicon-off"></div> {% trans "Log out" %}</a></li>
+          </ul>
+        </li>
+        {% else %}
+        <li><a href="{% url 'accounts.login' %}"><div class="glyphicon glyphicon-user"></div> {% trans "Log in" %}</a></li>
+        {% endif %}
+      </ul>
+    </nav>
   </div>
-</div>
+</header>
 
 <div class="container">
 <ul class="breadcrumb">
