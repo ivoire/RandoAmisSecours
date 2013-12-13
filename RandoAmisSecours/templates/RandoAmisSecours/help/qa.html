@@ -4,8 +4,8 @@
 {% block title %}{% trans "Q&A" %}{% endblock title %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
-  <li><a href="{% url 'help.index' %}">{% trans "Help" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+  <li><a href="{% url 'help.index' %}">{% trans "Help" %}</a></li>
   <li class="active">{% trans "Q&A" %}</li>
 {% endblock breadcrumb %}
 
@@ -15,10 +15,10 @@
 </div>
 
 <div class="row">
-  <div class="span12">
+  <div class="col-md-12">
     <p>{% trans "This page lists the most common questions and concerns about the R.A.S. website. If your question is missing, feel free to contact the R.A.S. team." %}</p>
   </div>
-  <div class="span12">
+  <div class="col-md-12">
     <h4 class="modal-header">{% trans "1/ Calling emergency services" %}</h4>
     <p>{% trans "If you are reported missing, the R.A.S. team will never call emergency services directly. It's your friends' duty to call public services only if necessary." %}</p>
     <h4 class="modal-header">{% trans "2/ Reliability" %}</h4>
