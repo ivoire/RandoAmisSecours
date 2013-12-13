@@ -3,25 +3,6 @@
 
 {% block title %}{% trans "Main Page" %}{% endblock %}
 
-{% block style %}
-    .jumbotron {
-      margin: 80px 0;
-      text-align: center;
-    }
-    .jumbotron h1 {
-      font-size: 100px;
-      line-height: 1;
-    }
-    .jumbotron .lead {
-      font-size: 24px;
-      line-height: 1.25;
-    }
-    .jumbotron .btn {
-      font-size: 21px;
-      padding: 14px 24px;
-    }
-{% endblock %}
-
 {% block breadcrumb %}
   <li class="active">{% trans "Home" %}</li>
 {% endblock %}
@@ -32,30 +13,30 @@
   <p class="lead">{% trans "Don't wait for an accident !" %}</p>
   <p class="lead">{% trans "Let your friends some information about your destination." %}</p>
   {% if user.is_authenticated %}
-  <a class="btn btn-large btn-success" href="{% url 'outings.index' %}">{% trans "My outings" %}</a>
+  <a class="btn btn-lg btn-success" href="{% url 'outings.index' %}">{% trans "My outings" %}</a>
   {% else %}
-  <a class="btn btn-large btn-success" href="{% url 'accounts.login' %}">{% trans "Log in" %}</a>
+  <a class="btn btn-lg btn-success" href="{% url 'accounts.login' %}">{% trans "Log in" %}</a>
   {% endif %}
 </div>
 
 <hr />
 
 <div class="row">
-  <div class="span4">
+  <div class="col-md-4">
     <h2>{% trans "Subscribe" %}</h2>
     <p>{% trans "Create an account on R.A.S. We only keep information that are required to contact you in case of emergency. We will never use these information for something else." %}</p>
-    <a class="btn" href="{% url 'accounts.register' %}">{% trans "Register »" %}</a>
+    <a class="btn btn-default" href="{% url 'accounts.register' %}">{% trans "Register »" %}</a>
   </div>
-  <div class="span4">
+  <div class="col-md-4">
     <h2>{% trans "Declare outings" %}</h2>
     <p>{% trans "Declare every planned outings with beginning and ending. Your friends will be alerted if you are not back on time." %}</p>
-    <a class="btn" href="{% url 'outings.create' %}">{% trans "Create »" %}</a>
+    <a class="btn btn-default" href="{% url 'outings.create' %}">{% trans "Create »" %}</a>
   </div>
-  <div class="span4">
+  <div class="col-md-4">
     <h2>{% trans "Look for friends" %}</h2>
     <p>{% trans "Link your profile with friends profiles. Only your friends will see your outings unless you are late." %}</p>
     <p>{% trans "R.A.S. will email your friends if you are not back on time." %}</p>
-    <a class="btn" href="{% url 'friends.search' %}">{% trans "Search »" %}</a>
+    <a class="btn btn-default" href="{% url 'friends.search' %}">{% trans "Search »" %}</a>
   </div>
 </div>
 {% endblock %}
