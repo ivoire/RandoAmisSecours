@@ -4,7 +4,7 @@
 {% block title %}{% trans "Profile" %}{% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
   <li class="active">{% trans "Account" %}</li>
 {% endblock %}
 
@@ -15,19 +15,19 @@
 
 <div class="row">
   {% if messages %}
-  <div class="span12">
+  <div class="col-md-12">
     {% for message in messages %}
     <div class="alert alert-{{ message.tags|default:'error' }}">
-      <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
       <strong>{{ message.tags|default:'error'|capfirst }}:</strong> {{ message }}
     </div>
     {% endfor %}
   </div>
   {% endif %}
 
-  <div class="span12">
+  <div class="col-md-12">
     {% url 'friends.search' as URL %}
-    <h3>{% trans "Friends" %} <a class="btn btn-info btn-mini" href="{% url 'friends.search' %}"><i class="icon-search icon-white"></i> {% trans "search" %}</a></h3>
+    <h3>{% trans "Friends" %} <a class="btn btn-info btn-xs" href="{% url 'friends.search' %}"><div class="glyphicon glyphicon-search"></div> {% trans "search" %}</a></h3>
     <div class="tabbable">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#friends" data-toggle="tab">{% trans "Friends" %}</a></li>
@@ -51,7 +51,7 @@
           <tr>
             <td>{{ friend.user.get_full_name }}</td>
             <td>{% if friend.phone_number %}<a href="tel:{{ friend.phone_number }}">{{ friend.phone_number }}</a>{% else %}?{% endif %}</td>
-            <td><a href="#deleteFriendModal{{ friend.user.pk }}" role="button" class="btn btn-mini btn-danger" title="{% trans "delete" %}" data-toggle="modal"><i class="icon-trash"></i></a>
+            <td><a href="#deleteFriendModal{{ friend.user.pk }}" role="button" class="btn btn-xs btn-danger" title="{% trans "delete" %}" data-toggle="modal"><div class="glyphicon glyphicon-trash"></div></a>
             <div id="deleteFriendModal{{ friend.user.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteFriendModal{{ friend.user.pk }}Label" aria-hidden="true">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
@@ -87,8 +87,8 @@
           <tr>
             <td>{{ f_r.user.get_full_name }}</td>
             <td>{{ f_r.creation|timesince }}</td>
-            <td><a href="#acceptFRModal{{ f_r.pk }}" class="btn btn-mini btn-success" title="{% trans "Accept" %}" data-toggle="modal"><i class="icon-ok-sign"></i></a>
-                <a href="#refuseFRModal{{ f_r.pk }}" class="btn btn-mini btn-danger" title="{% trans "Refuse" %}" data-toggle="modal"><i class="icon-trash"></i></a>
+            <td><a href="#acceptFRModal{{ f_r.pk }}" class="btn btn-xs btn-success" title="{% trans "Accept" %}" data-toggle="modal"><i class="icon-ok-sign"></i></a>
+                <a href="#refuseFRModal{{ f_r.pk }}" class="btn btn-xs btn-danger" title="{% trans "Refuse" %}" data-toggle="modal"><i class="icon-trash"></i></a>
             <div id="acceptFRModal{{ f_r.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="acceptFRModal{{ f_r.pk }}Label" aria-hidden="true">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
@@ -137,7 +137,7 @@
           <tr>
             <td>{{ f_r.to.get_full_name }}</td>
             <td>{{ f_r.creation|timesince }}</td>
-            <td><a href="#cancelFRModal{{ f_r.pk }}" role="button" class="btn btn-mini btn-danger" title="{% trans "Cancel" %}" data-toggle="modal"><i class="icon-trash"></i></a>
+            <td><a href="#cancelFRModal{{ f_r.pk }}" role="button" class="btn btn-xs btn-danger" title="{% trans "Cancel" %}" data-toggle="modal"><i class="icon-trash"></i></a>
             <div id="cancelFRModal{{ f_r.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="cancelFRModal{{ f_r.pk }}Label" aria-hidden="true">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
@@ -160,11 +160,11 @@
       </div>
     </div>
   </div>
-  <div class="span12">
+  <div class="col-md-12">
     {% url 'accounts.profile.update' as URL %}
-    <h3>{% trans "Information" %} <a class="btn btn-info btn-mini" href="{% url 'accounts.profile.update' %}"><i class="icon-wrench icon-white"></i> {% trans "update" %}</a></h3>
+    <h3>{% trans "Information" %} <a class="btn btn-info btn-xs" href="{% url 'accounts.profile.update' %}"><i class="icon-wrench icon-white"></i> {% trans "update" %}</a></h3>
     <div class="row">
-      <div class="span6">
+      <div class="col-md-6">
         <dl class="dl-horizontal">
           <dt>{% trans "Name" %}</dt>
           <dd>{{ user.get_full_name }}</dd>
@@ -176,7 +176,7 @@
           <dd><a href="{% url 'accounts.password_change' %}"><i class="icon-lock"></i> {% trans "update" %}</a></dd>
         </dl>
       </div>
-      <div class="span6">
+      <div class="col-md-6">
         <dl class="dl-horizontal">
           <dt>{% trans "Language" %}</dt>
           {% if user.profile.get_language_display %}
@@ -190,7 +190,7 @@
       </div>
     </div>
   </div>
-  <div class="span12">
+  <div class="col-md-12">
     <h3>{% trans "Deleting my account" %}</h3>
     <p>{% trans "If you want to remove your account, just click on the folowing button. Be careful as it will permanently remove all your outings and personal data." %}</p>
     <a href="#deleteAccountModal" role="button" class="btn btn-danger" title="{% trans "delete" %}" data-toggle="modal">{% trans "Deleting my account" %}</a>
