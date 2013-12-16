@@ -141,11 +141,20 @@ class RASUserUpdateForm(ModelForm):
         self.fields['last_name'].required = True
         self.fields['first_name'].widget.attrs['autofocus'] = 'autofocus'
 
+        self.fields['first_name'].widget.attrs['class'] = 'form-control'
+        self.fields['last_name'].widget.attrs['class'] = 'form-control'
+
 
 class RASProfileUpdateForm(ModelForm):
     class Meta:
         model = Profile
         fields = ('phone_number', 'language', 'timezone')
+
+    def __init__(self, *args, **kwargs):
+        super(RASProfileUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['phone_number'].widget.attrs['class'] = 'form-control'
+        self.fields['language'].widget.attrs['class'] = 'form-control'
+        self.fields['timezone'].widget.attrs['class'] = 'form-control'
 
 
 def register(request):
