@@ -84,6 +84,7 @@ class RASPasswordResetForm(PasswordResetForm):
         # Add HTML5 attributes
         self.fields['email'].widget.attrs['placeholder'] = _('email')
         self.fields['email'].widget.attrs['autofocus'] = 'autofocus'
+        self.fields['email'].widget.attrs['class'] = 'form-control'
 
 
 class RASSetPasswordForm(SetPasswordForm):
@@ -97,6 +98,9 @@ class RASSetPasswordForm(SetPasswordForm):
         self.fields['new_password1'].widget.attrs['placeholder'] = _('New password')
         self.fields['new_password1'].widget.attrs['autofocus'] = 'autofocus'
         self.fields['new_password2'].widget.attrs['placeholder'] = _('New password')
+
+        self.fields['new_password1'].widget.attrs['class'] = 'form-control'
+        self.fields['new_password2'].widget.attrs['class'] = 'form-control'
 
 
 class RASUserCreationForm(UserCreationForm):
