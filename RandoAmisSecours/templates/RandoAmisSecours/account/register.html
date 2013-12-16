@@ -4,8 +4,8 @@
 {% block title %}{% trans "Register" %}{% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
-  <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+  <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a></li>
   <li class="activate">{% trans "Register" %}</li>
 {% endblock %}
 
@@ -15,79 +15,79 @@
 </div>
 <div class="row">
   {% if messages %}
-  <div class="span12">
+  <div class="col-md-12">
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags|default:'error' }}">
-      <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+    <div class="alert alert-{{ message.tags|default:'danger' }} alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       <strong>{{ message.tags|default:'error'|capfirst }}:</strong> {{ message }}
     </div>
     {% endfor %}
   </div>
   {% endif %}
-  <form class="form-horizontal" method="post" action="{% url 'accounts.register' %}">
+  <form class="form-horizontal" role="form" method="post" action="{% url 'accounts.register' %}">
   {% csrf_token %}
-  <div class="span6">
+  <div class="col-md-6">
     <h4 class="modal-header">{% trans "Account information" %}</h4>
-    <div class="control-group{% if user_form.username.errors %} error{% endif %}">
-      <label class="control-label" for="id_username">{% trans "Username" %}</label>
-      <div class="controls">
+    <div class="form-group{% if user_form.username.errors %} has-error{% endif %}">
+      <label class="col-md-4 control-label" for="id_username">{% trans "Username" %}</label>
+      <div class="col-md-8">
         {{ user_form.username }}
         {% for error in user_form.username.errors %}
-        <span class="help-inline">{{ error }}</span>
+        <p class="help-block">{{ error }}</p>
         {% endfor %}
       </div>
     </div>
-    <div class="control-group{% if user_form.password1.errors %} error{% endif %}">
-      <label class="control-label" for="id_password1">{% trans "Password" %}</label>
-      <div class="controls">
+    <div class="form-group{% if user_form.password1.errors %} has-error{% endif %}">
+      <label class="col-md-4 control-label" for="id_password1">{% trans "Password" %}</label>
+      <div class="col-md-8">
         {{ user_form.password1 }}
         {% for error in user_form.password1.errors %}
-        <span class="help-inline">{{ error }}</span>
+        <p class="help-block">{{ error }}</p>
         {% endfor %}
       </div>
     </div>
-    <div class="control-group{% if user_form.password2.errors %} error{% endif %}">
-      <label class="control-label" for="id_password2">{% trans "Password" %}</label>
-      <div class="controls">
+    <div class="form-group{% if user_form.password2.errors %} has-error{% endif %}">
+      <label class="col-md-4 control-label" for="id_password2">{% trans "Password" %}</label>
+      <div class="col-md-8">
         {{ user_form.password2 }}
         {% for error in user_form.password2.errors %}
-        <span class="help-inline">{{ error }}</span>
+        <p class="help-block">{{ error }}</p>
         {% endfor %}
       </div>
     </div>
   </div>
-  <div class="span6">
+  <div class="col-md-6">
     <h4 class="modal-header">{% trans "Personnal information" %}</h4>
-    <div class="control-group{% if user_form.first_name.errors %} error{% endif %}">
-      <label class="control-label" for="id_first_name">{% trans "First name" %}</label>
-      <div class="controls">
+    <div class="form-group{% if user_form.first_name.errors %} has-error{% endif %}">
+      <label class="col-md-4 control-label" for="id_first_name">{% trans "First name" %}</label>
+      <div class="col-md-8">
         {{ user_form.first_name }}
         {% for error in user_form.first_name.errors %}
-        <span class="help-inline">{{ error }}</span>
+        <p class="help-block">{{ error }}</p>
         {% endfor %}
       </div>
     </div>
-    <div class="control-group{% if user_form.last_name.errors %} error{% endif %}">
-      <label class="control-label" for="id_last_name">{% trans "Last name" %}</label>
-      <div class="controls">
+    <div class="form-group{% if user_form.last_name.errors %} has-error{% endif %}">
+      <label class="col-md-4 control-label" for="id_last_name">{% trans "Last name" %}</label>
+      <div class="col-md-8">
         {{ user_form.last_name }}
         {% for error in user_form.last_name.errors %}
-        <span class="help-inline">{{ error }}</span>
+        <p class="help-block">{{ error }}</p>
         {% endfor %}
       </div>
     </div>
-    <div class="control-group{% if user_form.email.errors %} error{% endif %}">
-      <label class="control-label" for="id_email">{% trans "email" %}</label>
-      <div class="controls">
+    <div class="form-group{% if user_form.email.errors %} has-error{% endif %}">
+      <label class="col-md-4 control-label" for="id_email">{% trans "email" %}</label>
+      <div class="col-md-8">
         {{ user_form.email }}
         {% for error in user_form.email.errors %}
-        <span class="help-inline">{{ error }}</span>
+        <p class="help-block">{{ error }}</p>
         {% endfor %}
       </div>
     </div>
   </div>
-  <div class="span12">
-    <div class="form-actions">
+  <div class="form-group">
+    <div class="col-md-10 col-md-offset-2">
       <button class="btn btn-primary" type="submit">{% trans "Register" %}</button>
     </div>
   </div>
