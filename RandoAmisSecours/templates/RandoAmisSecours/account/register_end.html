@@ -4,8 +4,8 @@
 {% block title %}{% trans "Register end" %}{% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
-  <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+  <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a></li>
   <li class="activate">{% trans "Register end" %}</li>
 {% endblock %}
 
@@ -15,7 +15,7 @@
 </div>
 
 <div class="row">
-  <div class="span12">
+  <div class="col-md-12">
     <p class="lead">{% trans "Check your mailbox for the confirmation mail." %}</p>
     <p>{% trans "This mail will contains instructions to activate your account. Just click on the link to activate your account and log in R.A.S." %}</p>
     <p>{% trans "If you haven't received the mail, check the spam folder." %}</p>
