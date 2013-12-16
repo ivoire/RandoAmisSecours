@@ -45,6 +45,14 @@ class OutingForm(ModelForm):
         self.fields['latitude'].widget.attrs['placeholder'] = _('Latitude')
         self.fields['longitude'].widget.attrs['placeholder'] = _('Longitude')
 
+        self.fields['name'].widget.attrs['class'] = 'form-control'
+        self.fields['description'].widget.attrs['class'] = 'form-control'
+        self.fields['beginning'].widget.attrs['class'] = 'form-control'
+        self.fields['ending'].widget.attrs['class'] = 'form-control'
+        self.fields['alert'].widget.attrs['class'] = 'form-control'
+        self.fields['latitude'].widget.attrs['class'] = 'form-control'
+        self.fields['longitude'].widget.attrs['class'] = 'form-control'
+
     def clean(self):
         cleaned_data = super(OutingForm, self).clean()
         beginning = cleaned_data.get('beginning')

@@ -24,83 +24,83 @@
 
 <div class="row">
   <div class="col-md-12">
-  <form action="." method="post" class="form-horizontal">
+  <form class="form-horizontal" role="form" action="." method="post">
     {% csrf_token %}
     <div class="row">
       <div class="col-md-6">
         <h4 class="modal-header">{% trans "Global information" %}</h4>
-        <div class="control-group{% if form.name.errors %} hass-error{% endif %}">
-          <label class="control-label" for="id_name">{% trans "Name" %}</label>
-          <div class="controls">
+        <div class="form-group{% if form.name.errors %} has-error{% endif %}">
+          <label class="col-md-4 control-label" for="id_name">{% trans "Name" %}</label>
+          <div class="col-md-8">
             {{ form.name }}
             {% for error in form.name.errors %}
-            <span class="help-inline">{{ error }}</span>
+            <p class="help-block">{{ error }}</p>
             {% endfor %}
           </div>
         </div>
-        <div class="control-group{% if form.description.errors %} has-error{% endif %}">
-          <label class="control-label" for="id_description">{% trans "Description" %}</label>
-          <div class="controls">
+        <div class="form-group{% if form.description.errors %} has-error{% endif %}">
+          <label class="col-md-4 control-label" for="id_description">{% trans "Description" %}</label>
+          <div class="col-md-8">
             {{ form.description }}
             {% for error in form.description.errors %}
-            <span class="help-inline">{{ error }}</span>
+            <p class="help-block">{{ error }}</p>
             {% endfor %}
           </div>
         </div>
-        <div class="control-group{% if form.latitude.errors %} has-error{% endif %}">
-          <label class="control-label" for="id_latitude">{% trans "Latitude" %}</label>
-          <div class="controls">
+        <div class="form-group{% if form.latitude.errors %} has-error{% endif %}">
+          <label class="col-md-4 control-label" for="id_latitude">{% trans "Latitude" %}</label>
+          <div class="col-md-8">
             {{ form.latitude }}
             {% for error in form.latitude.errors %}
-            <span class="help-inline">{{ error }}</span>
+            <p class="help-block">{{ error }}</p>
             {% endfor %}
           </div>
         </div>
-        <div class="control-group{% if form.longitude.errors %} has-error{% endif %}">
-          <label class="control-label" for="id_longitude">{% trans "Longitude" %}</label>
-          <div class="controls">
+        <div class="form-group{% if form.longitude.errors %} has-error{% endif %}">
+          <label class="col-md-4 control-label" for="id_longitude">{% trans "Longitude" %}</label>
+          <div class="col-md-8">
             {{ form.longitude }}
             {% for error in form.longitude.errors %}
-            <span class="help-inline">{{ error }}</span>
+            <p class="help-block">{{ error }}</p>
             {% endfor %}
           </div>
         </div>
       </div>
       <div class="col-md-6">
         <h4 class="modal-header">{% blocktrans with user.profile.timezone as TIME_ZONE %}Timing (in {{ TIME_ZONE }}){% endblocktrans %}</h4>
-        <div class="control-group{% if form.beginning.errors %} has-error{% endif %}">
-          <label class="control-label" for="id_beginning">{% trans "Begin" %}</label>
-          <div class="controls">
-            <div id="beginning_picker" class="input-append date">
+        <div class="form-group{% if form.beginning.errors %} has-error{% endif %}">
+          <label class="col-md-4 control-label" for="id_beginning">{% trans "Begin" %}</label>
+          <div class="col-md-8">
+            <div id="beginning_picker" class="input-group date">
               {{ form.beginning }}
-              <span class="add-on"><div class="glyphicon glyphicon-th"></div></span>
+              <span class="input-group-addon"><div class="glyphicon glyphicon-th"></div></span>
             </div>
             {% for error in form.beginning.errors %}
-            <span class="help-inline">{{ error }}</span>
+            <p class="help-block">{{ error }}</p>
             {% endfor %}
           </div>
         </div>
-        <div class="control-group{% if form.ending.errors %} has-error{% endif %}">
-          <label class="control-label" for="id_ending">{% trans "End" %}</label>
-          <div class="controls">
-            <div id="ending_picker" class="input-append date">
+        <div class="form-group{% if form.ending.errors %} has-error{% endif %}">
+          <label class="col-md-4 control-label" for="id_ending">{% trans "End" %}</label>
+          <div class="col-md-8">
+            <div id="ending_picker" class="input-group date">
               {{ form.ending }}
-              <span class="add-on"><div class="glyphicon glyphicon-th"></div></span>
+              <span class="input-group-addon"><div class="glyphicon glyphicon-th"></div></span>
             </div>
             {% for error in form.ending.errors %}
-            <span class="help-inline">{{ error }}</span>
+            <p class="help-block">{{ error }}</p>
             {% endfor %}
           </div>
         </div>
-        <div class="control-group{% if form.alert.errors %} hass-error{% endif %}">
-          <label class="control-label" for="id_alert">{% trans "Alert" %}</label>
-          <div class="controls">
-            <div id="alert_picker" class="input-append date">
+        <div class="form-group{% if form.alert.errors %} has-error{% endif %}">
+          <label class="col-md-4 control-label" for="id_alert">{% trans "Alert" %}</label>
+          <div class="col-md-8">
+            <div id="alert_picker" class="input-group date">
               {{ form.alert }}
-              <span class="add-on"><div class="glyphicon glyphicon-th"></div></span>
+              <span class="input-group-addon"><div class="glyphicon glyphicon-th"></div></span>
             </div>
             {% for error in form.alert.errors %}
-            <span class="help-inline">{{ error }}</span>
+            <p class="help-block">{{ error }}</p>
             {% endfor %}
           </div>
         </div>
@@ -120,8 +120,10 @@
         </div>
       </div>
     </div>
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">{{ update|yesno:_("Update,Create") }}</button>
+    <div class="form-group">
+      <div class="col-md-10 col-md-offset-2">
+        <button type="submit" class="btn btn-primary">{{ update|yesno:_("Update,Create") }}</button>
+      </div>
     </div>
   </form>
   </div>
