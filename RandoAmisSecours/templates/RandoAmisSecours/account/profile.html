@@ -51,20 +51,25 @@
           <tr>
             <td>{{ friend.user.get_full_name }}</td>
             <td>{% if friend.phone_number %}<a href="tel:{{ friend.phone_number }}">{{ friend.phone_number }}</a>{% else %}?{% endif %}</td>
-            <td><a href="#deleteFriendModal{{ friend.user.pk }}" role="button" class="btn btn-xs btn-danger" title="{% trans "delete" %}" data-toggle="modal"><div class="glyphicon glyphicon-trash"></div></a>
-            <div id="deleteFriendModal{{ friend.user.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteFriendModal{{ friend.user.pk }}Label" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-                <h3 id="deleteFriendModal{{ friend.user.pk }}Label">{% trans "Remove friend from list" %}</h3>
+            <td><button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteFriendModal{{ friend.user.pk }}" title="{% trans "delete" %}"><div class="glyphicon glyphicon-trash"></div></button>
+            <div class="modal fade" id="deleteFriendModal{{ friend.user.pk }}" tabindex="-1" role="dialog" aria-labelledby="deleteFriendModal{{ friend.user.pk }}Label" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title" id="deleteFriendModal{{ friend.user.pk }}Label">{% trans "Remove friend from list" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>{% blocktrans with friend.user.get_full_name as name %}Are you sure you want to remove «{{ name }}» from your friends?{% endblocktrans %}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                    <a type="button" class="btn btn-danger" href="{% url 'friends.delete' friend.user.pk %}">{% trans "Delete" %}</a>
+                  </div>
+                </div>
               </div>
-              <div class="modal-body">
-                <p>{% blocktrans with friend.user.get_full_name as name %}Are you sure you want to remove «{{ name }}» from your friends?{% endblocktrans %}</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
-                <a href="{% url 'friends.delete' friend.user.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
-              </div>
-            </div></td>
+            </div>
+            </td>
           </tr>
           {% endfor %}
         </table>
@@ -87,32 +92,40 @@
           <tr>
             <td>{{ f_r.user.get_full_name }}</td>
             <td>{{ f_r.creation|timesince }}</td>
-            <td><a href="#acceptFRModal{{ f_r.pk }}" class="btn btn-xs btn-success" title="{% trans "Accept" %}" data-toggle="modal"><i class="icon-ok-sign"></i></a>
-                <a href="#refuseFRModal{{ f_r.pk }}" class="btn btn-xs btn-danger" title="{% trans "Refuse" %}" data-toggle="modal"><i class="icon-trash"></i></a>
-            <div id="acceptFRModal{{ f_r.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="acceptFRModal{{ f_r.pk }}Label" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-                <h3 id="acceptFRModal{{ f_r.pk }}Label">{% trans "Accept friend request" %}</h3>
-              </div>
-              <div class="modal-body">
-                <p>{% blocktrans with f_r.user.get_full_name as name %}Are you sure you want to add «{{ name }}» to your friends?{% endblocktrans %}</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
-                <a href="{% url 'friends.accept' f_r.pk %}" class="btn btn-success">{% trans "Add friend" %}</a>
+            <td><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#acceptFRModal{{ f_r.pk }}" title="{% trans "Accept" %}"><div class=" glyphicon glyphicon-ok-sign"></div></button>
+                <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#refuseFRModal{{ f_r.pk }}" title="{% trans "Refuse" %}"><div class="glyphicon glyphicon-trash"></div></button>
+            <div class="modal fade" id="acceptFRModal{{ f_r.pk }}" tabindex="-1" role="dialog" aria-labelledby="acceptFRModal{{ f_r.pk }}Label" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="moda-title" id="acceptFRModal{{ f_r.pk }}Label">{% trans "Accept friend request" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>{% blocktrans with f_r.user.get_full_name as name %}Are you sure you want to add «{{ name }}» to your friends?{% endblocktrans %}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                    <a type="button" class="btn btn-success" href="{% url 'friends.accept' f_r.pk %}">{% trans "Add friend" %}</a>
+                  </div>
+                </div>
               </div>
             </div>
-            <div id="refuseFRModal{{ f_r.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="refuseFRModal{{ f_r.pk }}Label" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-                <h3 id="refuseFRModal{{ f_r.pk }}Label">{% trans "Refuse friend request" %}</h3>
-              </div>
-              <div class="modal-body">
-                <p>{% blocktrans with f_r.user.get_full_name as name %}Are you sure you want refuse the friend request from «{{ name }}»?{% endblocktrans %}</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
-                <a href="{% url 'friends.refuse' f_r.pk %}" class="btn btn-danger">{% trans "Refuse request" %}</a>
+            <div class="modal fade" id="refuseFRModal{{ f_r.pk }}" tabindex="-1" role="dialog" aria-labelledby="refuseFRModal{{ f_r.pk }}Label" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title" id="refuseFRModal{{ f_r.pk }}Label">{% trans "Refuse friend request" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>{% blocktrans with f_r.user.get_full_name as name %}Are you sure you want refuse the friend request from «{{ name }}»?{% endblocktrans %}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                    <a type="button" class="btn btn-danger" href="{% url 'friends.refuse' f_r.pk %}">{% trans "Refuse request" %}</a>
+                  </div>
+                </div>
               </div>
             </div>
             </td>
@@ -137,18 +150,22 @@
           <tr>
             <td>{{ f_r.to.get_full_name }}</td>
             <td>{{ f_r.creation|timesince }}</td>
-            <td><a href="#cancelFRModal{{ f_r.pk }}" role="button" class="btn btn-xs btn-danger" title="{% trans "Cancel" %}" data-toggle="modal"><i class="icon-trash"></i></a>
-            <div id="cancelFRModal{{ f_r.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="cancelFRModal{{ f_r.pk }}Label" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-                <h3 id="cancelFRModal{{ f_r.pk }}Label">{% trans "Cancel friend request" %}</h3>
-              </div>
-              <div class="modal-body">
-                <p>{% blocktrans with f_r.to.get_full_name as name %}Are you sure you want to cancel the friend request sent to «{{ name }}»?{% endblocktrans %}</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
-                <a href="{% url 'friends.cancel' f_r.pk %}" class="btn btn-danger">{% trans "Cancel friend request" %}</a>
+            <td><button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#cancelFRModal{{ f_r.pk }}" title="{% trans "Cancel" %}"><div class="glyphicon glyphicon-trash"></div></button>
+            <div class="modal fade" id="cancelFRModal{{ f_r.pk }}" tabindex="-1" role="dialog" aria-labelledby="cancelFRModal{{ f_r.pk }}Label" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title" id="cancelFRModal{{ f_r.pk }}Label">{% trans "Cancel friend request" %}</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>{% blocktrans with f_r.to.get_full_name as name %}Are you sure you want to cancel the friend request sent to «{{ name }}»?{% endblocktrans %}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                    <a type="button" class="btn btn-danger" href="{% url 'friends.cancel' f_r.pk %}">{% trans "Cancel friend request" %}</a>
+                  </div>
+                </div>
               </div>
             </div></td>
           </tr>
@@ -162,7 +179,7 @@
   </div>
   <div class="col-md-12">
     {% url 'accounts.profile.update' as URL %}
-    <h3>{% trans "Information" %} <a class="btn btn-info btn-xs" href="{% url 'accounts.profile.update' %}"><i class="icon-wrench icon-white"></i> {% trans "update" %}</a></h3>
+    <h3>{% trans "Information" %} <a class="btn btn-info btn-xs" href="{% url 'accounts.profile.update' %}"><div class="glyphicon glyphicon-wrench"></div> {% trans "update" %}</a></h3>
     <div class="row">
       <div class="col-md-6">
         <dl class="dl-horizontal">
@@ -173,7 +190,7 @@
           <dt>{% trans "Phone number" %}</dt>
           <dd>{{ user.profile.phone_number|default:"?" }}</dd>
           <dt>{% trans "Password" %}</dt>
-          <dd><a href="{% url 'accounts.password_change' %}"><i class="icon-lock"></i> {% trans "update" %}</a></dd>
+          <dd><a href="{% url 'accounts.password_change' %}"><div class="glyphicon glyphicon-lock"></div> {% trans "update" %}</a></dd>
         </dl>
       </div>
       <div class="col-md-6">
@@ -193,18 +210,22 @@
   <div class="col-md-12">
     <h3>{% trans "Deleting my account" %}</h3>
     <p>{% trans "If you want to remove your account, just click on the folowing button. Be careful as it will permanently remove all your outings and personal data." %}</p>
-    <a href="#deleteAccountModal" role="button" class="btn btn-danger" title="{% trans "delete" %}" data-toggle="modal">{% trans "Deleting my account" %}</a>
-    <div id="deleteAccountModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
-        <h3 id="deleteAccountModalLabel">{% trans "Deleting my account" %}</h3>
-      </div>
-      <div class="modal-body">
-        <p>{% trans "Are you sure you want to delete your account? It will permanently delete all your outings along with your personal data." %}</p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
-        <a href="{% url 'accounts.delete' %}" class="btn btn-danger">{% trans "Deleting my account" %}</a>
+    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteAccountModal" title="{% trans "delete" %}">{% trans "Deleting my account" %}</button>
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 class="modal-title" id="deleteAccountModalLabel">{% trans "Deleting my account" %}</h3>
+          </div>
+          <div class="modal-body">
+            <p>{% trans "Are you sure you want to delete your account? It will permanently delete all your outings along with your personal data." %}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            <a type="button" class="btn btn-danger" href="{% url 'accounts.delete' %}">{% trans "Deleting my account" %}</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
