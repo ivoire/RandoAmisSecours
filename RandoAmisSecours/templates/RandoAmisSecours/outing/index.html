@@ -36,13 +36,13 @@
   <div class="col-md-12">
     {% url 'outings.create' as URL %}
     <h3>{% trans "My outings" %} <a class="btn btn-info btn-xs" href="{% url 'outings.create' %}"><div class="glyphicon glyphicon-plus-sign"></div> {% trans "new" %}</a></h3>
-    <div class="tabbable">
+    <div id="OutingsTab">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#current" data-toggle="tab">{% trans "Current" %}</a></li>
         <li><a href="#draft" data-toggle="tab">{% trans "Draft" %}</a></li>
         <li><a href="#finished" data-toggle="tab">{% trans "Finished" %}</a></li>
       </ul>
-      <div class="tab-content">
+      <div id="OutingsTabContent" class="tab-content">
         <div class="tab-pane active" id="current">
           {% if user_outings_confirmed %}
           <table class="table">
@@ -69,33 +69,41 @@
                 <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
                 <td>{{ outing.beginning|naturaltime }}</td>
                 <td>{{ outing.ending|naturaltime }}</td>
-                <td><a href="#okModal{{ outing.pk }}" role="button" class="btn btn-xs btn-success" title="{% trans "finish" %}" data-toggle="modal"><div class="glyphicon glyphicon-ok-sign"></div></a><a href="#" class="btn btn-xs btn-warning" title="{% trans "late" %}"><div class="glyphicon glyphicon-time"></div></a>
-                  <div id="okModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="okModal{{ outing.pk }}Label" aria-hidden="true">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-div="modal" aria-hidden="true">&times;</button>
-                      <h3 id="okModal{{ outing.pk }}Label">{% trans "Finishing outing" %}</h3>
-                    </div>
-                    <div class="modal-body">
-                      <p>{% blocktrans with outing.name as name %}Confirm that you are back home safe from «{{ name }}» ?{% endblocktrans %}</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
-                      <a href="{% url 'outings.finish' outing.pk %}" class="btn btn-success">{% trans "Finish" %}</a>
+                <td><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#okModal{{ outing.pk }}" title="{% trans "finish" %}"><div class="glyphicon glyphicon-ok-sign"></div></button><button class="btn btn-xs btn-warning" data-toggle="modal" data-target="#" title="{% trans "late" %}"><div class="glyphicon glyphicon-time"></div></button>
+                  <div class="modal fade" id="okModal{{ outing.pk }}" tabindex="-1" role="dialog" aria-labelledby="okModal{{ outing.pk }}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h3 class="modal-title" id="okModal{{ outing.pk }}Label">{% trans "Finishing outing" %}</h3>
+                        </div>
+                        <div class="modal-body">
+                          <p>{% blocktrans with outing.name as name %}Confirm that you are back home safe from «{{ name }}» ?{% endblocktrans %}</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                          <a type="button" class="btn btn-success" href="{% url 'outings.finish' outing.pk %}">{% trans "Finish" %}</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </td>
-                <td><a href="{% url 'outings.update' outing.pk %}" class="btn btn-xs btn-info" title="{% trans "update" %}"><div class="glyphicon glyphicon-pencil"></div></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-xs btn-danger" title="{% trans "delete" %}" data-toggle="modal"><div class="glyphicon glyphicon-trash"></div></a>
-                  <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h3 id="deleteModal{{ outing.pk }}Label">{% trans "Delete outing" %}</h3>
-                    </div>
-                    <div class="modal-body">
-                      <p>{% blocktrans with outing.name as name %}Are you sure you want to delete the outing: «{{ name }}» ?{% endblocktrans %}</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
-                      <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
+                <td><a class="btn btn-xs btn-info" href="{% url 'outings.update' outing.pk %}" title="{% trans "update" %}"><div class="glyphicon glyphicon-pencil"></div></a><button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal{{ outing.pk }}" title="{% trans "delete" %}"><div class="glyphicon glyphicon-trash"></div></button>
+                  <div class="modal fade" id="deleteModal{{ outing.pk }}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h3 class="modal-title" id="deleteModal{{ outing.pk }}Label">{% trans "Delete outing" %}</h3>
+                        </div>
+                        <div class="modal-body">
+                          <p>{% blocktrans with outing.name as name %}Are you sure you want to delete the outing: «{{ name }}» ?{% endblocktrans %}</p>
+                        </div>
+                       <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                          <a type="button" class="btn btn-danger" href="{% url 'outings.delete' outing.pk %}">{% trans "Delete" %}</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </td>
@@ -124,18 +132,22 @@
                 <td><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></td>
                 <td>{{ outing.beginning|naturaltime }}</td>
                 <td>{{ outing.ending|naturaltime }}</td>
-                <td><a href="{% url 'outings.confirm' outing.pk %}" class="btn btn-xs btn-success" title="{% trans "confirm" %}"><div class="glyphicon glyphicon-ok"></div></a><a href="{% url 'outings.update' outing.pk %}" class="btn btn-xs btn-info" title="{% trans "update" %}"><div class="glyphicon glyphicon-pencil"></div></a><a href="#deleteModal{{ outing.pk }}" role="button" class="btn btn-xs btn-danger" title="{% trans "delete" %}" data-toggle="modal"><div class="glyphicon glyphicon-trash"></div></a>
-                  <div id="deleteModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h3 id="deleteModal{{ outing.pk }}Label">{% trans "Delete outing" %}</h3>
-                    </div>
-                    <div class="modal-body">
-                      <p>{% blocktrans with outing.name as name %}Are you sure you want to delete the outing: «{{ name }}» ?{% endblocktrans %}</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
-                      <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
+                <td><a class="btn btn-xs btn-success" href="{% url 'outings.confirm' outing.pk %}" title="{% trans "confirm" %}"><div class="glyphicon glyphicon-ok"></div></a><a class="btn btn-xs btn-info" href="{% url 'outings.update' outing.pk %}" title="{% trans "update" %}"><div class="glyphicon glyphicon-pencil"></div></a><button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal{{ outing.pk }}" title="{% trans "delete" %}"><div class="glyphicon glyphicon-trash"></div></button>
+                  <div class="modal fade" id="deleteModal{{ outing.pk }}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ outing.pk }}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h3 class="modal-title" id="deleteModal{{ outing.pk }}Label">{% trans "Delete outing" %}</h3>
+                        </div>
+                        <div class="modal-body">
+                          <p>{% blocktrans with outing.name as name %}Are you sure you want to delete the outing: «{{ name }}» ?{% endblocktrans %}</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                          <a type="button" class="btn btn-danger" href="{% url 'outings.delete' outing.pk %}">{% trans "Delete" %}</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </td>
@@ -166,18 +178,22 @@
                 <td>{{ outing.beginning }}</td>
                 <td>{{ outing.ending }}</td>
                 <td></td>
-                <td><a href="#deleteFinishedModal{{ outing.pk }}" role="button" class="btn btn-xs btn-danger" title="{% trans "delete" %}" data-toggle="modal"><div class="glyphicon glyphicon-trash"></div></a>
-                  <div id="deleteFinishedModal{{ outing.pk }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteFinishedModal{{ outing.pk }}Label" aria-hidden="true">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h3 id="deleteFinishedModal{{ outing.pk }}Label">{% trans "Delete outing" %}</h3>
-                    </div>
-                    <div class="modal-body">
-                      <p>{% blocktrans with outing.name as name %}Are you sure you want to delete the outing: «{{ name }}» ?{% endblocktrans %}</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
-                      <a href="{% url 'outings.delete' outing.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
+                <td><button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteFinishedModal{{ outing.pk }}" title="{% trans "delete" %}"><div class="glyphicon glyphicon-trash"></div></button>
+                  <div class="modal fade" id="deleteFinishedModal{{ outing.pk }}" tabindex="-1" role="dialog" aria-labelledby="deleteFinishedModal{{ outing.pk }}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h3 class="modal-title" id="deleteFinishedModal{{ outing.pk }}Label">{% trans "Delete outing" %}</h3>
+                        </div>
+                        <div class="modal-body">
+                          <p>{% blocktrans with outing.name as name %}Are you sure you want to delete the outing: «{{ name }}» ?{% endblocktrans %}</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                          <a type="button" class="btn btn-danger" href="{% url 'outings.delete' outing.pk %}">{% trans "Delete" %}</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </td>
@@ -197,13 +213,13 @@
 <div class="row">
   <div class="col-md-12">
     <h3>{% trans "Friends Outings" %}</h3>
-    <div class="tabbable">
+    <div id="FriendutingsTab">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#friends_current" data-toggle="tab">{% trans "Current" %}</a></li>
         <li><a href="#friends_draft" data-toggle="tab">{% trans "Draft" %}</a></li>
         <li><a href="#friends_finished" data-toggle="tab">{% trans "Finished" %}</a></li>
       </ul>
-      <div class="tab-content">
+      <div id="FriendutingsTabContent" class="tab-content">
         <div class="tab-pane active" id="friends_current">
           {% if friends_outings_confirmed %}
           <table class="table">
