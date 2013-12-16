@@ -31,16 +31,16 @@
 {% endblock %}
 
 {% block breadcrumb %}
-  <li><a href="{% url 'index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
-  <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a> <span class="divider">/</span></li>
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+  <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a></li>
   <li class="activate">{% trans "Log in" %}</li>
 {% endblock %}
 
 {% block body %}
 <div class="container">
   {% if form.errors %}
-    <div class="alert alert-error">
-      <button class="close" data-dismiss="alert" type="button"><i class="icon-remove"></i></button>
+    <div class="alert alert-danger">
+      <button class="close" data-dismiss="alert" type="button">&times;</button>
       {% trans "<strong>Wrong username or password</strong>: Note that both fields may be case-sensitive" %}
     </div>
   {% endif %}

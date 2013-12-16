@@ -52,6 +52,9 @@ class RASAuthenticationForm(AuthenticationForm):
         self.fields['username'].widget.attrs['autofocus'] = 'autofocus'
         self.fields['password'].widget.attrs['placeholder'] = _('Password')
 
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['password'].widget.attrs['class'] = 'form-control'
+
 
 class RASPasswordChangeForm(PasswordChangeForm):
     """
