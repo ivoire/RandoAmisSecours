@@ -66,6 +66,10 @@ class RASPasswordChangeForm(PasswordChangeForm):
         self.fields['new_password1'].widget.attrs['placeholder'] = _('New password')
         self.fields['new_password2'].widget.attrs['placeholder'] = _('New password')
 
+        self.fields['old_password'].widget.attrs['class'] = 'form-control'
+        self.fields['new_password1'].widget.attrs['class'] = 'form-control'
+        self.fields['new_password2'].widget.attrs['class'] = 'form-control'
+
 
 class RASPasswordResetForm(PasswordResetForm):
     """
