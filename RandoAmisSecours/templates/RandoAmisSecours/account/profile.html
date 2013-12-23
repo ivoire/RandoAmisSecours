@@ -35,7 +35,7 @@
         <li><a href="#sent" data-toggle="tab">{% trans "Sent" %}{% if friend_requests_sent %} <span class="badge">{{ friend_requests_sent.count }}</span>{% endif %}</a></li>
       </ul>
     </div>
-    <div id="FriendTab" class="tab-content">
+    <div id="FriendTabContent" class="tab-content">
       <div class="tab-pane active" id="friends">
         {% with user.profile.friends.all.select_related as friends %}
         {% if friends %}
