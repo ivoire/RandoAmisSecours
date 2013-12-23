@@ -65,7 +65,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-                    <a type="button" class="btn btn-danger" href="{% url 'friends.delete' friend.user.pk %}">{% trans "Delete" %}</a>
+                    <a class="btn btn-danger" href="{% url 'friends.delete' friend.user.pk %}">{% trans "Delete" %}</a>
                   </div>
                 </div>
               </div>
@@ -108,7 +108,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-                    <a type="button" class="btn btn-success" href="{% url 'friends.accept' f_r.pk %}">{% trans "Add friend" %}</a>
+                    <a class="btn btn-success" href="{% url 'friends.accept' f_r.pk %}">{% trans "Add friend" %}</a>
                   </div>
                 </div>
               </div>
@@ -125,7 +125,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-                    <a type="button" class="btn btn-danger" href="{% url 'friends.refuse' f_r.pk %}">{% trans "Refuse request" %}</a>
+                    <a class="btn btn-danger" href="{% url 'friends.refuse' f_r.pk %}">{% trans "Refuse request" %}</a>
                   </div>
                 </div>
               </div>
@@ -165,7 +165,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-                    <a type="button" class="btn btn-danger" href="{% url 'friends.cancel' f_r.pk %}">{% trans "Cancel friend request" %}</a>
+                    <a class="btn btn-danger" href="{% url 'friends.cancel' f_r.pk %}">{% trans "Cancel friend request" %}</a>
                   </div>
                 </div>
               </div>
@@ -225,7 +225,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
-            <a type="button" class="btn btn-danger" href="{% url 'accounts.delete' %}">{% trans "Deleting my account" %}</a>
+            <a class="btn btn-danger" href="{% url 'accounts.delete' %}">{% trans "Deleting my account" %}</a>
           </div>
         </div>
       </div>
