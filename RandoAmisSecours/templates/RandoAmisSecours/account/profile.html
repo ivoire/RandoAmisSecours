@@ -27,7 +27,7 @@
 
   <div class="col-md-12">
     {% url 'friends.search' as URL %}
-    <h3>{% trans "Friends" %} <a class="btn btn-info btn-xs" href="{% url 'friends.search' %}"><div class="glyphicon glyphicon-search"></div> {% trans "search" %}</a></h3>
+    <h3>{% trans "Friends" %} <a class="btn btn-info btn-xs" href="{% url 'friends.search' %}"><span class="glyphicon glyphicon-search"></span> {% trans "search" %}</a></h3>
     <div id="FriendTab">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#friends" data-toggle="tab">{% trans "Friends" %}</a></li>
@@ -52,7 +52,7 @@
           <tr>
             <td>{{ friend.user.get_full_name }}</td>
             <td>{% if friend.phone_number %}<a href="tel:{{ friend.phone_number }}">{{ friend.phone_number }}</a>{% else %}?{% endif %}</td>
-            <td><button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteFriendModal{{ friend.user.pk }}" title="{% trans "delete" %}"><div class="glyphicon glyphicon-trash"></div></button>
+            <td><button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteFriendModal{{ friend.user.pk }}" title="{% trans "delete" %}"><span class="glyphicon glyphicon-trash"></span></button>
             <div class="modal fade" id="deleteFriendModal{{ friend.user.pk }}" tabindex="-1" role="dialog" aria-labelledby="deleteFriendModal{{ friend.user.pk }}Label" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -94,8 +94,8 @@
           <tr>
             <td>{{ f_r.user.get_full_name }}</td>
             <td>{{ f_r.creation|timesince }}</td>
-            <td><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#acceptFRModal{{ f_r.pk }}" title="{% trans "Accept" %}"><div class=" glyphicon glyphicon-ok-sign"></div></button>
-                <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#refuseFRModal{{ f_r.pk }}" title="{% trans "Refuse" %}"><div class="glyphicon glyphicon-trash"></div></button>
+            <td><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#acceptFRModal{{ f_r.pk }}" title="{% trans "Accept" %}"><span class=" glyphicon glyphicon-ok-sign"></span></button>
+                <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#refuseFRModal{{ f_r.pk }}" title="{% trans "Refuse" %}"><span class="glyphicon glyphicon-trash"></span></button>
             <div class="modal fade" id="acceptFRModal{{ f_r.pk }}" tabindex="-1" role="dialog" aria-labelledby="acceptFRModal{{ f_r.pk }}Label" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -152,7 +152,7 @@
           <tr>
             <td>{{ f_r.to.get_full_name }}</td>
             <td>{{ f_r.creation|timesince }}</td>
-            <td><button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#cancelFRModal{{ f_r.pk }}" title="{% trans "Cancel" %}"><div class="glyphicon glyphicon-trash"></div></button>
+            <td><button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#cancelFRModal{{ f_r.pk }}" title="{% trans "Cancel" %}"><span class="glyphicon glyphicon-trash"></span></button>
             <div class="modal fade" id="cancelFRModal{{ f_r.pk }}" tabindex="-1" role="dialog" aria-labelledby="cancelFRModal{{ f_r.pk }}Label" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -181,7 +181,7 @@
   </div>
   <div class="col-md-12">
     {% url 'accounts.profile.update' as URL %}
-    <h3>{% trans "Information" %} <a class="btn btn-info btn-xs" href="{% url 'accounts.profile.update' %}"><div class="glyphicon glyphicon-wrench"></div> {% trans "update" %}</a></h3>
+    <h3>{% trans "Information" %} <a class="btn btn-info btn-xs" href="{% url 'accounts.profile.update' %}"><span class="glyphicon glyphicon-wrench"></span> {% trans "update" %}</a></h3>
     <div class="row">
       <div class="col-md-6">
         <dl class="dl-horizontal">
@@ -192,7 +192,7 @@
           <dt>{% trans "Phone number" %}</dt>
           <dd>{{ user.profile.phone_number|default:"?" }}</dd>
           <dt>{% trans "Password" %}</dt>
-          <dd><a href="{% url 'accounts.password_change' %}"><div class="glyphicon glyphicon-lock"></div> {% trans "update" %}</a></dd>
+          <dd><a href="{% url 'accounts.password_change' %}"><span class="glyphicon glyphicon-lock"></span> {% trans "update" %}</a></dd>
         </dl>
       </div>
       <div class="col-md-6">

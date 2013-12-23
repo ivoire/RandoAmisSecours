@@ -32,22 +32,22 @@
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-        <li><a href="{% url 'index' %}"><div class="glyphicon glyphicon-home"></div> {% trans "Home" %}</a></li>
-        <li><a href="{% url 'outings.index' %}"><div class="glyphicon glyphicon-tasks"></div> {%trans "Outings" %}</a></li>
-        <li><a href="{% url 'help.index' %}"><div class="glyphicon glyphicon-question-sign"></div> {% trans "Help" %}</a></li>
+        <li><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home"></span> {% trans "Home" %}</a></li>
+        <li><a href="{% url 'outings.index' %}"><span class="glyphicon glyphicon-tasks"></span> {%trans "Outings" %}</a></li>
+        <li><a href="{% url 'help.index' %}"><span class="glyphicon glyphicon-question-sign"></span> {% trans "Help" %}</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><div class="glyphicon glyphicon-user"></div> {{ user.get_full_name }}<b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ user.get_full_name }}<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="{% url 'accounts.profile' %}"><div class="glyphicon glyphicon-cog"></div> {% trans "Profile" %}</a></li>
+            <li><a href="{% url 'accounts.profile' %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Profile" %}</a></li>
             <li class="divider"></li>
-            <li><a href="{% url 'accounts.logout' %}"><div class="glyphicon glyphicon-off"></div> {% trans "Log out" %}</a></li>
+            <li><a href="{% url 'accounts.logout' %}"><span class="glyphicon glyphicon-off"></span> {% trans "Log out" %}</a></li>
           </ul>
         </li>
         {% else %}
-        <li><a href="{% url 'accounts.login' %}"><div class="glyphicon glyphicon-user"></div> {% trans "Log in" %}</a></li>
+        <li><a href="{% url 'accounts.login' %}"><span class="glyphicon glyphicon-user"></span> {% trans "Log in" %}</a></li>
         {% endif %}
       </ul>
     </nav>

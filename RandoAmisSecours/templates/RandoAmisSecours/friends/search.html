@@ -33,7 +33,7 @@
         <div class=" col-md-6 input-group">
           <input type="text" name="query" class="input-medium form-control" autofocus="autofocus" placeholder="{% trans "Search" %}">
           <span class="input-group-btn">
-            <button type="submit" class="btn btn-default"><div class="glyphicon glyphicon-search"></div></button>
+            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
           </span>
         </div>
         {% if error %}
@@ -57,7 +57,7 @@
       {% for profile in results %}
         <tr>
           <td>{{ profile.user.get_full_name }}</td>
-          <td>{% if profile not in friends %}<a href="{% url 'friends.invite' profile.user.pk %}" class="btn btn-xs btn-success" title="invite"><div class="glyphicon glyphicon-plus"></div></a>{% endif %}</td>
+          <td>{% if profile not in friends %}<a href="{% url 'friends.invite' profile.user.pk %}" class="btn btn-xs btn-success" title="invite"><span class="glyphicon glyphicon-plus"></span></a>{% endif %}</td>
         </tr>
       {% endfor %}
       {% endwith %}
