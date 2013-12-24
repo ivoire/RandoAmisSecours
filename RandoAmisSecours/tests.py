@@ -780,3 +780,72 @@ class APITest(ResourceTestCase):
             'profile': "/api/1.0/profile/%d/" % (self.user3.profile.pk),
             'resource_uri': "/api/1.0/user/%d/" % (self.user3.pk)
         })
+
+    def test_user_modification(self):
+        """ This is not allowed for the moment """
+        self.assertHttpMethodNotAllowed(self.api_client.post('/api/1.0/user/', format='json', data=''))
+        self.assertHttpMethodNotAllowed(self.api_client.post('/api/1.0/user/', format='json', authentication=self.get_credentials()))
+        self.assertHttpMethodNotAllowed(self.api_client.put("/api/1.0/user/%d/" % (self.user1.pk), format='json', data=''))
+        self.assertHttpMethodNotAllowed(self.api_client.put("/api/1.0/user/%d/" % (self.user1.pk), format='json', authentication=self.get_credentials()))
+        self.assertHttpMethodNotAllowed(self.api_client.delete("/api/1.0/user/%d/" % (self.user1.pk), format='json', data=''))
+        self.assertHttpMethodNotAllowed(self.api_client.delete("/api/1.0/user/%d/" % (self.user1.pk), format='json', authentication=self.get_credentials()))
+
+    def test_profile_list(self):
+        # List the profiles
+        resp = self.api_client.get('/api/1.0/profile/', format='json', authentication=self.get_credentials())
+        self.assertValidJSONResponse(resp)
+
+        self.assertEqual(len(self.deserialize(resp)['objects']), 2)
+        self.assertEqual(self.deserialize(resp)['objects'][0], {
+            'user': self.user1.pk,
+            'friends': ["/api/1.0/profile/%d/" % (self.user2.pk)],
+            'timezone': self.user1.profile.timezone,
+            'language': self.user1.profile.language,
+            'phone_number': self.user1.profile.phone_number,
+            'user': "/api/1.0/user/%d/" % (self.user1.pk),
+            'resource_uri': "/api/1.0/profile/%d/" % (self.user1.profile.pk)
+        })
+        self.assertEqual(self.deserialize(resp)['objects'][1], {
+            'user': self.user2.pk,
+            'phone_number': self.user2.profile.phone_number,
+            'user': "/api/1.0/user/%d/" % (self.user2.pk),
+            'resource_uri': "/api/1.0/profile/%d/" % (self.user2.profile.pk)
+
+        })
+
+        # Try with user2
+        self.client.login(username='ras_friend', password='mdp2')
+        resp = self.api_client.get('/api/1.0/profile/', format='json', authentication=self.create_basic(username='ras_friend', password='mdp2'))
+        self.assertValidJSONResponse(resp)
+
+        self.assertEqual(len(self.deserialize(resp)['objects']), 3)
+        self.assertEqual(self.deserialize(resp)['objects'][0], {
+            'user': self.user2.pk,
+            'friends': ["/api/1.0/profile/%d/" % (self.user1.pk), "/api/1.0/profile/%d/" % (self.user3.pk)],
+            'timezone': self.user2.profile.timezone,
+            'language': self.user2.profile.language,
+            'phone_number': self.user2.profile.phone_number,
+            'user': "/api/1.0/user/%d/" % (self.user2.pk),
+            'resource_uri': "/api/1.0/profile/%d/" % (self.user2.profile.pk)
+        })
+        self.assertEqual(self.deserialize(resp)['objects'][1], {
+            'user': self.user1.pk,
+            'phone_number': self.user1.profile.phone_number,
+            'user': "/api/1.0/user/%d/" % (self.user1.pk),
+            'resource_uri': "/api/1.0/profile/%d/" % (self.user1.profile.pk)
+        })
+        self.assertEqual(self.deserialize(resp)['objects'][2], {
+            'user': self.user3.pk,
+            'phone_number': self.user3.profile.phone_number,
+            'user': "/api/1.0/user/%d/" % (self.user3.pk),
+            'resource_uri': "/api/1.0/profile/%d/" % (self.user3.profile.pk)
+        })
+
+    def test_profile_modification(self):
+        """ This is not allowed for the moment """
+        self.assertHttpMethodNotAllowed(self.api_client.post('/api/1.0/profile/', format='json', data=''))
+        self.assertHttpMethodNotAllowed(self.api_client.post('/api/1.0/profile/', format='json', authentication=self.get_credentials()))
+        self.assertHttpMethodNotAllowed(self.api_client.put("/api/1.0/profile/%d/" % (self.user1.profile.pk), format='json', data=''))
+        self.assertHttpMethodNotAllowed(self.api_client.put("/api/1.0/profile/%d/" % (self.user1.profile.pk), format='json', authentication=self.get_credentials()))
+        self.assertHttpMethodNotAllowed(self.api_client.delete("/api/1.0/profile/%d/" % (self.user1.profile.pk), format='json', data=''))
+        self.assertHttpMethodNotAllowed(self.api_client.delete("/api/1.0/profile/%d/" % (self.user1.profile.pk), format='json', authentication=self.get_credentials()))
