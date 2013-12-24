@@ -125,7 +125,7 @@ class UserResource(ModelResource):
         queryset = User.objects.all()
         resource_name = 'user'
         fields = ['first_name', 'last_name', 'email']
-        allowed_method = ['get']
+        allowed_methods = ['get']
         authentication = BasicAuthentication()
         authorization = UserAuthorization()
 
@@ -138,7 +138,7 @@ class ProfileResource(ModelResource):
         queryset = Profile.objects.all()
         resource_name = 'profile'
         fields = ['phone_number', 'language', 'timezone', 'friends']
-        allowed_method = ['get']
+        allowed_methods = ['get']
         authentication = BasicAuthentication()
         authorization = ProfileAuthorization()
 
