@@ -729,6 +729,23 @@ class APITest(ResourceTestCase):
         self.user3.profile = Profile.objects.create(user=self.user3, timezone='Europe/Paris', language='fr')
         self.user3.profile.friends.add(self.user2.profile)
 
+        date = datetime(2011, 2, 15, 2, 0).replace(tzinfo=utc)
+        self.outing1 = Outing.objects.create(user=self.user1, beginning=date,
+                                             ending=date, alert=date,
+                                             latitude=1.23, longitude=3.21, status=CONFIRMED)
+        date = datetime(2011, 2, 15, 2, 10).replace(tzinfo=utc)
+        self.outing2 = Outing.objects.create(user=self.user2, beginning=date,
+                                             ending=date, alert=date,
+                                             latitude=2.42, longitude=4.567890123, status=CONFIRMED)
+        date = datetime(2011, 2, 15, 2, 10).replace(tzinfo=utc)
+        self.outing3 = Outing.objects.create(user=self.user2, beginning=date,
+                                             ending=date, alert=date,
+                                             latitude=2.45678, longitude=0.98765432, status=CONFIRMED)
+        date = datetime(2011, 2, 15, 2, 10).replace(tzinfo=utc)
+        self.outing4 = Outing.objects.create(user=self.user3, beginning=date,
+                                             ending=date, alert=date,
+                                             latitude=4.12673661, longitude=0.65231, status=CONFIRMED)
+
     def get_credentials(self):
         return self.create_basic(username='ras', password='mdp')
 
@@ -849,3 +866,44 @@ class APITest(ResourceTestCase):
         self.assertHttpMethodNotAllowed(self.api_client.put("/api/1.0/profile/%d/" % (self.user1.profile.pk), format='json', authentication=self.get_credentials()))
         self.assertHttpMethodNotAllowed(self.api_client.delete("/api/1.0/profile/%d/" % (self.user1.profile.pk), format='json', data=''))
         self.assertHttpMethodNotAllowed(self.api_client.delete("/api/1.0/profile/%d/" % (self.user1.profile.pk), format='json', authentication=self.get_credentials()))
+
+    def test_outing_list(self):
+        self.assertHttpUnauthorized(self.api_client.get('/api/1.0/outing/', format='json'))
+        resp = self.api_client.get('/api/1.0/outing/', format='json', authentication=self.get_credentials())
+        self.assertEqual(len(self.deserialize(resp)['objects']), 3)
+        self.assertEqual(self.deserialize(resp)['objects'][0], {
+            'status': self.outing1.status,
+            'name': self.outing1.name,
+            'description': self.outing1.description,
+            'latitude': self.outing1.latitude,
+            'longitude': self.outing1.longitude,
+            'beginning': '2011-02-15T03:00:00',
+            'ending': '2011-02-15T03:00:00',
+            'alert': '2011-02-15T03:00:00',
+            'resource_uri': "/api/1.0/outing/%d/" % (self.outing1.pk),
+            'user': "/api/1.0/user/%d/" % (self.user1.pk)
+        })
+        self.assertEqual(self.deserialize(resp)['objects'][1], {
+            'status': self.outing2.status,
+            'name': self.outing2.name,
+            'description': self.outing2.description,
+            'latitude': self.outing2.latitude,
+            'longitude': self.outing2.longitude,
+            'beginning': '2011-02-15T03:10:00',
+            'ending': '2011-02-15T03:10:00',
+            'alert': '2011-02-15T03:10:00',
+            'resource_uri': "/api/1.0/outing/%d/" % (self.outing2.pk),
+            'user': "/api/1.0/user/%d/" % (self.user2.pk)
+        })
+        self.assertEqual(self.deserialize(resp)['objects'][2], {
+            'status': self.outing3.status,
+            'name': self.outing3.name,
+            'description': self.outing3.description,
+            'latitude': self.outing3.latitude,
+            'longitude': self.outing3.longitude,
+            'beginning': '2011-02-15T03:10:00',
+            'ending': '2011-02-15T03:10:00',
+            'alert': '2011-02-15T03:10:00',
+            'resource_uri': "/api/1.0/outing/%d/" % (self.outing3.pk),
+            'user': "/api/1.0/user/%d/" % (self.user2.pk)
+        })
