@@ -21,11 +21,13 @@ from __future__ import unicode_literals
 
 from django.utils import timezone
 
+import pytz
+
 
 class TimezoneMiddleware(object):
     def process_request(self, request):
         tz = request.session.get('django_timezone')
         if tz:
-            timezone.activate(tz)
+            timezone.activate(pytz.timezone(tz))
         else:
             timezone.deactivate()

@@ -22,8 +22,6 @@ from __future__ import unicode_literals
 from django.contrib.auth.signals import user_logged_in
 from django.dispatch import receiver
 
-import pytz
-
 
 @receiver(user_logged_in)
 def set_profile_info(sender, **kwargs):
@@ -34,4 +32,4 @@ def set_profile_info(sender, **kwargs):
 
     tz = kwargs['user'].profile.timezone
     if tz:
-        kwargs['request'].session['django_timezone'] = pytz.timezone(tz)
+        kwargs['request'].session['django_timezone'] = tz
