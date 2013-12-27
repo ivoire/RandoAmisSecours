@@ -813,7 +813,6 @@ class APITest(ResourceTestCase):
 
         self.assertEqual(len(self.deserialize(resp)['objects']), 2)
         self.assertEqual(self.deserialize(resp)['objects'][0], {
-            'user': self.user1.pk,
             'friends': ["/api/1.0/profile/%d/" % (self.user2.pk)],
             'timezone': self.user1.profile.timezone,
             'language': self.user1.profile.language,
@@ -822,7 +821,6 @@ class APITest(ResourceTestCase):
             'resource_uri': "/api/1.0/profile/%d/" % (self.user1.profile.pk)
         })
         self.assertEqual(self.deserialize(resp)['objects'][1], {
-            'user': self.user2.pk,
             'phone_number': self.user2.profile.phone_number,
             'user': "/api/1.0/user/%d/" % (self.user2.pk),
             'resource_uri': "/api/1.0/profile/%d/" % (self.user2.profile.pk)
@@ -836,7 +834,6 @@ class APITest(ResourceTestCase):
 
         self.assertEqual(len(self.deserialize(resp)['objects']), 3)
         self.assertEqual(self.deserialize(resp)['objects'][0], {
-            'user': self.user2.pk,
             'friends': ["/api/1.0/profile/%d/" % (self.user1.pk), "/api/1.0/profile/%d/" % (self.user3.pk)],
             'timezone': self.user2.profile.timezone,
             'language': self.user2.profile.language,
@@ -845,13 +842,11 @@ class APITest(ResourceTestCase):
             'resource_uri': "/api/1.0/profile/%d/" % (self.user2.profile.pk)
         })
         self.assertEqual(self.deserialize(resp)['objects'][1], {
-            'user': self.user1.pk,
             'phone_number': self.user1.profile.phone_number,
             'user': "/api/1.0/user/%d/" % (self.user1.pk),
             'resource_uri': "/api/1.0/profile/%d/" % (self.user1.profile.pk)
         })
         self.assertEqual(self.deserialize(resp)['objects'][2], {
-            'user': self.user3.pk,
             'phone_number': self.user3.profile.phone_number,
             'user': "/api/1.0/user/%d/" % (self.user3.pk),
             'resource_uri': "/api/1.0/profile/%d/" % (self.user3.profile.pk)
