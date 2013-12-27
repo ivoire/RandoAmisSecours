@@ -43,8 +43,8 @@ urlpatterns += patterns('django.contrib.auth.views',
     url(r'^accounts/logout/$', 'logout', {'template_name': 'RandoAmisSecours/account/logged_out.html'}, name='accounts.logout'),
     url(r'^accounts/password/change/$', 'password_change', {'template_name': 'RandoAmisSecours/account/password_change.html', 'password_change_form': RASPasswordChangeForm, 'post_change_redirect': reverse_lazy('accounts.password_change_done')}, name='accounts.password_change'),
     url(r'^accounts/password/reset/$', 'password_reset', {'template_name': 'RandoAmisSecours/account/password_reset.html', 'email_template_name': 'RandoAmisSecours/account/password_reset_email.txt', 'password_reset_form': RASPasswordResetForm, 'post_reset_redirect': reverse_lazy('accounts.password_reset_done')}, name='accounts.password_reset'),
-    url(r'^accounts/password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', 'password_reset_confirm', {'template_name': 'RandoAmisSecours/account/password_reset_confirm.html', 'set_password_form': RASSetPasswordForm}, name='accounts.password_reset_confirm'),
-    url(r'^accounts/password/reset/complete/$', 'password_reset_complete', {'template_name': 'RandoAmisSecours/account/password_reset_complete.html'}, name='accounts.password_reset_complete'),
+    url(r'^accounts/password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', 'password_reset_confirm', {'template_name': 'RandoAmisSecours/account/password_reset_confirm.html', 'set_password_form': RASSetPasswordForm}, name='accounts.password_reset_confirm'),
+    url(r'^accounts/password/reset/complete/$', 'password_reset_complete', {'template_name': 'RandoAmisSecours/account/password_reset_complete.html'}, name='password_reset_complete'),
 )
 
 urlpatterns += patterns('RandoAmisSecours.views.account',
