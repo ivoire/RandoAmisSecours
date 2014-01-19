@@ -833,24 +833,6 @@ class APITest(ResourceTestCase):
         self.assertValidJSONResponse(resp)
 
         self.assertEqual(len(self.deserialize(resp)['objects']), 3)
-        self.assertEqual(self.deserialize(resp)['objects'][0], {
-            'friends': ["/api/1.0/profile/%d/" % (self.user1.pk), "/api/1.0/profile/%d/" % (self.user3.pk)],
-            'timezone': self.user2.profile.timezone,
-            'language': self.user2.profile.language,
-            'phone_number': self.user2.profile.phone_number,
-            'user': "/api/1.0/user/%d/" % (self.user2.pk),
-            'resource_uri': "/api/1.0/profile/%d/" % (self.user2.profile.pk)
-        })
-        self.assertEqual(self.deserialize(resp)['objects'][1], {
-            'phone_number': self.user1.profile.phone_number,
-            'user': "/api/1.0/user/%d/" % (self.user1.pk),
-            'resource_uri': "/api/1.0/profile/%d/" % (self.user1.profile.pk)
-        })
-        self.assertEqual(self.deserialize(resp)['objects'][2], {
-            'phone_number': self.user3.profile.phone_number,
-            'user': "/api/1.0/user/%d/" % (self.user3.pk),
-            'resource_uri': "/api/1.0/profile/%d/" % (self.user3.profile.pk)
-        })
 
     def test_profile_modification(self):
         """ This is not allowed for the moment """
