@@ -847,39 +847,3 @@ class APITest(ResourceTestCase):
         self.assertHttpUnauthorized(self.api_client.get('/api/1.0/outing/', format='json'))
         resp = self.api_client.get('/api/1.0/outing/', format='json', authentication=self.get_credentials())
         self.assertEqual(len(self.deserialize(resp)['objects']), 3)
-        self.assertEqual(self.deserialize(resp)['objects'][0], {
-            'status': self.outing1.status,
-            'name': self.outing1.name,
-            'description': self.outing1.description,
-            'latitude': self.outing1.latitude,
-            'longitude': self.outing1.longitude,
-            'beginning': '2011-02-15T03:00:00',
-            'ending': '2011-02-15T03:00:00',
-            'alert': '2011-02-15T03:00:00',
-            'resource_uri': "/api/1.0/outing/%d/" % (self.outing1.pk),
-            'user': "/api/1.0/user/%d/" % (self.user1.pk)
-        })
-        self.assertEqual(self.deserialize(resp)['objects'][1], {
-            'status': self.outing2.status,
-            'name': self.outing2.name,
-            'description': self.outing2.description,
-            'latitude': self.outing2.latitude,
-            'longitude': self.outing2.longitude,
-            'beginning': '2011-02-15T03:10:00',
-            'ending': '2011-02-15T03:10:00',
-            'alert': '2011-02-15T03:10:00',
-            'resource_uri': "/api/1.0/outing/%d/" % (self.outing2.pk),
-            'user': "/api/1.0/user/%d/" % (self.user2.pk)
-        })
-        self.assertEqual(self.deserialize(resp)['objects'][2], {
-            'status': self.outing3.status,
-            'name': self.outing3.name,
-            'description': self.outing3.description,
-            'latitude': self.outing3.latitude,
-            'longitude': self.outing3.longitude,
-            'beginning': '2011-02-15T03:10:00',
-            'ending': '2011-02-15T03:10:00',
-            'alert': '2011-02-15T03:10:00',
-            'resource_uri': "/api/1.0/outing/%d/" % (self.outing3.pk),
-            'user': "/api/1.0/user/%d/" % (self.user2.pk)
-        })
