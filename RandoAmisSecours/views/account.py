@@ -233,7 +233,7 @@ def update(request):
             # Update the language code and activate it for the message
             if profile.language:
                 request.session['django_language'] = profile.language
-                request.session['django_timezone'] = pytz.timezone(profile.timezone)
+                request.session['django_timezone'] = profile.timezone
                 translation.activate(profile.language)
             # Print the message
             messages.success(request, _("Personnal information updated"))
