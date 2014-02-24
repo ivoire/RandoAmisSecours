@@ -36,6 +36,7 @@ class OutingForm(ModelForm):
     class Meta:
         model = Outing
         fields = ('name', 'description', 'beginning', 'ending', 'alert', 'latitude', 'longitude')
+        localized_fields = ('beginning', 'ending', 'alert')
 
     def __init__(self, *args, **kwargs):
         super(OutingForm, self).__init__(*args, **kwargs)
