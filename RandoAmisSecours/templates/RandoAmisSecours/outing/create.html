@@ -199,7 +199,7 @@
       autoclose: true,
       minuteStep: 15,
       pickerPosition: "bottom-left",
-      format: "dd/mm/yyyy hh:ii:ss"
+      format: "{% trans "yyyy-mm-dd hh:ii:ss" %}"
     }).on('changeDate', function(ev){
         var start_date = new Date(ev.date.valueOf() + 60000 * ev.date.getTimezoneOffset());
         $('#ending_picker, #alert_picker').datetimepicker('setStartDate', start_date);
@@ -210,7 +210,7 @@
       autoclose: true,
       minuteStep: 15,
       pickerPosition: "bottom-left",
-      format: "dd/mm/yyyy hh:ii:ss"
+      format: "{% trans "yyyy-mm-dd hh:ii:ss" %}"
     }).on('changeDate', function(ev){
         var start_date = new Date(ev.date.valueOf() + 60000 * ev.date.getTimezoneOffset());
         $('#alert_picker').datetimepicker('setStartDate', start_date);
@@ -221,7 +221,7 @@
       autoclose: true,
       minuteStep: 15,
       pickerPosition: "bottom-left",
-      format: "dd/mm/yyyy hh:ii:ss"
+      format: "{% trans "yyyy-mm-dd hh:ii:ss" %}"
     });
   });
 </script>
