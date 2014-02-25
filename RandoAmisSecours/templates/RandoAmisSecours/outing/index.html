@@ -45,7 +45,7 @@
       <div id="OutingsTabContent" class="tab-content">
         <div class="tab-pane active" id="current">
           {% if user_outings_confirmed %}
-          <table class="table">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th>{% trans "Name" %}</th>
@@ -117,7 +117,7 @@
         </div>
         <div class="tab-pane" id="draft">
           {% if user_outings_draft %}
-          <table class="table">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th>{% trans "Name" %}</th>
@@ -161,7 +161,7 @@
         </div>
         <div class="tab-pane" id="finished">
           {% if user_outings_finished %}
-          <table class="table">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th>{% trans "Name" %}</th>
@@ -222,7 +222,7 @@
       <div id="FriendutingsTabContent" class="tab-content">
         <div class="tab-pane active" id="friends_current">
           {% if friends_outings_confirmed %}
-          <table class="table">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th></th>
@@ -258,7 +258,7 @@
         </div>
         <div class="tab-pane" id="friends_draft">
           {% if friends_outings_draft %}
-          <table class="table">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th></th>
@@ -284,7 +284,7 @@
         </div>
         <div class="tab-pane" id="friends_finished">
           {% if friends_outings_finished %}
-          <table class="table">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th></th>
