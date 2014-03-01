@@ -785,9 +785,29 @@ class AccountTest(TestCase):
         self.assertEqual(response.client.session['django_language'], 'fr')
         self.assertEqual(response.client.session['django_timezone'], 'Europe/London')
 
-
     def test_friend_request(self):
-        pass
+        self.user2 = User.objects.create_user('tester',
+                                              'tester@project.org',
+                                              'ertyfjnbfvfceqsryuj')
+        self.user3 = User.objects.create_user('Sophocle',
+                                              'sophocle@project.org',
+                                              'gzgvaryurvyyjchrvyhubtr')
+        FR = FriendRequest(user=self.user1, to=self.user2)
+        FR.save()
+        FR2 = FriendRequest(user=self.user3, to=self.user1)
+        FR2.save()
+        FR3 = FriendRequest(user=self.user3, to=self.user2)
+        FR3.save()
+
+        response = self.client.get(reverse('accounts.profile'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertEqual(len(ctx['friend_requests']), 1)
+        self.assertEqual(ctx['friend_requests'][0].user, self.user3)
+        self.assertEqual(ctx['friend_requests'][0].to, self.user1)
+        self.assertEqual(len(ctx['friend_requests_sent']), 1)
+        self.assertEqual(ctx['friend_requests_sent'][0].user, self.user1)
+        self.assertEqual(ctx['friend_requests_sent'][0].to, self.user2)
 
 
 class APITest(ResourceTestCase):
