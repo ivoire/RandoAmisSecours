@@ -155,7 +155,6 @@ class RASUserUpdateForm(ModelForm):
         super(RASUserUpdateForm, self).__init__(*args, **kwargs)
         # first_name and last_name are required
         self.fields['first_name'].required = True
-        self.fields['last_name'].required = True
         self.fields['first_name'].widget.attrs['autofocus'] = 'autofocus'
 
         self.fields['first_name'].widget.attrs['class'] = 'form-control'
