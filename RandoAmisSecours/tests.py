@@ -703,6 +703,93 @@ class OutingsTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
 
+class AccountTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user1 = User.objects.create_user('alpha',
+                                              'alpha@example.com',
+                                              '12789azertyuiop')
+        self.user1.first_name = 'Alpha'
+        self.user1.last_name = 'Tester'
+        self.user1.save()
+        self.user1.profile = Profile.objects.create(user=self.user1, timezone='Europe/Paris', language='fr')
+        self.client.login(username='alpha', password='12789azertyuiop')
+
+    def test_profile(self):
+        response = self.client.get(reverse('accounts.profile'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertEqual(ctx['user'], self.user1)
+        self.assertEqual(len(ctx['friend_requests']), 0)
+        self.assertEqual(len(ctx['friend_requests_sent']), 0)
+        self.assertEqual(response.client.session['django_language'], 'fr')
+        self.assertEqual(response.client.session['django_timezone'], 'Europe/Paris')
+
+        # Update the profile and try again
+        data = {'first_name': 'new one',
+                'last_name': 'another one',
+                'phone_number': '0123456789',
+                'language': 'en',
+                'timezone': 'Europe/London'
+                }
+        response = self.client.post(reverse('accounts.profile.update'), data)
+        self.assertRedirects(response, reverse('accounts.profile'))
+
+        response = self.client.get(reverse('accounts.profile'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertEqual(len(ctx['friend_requests']), 0)
+        self.assertEqual(len(ctx['friend_requests_sent']), 0)
+        self.assertEqual(ctx['user'].first_name, 'new one')
+        self.assertEqual(ctx['user'].last_name, 'another one')
+        self.assertEqual(ctx['user'].profile.phone_number, '0123456789')
+        self.assertEqual(ctx['user'].profile.language, 'en')
+        self.assertEqual(ctx['user'].profile.timezone, 'Europe/London')
+        self.assertEqual(response.client.session['django_language'], 'en')
+        self.assertEqual(response.client.session['django_timezone'], 'Europe/London')
+
+        # Try some errors now
+        # Not setting the last_name is not an error
+        data = {'first_name': 'new one',
+                'last_name': '',
+                'phone_number': '0123456789',
+                'language': 'fr',
+                'timezone': 'Europe/London'
+                }
+        response = self.client.post(reverse('accounts.profile.update'), data)
+        self.assertRedirects(response, reverse('accounts.profile'))
+
+        response = self.client.get(reverse('accounts.profile'))
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertEqual(len(ctx['friend_requests']), 0)
+        self.assertEqual(len(ctx['friend_requests_sent']), 0)
+        self.assertEqual(ctx['user'].first_name, 'new one')
+        self.assertEqual(ctx['user'].last_name, '')
+        self.assertEqual(ctx['user'].profile.phone_number, '0123456789')
+        self.assertEqual(ctx['user'].profile.language, 'fr')
+        self.assertEqual(ctx['user'].profile.timezone, 'Europe/London')
+        self.assertEqual(response.client.session['django_language'], 'fr')
+        self.assertEqual(response.client.session['django_timezone'], 'Europe/London')
+
+        # Not setting some fields
+        data = {}
+        response = self.client.post(reverse('accounts.profile.update'), data)
+        self.assertEqual(response.status_code, 200)
+        ctx = response.context
+        self.assertNotEqual(ctx['user_form']['first_name'].errors, None)
+        self.assertEqual(ctx['user_form']['last_name'].errors, [])
+        self.assertNotEqual(ctx['profile_form']['phone_number'].errors, None)
+        self.assertNotEqual(ctx['profile_form']['language'].errors, None)
+        self.assertNotEqual(ctx['profile_form']['timezone'].errors, None)
+        self.assertEqual(response.client.session['django_language'], 'fr')
+        self.assertEqual(response.client.session['django_timezone'], 'Europe/London')
+
+
+    def test_friend_request(self):
+        pass
+
+
 class APITest(ResourceTestCase):
     def setUp(self):
         super(APITest, self).setUp()
