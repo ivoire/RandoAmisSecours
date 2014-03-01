@@ -122,7 +122,6 @@ class RASUserCreationForm(UserCreationForm):
         # email, first_name and last_name are required
         self.fields['email'].required = True
         self.fields['first_name'].required = True
-        self.fields['last_name'].required = True
 
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['class'] = 'form-control'
