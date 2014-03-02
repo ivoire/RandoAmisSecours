@@ -245,10 +245,10 @@ class FriendsTest(TestCase):
         self.assertFalse(ctx['error'])
 
     def test_invite(self):
-        response = self.client.get(reverse('friends.invite', args=[self.user1.profile.pk]))
+        response = self.client.get(reverse('friends.invite', args=[self.user1.pk]))
         self.assertEqual(response.status_code, 404)
 
-        response = self.client.get(reverse('friends.invite', args=[self.user2.profile.pk]))
+        response = self.client.get(reverse('friends.invite', args=[self.user2.pk]))
         self.assertRedirects(response, reverse('friends.search'))
         self.assertEqual(FriendRequest.objects.all().count(), 1)
         self.helper_compare_FR(FriendRequest.objects.all()[0], user=self.user1, to=self.user2)
@@ -256,7 +256,7 @@ class FriendsTest(TestCase):
         self.assertEqual(self.user2.profile.friends.all().count(), 0)
         self.assertEqual(self.user3.profile.friends.all().count(), 0)
 
-        response = self.client.get(reverse('friends.invite', args=[self.user3.profile.pk]))
+        response = self.client.get(reverse('friends.invite', args=[self.user3.pk]))
         self.assertRedirects(response, reverse('friends.search'))
         self.assertEqual(FriendRequest.objects.all().count(), 2)
         self.helper_compare_FR(FriendRequest.objects.all()[0], user=self.user1, to=self.user2)
