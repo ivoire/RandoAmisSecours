@@ -71,8 +71,8 @@
     </div>
   </div>
   {% if user.is_authenticated and outing.status == CONFIRMED and outing.is_alerting %}
-  <div class="col-md-12">
-      <h4 class="modal-header">{% trans "Late outing" %}</h4>
+  <div class="col-md-6">
+    <h4 class="modal-header">{% trans "Late outing" %}</h4>
     <p>{% blocktrans with outing.user.get_full_name as full_name %}{{ full_name }} is really late, you can try to contact him:{% endblocktrans %}</p>
     <dl class="dl-horizontal">
       <dt>{% trans "Name" %}</dt>
@@ -81,6 +81,13 @@
       <dd>{% if outing.user.profile.phone_number %}<a href="tel:{{ outing.user.profile.phone_number }}">{{ outing.user.profile.phone_number }}</a>{% else %}?{% endif %}</dd>
     </dl>
   </div>
+  {% if outing.gpspoint_set.count %}
+  <div class="col-md-6">
+    <h4 class="modal-header">{% trans "GPS trace" %}</h4>
+    {% url "outings.details.trace" outing.pk as URL %}
+    <p>{% blocktrans %}A GPS trace has been recorded, you can <a href="{{ URL }}">watch it</a>.</p>{% endblocktrans %}
+  </div>
+  {% endif %}
   {% endif %}
 </div>
 {% endblock %}
