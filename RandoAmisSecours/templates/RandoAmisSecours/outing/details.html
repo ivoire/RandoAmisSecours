@@ -85,7 +85,7 @@
   <div class="col-md-6">
     <h4 class="modal-header">{% trans "GPS trace" %}</h4>
     {% url "outings.details.trace" outing.pk as URL %}
-    <p>{% blocktrans %}A GPS trace has been recorded, you can <a href="{{ URL }}">watch it</a>.</p>{% endblocktrans %}
+    <p>{% blocktrans %}A GPS trace has been recorded, you can <a href="{{ URL }}">watch it</a>.{% endblocktrans %}</p>
   </div>
   {% endif %}
   {% endif %}
