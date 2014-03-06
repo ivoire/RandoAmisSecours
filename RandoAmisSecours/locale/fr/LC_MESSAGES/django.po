@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-24 19:51+0100\n"
+"POT-Creation-Date: 2014-03-06 16:32+0000\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -72,6 +72,7 @@ msgstr ""
 #: templates/RandoAmisSecours/main/index.html:7
 #: templates/RandoAmisSecours/outing/create.html:17
 #: templates/RandoAmisSecours/outing/details.html:15
+#: templates/RandoAmisSecours/outing/details_trace.html:16
 #: templates/RandoAmisSecours/outing/index.html:7
 msgid "Home"
 msgstr "Accueil"
@@ -115,6 +116,7 @@ msgstr ""
 #: templates/RandoAmisSecours/base.html:36
 #: templates/RandoAmisSecours/outing/create.html:18
 #: templates/RandoAmisSecours/outing/details.html:16
+#: templates/RandoAmisSecours/outing/details_trace.html:17
 #: templates/RandoAmisSecours/outing/index.html:4
 #: templates/RandoAmisSecours/outing/index.html:8
 #: templates/RandoAmisSecours/outing/index.html:21
@@ -963,11 +965,13 @@ msgstr "Informations générales"
 msgid "Description"
 msgstr "Description"
 
-#: templates/RandoAmisSecours/outing/create.html:51 views/outing.py:46
+#: templates/RandoAmisSecours/outing/create.html:51
+#: templates/RandoAmisSecours/outing/details_trace.html:36 views/outing.py:46
 msgid "Latitude"
 msgstr "Latitude"
 
-#: templates/RandoAmisSecours/outing/create.html:60 views/outing.py:47
+#: templates/RandoAmisSecours/outing/create.html:60
+#: templates/RandoAmisSecours/outing/details_trace.html:37 views/outing.py:47
 msgid "Longitude"
 msgstr "Longitude"
 
@@ -1074,6 +1078,35 @@ msgid "%(full_name)s is really late, you can try to contact him:"
 msgstr ""
 "%(full_name)s est très en retard, vous pouvez essayer de le contacter :"
 
+#: templates/RandoAmisSecours/outing/details.html:86
+msgid "GPS trace"
+msgstr "Trace GPS"
+
+#: templates/RandoAmisSecours/outing/details.html:88
+#, python-format
+msgid ""
+"A GPS trace has been recorded, you can <a href=\"%(URL)s\">watch it</a>."
+msgstr ""
+"Une trace GPS à été enregistrée, vous pouvez <a href=\"%(URL)s\">la "
+"regarder</a>."
+
+#: templates/RandoAmisSecours/outing/details_trace.html:4
+#, python-format
+msgid "Outing «%(name)s» trace"
+msgstr "Trace de la sortie «%(name)s»"
+
+#: templates/RandoAmisSecours/outing/details_trace.html:32
+msgid "Trace details"
+msgstr "Details de la trace"
+
+#: templates/RandoAmisSecours/outing/details_trace.html:35
+msgid "Date"
+msgstr "Date"
+
+#: templates/RandoAmisSecours/outing/details_trace.html:38
+msgid "Precision (m)"
+msgstr "Pécision (m)"
+
 #: templates/RandoAmisSecours/outing/index.html:38
 msgid "new"
 msgstr "nouveau"
@@ -1158,19 +1191,19 @@ msgstr "Pas de sortie terminée"
 msgid "Friends Outings"
 msgstr "Sorties de vos amis"
 
-#: views/account.py:183
+#: views/account.py:181
 msgid "Subscription to R.A.S."
 msgstr "Inscription à R.A.S."
 
-#: views/account.py:190
+#: views/account.py:188
 msgid "Some information are missing or mistyped"
 msgstr "Certains éléments sont manquants ou malformatés"
 
-#: views/account.py:239
+#: views/account.py:237
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
 
-#: views/account.py:252
+#: views/account.py:250
 msgid "Password changed successfully"
 msgstr ""
 
@@ -1223,36 +1256,36 @@ msgstr "La fin doit arriver après le début"
 msgid "Alert should happens at the end"
 msgstr "L'alerte doit arriver après la fin"
 
-#: views/outing.py:119
+#: views/outing.py:134
 msgid ""
 "Outing successfully created. The outing is still a draft and should be "
 "confirmed."
 msgstr ""
 "La sortie a été crée. Celle-ci est encore un brouillon et doit être validée."
 
-#: views/outing.py:137 views/outing.py:169
+#: views/outing.py:152 views/outing.py:184
 msgid "Only the outing owner can update it"
 msgstr "Seul le créateur d'une sortie peux la modifier"
 
-#: views/outing.py:157
+#: views/outing.py:172
 msgid "Only the outing owner can delete it"
 msgstr "Seul le créateur d'une sortie peux la supprimer"
 
-#: views/outing.py:159
+#: views/outing.py:174
 #, python-format
 msgid "«%(name)s» deleted"
 msgstr "La sortie «%(name)s» a été supprimée"
 
-#: views/outing.py:174
+#: views/outing.py:189
 #, python-format
 msgid "«%(name)s» is now confirmed"
 msgstr "«%(name)s» est maintenant confirmée"
 
-#: views/outing.py:182
+#: views/outing.py:197
 msgid "Only the outing owner can finish it"
 msgstr "Seul le créateur d'une sortie peux la terminer"
 
-#: views/outing.py:187
+#: views/outing.py:202
 #, python-format
 msgid "«%(name)s» is now finished"
 msgstr "«%(name)s» est maintenant terminée"
