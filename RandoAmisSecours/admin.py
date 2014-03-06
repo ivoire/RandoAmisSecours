@@ -25,3 +25,4 @@ from RandoAmisSecours.models import *
 admin.site.register(FriendRequest)
 admin.site.register(Outing)
 admin.site.register(Profile)
+admin.site.register(GPSPoint)

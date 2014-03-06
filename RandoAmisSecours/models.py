@@ -137,3 +137,21 @@ class Outing(models.Model):
         """ Return True if alert <= now """
         now = datetime.utcnow().replace(tzinfo=utc)
         return self.alert <= now
+
+
+@python_2_unicode_compatible
+class GPSPoint(models.Model):
+    class meta:
+        app_label = 'RandoAmisSecours'
+        ordering = ['date']
+
+    outing = models.ForeignKey(Outing)
+    date = models.DateTimeField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    precision = models.IntegerField()
+
+    def __str__(self):
+        return "[%s] %s: (%f, %f)" % (self.outing.user.get_full_name(),
+                                     self.outing.name, self.latitude,
+                                     self.longitude)
