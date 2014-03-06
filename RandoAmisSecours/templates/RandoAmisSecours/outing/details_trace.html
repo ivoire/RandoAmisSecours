@@ -1,0 +1,80 @@
+{% extends 'RandoAmisSecours/base.html' %}
+{% load static l10n i18n %}
+
+{% block title %}{% blocktrans with outing.name as name %}Outing «{{ name }}» trace{% endblocktrans %}{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.css" />
+{% endblock %}
+
+{% block style %}
+    #map { height: 600px; }
+{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+  <li><a href="{% url 'outings.index' %}">{% trans "Outings" %}</a></li>
+  <li><a href="{% url 'outings.details' outing.pk %}">{{ outing.name }}</a></li>
+  <li class="active">Trace</li>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div id="map">
+    </div>
+  </div>
+</div>
+{% if points %}
+<div class="row">
+  <div class="col-md-12">
+    <h4>{% trans "Trace details" %}</h4>
+    <table class="table table-striped">
+    <thead>
+      <th>{% trans "Date" %}</th>
+      <th>{% trans "Latitude" %}</th>
+      <th>{% trans "Longitude" %}</th>
+      <th>{% trans "Precision (m)" %}</th>
+    </thead>
+    <tbody>
+    {% for point in points %}
+      <tr>
+        <td>{{ point.date }}</td>
+        <td>{{ point.latitude }}</td>
+        <td>{{ point.longitude }}</td>
+        <td>{{ point.precision }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block script %}
+<script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet.js"></script>
+<script>
+  $(function(){
+    var map = L.map('map').setView([{{ outing.latitude|unlocalize }}, {{ outing.longitude|unlocalize }}], 12);
+    L.tileLayer('http://129.206.74.245:8001/tms_r.ashx?x={x}&y={y}&z={z}', {
+        attribution: '<a href="http://giscience.uni-hd.de/">GIScience Research Group</a> | &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18}).addTo(map);
+    var marker = L.marker([{{ outing.latitude|unlocalize }}, {{ outing.longitude|unlocalize }}]).addTo(map)
+                    .bindPopup('Ending');
+
+    // Add the GPS trace
+    var coordinates = [
+    {% for point in points %}
+        [{{ point.latitude|unlocalize }}, {{ point.longitude|unlocalize }}],
+    {% endfor %}
+    ];
+    var polyline = L.polyline(coordinates, {color: 'red'}).addTo(map);
+
+    // Draw the precisions
+    {% for point in points %}
+    L.circle([{{ point.latitude|unlocalize }}, {{ point.longitude|unlocalize }}], {{ point.precision }}).addTo(map);
+    {% endfor %}
+  });
+</script>
+{% endblock %}
