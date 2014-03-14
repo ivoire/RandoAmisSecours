@@ -8,14 +8,6 @@
   <li class="active">{% trans "Outings" %}</li>
 {% endblock %}
 
-{% block head %}
-  <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.css" />
-{% endblock %}
-
-{% block style %}
-    .outing-map { height: 300px; }
-{% endblock %}
-
 {% block body %}
 <div class="page-header">
   <h2>{% blocktrans %}Outings{% endblocktrans %}</h2>
