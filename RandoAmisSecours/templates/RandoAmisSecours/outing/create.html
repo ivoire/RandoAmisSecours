@@ -137,9 +137,8 @@
 <script src="{% get_static_prefix %}RandoAmisSecours/js/bootstrap-datetimepicker-v2.2.0.js"></script>
 {% get_current_language as LANGUAGE_CODE_LONG %}
 {% with LANGUAGE_CODE_LONG|slice:"0:2" as LANGUAGE_CODE %}
-{% if LANGUAGE_CODE == 'fr' %}
-<script src="{% get_static_prefix %}RandoAmisSecours/js/locales/bootstrap-datetimepicker-v2.2.0.fr.js"></script>
-{% endif %}
+{% if LANGUAGE_CODE == 'fr' %}<script src="{% get_static_prefix %}RandoAmisSecours/js/locales/bootstrap-datetimepicker-v2.2.0.fr.js"></script>{% endif %}
+{% if LANGUAGE_CODE == 'es' %}<script src="{% get_static_prefix %}RandoAmisSecours/js/locales/bootstrap-datetimepicker-v2.2.0.es.js"></script>{% endif %}
 {% endwith %}
 <script>
   $(function(){

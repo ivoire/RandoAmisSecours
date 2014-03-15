@@ -21,8 +21,9 @@
 ugettext_lazy = lambda s: s
 
 LANGUAGES = (
-    ('fr', ugettext_lazy('French')),
+    ('es', ugettext_lazy('Spanish')),
     ('en', ugettext_lazy('English')),
+    ('fr', ugettext_lazy('French')),
 )
 
 # Accounts related urls
