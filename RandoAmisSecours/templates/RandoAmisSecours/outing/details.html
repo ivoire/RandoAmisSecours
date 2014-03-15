@@ -4,7 +4,7 @@
 {% block title %}{% blocktrans with outing.name as name %}Outing «{{ name }}»{% endblocktrans %}{% endblock %}
 
 {% block head %}
-  <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.css" />
+  <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet-v0.7.css" />
 {% endblock %}
 
 {% block style %}
@@ -93,7 +93,7 @@
 {% endblock %}
 
 {% block script %}
-<script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet-v0.7.js"></script>
 <script>
   $(function(){
     var map = L.map('map').setView([{{ outing.latitude|unlocalize }}, {{ outing.longitude|unlocalize }}], 12);

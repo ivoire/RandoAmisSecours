@@ -4,7 +4,7 @@
 {% block title %}{% blocktrans with outing.name as name %}Outing «{{ name }}» trace{% endblocktrans %}{% endblock %}
 
 {% block head %}
-  <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.css" />
+  <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet-v0.7.css" />
   <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.fullscreen-v0.0.1.css" />
 {% endblock %}
 
@@ -54,7 +54,7 @@
 {% endblock %}
 
 {% block script %}
-<script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet-v0.7.js"></script>
 <script src="{% get_static_prefix %}RandoAmisSecours/js/Leaflet.fullscreen.min-v0.0.1.js"></script>
 <script>
   $(function(){
