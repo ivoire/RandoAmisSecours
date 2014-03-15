@@ -13,6 +13,8 @@
     #map { height: 400px; }
 {% endblock %}
 
+{% block nav-outings %}active{% endblock %}
+
 {% block breadcrumb %}
   <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
   <li><a href="{% url 'outings.index' %}">{% trans "Outings" %}</a></li>

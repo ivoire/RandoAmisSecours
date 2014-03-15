@@ -32,13 +32,13 @@
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-        <li><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home"></span> {% trans "Home" %}</a></li>
-        <li><a href="{% url 'outings.index' %}"><span class="glyphicon glyphicon-tasks"></span> {%trans "Outings" %}</a></li>
-        <li><a href="{% url 'help.index' %}"><span class="glyphicon glyphicon-question-sign"></span> {% trans "Help" %}</a></li>
+        <li class="{% block nav-index %}{% endblock %}"><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home"></span> {% trans "Home" %}</a></li>
+        <li class="{% block nav-outings %}{% endblock %}"><a href="{% url 'outings.index' %}"><span class="glyphicon glyphicon-tasks"></span> {%trans "Outings" %}</a></li>
+        <li class="{% block nav-help %}{% endblock %}"><a href="{% url 'help.index' %}"><span class="glyphicon glyphicon-question-sign"></span> {% trans "Help" %}</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}
-        <li class="dropdown">
+        <li class="dropdown {% block nav-account %}{% endblock %}">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ user.get_full_name }}<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="{% url 'accounts.profile' %}"><span class="glyphicon glyphicon-cog"></span> {% trans "Profile" %}</a></li>
@@ -47,7 +47,7 @@
           </ul>
         </li>
         {% else %}
-        <li><a href="{% url 'accounts.login' %}"><span class="glyphicon glyphicon-user"></span> {% trans "Log in" %}</a></li>
+        <li class="{% block nav-login %}{% endblock %}"><a href="{% url 'accounts.login' %}"><span class="glyphicon glyphicon-user"></span> {% trans "Log in" %}</a></li>
         {% endif %}
       </ul>
     </nav>

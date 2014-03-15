@@ -3,6 +3,8 @@
 
 {% block title %}{% trans "Q&A" %}{% endblock title %}
 
+{% block nav-help %}active{% endblock %}
+
 {% block breadcrumb %}
   <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
   <li><a href="{% url 'help.index' %}">{% trans "Help" %}</a></li>

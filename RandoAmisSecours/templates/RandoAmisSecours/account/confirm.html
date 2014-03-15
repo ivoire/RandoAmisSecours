@@ -3,6 +3,8 @@
 
 {% block title %}{% trans "Confirm" %}{% endblock %}
 
+{% block nav-login %}active{% endblock %}
+
 {% block head %}
   <meta http-equiv="refresh" content="5;url={% url 'accounts.login' %}">
 {% endblock %}

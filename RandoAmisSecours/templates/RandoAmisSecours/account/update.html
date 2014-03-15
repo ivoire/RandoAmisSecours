@@ -3,6 +3,8 @@
 
 {% block title %}{% trans "Update" %}{% endblock %}
 
+{% block nav-account %}active{% endblock %}
+
 {% block breadcrumb %}
   <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
   <li><a href="{% url 'accounts.profile' %}">{% trans "Account" %}</a></li>
