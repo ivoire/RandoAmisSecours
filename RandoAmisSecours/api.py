@@ -28,7 +28,7 @@ from tastypie.authorization import Authorization
 from tastypie.exceptions import Unauthorized
 from tastypie.resources import ModelResource
 
-from RandoAmisSecours.models import Outing, Profile
+from RandoAmisSecours.models import Outing, Profile, GPSPoint
 
 
 class UserAuthorization(Authorization):
@@ -118,6 +118,35 @@ class OutingAuthorization(Authorization):
         return bundle.obj.user == bundle.request.user
 
 
+class GPSPointAuthorization(Authorization):
+    def read_list(self, object_list, bundle):
+        return object_list.filter(Q(outing__user__pk=bundle.request.user.pk) |
+                                  Q(outing__user__profile__in=bundle.request.user.profile.friends.all()))
+
+    def read_detail(self, object_list, bundle):
+        # bundle.obj is a User
+        return (bundle.obj.outing.user.pk == bundle.request.user.pk or
+                bundle.obj.outing.user.profile in bundle.request.user.profile.friends.all())
+
+    def create_list(self, object_list, bundle):
+        return [obj for obj in object_list if obj.outing.user == bundle.request.user]
+
+    def create_detail(self, object_list, bundle):
+        return bundle.obj.outing.user == bundle.request.user
+
+    def update_list(self, object_list, bundle):
+        return [obj for obj in object_list if obj.outing.user == bundle.request.user]
+
+    def update_detail(seld, object_list, bundle):
+        return bundle.obj.outing.user == bundle.request.user
+
+    def delete_list(self, object_list, bundle):
+        raise Unathorized('Deletion impossible')
+
+    def delete_detail(self, object_list, bundle):
+        raise Unathorized('Deletion impossible')
+
+
 class UserResource(ModelResource):
     profile = fields.ForeignKey('RandoAmisSecours.api.ProfileResource', 'profile')
 
@@ -161,3 +190,14 @@ class OutingResource(ModelResource):
         fields = ['name', 'description', 'status', 'beginning', 'ending', 'alert', 'latitude', 'longitude']
         authentication = BasicAuthentication()
         authorization = OutingAuthorization()
+
+
+class GPSPointResource(ModelResource):
+    outing = fields.ForeignKey(OutingResource, 'outing')
+
+    class Meta:
+        queryset = GPSPoint.objects.all()
+        resource_name = 'GPSPoint'
+        fields = ['outing', 'date', 'latitude', 'longitude', 'precision']
+        authentication = BasicAuthentication()
+        authorization = GPSPointAuthorization()
