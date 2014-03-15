@@ -459,6 +459,9 @@
 				fromArgs = true;
 			} else {
 				date = this.element.data('date') || (this.isInput ? this.element.val() : this.element.find('input').val()) || this.initialDate;
+				if (typeof date == 'string' || date instanceof String) {
+				  date = date.replace(/^\s+|\s+$/g,'');
+				}
 			}
 
 			if (!date) {
@@ -939,8 +942,7 @@
 								}
 							}
 							this.viewDate.setUTCFullYear(year);
-							this.viewDate.setUTCMonth(month);
-							this.viewDate.setUTCDate(day);
+							this.viewDate.setUTCMonth(month, day);
 							this.element.trigger({
 								type: 'changeDay',
 								date: this.viewDate

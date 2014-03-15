@@ -6,7 +6,7 @@
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet-v0.7.css" />
   <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/l.geosearch-h874f4d.css" />
-  <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/datetimepicker.css" />
+  <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/bootstrap-datetimepicker-v2.2.0.css" />
 {% endblock %}
 
 {% block style %}
@@ -134,11 +134,11 @@
 <script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet-v0.7.js"></script>
 <script src="{% get_static_prefix %}RandoAmisSecours/js/l.control.geosearch-h874f4d.js"></script>
 <script src="{% get_static_prefix %}RandoAmisSecours/js/l.geosearch.provider.openstreetmap-h874f4d.js"></script>
-<script src="{% get_static_prefix %}RandoAmisSecours/js/bootstrap-datetimepicker.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/bootstrap-datetimepicker-v2.2.0.js"></script>
 {% get_current_language as LANGUAGE_CODE_LONG %}
 {% with LANGUAGE_CODE_LONG|slice:"0:2" as LANGUAGE_CODE %}
 {% if LANGUAGE_CODE == 'fr' %}
-<script src="{% get_static_prefix %}RandoAmisSecours/js/locales/bootstrap-datetimepicker.fr.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/locales/bootstrap-datetimepicker-v2.2.0.fr.js"></script>
 {% endif %}
 {% endwith %}
 <script>
