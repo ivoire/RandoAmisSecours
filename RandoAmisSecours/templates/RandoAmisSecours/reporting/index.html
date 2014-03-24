@@ -22,7 +22,9 @@
       <dt>Number of users</dt>
       <dd>{{ user_count }}</dd>
       <dt>Graphs</dt>
-      <dd><a href="{% url 'reporting.users' %}">{% trans "Subscription" %}</a></dd>
+      <dd><a href="{% url 'reporting.users' %}#subscription">{% trans "Subscription" %}</a></dd>
+      <dt></dt>
+      <dd><a href="{% url 'reporting.users' %}#last-login">{% trans "Last login" %}</a></dd>
     </dl>
   </div>
   <div class="col-md-6">

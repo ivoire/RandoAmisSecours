@@ -7,7 +7,7 @@
 
 {% block breadcrumb %}
   <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
-  <li><a href="%{ url 'reporting.index' %}">{% trans "Reporting" %}</a></li>
+  <li><a href="{% url 'reporting.index' %}">{% trans "Reporting" %}</a></li>
   <li class="active">{% trans "Users" %}</li>
 {% endblock %}
 
@@ -18,8 +18,12 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h4 class="modal-header">User subscription</h4>
-    <div id="container" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
+    <h4 class="modal-header" id="subscription">Subscription</h4>
+    <div id="container-subscription" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
+  </div>
+  <div class="col-md-12">
+    <h4 class="modal-header" id="last-login">Last login</h4>
+    <div id="container-last-login" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
   </div>
 </div>
 {% endblock %}
@@ -29,7 +33,7 @@
 
 <script>
 $(function () {
-  $('#container').highcharts({
+  $('#container-subscription').highcharts({
     chart: {
       type: 'area',
       zoomType: 'xy'
@@ -83,6 +87,62 @@ $(function () {
         data: [{% for day in joining_dates %}{{ day }},{% endfor %}]
     }]
   });
+
+  $('#container-last-login').highcharts({
+    chart: {
+      type: 'area',
+      zoomType: 'xy'
+    },
+    title: {
+      text: 'Last login by date'
+    },
+    xAxis: {
+      labels: {
+        formatter: function() {
+          var d = new Date({{ now }});
+          d.setDate(d.getDate() - (365 - this.value));
+          return (d.getMonth() + 1) + '-' + d.getFullYear();
+        }
+      }
+    },
+    yAxis: {
+      title: {
+        text: 'Number of users'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        var d = new Date({{ now }});
+        d.setDate(d.getDate() - (365 - this.x));
+        var d_str = d.getDate() + '-' + (d.getMonth() + 1) + '-' + d.getFullYear();
+        return d_str + '<br />' + this.y + ' user logged in';
+      }
+    },
+    plotOptions: {
+      area: {
+        marker: {
+          enabled: false,
+          symbol: 'circle',
+          radius: 2,
+          states: {
+            hover: {
+                enabled: true
+            }
+          }
+        }
+      }
+    },
+    series: [{
+      name: 'Users',
+        data: [{% for day in last_logins %}{{ day }},{% endfor %}]
+    }]
+  });
+
 });
 </script>
 {% endblock %}
