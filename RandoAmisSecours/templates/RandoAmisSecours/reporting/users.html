@@ -1,0 +1,88 @@
+{% extends 'RandoAmisSecours/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Reporting" %}{% endblock %}
+
+{% block nav-reporting %}active{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+  <li><a href="%{ url 'reporting.index' %}">{% trans "Reporting" %}</a></li>
+  <li class="active">{% trans "Users" %}</li>
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+  <h2>{% trans "User reporting" %}</h2>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h4 class="modal-header">User subscription</h4>
+    <div id="container" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+<script>
+$(function () {
+  $('#container').highcharts({
+    chart: {
+      type: 'area'
+    },
+    title: {
+      text: 'Subscription by date'
+    },
+    xAxis: {
+      labels: {
+        formatter: function() {
+          var d = new Date({{ now }});
+          d.setDate(d.getDate() - (365 - this.value));
+          return (d.getMonth() + 1) + '-' + d.getFullYear();
+        }
+      }
+    },
+    yAxis: {
+      title: {
+        text: 'New users'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        var d = new Date({{ now }});
+        d.setDate(d.getDate() - (365 - this.x));
+        var d_str = d.getDate() + '-' + (d.getMonth() + 1) + '-' + d.getFullYear();
+        return d_str + '<br />' + this.y + ' new users';
+      }
+    },
+    plotOptions: {
+      area: {
+        marker: {
+          enabled: false,
+          symbol: 'circle',
+          radius: 2,
+          states: {
+            hover: {
+                enabled: true
+            }
+          }
+        }
+      }
+    },
+    series: [{
+      name: 'Users',
+        data: [{% for day in joining_dates %}{{ day }},{% endfor %}]
+    }]
+  });
+});
+</script>
+{% endblock %}

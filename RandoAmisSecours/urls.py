@@ -79,6 +79,12 @@ urlpatterns += patterns('RandoAmisSecours.views.outing',
     url(r'^outings/(?P<outing_id>\d+)/finish/$', 'finish', name='outings.finish'),
 )
 
+# Reporting
+urlpatterns += patterns('RandoAmisSecours.views.reporting',
+    url(r'^reporting/$', 'index', name='reporting.index'),
+    url(r'^reporting/users/$', 'users', name='reporting.users'),
+)
+
 # API v1.0
 api_1_0 = Api(api_name='1.0')
 api_1_0.register(OutingResource())

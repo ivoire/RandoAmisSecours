@@ -34,6 +34,9 @@
       <ul class="nav navbar-nav">
         <li class="{% block nav-index %}{% endblock %}"><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home"></span> {% trans "Home" %}</a></li>
         <li class="{% block nav-outings %}{% endblock %}"><a href="{% url 'outings.index' %}"><span class="glyphicon glyphicon-tasks"></span> {%trans "Outings" %}</a></li>
+        {% if user.is_staff %}
+        <li class="{% block nav-reporting %}{% endblock %}"><a href="{% url 'reporting.index' %}"><span class="glyphicon glyphicon-picture"></span> {% trans "Reporting" %}</a></li>
+        {% endif %}
         <li class="{% block nav-help %}{% endblock %}"><a href="{% url 'help.index' %}"><span class="glyphicon glyphicon-question-sign"></span> {% trans "Help" %}</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

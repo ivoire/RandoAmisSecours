@@ -1,0 +1,34 @@
+{% extends 'RandoAmisSecours/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Reporting" %}{% endblock %}
+
+{% block nav-reporting %}active{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+  <li class="active">{% trans "Reporting" %}</li>
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+  <h2>{% trans "Reporting" %}</h2>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h4 class="modal-header">Users</h4>
+    <dl class="dl-horizontal">
+      <dt>Number of users</dt>
+      <dd>{{ user_count }}</dd>
+      <dt>Graphs</dt>
+      <dd><a href="{% url 'reporting.users' %}">{% trans "Subscription" %}</a></dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <h4 class="modal-header">Outings</h4>
+    <p><i>Nothing yet</i></p>
+  </div>
+</div>
+
+{% endblock %}
