@@ -37,10 +37,12 @@ def index(request):
                               {'user_count': user_count},
                               context_instance=RequestContext(request))
 
+
 @staff_member_required
 def outings(request):
     return render_to_response('RandoAmisSecours/reporting/outings.html',
                               context_instance=RequestContext(request))
+
 
 @staff_member_required
 def users(request):
