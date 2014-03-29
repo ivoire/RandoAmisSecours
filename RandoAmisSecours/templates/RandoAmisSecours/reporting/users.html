@@ -18,11 +18,11 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h4 class="modal-header" id="subscription">Subscription</h4>
+    <h4 class="modal-header" id="subscription">{% trans "Subscription" %}</h4>
     <div id="container-subscription" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
   </div>
   <div class="col-md-12">
-    <h4 class="modal-header" id="last-login">Last login</h4>
+    <h4 class="modal-header" id="last-login">{% trans "Last login" %}</h4>
     <div id="container-last-login" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
   </div>
 </div>
@@ -39,7 +39,7 @@ $(function () {
       zoomType: 'xy'
     },
     title: {
-      text: 'Subscription by date'
+      text: '{% trans "Subscription by date" %}'
     },
     xAxis: {
       labels: {
@@ -52,7 +52,7 @@ $(function () {
     },
     yAxis: {
       title: {
-        text: 'New users'
+        text: '{% trans "New users" %}'
       },
       labels: {
         formatter: function() {
@@ -94,7 +94,7 @@ $(function () {
       zoomType: 'xy'
     },
     title: {
-      text: 'Last login by date'
+      text: '{% trans "Last login by date" %}'
     },
     xAxis: {
       labels: {
@@ -107,7 +107,7 @@ $(function () {
     },
     yAxis: {
       title: {
-        text: 'Number of users'
+        text: '{% trans "Number of users" %}'
       },
       labels: {
         formatter: function() {

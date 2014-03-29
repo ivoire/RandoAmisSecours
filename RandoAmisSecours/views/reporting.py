@@ -32,9 +32,11 @@ from datetime import timedelta
 
 @staff_member_required
 def index(request):
+    outing_count = Outing.objects.count()
     user_count = User.objects.count()
     return render_to_response('RandoAmisSecours/reporting/index.html',
-                              {'user_count': user_count},
+                              {'outing_count': outing_count,
+                               'user_count': user_count},
                               context_instance=RequestContext(request))
 
 

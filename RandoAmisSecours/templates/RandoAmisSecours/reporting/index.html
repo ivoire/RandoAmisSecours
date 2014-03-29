@@ -17,19 +17,22 @@
 
 <div class="row">
   <div class="col-md-6">
-    <h4 class="modal-header">Users</h4>
+    <h4 class="modal-header">{% trans "Users" %}</h4>
     <dl class="dl-horizontal">
-      <dt>Number of users</dt>
+      <dt>{% trans "Number of users" %}</dt>
       <dd>{{ user_count }}</dd>
-      <dt>Graphs</dt>
+      <dt>{% trans "Graphs" %}</dt>
       <dd><a href="{% url 'reporting.users' %}#subscription">{% trans "Subscription" %}</a></dd>
       <dt></dt>
       <dd><a href="{% url 'reporting.users' %}#last-login">{% trans "Last login" %}</a></dd>
     </dl>
   </div>
   <div class="col-md-6">
-    <h4 class="modal-header">Outings</h4>
-    <p><i>Nothing yet</i></p>
+    <h4 class="modal-header">{% trans "Outings" %}</h4>
+    <dl class="dl-horizontal">
+      <dt>{% trans "Number of outings" %}</dt>
+      <dd>{{ outing_count }}</dd>
+    </dl>
   </div>
 </div>
 
