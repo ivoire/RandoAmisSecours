@@ -25,6 +25,10 @@
     <h4 class="modal-header" id="last-login">{% trans "Last login" %}</h4>
     <div id="container-last-login" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
   </div>
+  <div class="col-md-12">
+    <h4 class="modal-header" id="sessions">{% trans "Sessions" %}</h4>
+    <div id="container-sessions" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
+  </div>
 </div>
 {% endblock %}
 
@@ -142,6 +146,62 @@ $(function () {
         data: [{% for day in last_logins %}{{ day }},{% endfor %}]
     }]
   });
+
+  $('#container-sessions').highcharts({
+    chart: {
+      type: 'area',
+      zoomType: 'xy'
+    },
+    title: {
+      text: '{% trans "Sessions by date" %}'
+    },
+    xAxis: {
+      labels: {
+        formatter: function() {
+          var d = new Date({{ now }});
+          d.setDate(d.getDate() - (365 - this.value));
+          return (d.getMonth() + 1) + '-' + d.getFullYear();
+        }
+      }
+    },
+    yAxis: {
+      title: {
+        text: '{% trans "Number of users" %}'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        var d = new Date({{ now }});
+        d.setDate(d.getDate() - (365 - this.x));
+        var d_str = d.getDate() + '-' + (d.getMonth() + 1) + '-' + d.getFullYear();
+        return d_str + '<br />' + this.y + ' user logged in';
+      }
+    },
+    plotOptions: {
+      area: {
+        marker: {
+          enabled: false,
+          symbol: 'circle',
+          radius: 2,
+          states: {
+            hover: {
+                enabled: true
+            }
+          }
+        }
+      }
+    },
+    series: [{
+      name: 'Users',
+        data: [{% for day in sessions %}{{ day }},{% endfor %}]
+    }]
+  });
+
 
 });
 </script>

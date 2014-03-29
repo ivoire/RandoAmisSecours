@@ -21,8 +21,10 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from django.utils.timezone import datetime, utc
 
 from RandoAmisSecours.models import Outing, DRAFT, CONFIRMED, FINISHED
@@ -49,8 +51,9 @@ def outings(request):
 @staff_member_required
 def users(request):
     now = datetime.utcnow().replace(tzinfo=utc)
-    users_list = User.objects.all()
 
+    # Joining and last login dates
+    users_list = User.objects.all()
     joining_dates = [0] * 366
     last_logins = [0] * 366
     for user in users_list:
@@ -62,7 +65,26 @@ def users(request):
         if days_delta <= 365:
             last_logins[365 - days_delta] += 1
 
+    # Active sessions
+    all_sessions = Session.objects.all()
+    sessions_list = [0]* 366
+    for session in all_sessions:
+        end = (now - session.expire_date).days
+        begin = end + settings.SESSION_COOKIE_AGE / 86400
+
+        # If begin after today (error)
+        if begin <=0:
+            continue
+        # Crop to 365
+        if end <= 0:
+            end = 0
+
+        for day in range(end, begin):
+            if day <= 365:
+                sessions_list[365 - day] += 1
+
     return render_to_response('RandoAmisSecours/reporting/users.html',
                               {'joining_dates': joining_dates,
-                               'last_logins': last_logins},
+                               'last_logins': last_logins,
+                               'sessions': sessions_list},
                               context_instance=RequestContext(request))
