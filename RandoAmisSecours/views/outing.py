@@ -113,9 +113,12 @@ def details_trace(request, outing_id):
     # Return 404 if the outing does not belong to the user or his friends
     outing = get_object_or_404(Outing, Q(user=request.user) | Q(user__profile__in=request.user.profile.friends.all()), pk=outing_id)
 
-    # Return 404 if the outing is not late
-    #if not outing.is_late():
-    #    raise Http404
+    # Friends can only access traces when the outing is late
+    print outing.alert
+    print outing.is_late()
+    print outing.is_alerting()
+    if not outing.is_late() and not outing.is_alerting() and not outing.user.pk == request.user.pk:
+        raise Http404
 
     return render_to_response('RandoAmisSecours/outing/details_trace.html',
                               {'outing': outing,
