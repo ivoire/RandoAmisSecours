@@ -67,13 +67,13 @@ def users(request):
 
     # Active sessions
     all_sessions = Session.objects.all()
-    sessions_list = [0]* 366
+    sessions_list = [0] * 366
     for session in all_sessions:
         end = (now - session.expire_date).days
         begin = end + settings.SESSION_COOKIE_AGE / 86400
 
         # If begin after today (error)
-        if begin <=0:
+        if begin <= 0:
             continue
         # Crop to 365
         if end <= 0:
