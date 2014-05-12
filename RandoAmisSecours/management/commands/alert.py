@@ -24,7 +24,7 @@ from django.core.urlresolvers import reverse
 from django.utils.timezone import datetime, utc
 from django.utils.translation import ugettext_lazy as _
 
-from RandoAmisSecours.models import Outing, Profile, CONFIRMED
+from RandoAmisSecours.models import Outing, Profile, CONFIRMED, DRAFT
 from RandoAmisSecours.utils import send_localized_mail
 
 from optparse import make_option
@@ -53,10 +53,22 @@ class Command(BaseCommand):
         if kwargs.get('base_url', None) is None:
             raise CommandError('url option is required')
 
-        self.stdout.write("Listing alerting outings")
+        self.stdout.write("Listing alerting outings\n========================")
         self.stdout.write("Interval %d" % (kwargs['interval']))
 
         now = datetime.utcnow().replace(tzinfo=utc)
+
+        # Transform all DRAFT into CONFIRMED if the beginning is over
+        self.stdout.write("Transforming late DRAFTs:")
+        outings = Outing.objects.filter(status=DRAFT, beginning__lt=now)
+        for outing in outings:
+            self.stdout.write(" - %s" % (outing.name))
+            outing.status = CONFIRMED
+            outing.save()
+        self.stdout.write("  [done]\n\n")
+
+        # Grab all late outings
+        self.stdout.write("Alerting the users/friends:")
         outings = Outing.objects.filter(status=CONFIRMED, ending__lt=now)
 
         for outing in outings:
@@ -79,7 +91,6 @@ class Command(BaseCommand):
                 minutes = (now - outing.alert).seconds / 60.0
                 minutes = minutes % kwargs['alert']
 
-                self.stdout.write("  minutes: %d" % (minutes))
                 if 0 <= minutes and minutes < kwargs['interval']:
                     self.stdout.write("emailing friends")
                     # Send on mail per user translated into the right language
@@ -89,3 +100,4 @@ class Command(BaseCommand):
                                             {'fullname': outing.user.get_full_name(),
                                              'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
                                              'name': outing.name, 'ending': outing.ending})
+        self.stdout.write("  [done]\n\n")
