@@ -70,16 +70,16 @@ def users(request):
     sessions_list = [0] * 366
     for session in all_sessions:
         end = (now - session.expire_date).days
-        begin = end + settings.SESSION_COOKIE_AGE / 86400
+        begin = int(end + settings.SESSION_COOKIE_AGE / 86400)
 
         # If begin after today (error)
-        if begin <= 0:
+        if begin < 0:
             continue
         # Crop to 365
         if end <= 0:
             end = 0
 
-        for day in range(end, begin):
+        for day in range(end, begin + 1):
             if day <= 365:
                 sessions_list[365 - day] += 1
 
