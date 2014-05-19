@@ -103,8 +103,8 @@ class Command(BaseCommand):
                                              'name': outing.name, 'ending': outing.ending})
                     send_localized_mail(outing.user, _('[R.A.S] Alert'),
                                         'RandoAmisSecours/alert/alert_owner.html',
-                                            {'fullname': outing.user.get_full_name(),
-                                             'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
-                                             'name': outing.name, 'ending': outing.ending, 'friend_count': friend_count})
+                                        {'fullname': outing.user.get_full_name(),
+                                         'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
+                                         'name': outing.name, 'ending': outing.ending, 'friend_count': friend_count})
 
         self.stdout.write("  [done]\n\n")
