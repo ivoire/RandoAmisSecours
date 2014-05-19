@@ -53,33 +53,31 @@ class Command(BaseCommand):
         if kwargs.get('base_url', None) is None:
             raise CommandError('url option is required')
 
-        self.stdout.write("Listing alerting outings\n========================")
-        self.stdout.write("Interval %d" % (kwargs['interval']))
-
         now = datetime.utcnow().replace(tzinfo=utc)
 
         # Transform all DRAFT into CONFIRMED if the beginning is over
-        self.stdout.write("Transforming late DRAFTs:")
+        self.stdout.write("Transforming late DRAFTs\n========================")
         outings = Outing.objects.filter(status=DRAFT, beginning__lt=now)
         for outing in outings:
             self.stdout.write(" - %s" % (outing.name))
             outing.status = CONFIRMED
             outing.save()
-        self.stdout.write("  [done]\n\n")
+        self.stdout.write("\n\n")
 
         # Grab all late outings
-        self.stdout.write("Alerting the users/friends:")
+        self.stdout.write("Alerting the users/friends\n==========================")
         outings = Outing.objects.filter(status=CONFIRMED, ending__lt=now)
 
         for outing in outings:
-            self.stdout.write(" - %s" % (outing.name))
+            self.stdout.write("  %s\n    - user: %s" % (outing.name, outing.user.get_full_name()))
             # Late outings
             if outing.ending <= now and now < outing.alert:
+                self.stdout.write("    - Status: late")
                 minutes = (now - outing.alert).seconds / 60.0
                 minutes = minutes % kwargs['alert']
 
                 if 0 <= minutes and minutes < kwargs['interval']:
-                    self.stdout.write("Sending mail to owner")
+                    self.stdout.write("    - email: %s" % (outing.user.email))
                     # send a mail to the user, translated into the right language
                     send_localized_mail(outing.user, _('[R.A.S] Alert'),
                                         'RandoAmisSecours/alert/late.html',
@@ -88,16 +86,25 @@ class Command(BaseCommand):
 
             # Alerting outings
             elif outing.alert <= now:
+                self.stdout.write("    - Status: Alert")
                 minutes = (now - outing.alert).seconds / 60.0
                 minutes = minutes % kwargs['alert']
 
                 if 0 <= minutes and minutes < kwargs['interval']:
-                    self.stdout.write("emailing friends")
+                    friend_count = outing.user.profile.friends.count()
+                    self.stdout.write("    - Friends (%d):" % (friend_count))
                     # Send on mail per user translated into the right language
                     for friend_profile in outing.user.profile.friends.all():
+                        self.stdout.write("      - %s" % (friend_profile.user.email))
                         send_localized_mail(friend_profile.user, _('[R.A.S] Alert'),
                                             'RandoAmisSecours/alert/alert.html',
                                             {'fullname': outing.user.get_full_name(),
                                              'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
                                              'name': outing.name, 'ending': outing.ending})
+                    send_localized_mail(outing.user, _('[R.A.S] Alert'),
+                                        'RandoAmisSecours/alert/alert_owner.html',
+                                            {'fullname': outing.user.get_full_name(),
+                                             'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
+                                             'name': outing.name, 'ending': outing.ending, 'friend_count': friend_count})
+
         self.stdout.write("  [done]\n\n")
