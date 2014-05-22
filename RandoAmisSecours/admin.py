@@ -25,8 +25,11 @@ from RandoAmisSecours.models import *
 
 
 class OutingAdmin(admin.ModelAdmin):
-    list_display = ('name', 'user', 'beginning', 'ending', 'alert', 'not_running', 'not_late', 'not_alerting')
+    list_display = ('name', 'user', 'beginning', 'ending', 'alert', 'finished', 'not_running', 'not_late', 'not_alerting')
     ordering = ('-beginning', '-ending', '-alert', 'name')
+
+    def finished(self, outing):
+        return outing.status == FINISHED
 
     def not_running(self, outing):
         now = datetime.utcnow().replace(tzinfo=utc)
@@ -40,6 +43,7 @@ class OutingAdmin(admin.ModelAdmin):
         now = datetime.utcnow().replace(tzinfo=utc)
         return not outing.alert <= now
 
+    finished.boolean = True
     not_running.boolean = True
     not_late.boolean = True
     not_alerting.boolean = True
