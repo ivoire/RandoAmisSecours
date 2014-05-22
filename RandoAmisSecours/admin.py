@@ -20,9 +20,41 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from django.utils.timezone import datetime, utc
 from RandoAmisSecours.models import *
 
+
+class OutingAdmin(admin.ModelAdmin):
+    list_display = ('name', 'user', 'beginning', 'ending', 'alert', 'not_running', 'not_late', 'not_alerting')
+    ordering = ('-beginning', '-ending', '-alert', 'name')
+
+    def not_running(self, outing):
+        now = datetime.utcnow().replace(tzinfo=utc)
+        return not outing.beginning <= now
+
+    def not_late(self, outing):
+        now = datetime.utcnow().replace(tzinfo=utc)
+        return not outing.ending <= now
+
+    def not_alerting(self, outing):
+        now = datetime.utcnow().replace(tzinfo=utc)
+        return not outing.alert <= now
+
+    not_running.boolean = True
+    not_late.boolean = True
+    not_alerting.boolean = True
+
+
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'phone_number', 'language', 'timezone')
+
+
+class GPSPointAdmin(admin.ModelAdmin):
+    list_display = ('outing', 'date', 'latitude', 'longitude', 'precision')
+    ordering = ('outing', 'date')
+
+
 admin.site.register(FriendRequest)
-admin.site.register(Outing)
-admin.site.register(Profile)
-admin.site.register(GPSPoint)
+admin.site.register(Outing, OutingAdmin)
+admin.site.register(Profile, ProfileAdmin)
+admin.site.register(GPSPoint, GPSPointAdmin)

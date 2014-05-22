@@ -138,6 +138,10 @@ class Outing(models.Model):
         now = datetime.utcnow().replace(tzinfo=utc)
         return self.alert <= now
 
+    is_running.boolean = True
+    is_late.boolean = True
+    is_alerting.boolean = True
+
 
 @python_2_unicode_compatible
 class GPSPoint(models.Model):
