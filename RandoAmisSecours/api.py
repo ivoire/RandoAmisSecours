@@ -91,7 +91,8 @@ class ProfileAuthorization(Authorization):
 
 class OutingAuthorization(Authorization):
     def read_list(self, object_list, bundle):
-        return object_list.filter(Q(user=bundle.request.user) | Q(user__profile__in=bundle.request.user.profile.friends.all()))
+        return object_list.filter(Q(user=bundle.request.user) |
+                                  Q(user__profile__in=bundle.request.user.profile.friends.all()))
 
     def read_detail(self, object_list, bundle):
         # bundle.obj is an Outing
