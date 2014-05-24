@@ -20,7 +20,11 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.signals import user_logged_in
+from django.contrib.auth.models import User
+from django.db import models
 from django.dispatch import receiver
+
+from tastypie.models import create_api_key
 
 
 @receiver(user_logged_in)
@@ -33,3 +37,6 @@ def set_profile_info(sender, **kwargs):
     tz = kwargs['user'].profile.timezone
     if tz:
         kwargs['request'].session['django_timezone'] = tz
+
+
+models.signals.post_save.connect(create_api_key, sender=User)

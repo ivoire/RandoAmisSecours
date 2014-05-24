@@ -23,7 +23,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 
 from tastypie import fields
-from tastypie.authentication import BasicAuthentication
+from tastypie.authentication import ApiKeyAuthentication, BasicAuthentication
 from tastypie.authorization import Authorization
 from tastypie.exceptions import Unauthorized
 from tastypie.models import ApiKey
@@ -159,7 +159,7 @@ class UserResource(ModelResource):
         filtering = {
             'id': ALL
         }
-        authentication = BasicAuthentication()
+        authentication = ApiKeyAuthentication()
         authorization = UserAuthorization()
 
 
@@ -172,7 +172,7 @@ class ProfileResource(ModelResource):
         resource_name = 'profile'
         fields = ['phone_number', 'language', 'timezone', 'friends']
         allowed_methods = ['get']
-        authentication = BasicAuthentication()
+        authentication = ApiKeyAuthentication()
         authorization = ProfileAuthorization()
 
     def dehydrate(self, bundle):
@@ -196,7 +196,7 @@ class OutingResource(ModelResource):
         filtering = {
             'user': ALL_WITH_RELATIONS
         }
-        authentication = BasicAuthentication()
+        authentication = ApiKeyAuthentication()
         authorization = OutingAuthorization()
 
 
@@ -208,7 +208,7 @@ class GPSPointResource(ModelResource):
         resource_name = 'GPSPoint'
         fields = ['outing', 'date', 'latitude', 'longitude', 'precision']
         allowed_methods = ['get']
-        authentication = BasicAuthentication()
+        authentication = ApiKeyAuthentication()
         authorization = GPSPointAuthorization()
 
 
