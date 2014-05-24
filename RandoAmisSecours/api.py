@@ -26,7 +26,7 @@ from tastypie import fields
 from tastypie.authentication import BasicAuthentication
 from tastypie.authorization import Authorization
 from tastypie.exceptions import Unauthorized
-from tastypie.resources import ModelResource
+from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 
 from RandoAmisSecours.models import Outing, Profile, GPSPoint
 
@@ -153,8 +153,11 @@ class UserResource(ModelResource):
     class Meta:
         queryset = User.objects.all()
         resource_name = 'user'
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['id', 'first_name', 'last_name', 'email']
         allowed_methods = ['get']
+        filtering = {
+            'id': ALL
+        }
         authentication = BasicAuthentication()
         authorization = UserAuthorization()
 
@@ -189,6 +192,9 @@ class OutingResource(ModelResource):
         resource_name = 'outing'
         fields = ['name', 'description', 'status', 'beginning', 'ending', 'alert', 'latitude', 'longitude']
         allowed_methods = ['get']
+        filtering = {
+            'user': ALL_WITH_RELATIONS
+        }
         authentication = BasicAuthentication()
         authorization = OutingAuthorization()
 
