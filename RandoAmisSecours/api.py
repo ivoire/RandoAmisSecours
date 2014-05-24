@@ -188,6 +188,7 @@ class OutingResource(ModelResource):
         queryset = Outing.objects.all()
         resource_name = 'outing'
         fields = ['name', 'description', 'status', 'beginning', 'ending', 'alert', 'latitude', 'longitude']
+        allowed_methods = ['get']
         authentication = BasicAuthentication()
         authorization = OutingAuthorization()
 
@@ -199,5 +200,6 @@ class GPSPointResource(ModelResource):
         queryset = GPSPoint.objects.all()
         resource_name = 'GPSPoint'
         fields = ['outing', 'date', 'latitude', 'longitude', 'precision']
+        allowed_methods = ['get']
         authentication = BasicAuthentication()
         authorization = GPSPointAuthorization()
