@@ -26,6 +26,7 @@ from tastypie import fields
 from tastypie.authentication import BasicAuthentication
 from tastypie.authorization import Authorization
 from tastypie.exceptions import Unauthorized
+from tastypie.models import ApiKey
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
 
 from RandoAmisSecours.models import Outing, Profile, GPSPoint
@@ -209,3 +210,22 @@ class GPSPointResource(ModelResource):
         allowed_methods = ['get']
         authentication = BasicAuthentication()
         authorization = GPSPointAuthorization()
+
+
+class LoginResource(ModelResource):
+    class Meta:
+        resource_name = 'login'
+        fields = ['key']
+        allowed_methods = ['get']
+        include_resource_uri = False
+        object_class = ApiKey
+        authentication = BasicAuthentication()
+        authorization = UserAuthorization()
+
+    def obj_get_list(self, bundle, **kwargs):
+        return [ApiKey.objects.get(user=bundle.request.user)]
+
+    def dehydrate(self, bundle):
+        bundle.data['user_id'] = bundle.request.user.id
+        bundle.data['profile_id'] = bundle.request.user.profile.id
+        return bundle
