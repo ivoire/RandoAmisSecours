@@ -100,23 +100,22 @@ class OutingAuthorization(Authorization):
                 bundle.obj.user.profile in bundle.request.user.profile.friends.all())
 
     def create_list(self, object_list, bundle):
-        # TODO: is the user auto assigned
-        return object_list
+        raise Unathorized('Creation impossible')
 
     def create_detail(self, object_list, bundle):
-        return bundle.obj.user == bundle.request.user
+        raise Unathorized('Creation impossible')
 
     def update_list(self, object_list, bundle):
-        return [obj for obj in object_list if obj.user == bundle.request.user]
+        raise Unathorized('Updating impossible')
 
     def update_detail(seld, object_list, bundle):
-        return bundle.obj.user == bundle.request.user
+        raise Unathorized('Updating impossible')
 
     def delete_list(self, object_list, bundle):
-        return [obj for obj in object_list if obj.user == bundle.request.user]
+        raise Unathorized('Deletion impossible')
 
     def delete_detail(self, object_list, bundle):
-        return bundle.obj.user == bundle.request.user
+        raise Unathorized('Deletion impossible')
 
 
 class GPSPointAuthorization(Authorization):
@@ -130,16 +129,16 @@ class GPSPointAuthorization(Authorization):
                 bundle.obj.outing.user.profile in bundle.request.user.profile.friends.all())
 
     def create_list(self, object_list, bundle):
-        return [obj for obj in object_list if obj.outing.user == bundle.request.user]
+        raise Unathorized('Creation impossible')
 
     def create_detail(self, object_list, bundle):
-        return bundle.obj.outing.user == bundle.request.user
+        raise Unathorized('Creation impossible')
 
     def update_list(self, object_list, bundle):
-        return [obj for obj in object_list if obj.outing.user == bundle.request.user]
+        raise Unathorized('Updating impossible')
 
     def update_detail(seld, object_list, bundle):
-        return bundle.obj.outing.user == bundle.request.user
+        raise Unathorized('Updating impossible')
 
     def delete_list(self, object_list, bundle):
         raise Unathorized('Deletion impossible')
