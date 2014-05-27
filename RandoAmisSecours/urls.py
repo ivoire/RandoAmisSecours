@@ -23,7 +23,7 @@ from django.conf.urls import include, patterns, url
 from django.core.urlresolvers import reverse_lazy
 from tastypie.api import Api
 
-from RandoAmisSecours.api import OutingResource, ProfileResource, UserResource, GPSPointResource
+from RandoAmisSecours.api import OutingResource, ProfileResource, UserResource, GPSPointResource, LoginResource
 from RandoAmisSecours.views.account import RASAuthenticationForm, RASPasswordChangeForm, RASPasswordResetForm, RASSetPasswordForm
 
 
@@ -91,6 +91,7 @@ api_1_0.register(OutingResource())
 api_1_0.register(ProfileResource())
 api_1_0.register(UserResource())
 api_1_0.register(GPSPointResource())
+api_1_0.register(LoginResource())
 
 urlpatterns += patterns('',
   url(r'^api/', include(api_1_0.urls)),
