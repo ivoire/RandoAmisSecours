@@ -191,7 +191,7 @@ class OutingResource(ModelResource):
     class Meta:
         queryset = Outing.objects.all()
         resource_name = 'outing'
-        fields = ['name', 'description', 'status', 'beginning', 'ending', 'alert', 'latitude', 'longitude']
+        fields = ['id', 'name', 'description', 'status', 'beginning', 'ending', 'alert', 'latitude', 'longitude']
         allowed_methods = ['get']
         filtering = {
             'user': ALL_WITH_RELATIONS
