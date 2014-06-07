@@ -14,7 +14,7 @@ written in requirements.txt. If you use virtualenv and pip, just type:
 
     pip install -r requirements.txt
 
-RandoAmisSecours also uses *django.contrib.humanize* and *tastypie_apikey*
+RandoAmisSecours also uses *django.contrib.humanize* and *tastypie*
 which should be present in the INSTALLED_APPS.
 
 In order for timezones to work, you should install the TimezoneMiddleware. Add
