@@ -55,10 +55,10 @@ class UserAuthorization(Authorization):
         raise Unauthorized('Updating impossible')
 
     def delete_list(self, object_list, bundle):
-        raise Unathorized('Deletion impossible')
+        raise Unauthorized('Deletion impossible')
 
     def delete_detail(self, object_list, bundle):
-        raise Unathorized('Deletion impossible')
+        raise Unauthorized('Deletion impossible')
 
 
 class ProfileAuthorization(Authorization):
@@ -84,10 +84,10 @@ class ProfileAuthorization(Authorization):
         raise Unauthorized('Updating impossible')
 
     def delete_list(self, object_list, bundle):
-        raise Unathorized('Deletion impossible')
+        raise Unauthorized('Deletion impossible')
 
     def delete_detail(self, object_list, bundle):
-        raise Unathorized('Deletion impossible')
+        raise Unauthorized('Deletion impossible')
 
 
 class OutingAuthorization(Authorization):
@@ -101,22 +101,22 @@ class OutingAuthorization(Authorization):
                 bundle.obj.user.profile in bundle.request.user.profile.friends.all())
 
     def create_list(self, object_list, bundle):
-        raise Unathorized('Creation impossible')
+        raise Unauthorized('Creation impossible')
 
     def create_detail(self, object_list, bundle):
-        raise Unathorized('Creation impossible')
+        raise Unauthorized('Creation impossible')
 
     def update_list(self, object_list, bundle):
-        raise Unathorized('Updating impossible')
+        raise Unauthorized('Updating impossible')
 
     def update_detail(seld, object_list, bundle):
-        raise Unathorized('Updating impossible')
+        raise Unauthorized('Updating impossible')
 
     def delete_list(self, object_list, bundle):
-        raise Unathorized('Deletion impossible')
+        raise Unauthorized('Deletion impossible')
 
     def delete_detail(self, object_list, bundle):
-        raise Unathorized('Deletion impossible')
+        raise Unauthorized('Deletion impossible')
 
 
 class GPSPointAuthorization(Authorization):
@@ -130,22 +130,22 @@ class GPSPointAuthorization(Authorization):
                 bundle.obj.outing.user.profile in bundle.request.user.profile.friends.all())
 
     def create_list(self, object_list, bundle):
-        raise Unathorized('Creation impossible')
+        raise Unauthorized('Creation impossible')
 
     def create_detail(self, object_list, bundle):
-        raise Unathorized('Creation impossible')
+        raise Unauthorized('Creation impossible')
 
     def update_list(self, object_list, bundle):
-        raise Unathorized('Updating impossible')
+        raise Unauthorized('Updating impossible')
 
     def update_detail(seld, object_list, bundle):
-        raise Unathorized('Updating impossible')
+        raise Unauthorized('Updating impossible')
 
     def delete_list(self, object_list, bundle):
-        raise Unathorized('Deletion impossible')
+        raise Unauthorized('Deletion impossible')
 
     def delete_detail(self, object_list, bundle):
-        raise Unathorized('Deletion impossible')
+        raise Unauthorized('Deletion impossible')
 
 
 class UserResource(ModelResource):
