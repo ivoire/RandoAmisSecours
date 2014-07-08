@@ -194,7 +194,8 @@ class OutingResource(ModelResource):
         fields = ['id', 'name', 'description', 'status', 'beginning', 'ending', 'alert', 'latitude', 'longitude']
         allowed_methods = ['get']
         filtering = {
-            'user': ALL_WITH_RELATIONS
+            'user': ALL_WITH_RELATIONS,
+            'status': ['exact', 'gt', 'gte', 'lt', 'lte', 'range']
         }
         authentication = ApiKeyAuthentication()
         authorization = OutingAuthorization()
