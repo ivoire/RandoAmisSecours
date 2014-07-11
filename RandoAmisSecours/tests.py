@@ -90,8 +90,8 @@ class LoginRequired(TestCase):
                                              '12789azertyuiop')
         self.user.profile = Profile.objects.create(user=self.user, timezone='Europe/Paris', language='fr')
         self.user2 = User.objects.create_user('zarterzh',
-                                             'gzeryztye@example.org',
-                                             'help')
+                                              'gzeryztye@example.org',
+                                              'help')
         self.user2.profile = Profile.objects.create(user=self.user2, timezone='Europe/London', language='en')
 
         current_time = datetime.utcnow().replace(tzinfo=utc)

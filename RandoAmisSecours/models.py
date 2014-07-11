@@ -157,5 +157,5 @@ class GPSPoint(models.Model):
 
     def __str__(self):
         return "[%s] %s: (%f, %f)" % (self.outing.user.get_full_name(),
-                                     self.outing.name, self.latitude,
-                                     self.longitude)
+                                      self.outing.name, self.latitude,
+                                      self.longitude)
