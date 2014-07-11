@@ -51,7 +51,7 @@ class UserAuthorization(Authorization):
     def update_list(self, object_list, bundle):
         raise Unauthorized('Updating impossible')
 
-    def update_detail(seld, object_list, bundle):
+    def update_detail(self, object_list, bundle):
         raise Unauthorized('Updating impossible')
 
     def delete_list(self, object_list, bundle):
@@ -80,7 +80,7 @@ class ProfileAuthorization(Authorization):
     def update_list(self, object_list, bundle):
         raise Unauthorized('Updating impossible')
 
-    def update_detail(seld, object_list, bundle):
+    def update_detail(self, object_list, bundle):
         raise Unauthorized('Updating impossible')
 
     def delete_list(self, object_list, bundle):
@@ -109,7 +109,7 @@ class OutingAuthorization(Authorization):
     def update_list(self, object_list, bundle):
         raise Unauthorized('Updating impossible')
 
-    def update_detail(seld, object_list, bundle):
+    def update_detail(self, object_list, bundle):
         raise Unauthorized('Updating impossible')
 
     def delete_list(self, object_list, bundle):
@@ -138,7 +138,7 @@ class GPSPointAuthorization(Authorization):
     def update_list(self, object_list, bundle):
         raise Unauthorized('Updating impossible')
 
-    def update_detail(seld, object_list, bundle):
+    def update_detail(self, object_list, bundle):
         raise Unauthorized('Updating impossible')
 
     def delete_list(self, object_list, bundle):
