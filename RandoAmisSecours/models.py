@@ -145,7 +145,7 @@ class Outing(models.Model):
 
 @python_2_unicode_compatible
 class GPSPoint(models.Model):
-    class meta:
+    class Meta:
         app_label = 'RandoAmisSecours'
         ordering = ['date']
 
