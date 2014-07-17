@@ -24,11 +24,10 @@ from django.core.urlresolvers import reverse
 from django.utils.timezone import datetime, utc
 from django.utils.translation import ugettext_lazy as _
 
-from RandoAmisSecours.models import Outing, Profile, CONFIRMED, DRAFT
+from RandoAmisSecours.models import Outing, CONFIRMED, DRAFT
 from RandoAmisSecours.utils import send_localized_mail
 
 from optparse import make_option
-import pytz
 
 
 class Command(BaseCommand):
