@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans %}You are late from outing '{{ name }}'. If back safe, please update on R.A.S.{% endblocktrans %}

@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans %}{{ fullname }} is late from outing '{{ name }}', (finishing {{ ending }} ago). You should contact him/her.{% endblocktrans %}

@@ -21,11 +21,12 @@ from __future__ import unicode_literals
 
 from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
+from django.utils.timesince import timesince
 from django.utils.timezone import datetime, utc
 from django.utils.translation import ugettext_lazy as _
 
 from RandoAmisSecours.models import Outing, CONFIRMED, DRAFT
-from RandoAmisSecours.utils import send_localized_mail
+from RandoAmisSecours.utils import send_localized_mail, send_localized_sms
 
 from optparse import make_option
 
@@ -82,6 +83,8 @@ class Command(BaseCommand):
                                         'RandoAmisSecours/alert/late.html',
                                         {'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
                                          'SAFE_URL': "%s%s" % (kwargs['base_url'], reverse('outings.finish', args=[outing.pk]))})
+                    send_localized_sms(outing.user, 'RandoAmisSecours/alert/late.txt',
+                                       outing)
 
             # Alerting outings
             elif outing.alert <= now:
@@ -100,10 +103,14 @@ class Command(BaseCommand):
                                             {'fullname': outing.user.get_full_name(),
                                              'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
                                              'name': outing.name, 'ending': outing.ending})
+                        send_localized_sms(friend_profile.user, 'RandoAmisSecours/alert/alert.txt',
+                                           outing)
                     send_localized_mail(outing.user, _('[R.A.S] Alert'),
                                         'RandoAmisSecours/alert/alert_owner.html',
                                         {'fullname': outing.user.get_full_name(),
                                          'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
                                          'name': outing.name, 'ending': outing.ending, 'friend_count': friend_count})
+                    send_localized_sms(outing.user, 'RandoAmisSecours/alert/alert_owner.txt',
+                                       outing)
 
         self.stdout.write("  [done]\n\n")

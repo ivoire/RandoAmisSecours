@@ -2,3 +2,4 @@ Django==1.6.5
 pytz
 django-tastypie
 python-mimeparse
+SMSForward
