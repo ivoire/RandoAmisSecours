@@ -45,6 +45,10 @@ OUTING_STATUS = (
     (CANCELED, _('canceled'))
 )
 
+PROVIDERS = (
+    ('mobile.free.fr', 'mobile.free.fr'),
+)
+
 
 def random_hash():
     """ Create a random string of size 15 """
@@ -59,6 +63,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User)
     friends = models.ManyToManyField('self', blank=True, null=True)
     phone_number = models.CharField(max_length=30, blank=True, null=True)
+    provider = models.CharField(max_length=30, blank=True, null=True, choices=PROVIDERS)
+    provider_data = models.TextField(blank=True, null=True)
     hash_id = models.CharField(unique=True, max_length=30, default=random_hash)
     language = models.CharField(max_length=4, blank=True, null=True, choices=settings.LANGUAGES)
     timezone = models.CharField(max_length=40, choices=[(tz, tz) for tz in pytz.all_timezones], default='UTC')
