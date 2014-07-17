@@ -73,7 +73,7 @@ class Command(BaseCommand):
             # Late outings
             if outing.ending <= now and now < outing.alert:
                 self.stdout.write("    - Status: late")
-                minutes = (now - outing.alert).seconds / 60.0
+                minutes = (now - outing.ending).seconds / 60.0
                 minutes = minutes % kwargs['alert']
 
                 if 0 <= minutes and minutes < kwargs['interval']:
