@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-19 19:17+0200\n"
+"POT-Creation-Date: 2014-07-17 17:39+0000\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -48,8 +48,8 @@ msgstr "Anglais"
 msgid "French"
 msgstr "Français"
 
-#: management/commands/alert.py:82 management/commands/alert.py:99
-#: management/commands/alert.py:104
+#: management/commands/alert.py:82 management/commands/alert.py:101
+#: management/commands/alert.py:108
 msgid "[R.A.S] Alert"
 msgstr "[R.A.S] Alerte"
 
@@ -705,6 +705,15 @@ msgstr ""
 "-- \n"
 "L'équipe R.A.S."
 
+#: templates/RandoAmisSecours/alert/alert.txt:1
+#, python-format
+msgid ""
+"%(fullname)s is late from outing '%(name)s', (finishing %(ending)s ago). You "
+"should contact him/her."
+msgstr ""
+"%(fullname)s est en retard pour la sortie '%(name)s', (il y a %(ending)s). "
+"Vous devriez le contacter."
+
 #: templates/RandoAmisSecours/alert/alert_owner.html:1
 #, python-format
 msgid ""
@@ -734,6 +743,15 @@ msgstr ""
 "-- \n"
 "L'équipe R.A.S."
 
+#: templates/RandoAmisSecours/alert/alert_owner.txt:1
+#, python-format
+msgid ""
+"You are late from outing '%(name)s', (finishing %(ending)s ago). Your "
+"friends where alerted."
+msgstr ""
+"En retard pour la sortie '%(name)s', (il y a %(ending)s). Vos amis sont "
+"alertés."
+
 #: templates/RandoAmisSecours/alert/late.html:1
 #, python-format
 msgid ""
@@ -754,6 +772,14 @@ msgstr ""
 "\n"
 "-- \n"
 "L'équipe R.A.S."
+
+#: templates/RandoAmisSecours/alert/late.txt:1
+#, python-format
+msgid ""
+"You are late from outing '%(name)s'. If back safe, please update on R.A.S."
+msgstr ""
+"En retard pour la sortie '%(name)s'. Si de retour, merci de mettre à jour "
+"sur R.A.S."
 
 #: templates/RandoAmisSecours/friends/request_accepted_email.html:1
 #, python-format
@@ -882,11 +908,10 @@ msgid "2/ Reliability"
 msgstr "2/ Fiabilité"
 
 #: templates/RandoAmisSecours/help/qa.html:27
-#, fuzzy, python-format
 msgid ""
 "We are trying to get R.A.S. website as reliable as possible. The same great "
 "effort is made to keep the server hosting R.A.S. up and running. However we "
-"cannot 100%% guarantee this."
+"cannot 100% guarantee this."
 msgstr ""
 "Nous nous efforçons de rendre le site web R.A.S. aussi sûr que possible. "
 "Nous essayons également de garder le serveur hébergeant R.A.S. fonctionnel. "
