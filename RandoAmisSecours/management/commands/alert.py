@@ -26,7 +26,7 @@ from django.utils.timezone import datetime, utc
 from django.utils.translation import ugettext_lazy as _
 
 from RandoAmisSecours.models import Outing, CONFIRMED, DRAFT
-from RandoAmisSecours.utils import send_localized_mail, send_localized_sms
+from RandoAmisSecours.utils import Localize, send_mail_help, send_sms
 
 from optparse import make_option
 
@@ -79,12 +79,16 @@ class Command(BaseCommand):
                 if 0 <= minutes and minutes < kwargs['interval']:
                     self.stdout.write("    - email: %s" % (outing.user.email))
                     # send a mail to the user, translated into the right language
-                    send_localized_mail(outing.user, _('[R.A.S] Alert'),
-                                        'RandoAmisSecours/alert/late.html',
-                                        {'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
-                                         'SAFE_URL': "%s%s" % (kwargs['base_url'], reverse('outings.finish', args=[outing.pk]))})
-                    send_localized_sms(outing.user, 'RandoAmisSecours/alert/late.txt',
-                                       outing)
+                    with Localize(outing.user.profile.language,
+                                  outing.user.profile.timezone):
+                        send_mail_help(outing.user, _('[R.A.S] Alert'),
+                                       'RandoAmisSecours/alert/late.html',
+                                       {'URL': "%s%s" % (kwargs['base_url'],
+                                                         reverse('outings.details', args=[outing.pk])),
+                                        'SAFE_URL': "%s%s" % (kwargs['base_url'],
+                                                              reverse('outings.finish', args=[outing.pk]))})
+                        send_sms(outing.user, 'RandoAmisSecours/alert/late.txt',
+                                 {'name': outing.name})
 
             # Alerting outings
             elif outing.alert <= now:
@@ -98,19 +102,32 @@ class Command(BaseCommand):
                     # Send on mail per user translated into the right language
                     for friend_profile in outing.user.profile.friends.all():
                         self.stdout.write("      - %s" % (friend_profile.user.email))
-                        send_localized_mail(friend_profile.user, _('[R.A.S] Alert'),
-                                            'RandoAmisSecours/alert/alert.html',
-                                            {'fullname': outing.user.get_full_name(),
-                                             'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
-                                             'name': outing.name, 'ending': outing.ending})
-                        send_localized_sms(friend_profile.user, 'RandoAmisSecours/alert/alert.txt',
-                                           outing)
-                    send_localized_mail(outing.user, _('[R.A.S] Alert'),
-                                        'RandoAmisSecours/alert/alert_owner.html',
-                                        {'fullname': outing.user.get_full_name(),
-                                         'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
-                                         'name': outing.name, 'ending': outing.ending, 'friend_count': friend_count})
-                    send_localized_sms(outing.user, 'RandoAmisSecours/alert/alert_owner.txt',
-                                       outing)
+                        with Localize(friend_profile.language,
+                                      friend_profile.timezone):
+                            send_mail_help(friend_profile.user, _('[R.A.S] Alert'),
+                                           'RandoAmisSecours/alert/alert.html',
+                                           {'fullname': outing.user.get_full_name(),
+                                            'URL': "%s%s" % (kwargs['base_url'], reverse('outings.details', args=[outing.pk])),
+                                            'name': outing.name,
+                                            'ending': outing.ending})
+                            send_sms(friend_profile.user,
+                                     'RandoAmisSecours/alert/alert.txt',
+                                     {'fullname': outing.user.get_full_name(),
+                                      'name': outing.name,
+                                      'ending': timesince(outing.ending)})
+                    with Localize(outing.user.profile.language,
+                                  outing.user.profile.timezone):
+                        send_mail_help(outing.user, _('[R.A.S] Alert'),
+                                       'RandoAmisSecours/alert/alert_owner.html',
+                                       {'fullname': outing.user.get_full_name(),
+                                        'URL': "%s%s" % (kwargs['base_url'],
+                                                         reverse('outings.details', args=[outing.pk])),
+                                        'name': outing.name,
+                                        'ending': outing.ending,
+                                        'friend_count': friend_count})
+                        send_sms(outing.user,
+                                 'RandoAmisSecours/alert/alert_owner.txt',
+                                 {'name': outing.name,
+                                  'ending': timesince(outing.ending)})
 
         self.stdout.write("  [done]\n\n")
