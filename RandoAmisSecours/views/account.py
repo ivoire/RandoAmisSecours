@@ -19,14 +19,11 @@
 
 from __future__ import unicode_literals
 
-from django import forms
 from django.contrib import messages
-from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.forms import ModelForm
 from django.shortcuts import get_object_or_404, render_to_response
@@ -34,10 +31,8 @@ from django.template import RequestContext
 from django.utils import translation
 from django.utils.translation import ugettext as _
 
-from RandoAmisSecours.models import Profile, FriendRequest, CONFIRMED, DRAFT, LATE, FINISHED
+from RandoAmisSecours.models import Profile, FriendRequest, DRAFT, LATE, FINISHED
 from RandoAmisSecours.utils import send_localized_mail
-
-import pytz
 
 
 class RASAuthenticationForm(AuthenticationForm):
@@ -181,7 +176,8 @@ def register(request):
             send_localized_mail(new_user, _('Subscription to R.A.S.'),
                                 'RandoAmisSecours/account/register_email.html',
                                 {'URL': request.build_absolute_uri(reverse('accounts.register.confirm',
-                                                                   args=[new_user.pk, new_user.profile.hash_id])),
+                                                                           args=[new_user.pk,
+                                                                                 new_user.profile.hash_id])),
                                  'fullname': new_user.get_full_name()})
             return render_to_response('RandoAmisSecours/account/register_end.html', context_instance=RequestContext(request))
         else:
@@ -226,7 +222,7 @@ def update(request):
         user_form = RASUserUpdateForm(request.POST, instance=request.user)
         profile_form = RASProfileUpdateForm(request.POST, instance=profile)
         if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
+            user_form.save()
             profile = profile_form.save()
             # Update the language code and activate it for the message
             if profile.language:
