@@ -74,6 +74,19 @@ def send_sms(user, template_name, ctx):
     msg = loader.render_to_string(template_name, ctx)
 
     # Create the provider object
-    provider = providers.create(user.profile.provider,
-                                json.loads(user.profile.provider_data))
-    provider.send_message(msg)
+    try:
+        provider = providers.create(user.profile.provider,
+                                    json.loads(user.profile.provider_data))
+    except NotImplementedError:
+        logger.error("Unknown provider '%s'", user.profile.provider,
+                     exc_info=True,
+                     extra={'data': {'user': user.get_full_name(),
+                                     'provider': user.profile.provider}})
+
+    try:
+        provider.send_message(msg)
+        raise Exception
+    except Exception:
+        logger.error("Unable to send SMS", exc_info=True,
+                     extra={'data': {'user': user.get_full_name(),
+                                     'provider': user.profile.provider}})
