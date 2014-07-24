@@ -27,9 +27,7 @@ from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.utils.timezone import datetime, utc
 
-from RandoAmisSecours.models import Outing, DRAFT, CONFIRMED, FINISHED
-
-from datetime import timedelta
+from RandoAmisSecours.models import Outing
 
 
 @staff_member_required
