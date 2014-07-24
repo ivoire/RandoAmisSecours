@@ -28,7 +28,10 @@ from django.utils.translation import ugettext_lazy as _
 from RandoAmisSecours.models import Outing, CONFIRMED, DRAFT
 from RandoAmisSecours.utils import Localize, send_mail_help, send_sms
 
+import logging
 from optparse import make_option
+
+logger = logging.getLogger('ras.alert')
 
 
 class Command(BaseCommand):
@@ -53,31 +56,34 @@ class Command(BaseCommand):
         if kwargs.get('base_url', None) is None:
             raise CommandError('url option is required')
 
+        logger.info("Running Alert script")
         now = datetime.utcnow().replace(tzinfo=utc)
 
         # Transform all DRAFT into CONFIRMED if the beginning is over
-        self.stdout.write("Transforming late DRAFTs\n========================")
+        logger.debug('Transforming DRAFTs')
         outings = Outing.objects.filter(status=DRAFT, beginning__lt=now)
         for outing in outings:
-            self.stdout.write(" - %s" % (outing.name))
+            logger.info("Confirm: '%s' (owner: '%s')" % (outing.name, outing.user.get_full_name()))
             outing.status = CONFIRMED
             outing.save()
-        self.stdout.write("\n\n")
 
         # Grab all late outings
-        self.stdout.write("Alerting the users/friends\n==========================")
+        logger.debug('Alerting owner and friends')
         outings = Outing.objects.filter(status=CONFIRMED, ending__lt=now)
 
         for outing in outings:
-            self.stdout.write("  %s\n    - user: %s" % (outing.name, outing.user.get_full_name()))
+            logger.debug("Inspecting: '%s' (owner: '%s')" % (outing.name, outing.user.get_full_name()))
             # Late outings
             if outing.ending <= now and now < outing.alert:
-                self.stdout.write("    - Status: late")
+                logger.debug(' |-> Late')
                 minutes = (now - outing.ending).seconds / 60.0
                 minutes = minutes % kwargs['alert']
 
                 if 0 <= minutes and minutes < kwargs['interval']:
-                    self.stdout.write("    - email: %s" % (outing.user.email))
+                    logger.debug(' |--> Alerting the owner')
+                    logger.debug("     |-> %s" % (outing.user.get_full_name()))
+                    logger.debug("     |--> email: %s" % (outing.user.email))
+                    logger.debug("     |--> provider: %s" % (outing.user.profile.provider))
                     # send a mail to the user, translated into the right language
                     with Localize(outing.user.profile.language,
                                   outing.user.profile.timezone):
@@ -92,16 +98,19 @@ class Command(BaseCommand):
 
             # Alerting outings
             elif outing.alert <= now:
-                self.stdout.write("    - Status: Alert")
+                logger.debug(' |-> Alert')
                 minutes = (now - outing.alert).seconds / 60.0
                 minutes = minutes % kwargs['alert']
 
                 if 0 <= minutes and minutes < kwargs['interval']:
+                    logger.debug(' |--> Alerting now')
                     friend_count = outing.user.profile.friends.count()
-                    self.stdout.write("    - Friends (%d):" % (friend_count))
+                    logger.debug(" |---> %d friends to contact" % (friend_count))
                     # Send on mail per user translated into the right language
                     for friend_profile in outing.user.profile.friends.all():
-                        self.stdout.write("      - %s" % (friend_profile.user.email))
+                        logger.debug("      |-> %s" % (friend_profile.user.get_full_name()))
+                        logger.debug("      |--> email: %s" % (friend_profile.user.email))
+                        logger.debug("      \--> provider: %s" % (friend_profile.provider))
                         with Localize(friend_profile.language,
                                       friend_profile.timezone):
                             send_mail_help(friend_profile.user, _('[R.A.S] Alert'),
@@ -115,6 +124,10 @@ class Command(BaseCommand):
                                      {'fullname': outing.user.get_full_name(),
                                       'name': outing.name,
                                       'ending': timesince(outing.ending)})
+                    logger.debug(' |--> Alerting the owner')
+                    logger.debug("     |-> %s" % (outing.user.get_full_name()))
+                    logger.debug("     |--> email: %s" % (outing.user.email))
+                    logger.debug("     |--> provider: %s" % (outing.user.profile.provider))
                     with Localize(outing.user.profile.language,
                                   outing.user.profile.timezone):
                         send_mail_help(outing.user, _('[R.A.S] Alert'),
@@ -130,4 +143,4 @@ class Command(BaseCommand):
                                  {'name': outing.name,
                                   'ending': timesince(outing.ending)})
 
-        self.stdout.write("  [done]\n\n")
+        logger.info("End of Alert script")
