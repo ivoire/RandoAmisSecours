@@ -26,7 +26,7 @@ from django.utils import timezone, translation
 
 import json
 import pytz
-import providers
+from SMSForward import providers
 
 
 class Localize(object):
