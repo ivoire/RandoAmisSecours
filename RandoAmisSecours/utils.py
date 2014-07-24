@@ -24,10 +24,13 @@ from django.core.mail import send_mail
 from django.template import loader
 from django.utils import timezone, translation
 
+import logging
 import json
 import pytz
 from SMSForward import providers
 
+
+logger = logging.getLogger('ras.utils')
 
 class Localize(object):
     def __init__(self, language, timezone):
@@ -55,6 +58,9 @@ def send_localized_mail(user, subject, template_name, ctx):
 
 def send_mail_help(user, subject, template_name, ctx):
     body = loader.render_to_string(template_name, ctx)
+    logger.info("Sending email to '%s' ('%s')" % (user.get_full_name(),
+                                                  user.email),
+                extra={'data': ctx})
     send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [user.email])
 
 
@@ -63,6 +69,9 @@ def send_sms(user, template_name, ctx):
     if not user.profile.provider or not user.profile.provider_data:
         return
 
+    logger.info("Sending SMS to '%s' ('%s')" % (user.get_full_name(),
+                                                user.profile.provider),
+                extra={'data': ctx})
     msg = loader.render_to_string(template_name, ctx)
 
     # Create the provider object
