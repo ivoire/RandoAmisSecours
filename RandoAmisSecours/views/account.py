@@ -31,7 +31,7 @@ from django.template import RequestContext
 from django.utils import translation
 from django.utils.translation import ugettext as _
 
-from RandoAmisSecours.models import Profile, FriendRequest, DRAFT, LATE, FINISHED
+from RandoAmisSecours.models import Profile, FriendRequest
 from RandoAmisSecours.utils import send_localized_mail
 
 
