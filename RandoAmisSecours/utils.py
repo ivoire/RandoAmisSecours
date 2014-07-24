@@ -29,8 +29,8 @@ import json
 import pytz
 from SMSForward import providers
 
-
 logger = logging.getLogger('ras.utils')
+
 
 class Localize(object):
     def __init__(self, language, timezone):
