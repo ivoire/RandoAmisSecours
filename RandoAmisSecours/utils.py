@@ -22,14 +22,14 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template import loader
-from django.utils import timezone, translation, timesince
+from django.utils import timezone, translation
 
 import json
 import pytz
 import providers
 
 
-class Localize():
+class Localize(object):
     def __init__(self, language, timezone):
         self.language = language
         self.timezone = timezone
@@ -40,7 +40,7 @@ class Localize():
         if self.timezone:
             timezone.activate(pytz.timezone(self.timezone))
 
-    def __exit__(self, type, value, traceback):
+    def __exit__(self, type_name, value, traceback):
         if self.timezone:
             timezone.deactivate()
         if self.language:
