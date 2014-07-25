@@ -85,7 +85,6 @@ def send_sms(user, template_name, ctx):
 
     try:
         provider.send_message(msg)
-        raise Exception
     except Exception:
         logger.error("Unable to send SMS", exc_info=True,
                      extra={'data': {'user': user.get_full_name(),
