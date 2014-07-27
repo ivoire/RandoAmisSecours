@@ -21,7 +21,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 from django.utils.timezone import datetime, utc
-from RandoAmisSecours.models import *
+from RandoAmisSecours.models import FINISHED, FriendRequest, Outing, Profile, GPSPoint
 
 
 class OutingAdmin(admin.ModelAdmin):
