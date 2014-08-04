@@ -26,6 +26,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import datetime, utc
 from django.utils.translation import ugettext_noop as _
 
+from RandoAmisSecours.settings import LANGUAGES
 import binascii
 import pytz
 import os
@@ -66,7 +67,7 @@ class Profile(models.Model):
     provider = models.CharField(max_length=30, blank=True, null=True, choices=PROVIDERS)
     provider_data = models.TextField(blank=True, null=True)
     hash_id = models.CharField(unique=True, max_length=30, default=random_hash)
-    language = models.CharField(max_length=4, blank=True, null=True, choices=settings.LANGUAGES)
+    language = models.CharField(max_length=4, blank=True, null=True, choices=LANGUAGES)
     timezone = models.CharField(max_length=40, choices=[(tz, tz) for tz in pytz.all_timezones], default='UTC')
 
     def __str__(self):
