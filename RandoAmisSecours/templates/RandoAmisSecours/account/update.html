@@ -1,5 +1,5 @@
 {% extends 'RandoAmisSecours/base.html' %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "Update" %}{% endblock %}
 
@@ -70,6 +70,7 @@
         {% for error in profile_form.timezone.errors %}
         <p class="help-block">{{ error }}</p>
         {% endfor %}
+        <p>{% blocktrans %}Your browser is in the same timezone as <u id="current_timezone"></u>"{% endblocktrans %}</p>
       </div>
     </div>
   </div>
@@ -80,4 +81,14 @@
   </div>
   </form>
 </div>
+{% endblock %}
+
+{% block script %}
+<script src="{% get_static_prefix %}RandoAmisSecours/js/jstz-v1.0.5.min.js"></script>
+<script>
+  $(function(){
+    var timezone = jstz.determine();
+    $('#current_timezone').html(timezone.name());
+  });
+</script>
 {% endblock %}
