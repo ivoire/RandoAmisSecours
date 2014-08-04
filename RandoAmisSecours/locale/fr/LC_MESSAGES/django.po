@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-04 18:42+0000\n"
+"POT-Creation-Date: 2014-08-04 18:46+0000\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -678,11 +678,10 @@ msgid "Localization"
 msgstr "Localisation"
 
 #: templates/RandoAmisSecours/account/update.html:73
-msgid ""
-"Your browser is in the same timezone as <u id=\"current_timezone\"></u>\""
+msgid "Your browser is in the same timezone as <u id=\"current_timezone\"></u>"
 msgstr ""
 "Votre browser est dans le même fuseau horaire que <u id=\"current_timezone"
-"\"></u>\""
+"\"></u>"
 
 #: templates/RandoAmisSecours/alert/alert.html:1
 #, python-format
