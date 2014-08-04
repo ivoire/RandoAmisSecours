@@ -26,6 +26,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import datetime, utc
 from django.utils.translation import ugettext_noop as _
+from django.utils.translation import ugettext
 
 from RandoAmisSecours.settings import LANGUAGES
 import binascii
@@ -73,7 +74,7 @@ class Profile(models.Model):
 
     def clean(self):
         if self.timezone == 'UTC':
-            raise ValidationError({'timezone': [_('UTC is not valid timezone')]})
+            raise ValidationError({'timezone': [ugettext('UTC is not valid timezone')]})
 
     def __str__(self):
         return "%s" % (self.user)
