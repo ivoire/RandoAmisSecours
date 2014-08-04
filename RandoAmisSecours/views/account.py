@@ -163,6 +163,8 @@ class RASProfileUpdateForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RASProfileUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['language'].required = True
+        self.fields['timezone'].required = True
         self.fields['phone_number'].widget.attrs['class'] = 'form-control'
         self.fields['language'].widget.attrs['class'] = 'form-control'
         self.fields['timezone'].widget.attrs['class'] = 'form-control'
@@ -205,6 +207,10 @@ def register_confirm(request, user_id, user_hash):
 
 @login_required
 def profile(request):
+    # Force the user to provide language and timezone
+    if not request.user.profile.language or request.user.profile.timezone == 'UTC':
+        return HttpResponseRedirect(reverse('accounts.profile.update'))
+
     friend_requests = FriendRequest.objects.filter(to=request.user)
     friend_requests_sent = FriendRequest.objects.filter(user=request.user)
 

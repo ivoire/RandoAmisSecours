@@ -21,6 +21,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import datetime, utc
@@ -69,6 +70,10 @@ class Profile(models.Model):
     hash_id = models.CharField(unique=True, max_length=30, default=random_hash)
     language = models.CharField(max_length=4, blank=True, null=True, choices=LANGUAGES)
     timezone = models.CharField(max_length=40, choices=[(tz, tz) for tz in pytz.all_timezones], default='UTC')
+
+    def clean(self):
+        if self.timezone == 'UTC':
+            raise ValidationError({'timezone': [_('UTC is not valid timezone')]})
 
     def __str__(self):
         return "%s" % (self.user)
