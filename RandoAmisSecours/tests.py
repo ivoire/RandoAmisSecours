@@ -37,7 +37,7 @@ class TemplatesTest(TestCase):
         self.user = User.objects.create_user('azertyuiop',
                                              'django.test@project.org',
                                              '12789azertyuiop')
-        self.user.profile = Profile.objects.create(user=self.user)
+        self.user.profile = Profile.objects.create(user=self.user, language='fr', timezone='Europe/Paris')
         self.client.login(username='azertyuiop', password='12789azertyuiop')
 
     def helper_template(self, url, template):
@@ -154,7 +154,8 @@ class FriendsTest(TestCase):
         self.user1.first_name = 'Rando'
         self.user1.last_name = 'Secours'
         self.user1.save()
-        self.user1.profile = Profile.objects.create(user=self.user1)
+        self.user1.profile = Profile.objects.create(user=self.user1, language='es',
+                                                    timezone='Europe/London')
         self.client.login(username='ras', password='12789azertyuiop')
 
         self.user2 = User.objects.create_user('tester',
@@ -163,7 +164,8 @@ class FriendsTest(TestCase):
         self.user2.first_name = 'Alpha'
         self.user2.last_name = 'Beta Gamma'
         self.user2.save()
-        self.user2.profile = Profile.objects.create(user=self.user2)
+        self.user2.profile = Profile.objects.create(user=self.user2, language='en',
+                                                    timezone='Europe/Berlin')
 
         self.user3 = User.objects.create_user('Sophocle',
                                               'sophocle@project.org',
@@ -808,149 +810,3 @@ class AccountTest(TestCase):
         self.assertEqual(len(ctx['friend_requests_sent']), 1)
         self.assertEqual(ctx['friend_requests_sent'][0].user, self.user1)
         self.assertEqual(ctx['friend_requests_sent'][0].to, self.user2)
-
-
-class APITest(ResourceTestCase):
-    def setUp(self):
-        super(APITest, self).setUp()
-
-        self.user1 = User.objects.create_user('ras', 'ras@example.com', 'mdp')
-        self.user1.first_name = 'Rando'
-        self.user1.last_name = 'Amis'
-        self.user1.save()
-        self.user1.profile = Profile.objects.create(user=self.user1, timezone='Europe/Paris', language='fr')
-        self.client.login(username='ras', password='mdp')
-
-        self.user2 = User.objects.create_user('ras_friend', 'ras_friend@example.com', 'mdp2')
-        self.user2.first_name = 'Rando_friend'
-        self.user2.last_name = 'Amis'
-        self.user2.save()
-        self.user2.profile = Profile.objects.create(user=self.user2, timezone='Europe/London', language='en')
-        self.user2.profile.friends.add(self.user1.profile)
-
-        self.user3 = User.objects.create_user('friend_of_friend', 'friend_of_friend@example.com', 'mdp3')
-        self.user3.first_name = 'Friend'
-        self.user3.last_name = 'another_one'
-        self.user3.save()
-        self.user3.profile = Profile.objects.create(user=self.user3, timezone='Europe/Paris', language='fr')
-        self.user3.profile.friends.add(self.user2.profile)
-
-        date = datetime(2011, 2, 15, 2, 0).replace(tzinfo=utc)
-        self.outing1 = Outing.objects.create(user=self.user1, beginning=date,
-                                             ending=date, alert=date,
-                                             latitude=1.23, longitude=3.21, status=CONFIRMED)
-        date = datetime(2011, 2, 15, 2, 10).replace(tzinfo=utc)
-        self.outing2 = Outing.objects.create(user=self.user2, beginning=date,
-                                             ending=date, alert=date,
-                                             latitude=2.42, longitude=4.567890123, status=CONFIRMED)
-        date = datetime(2011, 2, 15, 2, 10).replace(tzinfo=utc)
-        self.outing3 = Outing.objects.create(user=self.user2, beginning=date,
-                                             ending=date, alert=date,
-                                             latitude=2.45678, longitude=0.98765432, status=CONFIRMED)
-        date = datetime(2011, 2, 15, 2, 10).replace(tzinfo=utc)
-        self.outing4 = Outing.objects.create(user=self.user3, beginning=date,
-                                             ending=date, alert=date,
-                                             latitude=4.12673661, longitude=0.65231, status=CONFIRMED)
-
-    def get_credentials(self):
-        return self.create_basic(username='ras', password='mdp')
-
-    def test_user_list(self):
-        # List the users
-        resp = self.api_client.get('/api/1.0/user/', format='json', authentication=self.get_credentials())
-        self.assertValidJSONResponse(resp)
-
-        self.assertEqual(len(self.deserialize(resp)['objects']), 2)
-        self.assertEqual(self.deserialize(resp)['objects'][0], {
-            'email': self.user1.email,
-            'first_name': self.user1.first_name,
-            'last_name': self.user1.last_name,
-            'profile': "/api/1.0/profile/%d/" % (self.user1.profile.pk),
-            'resource_uri': "/api/1.0/user/%d/" % (self.user1.pk)
-        })
-        self.assertEqual(self.deserialize(resp)['objects'][1], {
-            'email': self.user2.email,
-            'first_name': self.user2.first_name,
-            'last_name': self.user2.last_name,
-            'profile': "/api/1.0/profile/%d/" % (self.user2.profile.pk),
-            'resource_uri': "/api/1.0/user/%d/" % (self.user2.pk)
-        })
-
-        # Try with user2
-        self.client.login(username='ras_friend', password='mdp2')
-        resp = self.api_client.get('/api/1.0/user/', format='json', authentication=self.create_basic(username='ras_friend', password='mdp2'))
-        self.assertValidJSONResponse(resp)
-
-        self.assertEqual(len(self.deserialize(resp)['objects']), 3)
-        self.assertEqual(self.deserialize(resp)['objects'][0], {
-            'email': self.user1.email,
-            'first_name': self.user1.first_name,
-            'last_name': self.user1.last_name,
-            'profile': "/api/1.0/profile/%d/" % (self.user1.profile.pk),
-            'resource_uri': "/api/1.0/user/%d/" % (self.user1.pk)
-        })
-        self.assertEqual(self.deserialize(resp)['objects'][1], {
-            'email': self.user2.email,
-            'first_name': self.user2.first_name,
-            'last_name': self.user2.last_name,
-            'profile': "/api/1.0/profile/%d/" % (self.user2.profile.pk),
-            'resource_uri': "/api/1.0/user/%d/" % (self.user2.pk)
-        })
-        self.assertEqual(self.deserialize(resp)['objects'][2], {
-            'email': self.user3.email,
-            'first_name': self.user3.first_name,
-            'last_name': self.user3.last_name,
-            'profile': "/api/1.0/profile/%d/" % (self.user3.profile.pk),
-            'resource_uri': "/api/1.0/user/%d/" % (self.user3.pk)
-        })
-
-    def test_user_modification(self):
-        """ This is not allowed for the moment """
-        self.assertHttpMethodNotAllowed(self.api_client.post('/api/1.0/user/', format='json', data=''))
-        self.assertHttpMethodNotAllowed(self.api_client.post('/api/1.0/user/', format='json', authentication=self.get_credentials()))
-        self.assertHttpMethodNotAllowed(self.api_client.put("/api/1.0/user/%d/" % (self.user1.pk), format='json', data=''))
-        self.assertHttpMethodNotAllowed(self.api_client.put("/api/1.0/user/%d/" % (self.user1.pk), format='json', authentication=self.get_credentials()))
-        self.assertHttpMethodNotAllowed(self.api_client.delete("/api/1.0/user/%d/" % (self.user1.pk), format='json', data=''))
-        self.assertHttpMethodNotAllowed(self.api_client.delete("/api/1.0/user/%d/" % (self.user1.pk), format='json', authentication=self.get_credentials()))
-
-    def test_profile_list(self):
-        # List the profiles
-        resp = self.api_client.get('/api/1.0/profile/', format='json', authentication=self.get_credentials())
-        self.assertValidJSONResponse(resp)
-
-        self.assertEqual(len(self.deserialize(resp)['objects']), 2)
-        self.assertEqual(self.deserialize(resp)['objects'][0], {
-            'friends': ["/api/1.0/profile/%d/" % (self.user2.pk)],
-            'timezone': self.user1.profile.timezone,
-            'language': self.user1.profile.language,
-            'phone_number': self.user1.profile.phone_number,
-            'user': "/api/1.0/user/%d/" % (self.user1.pk),
-            'resource_uri': "/api/1.0/profile/%d/" % (self.user1.profile.pk)
-        })
-        self.assertEqual(self.deserialize(resp)['objects'][1], {
-            'phone_number': self.user2.profile.phone_number,
-            'user': "/api/1.0/user/%d/" % (self.user2.pk),
-            'resource_uri': "/api/1.0/profile/%d/" % (self.user2.profile.pk)
-
-        })
-
-        # Try with user2
-        self.client.login(username='ras_friend', password='mdp2')
-        resp = self.api_client.get('/api/1.0/profile/', format='json', authentication=self.create_basic(username='ras_friend', password='mdp2'))
-        self.assertValidJSONResponse(resp)
-
-        self.assertEqual(len(self.deserialize(resp)['objects']), 3)
-
-    def test_profile_modification(self):
-        """ This is not allowed for the moment """
-        self.assertHttpMethodNotAllowed(self.api_client.post('/api/1.0/profile/', format='json', data=''))
-        self.assertHttpMethodNotAllowed(self.api_client.post('/api/1.0/profile/', format='json', authentication=self.get_credentials()))
-        self.assertHttpMethodNotAllowed(self.api_client.put("/api/1.0/profile/%d/" % (self.user1.profile.pk), format='json', data=''))
-        self.assertHttpMethodNotAllowed(self.api_client.put("/api/1.0/profile/%d/" % (self.user1.profile.pk), format='json', authentication=self.get_credentials()))
-        self.assertHttpMethodNotAllowed(self.api_client.delete("/api/1.0/profile/%d/" % (self.user1.profile.pk), format='json', data=''))
-        self.assertHttpMethodNotAllowed(self.api_client.delete("/api/1.0/profile/%d/" % (self.user1.profile.pk), format='json', authentication=self.get_credentials()))
-
-    def test_outing_list(self):
-        self.assertHttpUnauthorized(self.api_client.get('/api/1.0/outing/', format='json'))
-        resp = self.api_client.get('/api/1.0/outing/', format='json', authentication=self.get_credentials())
-        self.assertEqual(len(self.deserialize(resp)['objects']), 3)
