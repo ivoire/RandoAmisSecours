@@ -233,8 +233,10 @@ def update(request):
             # Update the language code and activate it for the message
             if profile.language:
                 request.session['django_language'] = profile.language
-                request.session['django_timezone'] = profile.timezone
                 translation.activate(profile.language)
+            # Update the timezone if needed
+            if profile.timezone:
+                request.session['django_timezone'] = profile.timezone
             # Print the message
             messages.success(request, _("Personnal information updated"))
             return HttpResponseRedirect(reverse('accounts.profile'))
