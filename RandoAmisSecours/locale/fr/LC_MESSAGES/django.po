@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-17 17:39+0000\n"
+"POT-Creation-Date: 2014-08-04 18:42+0000\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -16,25 +16,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: models.py:41
+#: models.py:43
 msgid "draft"
 msgstr "brouillons"
 
-#: models.py:42
+#: models.py:44
 msgid "confirmed"
 msgstr "confirmées"
 
-#: models.py:43 templates/RandoAmisSecours/outing/index.html:66
+#: models.py:45 templates/RandoAmisSecours/outing/index.html:66
 msgid "late"
 msgstr "en retard"
 
-#: models.py:44
+#: models.py:46
 msgid "finished"
 msgstr "terminées"
 
-#: models.py:45
+#: models.py:47
 msgid "canceled"
 msgstr "annulées"
+
+#: models.py:76
+msgid "UTC is not valid timezone"
+msgstr "UTC n'est pas un fuseau horaire valide"
 
 #: settings.py:24
 msgid "Spanish"
@@ -48,8 +52,8 @@ msgstr "Anglais"
 msgid "French"
 msgstr "Français"
 
-#: management/commands/alert.py:82 management/commands/alert.py:101
-#: management/commands/alert.py:108
+#: management/commands/alert.py:92 management/commands/alert.py:118
+#: management/commands/alert.py:135
 msgid "[R.A.S] Alert"
 msgstr "[R.A.S] Alerte"
 
@@ -80,7 +84,6 @@ msgstr ""
 #: templates/RandoAmisSecours/outing/details_trace.html:18
 #: templates/RandoAmisSecours/outing/index.html:9
 #: templates/RandoAmisSecours/reporting/index.html:9
-#: templates/RandoAmisSecours/reporting/outings.html:9
 #: templates/RandoAmisSecours/reporting/users.html:9
 msgid "Home"
 msgstr "Accueil"
@@ -129,7 +132,6 @@ msgstr ""
 #: templates/RandoAmisSecours/outing/index.html:10
 #: templates/RandoAmisSecours/outing/index.html:15
 #: templates/RandoAmisSecours/reporting/index.html:31
-#: templates/RandoAmisSecours/reporting/outings.html:11
 msgid "Outings"
 msgstr "Sorties"
 
@@ -137,8 +139,6 @@ msgstr "Sorties"
 #: templates/RandoAmisSecours/reporting/index.html:4
 #: templates/RandoAmisSecours/reporting/index.html:10
 #: templates/RandoAmisSecours/reporting/index.html:15
-#: templates/RandoAmisSecours/reporting/outings.html:4
-#: templates/RandoAmisSecours/reporting/outings.html:10
 #: templates/RandoAmisSecours/reporting/users.html:4
 #: templates/RandoAmisSecours/reporting/users.html:10
 msgid "Reporting"
@@ -267,14 +267,14 @@ msgid "Change password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/password_change.html:24
-#: views/account.py:67
+#: views/account.py:62
 msgid "Old password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/password_change.html:33
 #: templates/RandoAmisSecours/account/password_change.html:42
-#: views/account.py:69 views/account.py:70 views/account.py:98
-#: views/account.py:100
+#: views/account.py:64 views/account.py:65 views/account.py:93
+#: views/account.py:95
 msgid "New password"
 msgstr ""
 
@@ -533,14 +533,14 @@ msgid "update"
 msgstr "mettre à jour"
 
 #: templates/RandoAmisSecours/account/profile.html:192
-#: templates/RandoAmisSecours/account/register.html:82 views/account.py:85
+#: templates/RandoAmisSecours/account/register.html:82 views/account.py:80
 msgid "email"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/profile.html:196
 #: templates/RandoAmisSecours/account/register.html:43
-#: templates/RandoAmisSecours/account/register.html:52 views/account.py:53
-#: views/account.py:119 views/account.py:120
+#: templates/RandoAmisSecours/account/register.html:52 views/account.py:48
+#: views/account.py:114 views/account.py:115
 msgid "Password"
 msgstr ""
 
@@ -592,8 +592,8 @@ msgstr "S'inscrire"
 msgid "Account information"
 msgstr "Informations sur le compte"
 
-#: templates/RandoAmisSecours/account/register.html:34 views/account.py:51
-#: views/account.py:117
+#: templates/RandoAmisSecours/account/register.html:34 views/account.py:46
+#: views/account.py:112
 msgid "Username"
 msgstr ""
 
@@ -665,7 +665,7 @@ msgstr "Si vous n'avez pas reçu de mail, vérifiez le répertoire de spam."
 
 #: templates/RandoAmisSecours/account/update.html:4
 #: templates/RandoAmisSecours/account/update.html:11
-#: templates/RandoAmisSecours/account/update.html:78
+#: templates/RandoAmisSecours/account/update.html:79
 msgid "Update"
 msgstr "Mettre à jour"
 
@@ -676,6 +676,13 @@ msgstr "Mettre à jour le compte"
 #: templates/RandoAmisSecours/account/update.html:52
 msgid "Localization"
 msgstr "Localisation"
+
+#: templates/RandoAmisSecours/account/update.html:73
+msgid ""
+"Your browser is in the same timezone as <u id=\"current_timezone\"></u>\""
+msgstr ""
+"Votre browser est dans le même fuseau horaire que <u id=\"current_timezone"
+"\"></u>\""
 
 #: templates/RandoAmisSecours/alert/alert.html:1
 #, python-format
@@ -1296,10 +1303,6 @@ msgstr "Dernière connexion"
 msgid "Number of outings"
 msgstr "Nombre de sorties"
 
-#: templates/RandoAmisSecours/reporting/outings.html:16
-msgid "Outing reporting"
-msgstr "Rapport sur les sorties"
-
 #: templates/RandoAmisSecours/reporting/users.html:16
 msgid "User reporting"
 msgstr "Rapports sur les utilisateurs"
@@ -1324,19 +1327,19 @@ msgstr "Dernière connexion par dâte"
 msgid "Sessions by date"
 msgstr "Sessions par dâte"
 
-#: views/account.py:181
+#: views/account.py:178
 msgid "Subscription to R.A.S."
 msgstr "Inscription à R.A.S."
 
-#: views/account.py:188
+#: views/account.py:186
 msgid "Some information are missing or mistyped"
 msgstr "Certains éléments sont manquants ou malformatés"
 
-#: views/account.py:237
+#: views/account.py:241
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
 
-#: views/account.py:250
+#: views/account.py:254
 msgid "Password changed successfully"
 msgstr ""
 
