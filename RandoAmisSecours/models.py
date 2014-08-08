@@ -53,7 +53,7 @@ PROVIDERS = (
 
 
 def random_hash():
-    """ Create a random string of size 15 """
+    """ Create a random string of size 30 """
     return binascii.b2a_hex(os.urandom(15))
 
 
