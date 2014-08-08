@@ -48,7 +48,7 @@ OUTING_STATUS = (
 )
 
 PROVIDERS = (
-    ('mobile.free.fr', 'mobile.free.fr'),
+    ('mobile.free.fr', 'Free Mobile France'),
 )
 
 

@@ -192,7 +192,7 @@
           <dt>{% trans "email" %}</dt>
           <dd>{{ user.email }}</dd>
           <dt>{% trans "Phone number" %}</dt>
-          <dd>{{ user.profile.phone_number|default:"?" }}{% if user.profile.provider %} ({{ user.profile.provider }}){% endif %}</dd>
+          <dd>{{ user.profile.phone_number|default:"?" }}{% if user.profile.provider %} ({{ user.profile.get_provider_display }}){% endif %}</dd>
           <dt>{% trans "Password" %}</dt>
           <dd><a href="{% url 'accounts.password_change' %}"><span class="glyphicon glyphicon-lock"></span> {% trans "update" %}</a></dd>
         </dl>
