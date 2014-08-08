@@ -26,6 +26,7 @@ from datetime import datetime
 
 register = template.Library()
 
+
 @register.filter
 def timedelta(value):
     if not value:
