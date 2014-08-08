@@ -26,6 +26,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.forms import ModelForm
+from django.forms.widgets import HiddenInput
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils import translation
@@ -159,7 +160,7 @@ class RASUserUpdateForm(ModelForm):
 class RASProfileUpdateForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ('phone_number', 'language', 'timezone')
+        fields = ('phone_number', 'language', 'timezone', 'provider', 'provider_data')
 
     def __init__(self, *args, **kwargs):
         super(RASProfileUpdateForm, self).__init__(*args, **kwargs)
@@ -168,6 +169,8 @@ class RASProfileUpdateForm(ModelForm):
         self.fields['phone_number'].widget.attrs['class'] = 'form-control'
         self.fields['language'].widget.attrs['class'] = 'form-control'
         self.fields['timezone'].widget.attrs['class'] = 'form-control'
+        self.fields['provider'].widget.attrs['class'] = 'form-control'
+        self.fields['provider_data'].widget = HiddenInput()
 
 
 def register(request):

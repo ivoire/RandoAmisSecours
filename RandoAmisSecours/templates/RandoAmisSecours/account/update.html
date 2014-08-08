@@ -74,9 +74,39 @@
       </div>
     </div>
   </div>
+  <div class="col-md-6">
+    <h4 class="modal-header">{% trans "Advanced settings" %}</h4>
+    <p>{% trans "Some providers, allows to send SMS from R.A.S. to you phone for free. Select your provider in the following list (if available) to receive alerts by SMS." %}</p>
+    <div class="form-group{% if profile_form.provider.errors %} has-error{% endif %}">
+      <label class="col-md-4 control-label" for="id_provider">{% trans "Provider" %}</label>
+      <div class="col-md-8">
+        {{ profile_form.provider }}
+        {% for error in profile_form.provider.errors %}
+        <p class="help-block">{{ error }}</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div id="MobileFreeFr" class="hidden">
+      <div class="form-group" id="form_group_mobile_free_fr_user">
+        <label class="col-md-4 control-label" for="id_mobile_free_fr_user">{% trans "User" %}</label>
+        <div class="col-md-8">
+           <input class="form-control" id="id_mobile_free_fr_user" maxlength="30" name="username" type="text" />
+        </div>
+      </div>
+      <div class="form-group" id="form_group_mobile_free_fr_token">
+        <label class="col-md-4 control-label" for="id_mobile_free_fr_token">{% trans "Token" %}</label>
+        <div class="col-md-8">
+           <input class="form-control" id="id_mobile_free_fr_token" maxlength="30" name="token" type="text" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{ profile_form.provider_data }}
   <div class="form-group">
     <div class="col-md-10 col-md-offset-2">
-      <button class="btn btn-primary" type="submit">{% trans "Update" %}</button>
+      <button class="btn btn-primary" type="submit" id="btn_submit">{% trans "Update" %}</button>
     </div>
   </div>
   </form>
@@ -89,6 +119,50 @@
   $(function(){
     var timezone = jstz.determine();
     $('#current_timezone').html(timezone.name());
+
+    var MobileFreeFrClick = function() {
+      var user = $('#id_mobile_free_fr_user').val();
+      var token = $('#id_mobile_free_fr_token').val();
+      if(user == '' || token == '') {
+        if(user == '') {
+          $('#form_group_mobile_free_fr_user').addClass('has-error');
+        } else {
+          $('#form_group_mobile_free_fr_user').removeClass('has-error');
+        }
+        if(token == '') {
+          $('#form_group_mobile_free_fr_token').addClass('has-error');
+        } else {
+          $('#form_group_mobile_free_fr_token').removeClass('has-error');
+        }
+
+        return false;
+      }
+      // transform into JSON
+      $('#id_provider_data').val(JSON.stringify({'user': user, 'token': token}));
+
+    };
+
+    // Check the current value
+    if($('#id_provider').val() == 'mobile.free.fr') {
+        var data = JSON.parse($('#id_provider_data').val());
+        $('#id_mobile_free_fr_user').val(data['user']);
+        $('#id_mobile_free_fr_token').val(data['token']);
+
+        $('#MobileFreeFr').removeClass('hidden');
+        $('#btn_submit').click(MobileFreeFrClick);
+    }
+
+    // Handle clicks on the sect
+    $('#id_provider').change(function() {
+      var selected_text = $( "#id_provider option:selected" ).val();
+      if(selected_text == 'mobile.free.fr') {
+        $('#MobileFreeFr').removeClass('hidden');
+        $('#btn_submit').click(MobileFreeFrClick);
+      } else {
+        $('#MobileFreeFr').addClass('hidden');
+        $('#btn_submit').unbind('click', MobileFreeFrClick);
+      }
+    });
   });
 </script>
 {% endblock %}
