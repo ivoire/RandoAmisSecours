@@ -1,0 +1,48 @@
+{% extends 'RandoAmisSecours/base.html' %}
+{% load humanize i18n timedelta %}
+
+{% block title %}{% trans "Reporting" %}{% endblock %}
+
+{% block nav-reporting %}active{% endblock %}
+
+{% block breadcrumb %}
+  <li><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+  <li><a href="{% url 'reporting.index' %}">{% trans "Reporting" %}</a></li>
+  <li class="active">{% trans "Late outings" %}</li>
+{% endblock %}
+
+{% block body %}
+<div class="page-header">
+  <h2>{% trans "Late outings" %}</h2>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+        <th>{% trans "Name" %}</th>
+        <th>{% trans "Owner" %}</th>
+        <th>{% trans "Beginning" %}</th>
+        <th>{% trans "Ending" %}</th>
+        <th>{% trans "Alert" %}</th>
+      </thead>
+      <tbody>
+      {% for outing in late_outings %}
+        {% if outing.is_late %}
+        <tr class="warning">
+        {% else %}
+        <tr class="danger">
+        {% endif %}
+          <td>{{ outing.name }}</td>
+          <td>{{ outing.user.get_full_name }}</td>
+          <td>{{ outing.beginning|timesince }}</td>
+          <td>{{ outing.ending|timesince }}</td>
+          <td>{{ outing.alert|timedelta }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+

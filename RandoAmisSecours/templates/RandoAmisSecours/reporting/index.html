@@ -32,6 +32,8 @@
     <dl class="dl-horizontal">
       <dt>{% trans "Number of outings" %}</dt>
       <dd>{{ outing_count }}</dd>
+      <dt>{% trans "Late outings" %}</dt>
+      <dd>{{ outing_late_count }} <a href="{% url 'reporting.outings.late' %}">{% trans "(details)" %}</a></dd>
     </dl>
   </div>
 </div>

@@ -83,6 +83,7 @@ urlpatterns += patterns('RandoAmisSecours.views.outing',
 urlpatterns += patterns('RandoAmisSecours.views.reporting',
     url(r'^reporting/$', 'index', name='reporting.index'),
     url(r'^reporting/users/$', 'users', name='reporting.users'),
+    url(r'^reporting/outings/late/$', 'outings_late', name='reporting.outings.late'),
 )
 
 # API v1.0

@@ -27,22 +27,21 @@ from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.utils.timezone import datetime, utc
 
-from RandoAmisSecours.models import Outing
+from RandoAmisSecours.models import Outing, CONFIRMED
 
 
 @staff_member_required
 def index(request):
+    now = datetime.utcnow().replace(tzinfo=utc)
+
     outing_count = Outing.objects.count()
+    outing_late_count = Outing.objects.filter(status=CONFIRMED, ending__lt=now).count()
+
     user_count = User.objects.count()
     return render_to_response('RandoAmisSecours/reporting/index.html',
                               {'outing_count': outing_count,
+                               'outing_late_count': outing_late_count,
                                'user_count': user_count},
-                              context_instance=RequestContext(request))
-
-
-@staff_member_required
-def outings(request):
-    return render_to_response('RandoAmisSecours/reporting/outings.html',
                               context_instance=RequestContext(request))
 
 
@@ -85,4 +84,13 @@ def users(request):
                               {'joining_dates': joining_dates,
                                'last_logins': last_logins,
                                'sessions': sessions_list},
+                              context_instance=RequestContext(request))
+
+
+@staff_member_required
+def outings_late(request):
+    now = datetime.utcnow().replace(tzinfo=utc)
+    late_outings = Outing.objects.filter(status=CONFIRMED, ending__lt=now)
+    return render_to_response('RandoAmisSecours/reporting/outings_late.html',
+                              {'late_outings': late_outings},
                               context_instance=RequestContext(request))
