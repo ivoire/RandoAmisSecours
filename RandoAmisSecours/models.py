@@ -73,10 +73,11 @@ class Profile(models.Model):
     timezone = models.CharField(max_length=40, choices=[(tz, tz) for tz in pytz.all_timezones], default='UTC')
 
     def clean(self):
-        try:
-            json.loads(self.provider_data)
-        except Exception:
-            raise ValidationError({'provider_data': [ugettext('This should be JSON serialized')]})
+        if self.provider_data:
+            try:
+                json.loads(self.provider_data)
+            except Exception:
+                raise ValidationError({'provider_data': [ugettext('This should be JSON serialized')]})
 
         if self.timezone == 'UTC':
             raise ValidationError({'timezone': [ugettext('UTC is not valid timezone')]})
