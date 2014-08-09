@@ -21,7 +21,6 @@ from django import template
 from django.utils.timezone import datetime, utc
 from django.utils.timesince import timesince
 from django.utils.translation import ugettext as _
-from datetime import datetime
 
 
 register = template.Library()
