@@ -1,14 +1,14 @@
 # French translation
 # Copyright (C) Duraffort Rémi
 # This file is distributed under the same license as the RandoAmisSecours package.
-# Rémi Duraffort, 2013
+# Rémi Duraffort, 2013, 2014
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-04 18:46+0000\n"
+"POT-Creation-Date: 2014-08-09 07:12+0000\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -16,39 +16,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: models.py:43
+#: models.py:44
 msgid "draft"
 msgstr "brouillons"
 
-#: models.py:44
+#: models.py:45
 msgid "confirmed"
 msgstr "confirmées"
 
-#: models.py:45 templates/RandoAmisSecours/outing/index.html:66
+#: models.py:46 templates/RandoAmisSecours/outing/index.html:66
 msgid "late"
 msgstr "en retard"
 
-#: models.py:46
+#: models.py:47
 msgid "finished"
 msgstr "terminées"
 
-#: models.py:47
+#: models.py:48
 msgid "canceled"
 msgstr "annulées"
 
-#: models.py:76
+#: models.py:80
+msgid "This should be JSON serialized"
+msgstr "Ce champ doit être sérialisé en JSON"
+
+#: models.py:83
 msgid "UTC is not valid timezone"
 msgstr "UTC n'est pas un fuseau horaire valide"
 
-#: settings.py:24
+#: settings.py:27
 msgid "Spanish"
 msgstr "Espagnol"
 
-#: settings.py:25
+#: settings.py:28
 msgid "English"
 msgstr "Anglais"
 
-#: settings.py:26
+#: settings.py:29
 msgid "French"
 msgstr "Français"
 
@@ -84,6 +88,7 @@ msgstr ""
 #: templates/RandoAmisSecours/outing/details_trace.html:18
 #: templates/RandoAmisSecours/outing/index.html:9
 #: templates/RandoAmisSecours/reporting/index.html:9
+#: templates/RandoAmisSecours/reporting/outings_late.html:9
 #: templates/RandoAmisSecours/reporting/users.html:9
 msgid "Home"
 msgstr "Accueil"
@@ -139,6 +144,8 @@ msgstr "Sorties"
 #: templates/RandoAmisSecours/reporting/index.html:4
 #: templates/RandoAmisSecours/reporting/index.html:10
 #: templates/RandoAmisSecours/reporting/index.html:15
+#: templates/RandoAmisSecours/reporting/outings_late.html:4
+#: templates/RandoAmisSecours/reporting/outings_late.html:10
 #: templates/RandoAmisSecours/reporting/users.html:4
 #: templates/RandoAmisSecours/reporting/users.html:10
 msgid "Reporting"
@@ -267,14 +274,14 @@ msgid "Change password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/password_change.html:24
-#: views/account.py:62
+#: views/account.py:63
 msgid "Old password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/password_change.html:33
 #: templates/RandoAmisSecours/account/password_change.html:42
-#: views/account.py:64 views/account.py:65 views/account.py:93
-#: views/account.py:95
+#: views/account.py:65 views/account.py:66 views/account.py:94
+#: views/account.py:96
 msgid "New password"
 msgstr ""
 
@@ -412,12 +419,13 @@ msgstr "Envoyée"
 #: templates/RandoAmisSecours/outing/index.html:223
 #: templates/RandoAmisSecours/outing/index.html:259
 #: templates/RandoAmisSecours/outing/index.html:285
+#: templates/RandoAmisSecours/reporting/outings_late.html:23
 msgid "Name"
 msgstr "Nom"
 
 #: templates/RandoAmisSecours/account/profile.html:48
 #: templates/RandoAmisSecours/account/profile.html:194
-#: templates/RandoAmisSecours/account/update.html:42
+#: templates/RandoAmisSecours/account/update.html:55
 #: templates/RandoAmisSecours/outing/details.html:83
 msgid "Phone number"
 msgstr "Numéro de téléphone"
@@ -533,19 +541,19 @@ msgid "update"
 msgstr "mettre à jour"
 
 #: templates/RandoAmisSecours/account/profile.html:192
-#: templates/RandoAmisSecours/account/register.html:82 views/account.py:80
+#: templates/RandoAmisSecours/account/register.html:82 views/account.py:81
 msgid "email"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/profile.html:196
 #: templates/RandoAmisSecours/account/register.html:43
-#: templates/RandoAmisSecours/account/register.html:52 views/account.py:48
-#: views/account.py:114 views/account.py:115
+#: templates/RandoAmisSecours/account/register.html:52 views/account.py:49
+#: views/account.py:115 views/account.py:116
 msgid "Password"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/profile.html:202
-#: templates/RandoAmisSecours/account/update.html:54
+#: templates/RandoAmisSecours/account/update.html:67
 msgid "Language"
 msgstr "Langue"
 
@@ -554,7 +562,7 @@ msgid "undefined"
 msgstr "non définie"
 
 #: templates/RandoAmisSecours/account/profile.html:208
-#: templates/RandoAmisSecours/account/update.html:67
+#: templates/RandoAmisSecours/account/update.html:80
 msgid "Timezone"
 msgstr "Fuseau horaire"
 
@@ -592,23 +600,24 @@ msgstr "S'inscrire"
 msgid "Account information"
 msgstr "Informations sur le compte"
 
-#: templates/RandoAmisSecours/account/register.html:34 views/account.py:46
-#: views/account.py:112
+#: templates/RandoAmisSecours/account/register.html:34
+#: templates/RandoAmisSecours/account/update.html:106 views/account.py:47
+#: views/account.py:113
 msgid "Username"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/register.html:62
-#: templates/RandoAmisSecours/account/update.html:22
+#: templates/RandoAmisSecours/account/update.html:35
 msgid "Personnal information"
 msgstr "Informations personnelles"
 
 #: templates/RandoAmisSecours/account/register.html:64
-#: templates/RandoAmisSecours/account/update.html:24
+#: templates/RandoAmisSecours/account/update.html:37
 msgid "First name"
 msgstr "Prénom"
 
 #: templates/RandoAmisSecours/account/register.html:73
-#: templates/RandoAmisSecours/account/update.html:33
+#: templates/RandoAmisSecours/account/update.html:46
 msgid "Last name"
 msgstr "Nom"
 
@@ -665,7 +674,7 @@ msgstr "Si vous n'avez pas reçu de mail, vérifiez le répertoire de spam."
 
 #: templates/RandoAmisSecours/account/update.html:4
 #: templates/RandoAmisSecours/account/update.html:11
-#: templates/RandoAmisSecours/account/update.html:79
+#: templates/RandoAmisSecours/account/update.html:123
 msgid "Update"
 msgstr "Mettre à jour"
 
@@ -673,15 +682,48 @@ msgstr "Mettre à jour"
 msgid "Update my account"
 msgstr "Mettre à jour le compte"
 
-#: templates/RandoAmisSecours/account/update.html:52
+#: templates/RandoAmisSecours/account/update.html:65
 msgid "Localization"
 msgstr "Localisation"
 
-#: templates/RandoAmisSecours/account/update.html:73
+#: templates/RandoAmisSecours/account/update.html:86
 msgid "Your browser is in the same timezone as <u id=\"current_timezone\"></u>"
 msgstr ""
 "Votre browser est dans le même fuseau horaire que <u id=\"current_timezone"
 "\"></u>"
+
+#: templates/RandoAmisSecours/account/update.html:91
+msgid "Advanced settings"
+msgstr "Paramètres avancés"
+
+#: templates/RandoAmisSecours/account/update.html:92
+msgid ""
+"Some providers, allows to send SMS from R.A.S. to you phone for free. Select "
+"your provider in the following list (if available) to receive alerts by SMS."
+msgstr ""
+"Certains opérateurs de téléphonie mobile, permettent l'envoie de SMS "
+"gratuitement depuis R.A.S. Sélectionnez votre opérateur dans la liste ci-"
+"contre (s'il est présent) afin de recevoir les alertes de R.A.S. par SMS."
+
+#: templates/RandoAmisSecours/account/update.html:94
+msgid "Provider"
+msgstr "Opérateur"
+
+#: templates/RandoAmisSecours/account/update.html:104
+msgid ""
+"In order to get the following information, you should activate the option "
+"called <i>SMS Notification</i> on <a href=\"https://mobile.free.fr/moncompte/"
+"index.php?page=options\">your option page</a>. Then enter the generated user "
+"key in the <i>token</i> field."
+msgstr ""
+"Pour obtenir les identifiants ci-dessous, vous devez tout d'abord activer "
+"l'option <i>Notifications par SMS</i> sur la page <a href=\"https://mobile."
+"free.fr/moncompte/index.php?page=options\">Gérer mes options</a>. Entrez "
+"alors votre <i>clé d'identification au service</i> dans le champ <i>clé</i>."
+
+#: templates/RandoAmisSecours/account/update.html:112
+msgid "Token"
+msgstr "Clé"
 
 #: templates/RandoAmisSecours/alert/alert.html:1
 #, python-format
@@ -842,7 +884,7 @@ msgstr "Chercher"
 
 #: templates/RandoAmisSecours/friends/search.html:32
 msgid "Search for friends using the field below."
-msgstr "Utilisez le champs ci-dessous pour rechercher des amis."
+msgstr "Utilisez le champ ci-dessous pour rechercher des amis."
 
 #: templates/RandoAmisSecours/friends/search.html:42
 msgid "The query should be at least 3 characters long."
@@ -1082,6 +1124,7 @@ msgstr "Fin"
 
 #: templates/RandoAmisSecours/outing/create.html:99
 #: templates/RandoAmisSecours/outing/create.html:116
+#: templates/RandoAmisSecours/reporting/outings_late.html:27
 msgid "Alert"
 msgstr "Alerte"
 
@@ -1094,6 +1137,7 @@ msgstr ""
 "champs ci-dessus :"
 
 #: templates/RandoAmisSecours/outing/create.html:112
+#: templates/RandoAmisSecours/reporting/outings_late.html:25
 msgid "Beginning"
 msgstr "Début"
 
@@ -1102,6 +1146,7 @@ msgid "the beginning of the outing"
 msgstr "le début de la sortie"
 
 #: templates/RandoAmisSecours/outing/create.html:114
+#: templates/RandoAmisSecours/reporting/outings_late.html:26
 msgid "Ending"
 msgstr "Fin"
 
@@ -1302,6 +1347,20 @@ msgstr "Dernière connexion"
 msgid "Number of outings"
 msgstr "Nombre de sorties"
 
+#: templates/RandoAmisSecours/reporting/index.html:35
+#: templates/RandoAmisSecours/reporting/outings_late.html:11
+#: templates/RandoAmisSecours/reporting/outings_late.html:16
+msgid "Late outings"
+msgstr "Sorties en retard"
+
+#: templates/RandoAmisSecours/reporting/index.html:36
+msgid "(details)"
+msgstr "(details)"
+
+#: templates/RandoAmisSecours/reporting/outings_late.html:24
+msgid "User"
+msgstr "Utilisateur"
+
 #: templates/RandoAmisSecours/reporting/users.html:16
 msgid "User reporting"
 msgstr "Rapports sur les utilisateurs"
@@ -1326,19 +1385,31 @@ msgstr "Dernière connexion par dâte"
 msgid "Sessions by date"
 msgstr "Sessions par dâte"
 
-#: views/account.py:178
+#: templatetags/timedelta.py:37
+#, python-format
+msgid "in %s"
+msgstr "dans %s"
+
+#: views/account.py:181
 msgid "Subscription to R.A.S."
 msgstr "Inscription à R.A.S."
 
-#: views/account.py:186
+#: views/account.py:189
 msgid "Some information are missing or mistyped"
 msgstr "Certains éléments sont manquants ou malformatés"
 
-#: views/account.py:241
+#: views/account.py:215
+msgid ""
+"You should update your timezone. Without it R.A.S. will not work as expected."
+msgstr ""
+"Vous devez mettre à jour votre fuseau horaire. Sans cela, R.A.S. ne pourra "
+"pas fonctionner correctement."
+
+#: views/account.py:245
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
 
-#: views/account.py:254
+#: views/account.py:258
 msgid "Password changed successfully"
 msgstr ""
 
