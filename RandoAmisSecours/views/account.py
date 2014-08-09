@@ -212,6 +212,7 @@ def register_confirm(request, user_id, user_hash):
 def profile(request):
     # Force the user to provide language and timezone
     if not request.user.profile.language or request.user.profile.timezone == 'UTC':
+        messages.error(request, _("You should update your timezone. Without it R.A.S. will not work as expected."))
         return HttpResponseRedirect(reverse('accounts.profile.update'))
 
     friend_requests = FriendRequest.objects.filter(to=request.user)
