@@ -17,6 +17,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with RandoAmisSecours.  If not, see <http://www.gnu.org/licenses/>
 
+from django.contrib.messages import constants as message_constants
+
+
 # List the available languages
 ugettext_lazy = lambda s: s
 
@@ -30,3 +33,8 @@ LANGUAGES = (
 LOGIN_URL = 'accounts.login'
 LOGOUT_UR = 'accounts.logout'
 LOGIN_REDIRECT_URL = 'accounts.profile'
+
+# For bootstrap 3, error messages should be flaged 'danger'
+MESSAGE_TAGS = {
+    message_constants.ERROR: 'danger'
+}
