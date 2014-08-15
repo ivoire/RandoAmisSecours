@@ -20,6 +20,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
@@ -817,3 +818,26 @@ class AccountTest(TestCase):
         self.assertEqual(len(ctx['friend_requests_sent']), 1)
         self.assertEqual(ctx['friend_requests_sent'][0].user, self.user1)
         self.assertEqual(ctx['friend_requests_sent'][0].to, self.user2)
+
+    def test_profile_provider(self):
+        self.user1.profile.provider_data = 'not JSON serialized'
+        try:
+            self.user1.profile.clean()
+        except ValidationError as e:
+            pass
+        else:
+            self.assertFalse("The clean method should fail here")
+
+        self.user1.profile.provider_data = '{"token": "hello world"}'
+        self.user1.profile.clean()
+
+    def test_profile_timezone(self):
+        self.user1.profile.timezone = 'UTC'
+        try:
+            self.user1.profile.clean()
+        except ValidationError as e:
+            pass
+        else:
+            self.assertFalse("The clean method should fail here")
+        self.user1.profile.timezone = 'Euope/Berlin'
+        self.user1.profile.clean()
