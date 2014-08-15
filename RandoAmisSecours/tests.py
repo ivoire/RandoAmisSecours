@@ -34,7 +34,7 @@ from RandoAmisSecours.models import CONFIRMED, DRAFT, FINISHED
 class TemplatesTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user('azertyuiop',
+        self.user = User.objects.create_superuser('azertyuiop',
                                              'django.test@project.org',
                                              '12789azertyuiop')
         self.user.profile = Profile.objects.create(user=self.user, language='fr', timezone='Europe/Paris')
@@ -80,6 +80,13 @@ class TemplatesTest(TestCase):
                                        ending=current_time, alert=current_time,
                                        latitude=1, longitude=1)
         self.helper_template(reverse('outings.update', args=[outing.pk]), 'outing/create.html')
+        self.helper_template(reverse('outings.details', args=[outing.pk]), 'outing/details.html')
+        self.helper_template(reverse('outings.details.trace', args=[outing.pk]), 'outing/details_trace.html')
+
+    def test_reporting(self):
+        self.helper_template(reverse('reporting.index'), 'reporting/index.html')
+        self.helper_template(reverse('reporting.users'), 'reporting/users.html')
+        self.helper_template(reverse('reporting.outings.late'), 'reporting/outings_late.html')
 
 
 class LoginRequired(TestCase):
