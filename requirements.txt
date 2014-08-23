@@ -1,4 +1,4 @@
-Django==1.6.5
+Django==1.6.6
 pytz
 django-tastypie
 python-mimeparse
