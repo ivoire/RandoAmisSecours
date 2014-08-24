@@ -3,18 +3,20 @@
 # This file is distributed under the same license as the RandoAmisSecours package.
 # Sébastien Soilen, 2014
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-09 07:16+0000\n"
-"Last-Translator: Sébastien Soilen\n"
-"Language: \n"
+"Last-Translator: Seb <seb@sebbcn.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: es\n"
 
 #: models.py:44
 msgid "draft"
@@ -38,11 +40,11 @@ msgstr "canceladas"
 
 #: models.py:80
 msgid "This should be JSON serialized"
-msgstr ""
+msgstr "Esto tiene que ser serializado con JSON"
 
 #: models.py:83
 msgid "UTC is not valid timezone"
-msgstr ""
+msgstr "UTC no es una zona horaria valida"
 
 #: settings.py:27
 msgid "Spanish"
@@ -63,7 +65,7 @@ msgstr "[R.A.S] Alerta"
 
 #: templates/404.html:4 templates/404.html.py:23
 msgid "Page not found"
-msgstr "Paginá no encontrada"
+msgstr "Página no encontrada"
 
 #: templates/404.html:17 templates/500.html:17
 #: templates/RandoAmisSecours/base.html:35
@@ -126,7 +128,7 @@ msgid ""
 "navigate to the page you have prevously come from."
 msgstr ""
 "El servidor no puede procesar la página que ha pedido. Contacte el webmaster "
-"o vuelva a probarlo mas tarde. Puede volver a la página anteriorutilizando "
+"o vuelva a probarlo mas tarde. Puede volver a la página anterior utilizando "
 "el botón <b>Anterior</b> de su navegador."
 
 #: templates/RandoAmisSecours/base.html:36
@@ -148,9 +150,8 @@ msgstr "Salidas"
 #: templates/RandoAmisSecours/reporting/outings_late.html:10
 #: templates/RandoAmisSecours/reporting/users.html:4
 #: templates/RandoAmisSecours/reporting/users.html:10
-#, fuzzy
 msgid "Reporting"
-msgstr "Nueva salida"
+msgstr "Resumen"
 
 #: templates/RandoAmisSecours/base.html:40
 #: templates/RandoAmisSecours/help/index.html:4
@@ -238,12 +239,12 @@ msgid ""
 "<strong>Wrong username or password</strong>: Note that both fields may be "
 "case-sensitive"
 msgstr ""
-"<strong>Usuario y/o contraseña erroneo(s)</strong> : Recuerde que los dos "
-"campos respetan las minusculas y mayusculas"
+"<strong>Usuario y/o contraseña erróneo(s)</strong> : Recuerde que los dos "
+"campos respetan las minúsculas y mayúsculas"
 
 #: templates/RandoAmisSecours/account/login.html:52
 msgid "Please sign in"
-msgstr "Por favor identifiquese"
+msgstr "Por favor identifíquese"
 
 #: templates/RandoAmisSecours/account/login.html:57
 #: templates/RandoAmisSecours/account/register.html:16
@@ -256,7 +257,7 @@ msgstr "He olvidado mi contraseña"
 
 #: templates/RandoAmisSecours/account/login.html:61
 msgid "Request a new one:"
-msgstr "Reinicialiarla:"
+msgstr "Reinicializarla:"
 
 #: templates/RandoAmisSecours/account/login.html:61
 #: templates/RandoAmisSecours/account/password_reset.html:4
@@ -272,7 +273,7 @@ msgstr "Reinicialización de la contraseña"
 #: templates/RandoAmisSecours/account/password_change.html:11
 #: templates/RandoAmisSecours/account/password_change.html:16
 msgid "Change password"
-msgstr "Cambiar la contreseña"
+msgstr "Cambiar la contraseña"
 
 #: templates/RandoAmisSecours/account/password_change.html:24
 #: views/account.py:63
@@ -345,7 +346,7 @@ msgstr "Cambiar mi contraseña"
 
 #: templates/RandoAmisSecours/account/password_reset_confirm.html:53
 msgid "Password reset unsuccessful"
-msgstr "Cambio de contraseña erroneo"
+msgstr "Cambio de contraseña erróneo"
 
 #: templates/RandoAmisSecours/account/password_reset_confirm.html:58
 msgid ""
@@ -359,14 +360,14 @@ msgstr ""
 #: templates/RandoAmisSecours/account/password_reset_done.html:4
 #: templates/RandoAmisSecours/account/password_reset_done.html:16
 msgid "Password reset successful"
-msgstr "Reinicializacion de contraseña acabada"
+msgstr "Reinicialización de contraseña acabada"
 
 #: templates/RandoAmisSecours/account/password_reset_done.html:21
 msgid ""
 "We've emailed you instructions for setting your password to the email "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
-"Le hemos enviado instrucciones para definir su contraseña a su direccionde "
+"Le hemos enviado instrucciones para definir su contraseña a su dirección de "
 "correo. Debería recibirlas dentro de poco."
 
 #: templates/RandoAmisSecours/account/password_reset_email.txt:2
@@ -440,7 +441,7 @@ msgstr "Nombre"
 #: templates/RandoAmisSecours/account/update.html:55
 #: templates/RandoAmisSecours/outing/details.html:83
 msgid "Phone number"
-msgstr "Numero de telefono"
+msgstr "Numero de teléfono"
 
 #: templates/RandoAmisSecours/account/profile.html:57
 #: templates/RandoAmisSecours/account/profile.html:217
@@ -481,7 +482,7 @@ msgstr "Suprimir"
 
 #: templates/RandoAmisSecours/account/profile.html:81
 msgid "You don't have friends here for the moment."
-msgstr "No tiene amigos aqui de momento."
+msgstr "No tiene amigos aquí de momento."
 
 #: templates/RandoAmisSecours/account/profile.html:92
 #: templates/RandoAmisSecours/account/profile.html:150
@@ -601,13 +602,13 @@ msgid ""
 "your outings along with your personal data."
 msgstr ""
 "¿Seguro que quiere suprimir su cuenta? Todas sus salidas y todos sus datos "
-"personables se eliminarán."
+"personales se eliminarán."
 
 #: templates/RandoAmisSecours/account/register.html:4
 #: templates/RandoAmisSecours/account/register.html:11
 #: templates/RandoAmisSecours/account/register.html:93
 msgid "Register"
-msgstr "Registarse"
+msgstr "Registrarse"
 
 #: templates/RandoAmisSecours/account/register.html:32
 msgid "Account information"
@@ -662,7 +663,7 @@ msgstr ""
 #: templates/RandoAmisSecours/account/register_end.html:4
 #: templates/RandoAmisSecours/account/register_end.html:11
 msgid "Register end"
-msgstr "Fin de la registración"
+msgstr "Fin de la inscripción"
 
 #: templates/RandoAmisSecours/account/register_end.html:16
 msgid "email confirmation"
@@ -702,20 +703,25 @@ msgstr "Localización"
 #: templates/RandoAmisSecours/account/update.html:86
 msgid "Your browser is in the same timezone as <u id=\"current_timezone\"></u>"
 msgstr ""
+"Su navegador esta en la misma zona horaria que <u id=\"current_timezone\"></"
+"u>"
 
 #: templates/RandoAmisSecours/account/update.html:91
 msgid "Advanced settings"
-msgstr ""
+msgstr "Parámetros avanzados"
 
 #: templates/RandoAmisSecours/account/update.html:92
 msgid ""
 "Some providers, allows to send SMS from R.A.S. to you phone for free. Select "
 "your provider in the following list (if available) to receive alerts by SMS."
 msgstr ""
+"Algunos proveedores permiten enviar SMS desde R.A.S. a su teléfono gratis. "
+"Elije un proveedor en la lista siguiente (si existe) para recibir alertas "
+"por SMS."
 
 #: templates/RandoAmisSecours/account/update.html:94
 msgid "Provider"
-msgstr ""
+msgstr "Proveedor"
 
 #: templates/RandoAmisSecours/account/update.html:104
 msgid ""
@@ -724,10 +730,14 @@ msgid ""
 "index.php?page=options\">your option page</a>. Then enter the generated user "
 "key in the <i>token</i> field."
 msgstr ""
+"Para obtener la información siguiente, usted tiene que activar el opción "
+"<i>Notificación SMS</i> en <a href=\"https://mobile.free.fr/moncompte/index."
+"php?page=options\">su pagina de opciones</a>. Luego copia la clave de "
+"usuario generada en el campo <i>Identificador</i>."
 
 #: templates/RandoAmisSecours/account/update.html:112
 msgid "Token"
-msgstr ""
+msgstr "Identificador"
 
 #: templates/RandoAmisSecours/alert/alert.html:1
 #, python-format
@@ -764,9 +774,11 @@ msgid ""
 "%(fullname)s is late from outing '%(name)s', (finishing %(ending)s ago). You "
 "should contact him/her."
 msgstr ""
+"%(fullname)s no ha vuelto de la salida '%(name)s', (acabada hace "
+"%(ending)s). Debería contactar con el(la)."
 
 #: templates/RandoAmisSecours/alert/alert_owner.html:1
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hello,\n"
 "\n"
@@ -783,16 +795,16 @@ msgid ""
 msgstr ""
 "Hola,\n"
 "\n"
-"%(fullname)s no ha vuelto a tiempo de la salida «%(name)s», que se tenia que "
-"acabar el %(ending)s.\n"
+"usted esta llegando tarde de la salida  «%(name)s», que tenia que acabar a "
+"%(ending)s.\n"
 "\n"
-"Para tener mas informaciones sobre la salida, consulte la página : %(URL)s.\n"
+"Si llegó a casa sin problemas, por favor haga clic en %(URL)s.\n"
 "\n"
-"Para aclarar la situación, debería intentar contactar con %(fullname)s "
-"directamente.\n"
+"Enviaremos un correo a %(friend_count)s amigos que tiene en su lista de R.A."
+"S, acerca de la situación.\n"
 "\n"
 "-- \n"
-"El equipo R.A.S."
+"El equipo R.A.S"
 
 #: templates/RandoAmisSecours/alert/alert_owner.txt:1
 #, python-format
@@ -800,6 +812,8 @@ msgid ""
 "You are late from outing '%(name)s', (finishing %(ending)s ago). Your "
 "friends where alerted."
 msgstr ""
+"No ha vuelto de la salida '%(name)s', (acabada hace %(ending)s). Sus amigos "
+"han sido avisados."
 
 #: templates/RandoAmisSecours/alert/late.html:1
 #, python-format
@@ -817,7 +831,7 @@ msgstr ""
 "\n"
 "Esta llegando mas tarde que la hora prevista de la salida %(URL)s.\n"
 "\n"
-"Si ya esta de vuelta, gracias por señalarlo haciendo clic aqui "
+"Si ya esta de vuelta, gracias por señalarlo haciendo clic aquí "
 "%(SAFE_URL)s.\n"
 "\n"
 "-- \n"
@@ -828,6 +842,8 @@ msgstr ""
 msgid ""
 "You are late from outing '%(name)s'. If back safe, please update on R.A.S."
 msgstr ""
+"No ha terminado la salida '%(name)s'. Si esta en casa, por favor confírmelo "
+"en R.A.S "
 
 #: templates/RandoAmisSecours/friends/request_accepted_email.html:1
 #, python-format
@@ -887,16 +903,16 @@ msgstr "Utilice el campo abajo para buscar amigos."
 
 #: templates/RandoAmisSecours/friends/search.html:42
 msgid "The query should be at least 3 characters long."
-msgstr "La busqueda requiere como minimo 3 caracteres."
+msgstr "La búsqueda requiere como mínimo 3 caracteres."
 
 #: templates/RandoAmisSecours/friends/search.html:69
 msgid "No matching user"
-msgstr "Ningun usuario encontrado"
+msgstr "Ningún usuario encontrado"
 
 #: templates/RandoAmisSecours/help/index.html:20
 #: templates/RandoAmisSecours/help/qa.html:16
 msgid "Questions and Answers"
-msgstr "Preguntas y Respustas"
+msgstr "Preguntas y Respuestas"
 
 #: templates/RandoAmisSecours/help/index.html:21
 msgid ""
@@ -904,7 +920,7 @@ msgid ""
 "questions along with their answers should be available their."
 msgstr ""
 "Mas información sobre R.A.S. en las preguntas frecuentes. Las preguntas mas "
-"habituales deberián aparecer con sus respuestas."
+"habituales deberían aparecer con sus respuestas."
 
 #: templates/RandoAmisSecours/help/index.html:22
 msgid "Visit Q&A page"
@@ -920,7 +936,7 @@ msgid ""
 "The tutorial describes how to create, confirm and then close an outing. This "
 "tutorial will be available soon."
 msgstr ""
-"El tutorial enseña como crear, confirmar y cerrar una salida. Estetutorial "
+"El tutorial enseña como crear, confirmar y cerrar una salida. Este tutorial "
 "sera disponible dentro de poco."
 
 #: templates/RandoAmisSecours/help/qa.html:4
@@ -933,7 +949,7 @@ msgid ""
 "This page lists the most common questions and concerns about the R.A.S. "
 "website. If your question is missing, feel free to contact the R.A.S. team."
 msgstr ""
-"Aqui estan las preguntas mas frecuentes sobre R.A.S. Si su pregunta no "
+"Aquí están las preguntas mas frecuentes sobre R.A.S. Si su pregunta no "
 "aparece, puede contactar con el equipo R.A.S."
 
 #: templates/RandoAmisSecours/help/qa.html:24
@@ -947,8 +963,8 @@ msgid ""
 "necessary."
 msgstr ""
 "Si usted no vuelve a tiempo, el equipo R.A.S. no llamará a los servicios de "
-"rescate. Es responsabilidad de sus amigos de contactar con ellos si lojuzgan "
-"necesario."
+"rescate. Es responsabilidad de sus amigos de contactar con ellos si lo "
+"juzgan necesario."
 
 #: templates/RandoAmisSecours/help/qa.html:26
 msgid "2/ Reliability"
@@ -975,12 +991,12 @@ msgid ""
 "So be careful when accepting friends."
 msgstr ""
 "Las salidas que crea son visibles solo por usted y sus amigos. Ocurre lo "
-"mismo con sus datos personales (su numero de telefono por ejemplo). Tenga "
+"mismo con sus datos personales (su numero de teléfono por ejemplo). Tenga "
 "cuidado cuando agregue nuevos amigos."
 
 #: templates/RandoAmisSecours/help/qa.html:30
 msgid "4/ Warranties"
-msgstr "4/ Garantias"
+msgstr "4/ Garantías"
 
 #: templates/RandoAmisSecours/help/qa.html:31
 msgid ""
@@ -988,7 +1004,7 @@ msgid ""
 "service is provided without any warranties."
 msgstr ""
 "Intentamos que el servicio R.A.S. sea lo mas seguro y fiable posible. Sin "
-"embargo proveemos este servicio sin garantias."
+"embargo proveemos este servicio sin garantías."
 
 #: templates/RandoAmisSecours/main/index.html:4
 msgid "Main Page"
@@ -1034,8 +1050,8 @@ msgid ""
 "Declare every planned outings with beginning and ending. Your friends will "
 "be alerted if you are not back on time."
 msgstr ""
-"Apunte sus salidas previstas con sus tiempos de principio y fin. Sus "
-"amigosrecibiran alerta si no vuelve a tiempo."
+"Apunte sus salidas previstas con sus tiempos de principio y fin. Sus amigos "
+"recibirán alerta si no vuelve a tiempo."
 
 #: templates/RandoAmisSecours/main/index.html:35
 msgid "Create »"
@@ -1050,7 +1066,7 @@ msgid ""
 "Link your profile with friends profiles. Only your friends will see your "
 "outings unless you are late."
 msgstr ""
-"Conecta su perfil con el de sus amigos. Solo sus amigos verrán sus salidas a "
+"Conecta su perfil con el de sus amigos. Solo sus amigos verán sus salidas a "
 "menos que usted no este de vuelta a tiempo."
 
 #: templates/RandoAmisSecours/main/index.html:40
@@ -1133,7 +1149,7 @@ msgid ""
 "RandoAmisSecours will use the three fields above to decide upon when to send "
 "email:"
 msgstr ""
-"RandoAmisSecours decide del envio de correos segun el contenido de los tres "
+"RandoAmisSecours decide del envió de correos según el contenido de los tres "
 "campos siguientes:"
 
 #: templates/RandoAmisSecours/outing/create.html:112
@@ -1187,7 +1203,7 @@ msgid ""
 "This outing is not validated. You should <a href=\"%(confirmed_url)s"
 "\">confirmed it!</a>"
 msgstr ""
-"Esta salida no esta confirmada. Deberia <a href=\"%(confirmed_url)s"
+"Esta salida no esta confirmada. Debería <a href=\"%(confirmed_url)s"
 "\">confirmarla !</a>"
 
 #: templates/RandoAmisSecours/outing/details.html:62
@@ -1318,82 +1334,75 @@ msgstr "Salidas de sus amigos"
 
 #: templates/RandoAmisSecours/reporting/index.html:20
 #: templates/RandoAmisSecours/reporting/users.html:11
-#, fuzzy
 msgid "Users"
-msgstr "Nombre de usuario"
+msgstr "Usuarios"
 
 #: templates/RandoAmisSecours/reporting/index.html:22
 #: templates/RandoAmisSecours/reporting/users.html:114
 #: templates/RandoAmisSecours/reporting/users.html:169
 msgid "Number of users"
-msgstr ""
+msgstr "Numero de usuarios"
 
 #: templates/RandoAmisSecours/reporting/index.html:24
 msgid "Graphs"
-msgstr ""
+msgstr "Gráficos"
 
 #: templates/RandoAmisSecours/reporting/index.html:25
 #: templates/RandoAmisSecours/reporting/users.html:21
-#, fuzzy
 msgid "Subscription"
-msgstr "Descripción"
+msgstr "Alta"
 
 #: templates/RandoAmisSecours/reporting/index.html:27
 #: templates/RandoAmisSecours/reporting/users.html:25
-#, fuzzy
 msgid "Last login"
-msgstr "Apellido(s)"
+msgstr "Ultima conexión"
 
 #: templates/RandoAmisSecours/reporting/index.html:33
-#, fuzzy
 msgid "Number of outings"
-msgstr "Nueva salida"
+msgstr "Numero de salidas"
 
 #: templates/RandoAmisSecours/reporting/index.html:35
 #: templates/RandoAmisSecours/reporting/outings_late.html:11
 #: templates/RandoAmisSecours/reporting/outings_late.html:16
-#, fuzzy
 msgid "Late outings"
-msgstr "Salida con retraso"
+msgstr "Salidas retrasadas"
 
 #: templates/RandoAmisSecours/reporting/index.html:36
 msgid "(details)"
 msgstr "(Detalles)"
 
 #: templates/RandoAmisSecours/reporting/outings_late.html:24
-#, fuzzy
 msgid "User"
-msgstr "Nombre de usuario"
+msgstr "Usuario"
 
 #: templates/RandoAmisSecours/reporting/users.html:16
 msgid "User reporting"
-msgstr ""
+msgstr "Resumen del usuario"
 
 #: templates/RandoAmisSecours/reporting/users.html:29
 msgid "Sessions"
-msgstr ""
+msgstr "Sesiones"
 
 #: templates/RandoAmisSecours/reporting/users.html:46
-#, fuzzy
 msgid "Subscription by date"
-msgstr "Apuntarse a R.A.S."
+msgstr "Alta por fecha"
 
 #: templates/RandoAmisSecours/reporting/users.html:59
 msgid "New users"
-msgstr ""
+msgstr "Nuevos usuarios"
 
 #: templates/RandoAmisSecours/reporting/users.html:101
 msgid "Last login by date"
-msgstr ""
+msgstr "Ultima conexión por fecha"
 
 #: templates/RandoAmisSecours/reporting/users.html:156
 msgid "Sessions by date"
-msgstr ""
+msgstr "Sesiones por fecha"
 
 #: templatetags/timedelta.py:37
 #, python-format
 msgid "in %s"
-msgstr ""
+msgstr "en %s"
 
 #: views/account.py:181
 msgid "Subscription to R.A.S."
@@ -1401,12 +1410,14 @@ msgstr "Apuntarse a R.A.S."
 
 #: views/account.py:189
 msgid "Some information are missing or mistyped"
-msgstr "Algunos elementos faltan o son erroneos."
+msgstr "Algunos elementos faltan o son erróneos."
 
 #: views/account.py:215
 msgid ""
 "You should update your timezone. Without it R.A.S. will not work as expected."
 msgstr ""
+"Tiene que actualizar su zona horaria. Sin ella, R.A.S no funcionara "
+"correctamente."
 
 #: views/account.py:245
 msgid "Personnal information updated"
@@ -1418,16 +1429,16 @@ msgstr "La contraseña ha sido cambiada"
 
 #: views/friends.py:66
 msgid "[R.A.S.] Friend request"
-msgstr "[R.A.S.] Peticion de un amigo"
+msgstr "[R.A.S.] Petición de un amigo"
 
 #: views/friends.py:74
 #, python-format
 msgid "Friend request sent to «%(name)s»"
-msgstr "Peticion enviada a «%(name)s»"
+msgstr "Petición enviada a «%(name)s»"
 
 #: views/friends.py:88
 msgid "[R.A.S.] Friend request accepted"
-msgstr "[R.A.S.] Peticion de un amigo aceptada"
+msgstr "[R.A.S.] Petición de un amigo aceptada"
 
 #: views/friends.py:93
 #, python-format
@@ -1437,12 +1448,12 @@ msgstr "«%(name)s» añadido a sus amigos"
 #: views/friends.py:104
 #, python-format
 msgid "Request from «%(name)s» refused"
-msgstr "La peticion a «%(name)s» ha sido rechazada"
+msgstr "La petición de «%(name)s» ha sido rechazada"
 
 #: views/friends.py:114
 #, python-format
 msgid "Request to «%(name)s» canceled"
-msgstr "La peticion a «%(name)s» ha sido cancelada"
+msgstr "La petición a «%(name)s» ha sido cancelada"
 
 #: views/friends.py:123
 #, python-format
@@ -1459,18 +1470,18 @@ msgstr "La fecha de principio de la salida tiene que ocurrir primero"
 
 #: views/outing.py:66
 msgid "Ending should happens after the beginning"
-msgstr "El fin de la salida tiene que ocurrir despues del principio de aquella"
+msgstr "El fin de la salida tiene que ocurrir después del principio de aquella"
 
 #: views/outing.py:67
 msgid "Alert should happens at the end"
-msgstr "La alerta tiene que ocurrir despues del fin de la salida"
+msgstr "La alerta tiene que ocurrir después del fin de la salida"
 
 #: views/outing.py:134
 msgid ""
 "Outing successfully created. The outing is still a draft and should be "
 "confirmed."
 msgstr ""
-"La salida ha sido creada. Es todavia un borrador y tiene que ser validada."
+"La salida ha sido creada. Es todavía un borrador y tiene que ser validada."
 
 #: views/outing.py:152 views/outing.py:184
 msgid "Only the outing owner can update it"
@@ -1488,7 +1499,7 @@ msgstr "La salida «%(name)s» ha sido suprimida"
 #: views/outing.py:189
 #, python-format
 msgid "«%(name)s» is now confirmed"
-msgstr "«%(name)s» ya esta confimada"
+msgstr "«%(name)s» ya esta confirmada"
 
 #: views/outing.py:197
 msgid "Only the outing owner can finish it"
