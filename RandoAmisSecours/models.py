@@ -64,7 +64,7 @@ class Profile(models.Model):
         app_label = 'RandoAmisSecours'
 
     user = models.OneToOneField(User)
-    friends = models.ManyToManyField('self', blank=True, null=True)
+    friends = models.ManyToManyField('self', blank=True)
     phone_number = models.CharField(max_length=30, blank=True, null=True)
     provider = models.CharField(max_length=30, blank=True, null=True, choices=PROVIDERS)
     provider_data = models.TextField(blank=True, null=True)
