@@ -27,7 +27,7 @@ from django.dispatch import receiver
 from tastypie.models import create_api_key
 
 
-@receiver(user_logged_in)
+@receiver(user_logged_in, dispatch_uid='set_profile_info')
 def set_profile_info(sender, **kwargs):
     """ Set language and timezone if defined in the profile """
     language = kwargs['user'].profile.language
@@ -39,4 +39,4 @@ def set_profile_info(sender, **kwargs):
         kwargs['request'].session['django_timezone'] = tz
 
 
-models.signals.post_save.connect(create_api_key, sender=User, dispatch_uid='set_profile_info')
+models.signals.post_save.connect(create_api_key, sender=User, dispatch_uid='create_api_key')
