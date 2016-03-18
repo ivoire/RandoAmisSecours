@@ -39,4 +39,4 @@ def set_profile_info(sender, **kwargs):
         kwargs['request'].session['django_timezone'] = tz
 
 
-models.signals.post_save.connect(create_api_key, sender=User)
+models.signals.post_save.connect(create_api_key, sender=User, dispatch_uid='set_profile_info')
