@@ -36,8 +36,8 @@ class TemplatesTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_superuser('azertyuiop',
-                                             'django.test@project.org',
-                                             '12789azertyuiop')
+                                                  'django.test@project.org',
+                                                  '12789azertyuiop')
         self.user.profile = Profile.objects.create(user=self.user, language='fr', timezone='Europe/Paris')
         self.client.login(username='azertyuiop', password='12789azertyuiop')
 
@@ -823,7 +823,7 @@ class AccountTest(TestCase):
         self.user1.profile.provider_data = 'not JSON serialized'
         try:
             self.user1.profile.clean()
-        except ValidationError as e:
+        except ValidationError:
             pass
         else:
             self.assertFalse("The clean method should fail here")
@@ -835,7 +835,7 @@ class AccountTest(TestCase):
         self.user1.profile.timezone = 'UTC'
         try:
             self.user1.profile.clean()
-        except ValidationError as e:
+        except ValidationError:
             pass
         else:
             self.assertFalse("The clean method should fail here")
