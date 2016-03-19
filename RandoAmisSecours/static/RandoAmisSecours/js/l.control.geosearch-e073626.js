@@ -6,16 +6,22 @@
 L.GeoSearch = {};
 L.GeoSearch.Provider = {};
 
-L.GeoSearch.Result = function (x, y, label) {
+L.GeoSearch.Result = function (x, y, label, bounds, details) {
     this.X = x;
     this.Y = y;
     this.Label = label;
+    this.bounds = bounds;
+
+    if (details)
+        this.details = details;
 };
 
 L.Control.GeoSearch = L.Control.extend({
     options: {
         position: 'topcenter',
-        showMarker: true
+        showMarker: true,
+        retainZoomLevel: false,
+        draggable: false
     },
 
     _config: {
@@ -83,13 +89,14 @@ L.Control.GeoSearch = L.Control.extend({
     },
 
     geosearch: function (qry) {
+        var that = this;
         try {
             var provider = this._config.provider;
 
             if(typeof provider.GetLocations == 'function') {
                 var results = provider.GetLocations(qry, function(results) {
-                    this._processResults(results);
-                }.bind(this));
+                    that._processResults(results);
+                });
             }
             else {
                 var url = provider.GetServiceUrl(qry);
@@ -113,7 +120,7 @@ L.Control.GeoSearch = L.Control.extend({
         };
 
         function getJsonP (url) {
-            url = url + '&callback=parseLocation'
+            url = url + '&callback=parseLocation';
             var script = document.createElement('script');
             script.id = 'getJsonP';
             script.src = url;
@@ -177,20 +184,35 @@ L.Control.GeoSearch = L.Control.extend({
 
     _showLocation: function (location) {
         if (this.options.showMarker == true) {
-            if (typeof this._positionMarker === 'undefined')
-                this._positionMarker = L.marker([location.Y, location.X]).addTo(this._map);
-            else
+            if (typeof this._positionMarker === 'undefined') {
+                this._positionMarker = L.marker(
+                    [location.Y, location.X],
+                    {draggable: this.options.draggable}
+                ).addTo(this._map);
+            }
+            else {
                 this._positionMarker.setLatLng([location.Y, location.X]);
+            }
+        }
+        if (!this.options.retainZoomLevel && location.bounds && location.bounds.isValid()) {
+            this._map.fitBounds(location.bounds);
+        }
+        else {
+            this._map.setView([location.Y, location.X], this._getZoomLevel(), false);
         }
 
-        this._map.setView([location.Y, location.X], this._config.zoomLevel, false);
-        this._map.fireEvent('geosearch_showlocation', {Location: location});
+        this._map.fireEvent('geosearch_showlocation', {
+          Location: location,
+          Marker : this._positionMarker
+        });
     },
 
     _printError: function(message) {
         var elem = this._resultslist;
         elem.innerHTML = '<li>' + message + '</li>';
         elem.style.display = 'block';
+
+        this._map.fireEvent('geosearch_error', {message: message});
 
         setTimeout(function () {
             elem.style.display = 'none';
@@ -199,16 +221,24 @@ L.Control.GeoSearch = L.Control.extend({
 
     _onKeyUp: function (e) {
         var esc = 27,
-            enter = 13,
-            queryBox = document.getElementById('leaflet-control-geosearch-qry');
+            enter = 13;
 
         if (e.keyCode === esc) { // escape key detection is unreliable
-            queryBox.value = '';
+            this._searchbox.value = '';
             this._map._container.focus();
         } else if (e.keyCode === enter) {
             e.preventDefault();
             e.stopPropagation();
-            this.geosearch(queryBox.value);
+
+            this.geosearch(this._searchbox.value);
         }
+    },
+
+    _getZoomLevel: function() {
+        if (! this.options.retainZoomLevel) {
+            return this._config.zoomLevel;
+        }
+        return this._map.zoom;
     }
+
 });

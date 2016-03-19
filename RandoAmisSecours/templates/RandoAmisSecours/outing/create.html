@@ -6,7 +6,7 @@
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet-v0.7.7.css" />
   <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.fullscreen-v1.0.1.css" />
-  <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/l.geosearch-h874f4d.css" />
+  <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/l.geosearch-e073626.css" />
   <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}RandoAmisSecours/css/bootstrap-datetimepicker-v2.2.0.css" />
 {% endblock %}
 
@@ -136,8 +136,8 @@
 {% block script %}
 <script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet-v0.7.7.js"></script>
 <script src="{% get_static_prefix %}RandoAmisSecours/js/Leaflet.fullscreen.min-v1.0.1.js"></script>
-<script src="{% get_static_prefix %}RandoAmisSecours/js/l.control.geosearch-h874f4d.js"></script>
-<script src="{% get_static_prefix %}RandoAmisSecours/js/l.geosearch.provider.openstreetmap-h874f4d.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/l.control.geosearch-e073626.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/l.geosearch.provider.openstreetmap-e073626.js"></script>
 <script src="{% get_static_prefix %}RandoAmisSecours/js/bootstrap-datetimepicker-v2.2.0.js"></script>
 {% get_current_language as LANGUAGE_CODE_LONG %}
 {% with LANGUAGE_CODE_LONG|slice:"0:2" as LANGUAGE_CODE %}
@@ -161,7 +161,7 @@
 
     new L.Control.GeoSearch({
       provider: new L.GeoSearch.Provider.OpenStreetMap(),
-      'showMarker': false
+      showMarker: false
     }).addTo(map);
 
     // Add a marker to the map
