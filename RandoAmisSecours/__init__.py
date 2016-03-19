@@ -16,3 +16,5 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with RandoAmisSecours.  If not, see <http://www.gnu.org/licenses/>
+
+default_app_config = 'RandoAmisSecours.apps.RASConfig'
