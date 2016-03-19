@@ -19,12 +19,12 @@
 
 from __future__ import unicode_literals
 
-from django.shortcuts import render_to_response
-from django.template import RequestContext
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
+from django.shortcuts import render
+from django.template import RequestContext
 from django.utils.timezone import datetime, utc
 
 from RandoAmisSecours.models import Outing, CONFIRMED
@@ -38,11 +38,10 @@ def index(request):
     outing_late_count = Outing.objects.filter(status=CONFIRMED, ending__lt=now).count()
 
     user_count = User.objects.count()
-    return render_to_response('RandoAmisSecours/reporting/index.html',
-                              {'outing_count': outing_count,
-                               'outing_late_count': outing_late_count,
-                               'user_count': user_count},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/reporting/index.html',
+                  {'outing_count': outing_count,
+                   'outing_late_count': outing_late_count,
+                   'user_count': user_count})
 
 
 @staff_member_required
@@ -80,17 +79,15 @@ def users(request):
             if day <= 365:
                 sessions_list[365 - day] += 1
 
-    return render_to_response('RandoAmisSecours/reporting/users.html',
-                              {'joining_dates': joining_dates,
-                               'last_logins': last_logins,
-                               'sessions': sessions_list},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/reporting/users.html',
+                  {'joining_dates': joining_dates,
+                   'last_logins': last_logins,
+                   'sessions': sessions_list})
 
 
 @staff_member_required
 def outings_late(request):
     now = datetime.utcnow().replace(tzinfo=utc)
     late_outings = Outing.objects.filter(status=CONFIRMED, ending__lt=now)
-    return render_to_response('RandoAmisSecours/reporting/outings_late.html',
-                              {'late_outings': late_outings},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/reporting/outings_late.html',
+                  {'late_outings': late_outings})

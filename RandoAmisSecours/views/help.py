@@ -19,15 +19,13 @@
 
 from __future__ import unicode_literals
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 
 
 def index(request):
-    return render_to_response('RandoAmisSecours/help/index.html',
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/help/index.html')
 
 
 def qa(request):
-    return render_to_response('RandoAmisSecours/help/qa.html',
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/help/qa.html')

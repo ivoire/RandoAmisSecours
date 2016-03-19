@@ -25,7 +25,7 @@ from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms import ModelForm
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 
@@ -85,14 +85,13 @@ def index(request):
     friends_outings_draft = friends_outings.filter(status=DRAFT)
     friends_outings_finished = friends_outings.filter(status=FINISHED)
 
-    return render_to_response('RandoAmisSecours/outing/index.html',
-                              {'user_outings_confirmed': user_outings_confirmed,
-                               'user_outings_draft': user_outings_draft,
-                               'user_outings_finished': user_outings_finished,
-                               'friends_outings_confirmed': friends_outings_confirmed,
-                               'friends_outings_draft': friends_outings_draft,
-                               'friends_outings_finished': friends_outings_finished},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/outing/index.html',
+                  {'user_outings_confirmed': user_outings_confirmed,
+                   'user_outings_draft': user_outings_draft,
+                   'user_outings_finished': user_outings_finished,
+                   'friends_outings_confirmed': friends_outings_confirmed,
+                   'friends_outings_draft': friends_outings_draft,
+                   'friends_outings_finished': friends_outings_finished})
 
 
 @login_required
@@ -100,12 +99,11 @@ def details(request, outing_id):
     # Return 404 if the outing does not belong to the user or his friends
     outing = get_object_or_404(Outing, Q(user=request.user) | Q(user__profile__in=request.user.profile.friends.all()), pk=outing_id)
 
-    return render_to_response('RandoAmisSecours/outing/details.html',
-                              {'outing': outing,
-                               'FINISHED': FINISHED,
-                               'CONFIRMED': CONFIRMED,
-                               'DRAFT': DRAFT},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/outing/details.html',
+                  {'outing': outing,
+                   'FINISHED': FINISHED,
+                   'CONFIRMED': CONFIRMED,
+                   'DRAFT': DRAFT})
 
 
 @login_required
@@ -117,10 +115,9 @@ def details_trace(request, outing_id):
     if not outing.is_late() and not outing.is_alerting() and not outing.user.pk == request.user.pk:
         raise Http404
 
-    return render_to_response('RandoAmisSecours/outing/details_trace.html',
-                              {'outing': outing,
-                               'points': outing.gpspoint_set.all()},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/outing/details_trace.html',
+                  {'outing': outing,
+                   'points': outing.gpspoint_set.all()})
 
 
 @login_required
@@ -136,9 +133,8 @@ def create(request):
     else:
         form = OutingForm()
 
-    return render_to_response('RandoAmisSecours/outing/create.html',
-                              {'form': form},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/outing/create.html',
+                  {'form': form})
 
 
 @login_required
@@ -160,9 +156,8 @@ def update(request, outing_id):
     else:
         form = OutingForm(instance=outing)
 
-    return render_to_response('RandoAmisSecours/outing/create.html',
-                              {'form': form, 'update': True, 'outing': outing},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/outing/create.html',
+                  {'form': form, 'update': True, 'outing': outing})
 
 
 @login_required

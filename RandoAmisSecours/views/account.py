@@ -27,7 +27,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.forms import ModelForm
 from django.forms.widgets import HiddenInput
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
 from django.utils import translation
 from django.utils.translation import ugettext as _
@@ -190,9 +190,8 @@ def register(request):
     else:
         user_form = RASUserCreationForm()
 
-    return render_to_response('RandoAmisSecours/account/register.html',
-                              {'user_form': user_form},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/account/register.html',
+                  {'user_form': user_form})
 
 
 def register_confirm(request, user_id, user_hash):
@@ -203,9 +202,8 @@ def register_confirm(request, user_id, user_hash):
     user.is_active = True
     user.save()
 
-    return render_to_response('RandoAmisSecours/account/confirm.html',
-                              {'user': user},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/account/confirm.html',
+                  {'user': user})
 
 
 @login_required
@@ -218,10 +216,9 @@ def profile(request):
     friend_requests = FriendRequest.objects.filter(to=request.user)
     friend_requests_sent = FriendRequest.objects.filter(user=request.user)
 
-    return render_to_response('RandoAmisSecours/account/profile.html',
-                              {'friend_requests': friend_requests,
-                               'friend_requests_sent': friend_requests_sent},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/account/profile.html',
+                  {'friend_requests': friend_requests,
+                   'friend_requests_sent': friend_requests_sent})
 
 
 @login_required
@@ -248,9 +245,8 @@ def update(request):
         user_form = RASUserUpdateForm(instance=request.user)
         profile_form = RASProfileUpdateForm(instance=profile)
 
-    return render_to_response('RandoAmisSecours/account/update.html',
-                              {'user_form': user_form, 'profile_form': profile_form},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/account/update.html',
+                  {'user_form': user_form, 'profile_form': profile_form})
 
 
 @login_required
@@ -260,8 +256,7 @@ def password_change_done(request):
 
 
 def password_reset_done(request):
-    return render_to_response('RandoAmisSecours/account/password_reset_done.html',
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/account/password_reset_done.html')
 
 
 @login_required

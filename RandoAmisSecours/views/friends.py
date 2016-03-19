@@ -24,7 +24,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 
@@ -45,8 +45,8 @@ def search(request):
             error = True
     else:
         results = None
-    return render_to_response('RandoAmisSecours/friends/search.html', {'query': query, 'results': results, 'error': error},
-                              context_instance=RequestContext(request))
+    return render(request, 'RandoAmisSecours/friends/search.html',
+                  {'query': query, 'results': results, 'error': error})
 
 
 @login_required
