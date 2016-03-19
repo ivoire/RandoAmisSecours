@@ -5,7 +5,7 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet-v0.7.7.css" />
-  <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.fullscreen-v0.0.1.css" />
+  <link rel="stylesheet" href="{% get_static_prefix %}RandoAmisSecours/css/leaflet.fullscreen-v1.0.1.css" />
 {% endblock %}
 
 {% block style %}
@@ -97,11 +97,13 @@
 
 {% block script %}
 <script src="{% get_static_prefix %}RandoAmisSecours/js/leaflet-v0.7.7.js"></script>
-<script src="{% get_static_prefix %}RandoAmisSecours/js/Leaflet.fullscreen.min-v0.0.1.js"></script>
+<script src="{% get_static_prefix %}RandoAmisSecours/js/Leaflet.fullscreen.min-v1.0.1.js"></script>
 <script>
   $(function(){
     var map = L.map('map', {
-                      fullscreenControl: true
+                      fullscreenControl: {
+                        pseudoFullscreen: true
+                      }
                   }).setView([{{ outing.latitude|unlocalize }}, {{ outing.longitude|unlocalize }}], 12);
     L.tileLayer('http://129.206.74.245:8001/tms_r.ashx?x={x}&y={y}&z={z}', {
         attribution: '<a href="http://giscience.uni-hd.de/">GIScience Research Group</a> | &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
