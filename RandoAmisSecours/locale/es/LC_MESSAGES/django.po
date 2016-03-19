@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-19 13:20+0000\n"
+"POT-Creation-Date: 2016-03-19 14:21+0000\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Seb <seb@sebbcn.net>\n"
 "Language-Team: \n"
@@ -237,14 +237,14 @@ msgid "Change password"
 msgstr "Cambiar la contraseña"
 
 #: templates/RandoAmisSecours/account/password_change.html:24
-#: views/account.py:63
+#: views/account.py:62
 msgid "Old password"
 msgstr "Contraseña anterior"
 
 #: templates/RandoAmisSecours/account/password_change.html:33
 #: templates/RandoAmisSecours/account/password_change.html:42
-#: views/account.py:65 views/account.py:66 views/account.py:94
-#: views/account.py:96
+#: views/account.py:64 views/account.py:65 views/account.py:93
+#: views/account.py:95
 msgid "New password"
 msgstr "Nueva contraseña"
 
@@ -521,14 +521,14 @@ msgid "update"
 msgstr "modificar"
 
 #: templates/RandoAmisSecours/account/profile.html:192
-#: templates/RandoAmisSecours/account/register.html:82 views/account.py:81
+#: templates/RandoAmisSecours/account/register.html:82 views/account.py:80
 msgid "email"
 msgstr "dirección de correo"
 
 #: templates/RandoAmisSecours/account/profile.html:196
 #: templates/RandoAmisSecours/account/register.html:43
-#: templates/RandoAmisSecours/account/register.html:52 views/account.py:49
-#: views/account.py:115 views/account.py:116
+#: templates/RandoAmisSecours/account/register.html:52 views/account.py:48
+#: views/account.py:114 views/account.py:115
 msgid "Password"
 msgstr "Contraseña"
 
@@ -581,8 +581,8 @@ msgid "Account information"
 msgstr "Informaciones sobre la cuenta"
 
 #: templates/RandoAmisSecours/account/register.html:34
-#: templates/RandoAmisSecours/account/update.html:107 views/account.py:47
-#: views/account.py:113
+#: templates/RandoAmisSecours/account/update.html:107 views/account.py:46
+#: views/account.py:112
 msgid "Username"
 msgstr "Nombre de usuario"
 
@@ -1101,17 +1101,17 @@ msgid "Global information"
 msgstr "Informaciones generales"
 
 #: templates/RandoAmisSecours/outing/create.html:45
-#: templates/RandoAmisSecours/outing/details.html:68 views/outing.py:45
+#: templates/RandoAmisSecours/outing/details.html:68 views/outing.py:44
 msgid "Description"
 msgstr "Descripción"
 
 #: templates/RandoAmisSecours/outing/create.html:54
-#: templates/RandoAmisSecours/outing/details_trace.html:38 views/outing.py:46
+#: templates/RandoAmisSecours/outing/details_trace.html:38 views/outing.py:45
 msgid "Latitude"
 msgstr "Latitud"
 
 #: templates/RandoAmisSecours/outing/create.html:63
-#: templates/RandoAmisSecours/outing/details_trace.html:39 views/outing.py:47
+#: templates/RandoAmisSecours/outing/details_trace.html:39 views/outing.py:46
 msgid "Longitude"
 msgstr "Longitud"
 
@@ -1404,108 +1404,108 @@ msgstr "Sesiones por fecha"
 msgid "in %s"
 msgstr "en %s"
 
-#: views/account.py:181
+#: views/account.py:180
 msgid "Subscription to R.A.S."
 msgstr "Apuntarse a R.A.S."
 
-#: views/account.py:189
+#: views/account.py:188
 msgid "Some information are missing or mistyped"
 msgstr "Algunos elementos faltan o son erróneos."
 
-#: views/account.py:213
+#: views/account.py:212
 msgid ""
 "You should update your timezone. Without it R.A.S. will not work as expected."
 msgstr ""
 "Tiene que actualizar su zona horaria. Sin ella, R.A.S no funcionara "
 "correctamente."
 
-#: views/account.py:242
+#: views/account.py:241
 msgid "Personnal information updated"
 msgstr "Datos personales actualizados"
 
-#: views/account.py:254
+#: views/account.py:253
 msgid "Password changed successfully"
 msgstr "La contraseña ha sido cambiada"
 
-#: views/friends.py:66
+#: views/friends.py:65
 msgid "[R.A.S.] Friend request"
 msgstr "[R.A.S.] Petición de un amigo"
 
-#: views/friends.py:74
+#: views/friends.py:73
 #, python-format
 msgid "Friend request sent to «%(name)s»"
 msgstr "Petición enviada a «%(name)s»"
 
-#: views/friends.py:88
+#: views/friends.py:87
 msgid "[R.A.S.] Friend request accepted"
 msgstr "[R.A.S.] Petición de un amigo aceptada"
 
-#: views/friends.py:93
+#: views/friends.py:92
 #, python-format
 msgid "«%(name)s» added to your friends"
 msgstr "«%(name)s» añadido a sus amigos"
 
-#: views/friends.py:104
+#: views/friends.py:103
 #, python-format
 msgid "Request from «%(name)s» refused"
 msgstr "La petición de «%(name)s» ha sido rechazada"
 
-#: views/friends.py:114
+#: views/friends.py:113
 #, python-format
 msgid "Request to «%(name)s» canceled"
 msgstr "La petición a «%(name)s» ha sido cancelada"
 
-#: views/friends.py:123
+#: views/friends.py:122
 #, python-format
 msgid "Removed «%(name)s» from friend list"
 msgstr "«%(name)s» suprimido de su lista de amigos"
 
-#: views/outing.py:43
+#: views/outing.py:42
 msgid "Outing name"
 msgstr "Nombre de la salida"
 
-#: views/outing.py:65
+#: views/outing.py:64
 msgid "Beginning should happens first"
 msgstr "La fecha de principio de la salida tiene que ocurrir primero"
 
-#: views/outing.py:66
+#: views/outing.py:65
 msgid "Ending should happens after the beginning"
 msgstr "El fin de la salida tiene que ocurrir después del principio de aquella"
 
-#: views/outing.py:67
+#: views/outing.py:66
 msgid "Alert should happens at the end"
 msgstr "La alerta tiene que ocurrir después del fin de la salida"
 
-#: views/outing.py:131
+#: views/outing.py:130
 msgid ""
 "Outing successfully created. The outing is still a draft and should be "
 "confirmed."
 msgstr ""
 "La salida ha sido creada. Es todavía un borrador y tiene que ser validada."
 
-#: views/outing.py:148 views/outing.py:179
+#: views/outing.py:147 views/outing.py:178
 msgid "Only the outing owner can update it"
 msgstr "Solo el creador de una salida puede modificarla"
 
-#: views/outing.py:167
+#: views/outing.py:166
 msgid "Only the outing owner can delete it"
 msgstr "Solo el creador de una salida puede suprimirla"
 
-#: views/outing.py:169
+#: views/outing.py:168
 #, python-format
 msgid "«%(name)s» deleted"
 msgstr "La salida «%(name)s» ha sido suprimida"
 
-#: views/outing.py:184
+#: views/outing.py:183
 #, python-format
 msgid "«%(name)s» is now confirmed"
 msgstr "«%(name)s» ya esta confirmada"
 
-#: views/outing.py:192
+#: views/outing.py:191
 msgid "Only the outing owner can finish it"
 msgstr "Solo el creador de una salida puede acabarla"
 
-#: views/outing.py:197
+#: views/outing.py:196
 #, python-format
 msgid "«%(name)s» is now finished"
 msgstr "«%(name)s» ya esta acabada"
