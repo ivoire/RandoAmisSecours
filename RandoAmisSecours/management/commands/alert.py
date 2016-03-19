@@ -35,22 +35,15 @@ logger = logging.getLogger('ras.alert')
 
 
 class Command(BaseCommand):
-    args = None
     help = 'Alert the user or his friends that he is late'
-    option_list = BaseCommand.option_list + (
-        make_option('--interval',
-                    dest='interval',
-                    default=10,
-                    type=int,
-                    help='Check interval in minutes'),
-        make_option('--alert',
-                    dest='alert',
-                    default=60,
-                    type=int,
-                    help='Alerting interval'),
-        make_option('--url',
-                    dest='base_url',
-                    help='Base URL of the website'))
+
+    def add_arguments(self, parser):
+        parser.add_argument('--interval', dest='interval', default=10,
+                            type=int, help='Check interval in minutes')
+        parser.add_argument('--alert', dest='alert', default=60,
+                            type=int, help='Alerting interval')
+        parser.add_argument('--url', dest='base_url',
+                            help='Base URL of the website')
 
     def handle(self, *args, **kwargs):
         if kwargs.get('base_url', None) is None:
