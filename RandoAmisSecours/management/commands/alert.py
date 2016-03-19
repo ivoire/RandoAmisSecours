@@ -29,7 +29,6 @@ from RandoAmisSecours.models import Outing, CONFIRMED, DRAFT
 from RandoAmisSecours.utils import Localize, send_mail_help, send_sms
 
 import logging
-from optparse import make_option
 
 logger = logging.getLogger('ras.alert')
 
