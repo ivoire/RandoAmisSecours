@@ -8,13 +8,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-09 07:12+0000\n"
+"POT-Creation-Date: 2016-03-19 13:20+0000\n"
 "Last-Translator: Rémi Duraffort\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: management/commands/alert.py:92 management/commands/alert.py:118
+#: management/commands/alert.py:135
+msgid "[R.A.S] Alert"
+msgstr "[R.A.S] Alerte"
 
 #: models.py:44
 msgid "draft"
@@ -24,7 +29,7 @@ msgstr "brouillons"
 msgid "confirmed"
 msgstr "confirmées"
 
-#: models.py:46 templates/RandoAmisSecours/outing/index.html:66
+#: models.py:46 templates/RandoAmisSecours/outing/index.html.py:66
 msgid "late"
 msgstr "en retard"
 
@@ -56,17 +61,11 @@ msgstr "Anglais"
 msgid "French"
 msgstr "Français"
 
-#: management/commands/alert.py:92 management/commands/alert.py:118
-#: management/commands/alert.py:135
-msgid "[R.A.S] Alert"
-msgstr "[R.A.S] Alerte"
-
 #: templates/404.html:4 templates/404.html.py:23
 msgid "Page not found"
 msgstr ""
 
-#: templates/404.html:17 templates/500.html:17
-#: templates/RandoAmisSecours/base.html:35
+#: templates/404.html:17 templates/500.html.py:17
 #: templates/RandoAmisSecours/account/confirm.html:13
 #: templates/RandoAmisSecours/account/logged_out.html:28
 #: templates/RandoAmisSecours/account/login.html:36
@@ -79,6 +78,7 @@ msgstr ""
 #: templates/RandoAmisSecours/account/register.html:9
 #: templates/RandoAmisSecours/account/register_end.html:9
 #: templates/RandoAmisSecours/account/update.html:9
+#: templates/RandoAmisSecours/base.html:35
 #: templates/RandoAmisSecours/friends/search.html:9
 #: templates/RandoAmisSecours/help/index.html:9
 #: templates/RandoAmisSecours/help/qa.html:9
@@ -107,7 +107,7 @@ msgstr ""
 "réessayez plus tard. Revenez à la page précédente en cliquant sur le boutton "
 "<b>Précédent</b> de votre navigateur."
 
-#: templates/404.html:26 templates/500.html:26
+#: templates/404.html:26 templates/500.html.py:26
 msgid "Take Me Home"
 msgstr "Allez à l'accueil"
 
@@ -128,59 +128,6 @@ msgstr ""
 "Le serveur n'a pas pu servir la page que vous avez demandé. Contactez le "
 "webmaster ou réessayez plus tard. Revenez à la page précédente en cliquant "
 "sur le boutton <b>Précédent</b> de votre navigateur."
-
-#: templates/RandoAmisSecours/base.html:36
-#: templates/RandoAmisSecours/outing/create.html:21
-#: templates/RandoAmisSecours/outing/details.html:19
-#: templates/RandoAmisSecours/outing/details_trace.html:19
-#: templates/RandoAmisSecours/outing/index.html:4
-#: templates/RandoAmisSecours/outing/index.html:10
-#: templates/RandoAmisSecours/outing/index.html:15
-#: templates/RandoAmisSecours/reporting/index.html:31
-msgid "Outings"
-msgstr "Sorties"
-
-#: templates/RandoAmisSecours/base.html:38
-#: templates/RandoAmisSecours/reporting/index.html:4
-#: templates/RandoAmisSecours/reporting/index.html:10
-#: templates/RandoAmisSecours/reporting/index.html:15
-#: templates/RandoAmisSecours/reporting/outings_late.html:4
-#: templates/RandoAmisSecours/reporting/outings_late.html:10
-#: templates/RandoAmisSecours/reporting/users.html:4
-#: templates/RandoAmisSecours/reporting/users.html:10
-msgid "Reporting"
-msgstr "Rapports"
-
-#: templates/RandoAmisSecours/base.html:40
-#: templates/RandoAmisSecours/help/index.html:4
-#: templates/RandoAmisSecours/help/index.html:10
-#: templates/RandoAmisSecours/help/index.html:15
-#: templates/RandoAmisSecours/help/qa.html:10
-msgid "Help"
-msgstr "Aide"
-
-#: templates/RandoAmisSecours/base.html:47
-#: templates/RandoAmisSecours/account/profile.html:4
-msgid "Profile"
-msgstr "Profil"
-
-#: templates/RandoAmisSecours/base.html:49
-#: templates/RandoAmisSecours/account/logged_out.html:30
-msgid "Log out"
-msgstr ""
-
-#: templates/RandoAmisSecours/base.html:53
-#: templates/RandoAmisSecours/account/login.html:4
-#: templates/RandoAmisSecours/account/login.html:38
-#: templates/RandoAmisSecours/account/login.html:55
-#: templates/RandoAmisSecours/account/password_reset_complete.html:22
-#: templates/RandoAmisSecours/main/index.html:20
-msgid "Log in"
-msgstr ""
-
-#: templates/RandoAmisSecours/base.html:71
-msgid "About"
-msgstr "À propos"
 
 #: templates/RandoAmisSecours/account/confirm.html:4
 #: templates/RandoAmisSecours/account/confirm.html:15
@@ -224,12 +171,26 @@ msgstr ""
 msgid "Logged out"
 msgstr ""
 
+#: templates/RandoAmisSecours/account/logged_out.html:30
+#: templates/RandoAmisSecours/base.html:49
+msgid "Log out"
+msgstr ""
+
 #: templates/RandoAmisSecours/account/logged_out.html:37
 msgid "Thanks for using RandoAmisSecours."
 msgstr "Merci d'avoir utilisé RandoAmisSecours."
 
 #: templates/RandoAmisSecours/account/logged_out.html:38
 msgid "Log in again"
+msgstr ""
+
+#: templates/RandoAmisSecours/account/login.html:4
+#: templates/RandoAmisSecours/account/login.html:38
+#: templates/RandoAmisSecours/account/login.html:55
+#: templates/RandoAmisSecours/account/password_reset_complete.html:22
+#: templates/RandoAmisSecours/base.html:53
+#: templates/RandoAmisSecours/main/index.html:20
+msgid "Log in"
 msgstr ""
 
 #: templates/RandoAmisSecours/account/login.html:46
@@ -381,6 +342,11 @@ msgstr ""
 #: templates/RandoAmisSecours/account/password_reset_email.txt:12
 msgid "The R.A.S. team"
 msgstr "L'équipe R.A.S."
+
+#: templates/RandoAmisSecours/account/profile.html:4
+#: templates/RandoAmisSecours/base.html:47
+msgid "Profile"
+msgstr "Profil"
 
 #: templates/RandoAmisSecours/account/profile.html:15
 msgid "My profile"
@@ -601,7 +567,7 @@ msgid "Account information"
 msgstr "Informations sur le compte"
 
 #: templates/RandoAmisSecours/account/register.html:34
-#: templates/RandoAmisSecours/account/update.html:106 views/account.py:47
+#: templates/RandoAmisSecours/account/update.html:107 views/account.py:47
 #: views/account.py:113
 msgid "Username"
 msgstr ""
@@ -674,7 +640,7 @@ msgstr "Si vous n'avez pas reçu de mail, vérifiez le répertoire de spam."
 
 #: templates/RandoAmisSecours/account/update.html:4
 #: templates/RandoAmisSecours/account/update.html:11
-#: templates/RandoAmisSecours/account/update.html:123
+#: templates/RandoAmisSecours/account/update.html:124
 msgid "Update"
 msgstr "Mettre à jour"
 
@@ -692,11 +658,11 @@ msgstr ""
 "Votre browser est dans le même fuseau horaire que <u id=\"current_timezone"
 "\"></u>"
 
-#: templates/RandoAmisSecours/account/update.html:91
+#: templates/RandoAmisSecours/account/update.html:93
 msgid "Advanced settings"
 msgstr "Paramètres avancés"
 
-#: templates/RandoAmisSecours/account/update.html:92
+#: templates/RandoAmisSecours/account/update.html:94
 msgid ""
 "Some providers, allows to send SMS from R.A.S. to you phone for free. Select "
 "your provider in the following list (if available) to receive alerts by SMS."
@@ -705,11 +671,11 @@ msgstr ""
 "gratuitement depuis R.A.S. Sélectionnez votre opérateur dans la liste ci-"
 "contre (s'il est présent) afin de recevoir les alertes de R.A.S. par SMS."
 
-#: templates/RandoAmisSecours/account/update.html:94
+#: templates/RandoAmisSecours/account/update.html:96
 msgid "Provider"
 msgstr "Opérateur"
 
-#: templates/RandoAmisSecours/account/update.html:104
+#: templates/RandoAmisSecours/account/update.html:105
 msgid ""
 "In order to get the following information, you should activate the option "
 "called <i>SMS Notification</i> on <a href=\"https://mobile.free.fr/moncompte/"
@@ -721,7 +687,7 @@ msgstr ""
 "free.fr/moncompte/index.php?page=options\">Gérer mes options</a>. Entrez "
 "alors votre <i>clé d'identification au service</i> dans le champ <i>clé</i>."
 
-#: templates/RandoAmisSecours/account/update.html:112
+#: templates/RandoAmisSecours/account/update.html:113
 msgid "Token"
 msgstr "Clé"
 
@@ -828,6 +794,40 @@ msgid ""
 msgstr ""
 "En retard pour la sortie '%(name)s'. Si de retour, merci de mettre à jour "
 "sur R.A.S."
+
+#: templates/RandoAmisSecours/base.html:36
+#: templates/RandoAmisSecours/outing/create.html:21
+#: templates/RandoAmisSecours/outing/details.html:19
+#: templates/RandoAmisSecours/outing/details_trace.html:19
+#: templates/RandoAmisSecours/outing/index.html:4
+#: templates/RandoAmisSecours/outing/index.html:10
+#: templates/RandoAmisSecours/outing/index.html:15
+#: templates/RandoAmisSecours/reporting/index.html:31
+msgid "Outings"
+msgstr "Sorties"
+
+#: templates/RandoAmisSecours/base.html:38
+#: templates/RandoAmisSecours/reporting/index.html:4
+#: templates/RandoAmisSecours/reporting/index.html:10
+#: templates/RandoAmisSecours/reporting/index.html:15
+#: templates/RandoAmisSecours/reporting/outings_late.html:4
+#: templates/RandoAmisSecours/reporting/outings_late.html:10
+#: templates/RandoAmisSecours/reporting/users.html:4
+#: templates/RandoAmisSecours/reporting/users.html:10
+msgid "Reporting"
+msgstr "Rapports"
+
+#: templates/RandoAmisSecours/base.html:40
+#: templates/RandoAmisSecours/help/index.html:4
+#: templates/RandoAmisSecours/help/index.html:10
+#: templates/RandoAmisSecours/help/index.html:15
+#: templates/RandoAmisSecours/help/qa.html:10
+msgid "Help"
+msgstr "Aide"
+
+#: templates/RandoAmisSecours/base.html:71
+msgid "About"
+msgstr "À propos"
 
 #: templates/RandoAmisSecours/friends/request_accepted_email.html:1
 #, python-format
@@ -1385,7 +1385,7 @@ msgstr "Dernière connexion par dâte"
 msgid "Sessions by date"
 msgstr "Sessions par dâte"
 
-#: templatetags/timedelta.py:37
+#: templatetags/timedelta.py:36
 #, python-format
 msgid "in %s"
 msgstr "dans %s"
@@ -1398,18 +1398,18 @@ msgstr "Inscription à R.A.S."
 msgid "Some information are missing or mistyped"
 msgstr "Certains éléments sont manquants ou malformatés"
 
-#: views/account.py:215
+#: views/account.py:213
 msgid ""
 "You should update your timezone. Without it R.A.S. will not work as expected."
 msgstr ""
 "Vous devez mettre à jour votre fuseau horaire. Sans cela, R.A.S. ne pourra "
 "pas fonctionner correctement."
 
-#: views/account.py:245
+#: views/account.py:242
 msgid "Personnal information updated"
 msgstr "Informations personelles mise à jour"
 
-#: views/account.py:258
+#: views/account.py:254
 msgid "Password changed successfully"
 msgstr ""
 
@@ -1462,36 +1462,36 @@ msgstr "La fin doit arriver après le début"
 msgid "Alert should happens at the end"
 msgstr "L'alerte doit arriver après la fin"
 
-#: views/outing.py:134
+#: views/outing.py:131
 msgid ""
 "Outing successfully created. The outing is still a draft and should be "
 "confirmed."
 msgstr ""
 "La sortie a été crée. Celle-ci est encore un brouillon et doit être validée."
 
-#: views/outing.py:152 views/outing.py:184
+#: views/outing.py:148 views/outing.py:179
 msgid "Only the outing owner can update it"
 msgstr "Seul le créateur d'une sortie peux la modifier"
 
-#: views/outing.py:172
+#: views/outing.py:167
 msgid "Only the outing owner can delete it"
 msgstr "Seul le créateur d'une sortie peux la supprimer"
 
-#: views/outing.py:174
+#: views/outing.py:169
 #, python-format
 msgid "«%(name)s» deleted"
 msgstr "La sortie «%(name)s» a été supprimée"
 
-#: views/outing.py:189
+#: views/outing.py:184
 #, python-format
 msgid "«%(name)s» is now confirmed"
 msgstr "«%(name)s» est maintenant confirmée"
 
-#: views/outing.py:197
+#: views/outing.py:192
 msgid "Only the outing owner can finish it"
 msgstr "Seul le créateur d'une sortie peux la terminer"
 
-#: views/outing.py:202
+#: views/outing.py:197
 #, python-format
 msgid "«%(name)s» is now finished"
 msgstr "«%(name)s» est maintenant terminée"
