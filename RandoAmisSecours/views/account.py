@@ -184,7 +184,7 @@ def register(request):
                                                                            args=[new_user.pk,
                                                                                  new_user.profile.hash_id])),
                                  'fullname': new_user.get_full_name()})
-            return render_to_response('RandoAmisSecours/account/register_end.html', context_instance=RequestContext(request))
+            return render(request, 'RandoAmisSecours/account/register_end.html')
         else:
             messages.error(request, _("Some information are missing or mistyped"))
     else:
