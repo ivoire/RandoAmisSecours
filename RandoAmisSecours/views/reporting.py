@@ -24,7 +24,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.shortcuts import render
-from django.template import RequestContext
 from django.utils.timezone import datetime, utc
 
 from RandoAmisSecours.models import Outing, CONFIRMED
