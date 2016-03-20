@@ -104,7 +104,7 @@ class Command(BaseCommand):
                     for friend_profile in outing.user.profile.friends.all():
                         logger.debug("      |-> %s", friend_profile.user.get_full_name())
                         logger.debug("      |--> email: %s", friend_profile.user.email)
-                        logger.debug("      \--> provider: %s", friend_profile.provider)
+                        logger.debug("      \\--> provider: %s", friend_profile.provider)
                         with Localize(friend_profile.language,
                                       friend_profile.timezone):
                             send_mail_help(friend_profile.user, _('[R.A.S] Alert'),
